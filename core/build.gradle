@@ -1,11 +1,19 @@
 apply plugin: "java"
-
 sourceCompatibility = 1.6
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-sourceSets.main.java.srcDirs = [ "src/" ]
-
-
+sourceSets.main.java.srcDirs = ["src/"]
 eclipse.project {
     name = appName + "-core"
+}
+dependencies {
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/slick.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/slf4j-api-1.7.2.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/bridj-0.6.2.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/jdom-2.0.5-javadoc.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/webcam-capture-0.3.10.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/zxing-2.1.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/lwjgl.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/jdom-2.0.5.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/jinput.jar')
+    compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/core-2.1.jar')
 }

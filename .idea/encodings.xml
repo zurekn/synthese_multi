@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/android/assets/images" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/assets/musics" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/assets/sounds" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/assets/testRes" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/assets/xml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/README" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/bridj-0.6.2.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/core-2.1.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/jdom-2.0.5-javadoc.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/jdom-2.0.5.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/jinput.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/lwjgl.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/natives" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/slf4j-api-1.7.2.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/slick.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/webcam-capture-0.3.10.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/zwing-3.1.0" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/android/libs/zxing-2.1.jar" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/core/src/com/mygdx/game/data" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/core/src/com/mygdx/game/exception" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/core/src/com/mygdx/game/game" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/core/src/com/mygdx/game/main" charset="windows-1252" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
