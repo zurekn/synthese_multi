@@ -1,7 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="" />
+    <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AIHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIX.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIXAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIXListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AStar.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/ActionEvent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AlphaBeta.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Block.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterBuilder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Event.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/FormObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Handler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/HeroData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/exception/IllegalActionException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/exception/IllegalCaracterClassException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/exception/IllegalMovementException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/ImageProcessingTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Map.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MobHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Monster.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/MonsterData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/MovementAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/MovementEvent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/MovementListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/Node.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/Pixel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/exception/PlayableCharacterException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCam.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeEvent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeListener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeProcessing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Spell.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellD.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Stats.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/TestThread.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/TraitementQRTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Trap.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/TrapD.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/TrapData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/TreeNode.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/WebCamCapture.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/WebCamQRCode.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/WebCamTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/WindowGameData.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/XMLReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/desktop.iml" afterPath="$PROJECT_DIR$/desktop/desktop.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Synthese_multi.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,6 +93,30 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Synthese_multi" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Data.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2825,13 +2917,22 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/Node.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
+      </list>
+    </option>
+  </component>
   <component name="NamedScopeManager">
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1050" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1938" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2856,9 +2957,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2867,17 +2967,114 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/Dev/RunRunSVN" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RunRunSVN" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Dev\synthese_multi\core\src\com\mygdx\game" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Dev\synthese_multi\core\src\com\mygdx\game" />
+      <recent name="D:\Dev\synthese_multi\core\src" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.android">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -3056,35 +3253,35 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1932" height="1050" extended-state="0" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919786" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -3093,5 +3290,31 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22261904">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
