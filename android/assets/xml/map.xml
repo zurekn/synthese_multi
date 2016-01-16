@@ -1,0 +1,160 @@
+<map>
+	<mapInfo>
+		<background>Synthese/res/images/map3.tmx</background>
+		<x>25</x>
+		<y>25</y>
+		<RandomTraps>3</RandomTraps>
+	</mapInfo>
+
+	<blockInfo>
+		<size>32</size>
+		<numberX>25</numberX>
+		<numberY>25</numberY>
+	</blockInfo>
+
+	<!-- Blocks -->
+	<block x="5" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="5" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="5" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="21" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="22" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="22" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="3">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="19">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="20">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="21">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="22">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="23">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="20">
+		<untraversable></untraversable>
+	</block>
+	<block x="17" y="20">
+		<untraversable></untraversable>
+	</block>
+	<block x="15" y="21">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="21">
+		<untraversable></untraversable>
+	</block>
+	<block x="17" y="21">
+		<untraversable></untraversable>
+	</block>
+	<block x="15" y="23">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="23">
+		<untraversable></untraversable>
+	</block>
+	<block x="15" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="17" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="18" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="19" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="20" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="21" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="22" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="24">
+		<untraversable></untraversable>
+	</block>
+	<block x="1" y="1">
+		<damage type="fire">10</damage>
+	</block>
+
+	<!-- Monsters -->
+	<monster id="m1">
+		<x>5</x>
+		<y>5</y>
+	</monster>
+	<monster id="m2">
+		<x>6</x>
+		<y>5</y>
+	</monster>
+	<monster id="m3">
+		<x>10</x>
+		<y>10</y>
+	</monster>
+	<monster id="m4">
+		<x>11</x>
+		<y>11</y>
+	</monster>
+
+	<!--Traps -->
+
+	<departure>
+		<block x="5" y="24" />
+		<block x="12" y="24" />
+		<block x="24" y="16" />
+		<block x="24" y="12" />
+	</departure>
+	
+	<music>Synthese/res/musics/ChronoTriggerAmbient.wav</music>
+	<halo_image>Synthese/res/images/tiles/Other/halo.png</halo_image>
+	<win_image>Synthese/res/images/tiles/Other/You_Win.png</win_image>
+	<lose_image>Synthese/res/images/tiles/Other/You_Lose.png</lose_image>
+
+</map>
