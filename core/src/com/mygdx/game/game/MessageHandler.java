@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import data.Data;
+import com.mygdx.game.data.Data;
 
 public class MessageHandler {
 

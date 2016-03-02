@@ -7,15 +7,15 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import data.Data;
-import data.Hero;
-import data.HeroData;
-import data.Monster;
-import data.MonsterData;
-import data.SpellData;
-import data.Stats;
-import exception.IllegalCaracterClassException;
-import exception.IllegalMovementException;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.Hero;
+import com.mygdx.game.data.HeroData;
+import com.mygdx.game.data.Monster;
+import com.mygdx.game.data.MonsterData;
+import com.mygdx.game.data.SpellData;
+import com.mygdx.game.data.Stats;
+import com.mygdx.game.exception.IllegalCaracterClassException;
+import com.mygdx.game.exception.IllegalMovementException;
 
 public class Player extends Character {
 	

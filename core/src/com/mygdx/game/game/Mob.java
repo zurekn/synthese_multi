@@ -7,10 +7,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import data.Data;
-import data.Monster;
-import data.MonsterData;
-import data.Stats;
+import com.mygdx.game.data.*;
+
 
 public class Mob extends Character {
 

@@ -3,7 +3,7 @@ package com.mygdx.game.game;
 import java.io.IOException;
 import java.util.Scanner;
 
-import data.Data;
+import com.mygdx.game.data.Data;
 
 /**
  * Used for the debug fonction, 

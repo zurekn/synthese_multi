@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import javax.swing.event.EventListenerList;
 
-import data.Handler;
-import game.Character;
-import game.Mob;
-import game.Player;
-import game.WindowGame;
+import com.mygdx.game.data.Handler;
+import com.mygdx.game.game.Character;
+import com.mygdx.game.game.Mob;
+import com.mygdx.game.game.Player;
+import com.mygdx.game.game.WindowGame;
 
 /**
  * This class handle the ai for the game

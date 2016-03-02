@@ -3,7 +3,7 @@ package com.mygdx.game.game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import data.Event;
+import com.mygdx.game.data.Event;
 
 public class Spell {
 	// TODO add range in constructors

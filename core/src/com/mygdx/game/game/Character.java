@@ -10,12 +10,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 
-import ai.AStar;
-import data.Data;
-import data.SpellD;
-import data.Stats;
-import exception.IllegalActionException;
-import exception.IllegalMovementException;
+import com.mygdx.game.ai.AStar;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.SpellD;
+import com.mygdx.game.data.Stats;
+import com.mygdx.game.exception.IllegalActionException;
+import com.mygdx.game.exception.IllegalMovementException;
 
 /**
  * Class representing a character which can be either a player or a monster.
@@ -100,7 +100,8 @@ public abstract class Character {
 	/**
 	 * Is intended to be used with alpha beta
 	 * 
-	 * @param position
+	 * @param x, pposition x
+	 * @param y, postion y
 	 * @throws IllegalMovementException
 	 */
 	public void moveAiTo(int x, int y) {

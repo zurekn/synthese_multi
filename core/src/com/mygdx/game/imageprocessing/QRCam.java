@@ -22,11 +22,11 @@ import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+//import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 
-import data.Data;
-import imageprocessing. QRCodeProcessing;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.imageprocessing. QRCodeProcessing;
 
 public class QRCam extends JFrame implements Runnable, ThreadFactory {
 	

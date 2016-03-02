@@ -2,347 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/001-G_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/001-Grassland01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/002-G_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/002-Woods01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/003-Forest01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/003-G_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/004-G_Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/004-Mountain01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/005-Beach01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/005-G_Road01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/006-Desert01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/006-G_Road02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/007-G_Undulation01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/007-Swamp01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/008-G_Undulation02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/008-Snowfield01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/009-CastleTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/009-G2_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/010-CastleTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/010-G2_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/011-G2_Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/011-PortTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/012-G2_Swamp01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/012-PortTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/013-G2_Swamp02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/013-PostTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/014-G2_Swamp03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/014-PostTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/015-ForestTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/015-Sa_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/016-ForestTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/016-Sa_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/017-MineTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/017-Sa_Grass01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/018-MineTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/018-Sa_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/019-DesertTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/019-Sa_Grass02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/020-DesertTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/020-Sa_Grass03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/021-Sa_Road01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/021-SnowTown01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/022-Roof01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/022-SnowTown02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/023-FarmVillage01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/023-Sa_Undulation01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/024-FarmVillage02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/024-Ocean01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/025-Castle01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/025-Ocean02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/026-Castle02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/026-Ocean03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/027-Castle03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/027-Ocean04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/028-Church01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/028-Sn_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/029-Church02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/029-Sn_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/030-Ship01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/030-Sn_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/031-Ship02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/031-Sn_Undulation01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/032-Heaven01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/032-T_Ocean01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/033-Heaven02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/033-Waterfall01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/034-Bridge01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/034-Waterfall02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/035-Ruins01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/035-Waterfall03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/036-Shop01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/036-Tree01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/037-Fort01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/037-Tree02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/038-Fort02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/038-Tree03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/039-Tower01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/039-Tree04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/040-Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/040-Tower02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/041-EvilCastle01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/041-Grass01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/042-EvilCastle02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/042-Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/043-Cave01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/043-Grass02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/044-Cave02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/044-Road01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/045-Cave03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/045-Road02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/046-Cave04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/046-Road03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/047-Flower01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/047-Mine01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/048-Sewer01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/048-Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/049-InnerBody01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/049-St_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/050-DarkSpace01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/050-Roof02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/051-Carpet01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/052-Carpet02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/053-Wall01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/054-Wall02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/055-Wall03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/056-CE_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/057-CE_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/058-CE_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/059-CE_Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/060-CE_Grass01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/061-CE_Road01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/062-CF_Lava01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/063-CF_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/064-CF_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/065-CF_Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/066-CF_Ground03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/067-CF_Ground04.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/068-CI_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/069-CI_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/070-CI_Snow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/071-CI_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/072-CI_Ice01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/073-CI_Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/074-CW_Water01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/075-CW_Shadow01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/076-CW_Grass01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/077-CW_Grass02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/078-CW_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/079-CW_Grass03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/080-B_Ground01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/081-B_Ground02.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Traps/180-Switch03.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Aero.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Aero.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Attaque.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/musics/ChronoTriggerAmbient.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/DS - Pokemon Ranger 2 Shadows of Almia - Effects Set 4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/DS - Sonic Rush Adventure - Blazes SFX.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/Dark Matter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/DarkMatter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Dark_matter.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Fire Ball.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Fur.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Heal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/HolyRay.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/Ice Crush.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Ice Crush.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Ice_Crush.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Key.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/Lunar Light.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/LunarLight.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Lunar_light.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/Meteor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Meteor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Meteor.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Multiple_test.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/OpenAL32.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/OpenAL64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Potion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/Shoot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Shoot.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Shoot.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Shuriken.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/SwordSlash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/Ultimate_Beam_Fx_3_by_Xypter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/Water Wave.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/Water_wave.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Other/You_Lose.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Other/You_Win.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/aero.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/barrel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/bat.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/bat.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/bee.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/bee.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/big_worm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/big_worm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/musics/boss.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/brackish.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/bridges.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/buckets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/cabinets.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/castle_lightsources.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/castle_outside.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/castlefloors.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/castlefloors_outside.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/castlewalls.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/cement.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/cementstair.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/chests.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/country.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/cup.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/musics/decouverte.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/dilatation.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/dirt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/dirt2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/dungeon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/musics/dungeon.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/eyeball.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/eyeball.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/fabled_mugen_sprite_effects_by_ricinator0-d3gy8nh.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/female_hurt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/female_slash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/female_spellcast.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/female_walkcycle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Traps/fireBall.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/fire_skull.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/fireball.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/fireball.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/ghost.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/ghost.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/grass.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/grassalt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/hairfemale.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/hairfemale.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/hairmale.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/hairmale.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Other/halo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/hole.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/holek.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/holemid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/holy_ray.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/holy_strike.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/holy_strike.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/house.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/imgSrc.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/inside.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/jinput-dx8.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/jinput-dx8_64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/jinput-raw.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/jinput-raw_64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/kitchen.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/lava.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/lavarock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/libjinput-linux.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/libjinput-linux64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/libjinput-osx.dylib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/liblwjgl.dylib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/liblwjgl.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/liblwjgl64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/libopenal.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/libopenal64.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/lwjgl.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/lwjgl64.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/m_super_the_hedgehog_sprite_sheet_by_mrsupersonic1671-d51e58k.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/class/mage_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_hurt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_hurt_pants.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_pants.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_slash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_slash_pants.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_spellcast.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_spellcast_pants.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/male_walkcycle.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/man_eater_flower.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/man_eater_flower.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/mountains.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/natives/openal.dylib" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/class/priest_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/princess.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/princess.xcf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/pumpking.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/pumpking.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/rock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/class/rogue_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/root.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/signs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/slime.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/slime.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/small_worm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/small_worm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Monsters/snake.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/snake.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/soldier.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/soldier_altcolor.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/sonic_battle_effects_sheet_by_tanuke.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/stairs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/sword slash.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/sword_slash.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/testBloc.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/testRes/QRCodes/test_petit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/musics/theme_sympa.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/tiles.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/musics/town.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/treetop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/trunk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/ultimate_effects_sheet_1_by_xypter-d3elq5i.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/ultimate_effects_sheet_8_by_xypter-d3iax71.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/victoria.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/class/war_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Spells/water wave.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/water.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/waterfall.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/tiles/Sprites/watergrass.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/README" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/sounds/README" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/README" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/libs/README" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/bridj_0_6_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/core_2_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/desktop_desktop_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/hero.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/init.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/items.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jdom_2_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jdom_2_0_5_javadoc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jinput.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/lwjgl.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/map.tmx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/map.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/map2.tmx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/map2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/images/map3.tmx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/monstersData.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/slick.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/spells.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/xml/traps.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/webcam_capture_0_3_10.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/zxing_2_1.xml" />
-      <change type="DELETED" beforePath="C:\Users\nicolas\Google Drive\Dev\synthese_multi\Synthese_multi.iml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\nicolas\Google Drive\Dev\synthese_multi\core\src\Game.gwt.xml" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/Game.gwt.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="DELETED" beforePath="D:\Dev\synthese_multi\Synthese_multi.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AIHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AIHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIX.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AStar.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AStar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AlphaBeta.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AlphaBeta.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Block.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Block.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterBuilder.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterData.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessing.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Map.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Map.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Monster.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Monster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/MonsterData.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/MonsterData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCam.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCam.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeProcessing.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeProcessing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Spell.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Spell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellData.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/WindowGameData.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/ai/WindowGameData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build.gradle" afterPath="$PROJECT_DIR$/core/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/core.iml" afterPath="$PROJECT_DIR$/core/core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/desktop.iml" afterPath="$PROJECT_DIR$/desktop/desktop.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/bridj_0_6_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/bridj_0_6_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/core_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/core_2_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/html.iml" afterPath="$PROJECT_DIR$/html/html.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ios/ios.iml" afterPath="$PROJECT_DIR$/ios/ios.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/jdom_2_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/jdom_2_0_5.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/jdom_2_0_5_javadoc.xml" afterPath="$PROJECT_DIR$/.idea/libraries/jdom_2_0_5_javadoc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/jinput.xml" afterPath="$PROJECT_DIR$/.idea/libraries/jinput.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lwjgl.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lwjgl.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_7_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/slick.xml" afterPath="$PROJECT_DIR$/.idea/libraries/slick.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/webcam_capture_0_3_10.xml" afterPath="$PROJECT_DIR$/.idea/libraries/webcam_capture_0_3_10.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/zxing_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/zxing_2_1.xml" />
     </list>
     <ignored path="Synthese_multi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -395,55 +104,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/android/build.gradle">
+      <file leaf-file-name="ImageProcessingHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <caret line="132" column="31" selection-start-line="132" selection-start-column="31" selection-end-line="132" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QRCodeProcessing.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeProcessing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.15026833">
+              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DesktopLauncher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DesktopLauncher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26608697">
-              <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="96" column="18" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -467,24 +154,24 @@
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value=":android" />
-                <option name="path" value="$PROJECT_DIR$/android" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
-                <option name="name" value=":ios" />
-                <option name="path" value="$PROJECT_DIR$/ios" />
+                <option name="name" value=":core" />
+                <option name="path" value="$PROJECT_DIR$/core" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
                 <option name="name" value=":desktop" />
                 <option name="path" value="$PROJECT_DIR$/desktop" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
+                <option name="name" value=":android" />
+                <option name="path" value="$PROJECT_DIR$/android" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
                 <option name="name" value=":html" />
                 <option name="path" value="$PROJECT_DIR$/html" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value=":core" />
-                <option name="path" value="$PROJECT_DIR$/core" />
+                <option name="name" value=":ios" />
+                <option name="path" value="$PROJECT_DIR$/ios" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
                 <option name="name" value="synthese_multi" />
@@ -2552,6 +2239,7 @@
       <map>
         <entry key="$PROJECT_DIR$" value="10163815975868" />
         <entry key="D:\Android\Synthese_multi" value="10159849626627" />
+        <entry key="D:\Dev\synthese_multi" value="10168380788223" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2819,16 +2507,16 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.6.3/f5848caaa3edeedce92361c61c716a1cb33587f/gdx-1.6.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.6.3/82ff2ee784275ae5f49ac942a593c5248b80881b/gdx-box2d-1.6.3.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.3/e829c3543ab5a6b3ff818615a8620024f6a14fe0/box2dlights-1.3.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/slick.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/slf4j-api-1.7.2.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/bridj-0.6.2.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/jdom-2.0.5-javadoc.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/webcam-capture-0.3.10.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/zxing-2.1.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/lwjgl.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/jdom-2.0.5.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/jinput.jar" />
-                            <option value="$PROJECT_DIR$/android/libs/core-2.1.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/slick.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/slf4j-api-1.7.2.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/bridj-0.6.2.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/jdom-2.0.5-javadoc.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/webcam-capture-0.3.10.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/zxing-2.1.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/lwjgl.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/jdom-2.0.5.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/jinput.jar" />
+                            <option value="$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/core-2.1.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/core" />
@@ -3266,6 +2954,35 @@
       <list>
         <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/ActionEvent.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AIHandler.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AlphaBeta.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/AStar.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterData.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/WindowGameData.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterBuilder.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Spell.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellData.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Monster.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Block.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameHandler.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Map.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIX.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessing.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCam.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeProcessing.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java" />
       </list>
     </option>
   </component>
@@ -3283,9 +3000,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1057" />
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="1932" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -3310,6 +3028,26 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
@@ -3363,98 +3101,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Synthese_multi" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Synthese_multi" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ios" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Synthese_multi" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Synthese_multi" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Synthese_multi" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Synthese_multi" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -3482,6 +3128,50 @@
               <option name="myItemId" value="Synthese_multi" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zxing-2.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zxing-2.1.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zxing-2.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zxing-2.1.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zxing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3490,6 +3180,42 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desktop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desktop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="desktop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3529,13 +3255,143 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imageprocessing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ai" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/Dev/RunRunSVN" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RunRunSVN" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
@@ -3613,10 +3469,15 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_SELECTION_ERROR" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -3638,10 +3499,15 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_SELECTION_ERROR" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3765,10 +3631,15 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_SELECTION_ERROR" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="false" name="desktop" type="Application" factoryName="Application">
@@ -3834,34 +3705,34 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1057" extended-state="0" />
+    <frame x="-9" y="-9" width="1932" height="1060" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27432218" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24945295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2702407" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22555555" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24892704" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3882,142 +3753,469 @@
     <option name="LAST_COMMIT_MESSAGE" value="add the old code in the current projet" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/AlphaBeta.java</url>
+          <line>2</line>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/TreeNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/WindowGameData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64">
+          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#316#331#0" expanded="true" />
+            <element signature="e#1010#1011#0" expanded="true" />
+            <element signature="e#1034#1035#0" expanded="true" />
+            <element signature="e#1101#1102#0" expanded="true" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1170#1171#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
+            <element signature="e#1347#1362#0" expanded="true" />
+            <element signature="e#1794#1809#0" expanded="true" />
+            <element signature="e#2328#2336#0" expanded="true" />
+            <element signature="e#4783#4798#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/AStar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="71" column="26" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+    <entry file="jar://C:/Java/jdk1.8.0_45/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.33294117">
+          <caret line="456" column="19" selection-start-line="456" selection-start-column="19" selection-end-line="456" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.12">
+          <caret line="59" column="20" selection-start-line="59" selection-start-column="20" selection-end-line="59" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/CharacterBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding>
+            <element signature="e#230#245#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5129412">
+          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/proguard-project.txt">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Event.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ios/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html/build.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Handler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/build.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.18">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#306#313#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/HeroData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.037647057">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Monster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+          <folding>
+            <element signature="e#385#392#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/MonsterData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33294117">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.54">
+          <caret line="103" column="17" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2106#2107#0" expanded="true" />
+            <element signature="e#2125#2126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/SpellData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2780#2787#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Stats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/TrapD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.13882352">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/TrapData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.35764706">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/XMLReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Block.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Game.gwt.xml">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="4.96">
+          <caret line="294" column="30" selection-start-line="294" selection-start-column="30" selection-end-line="294" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/GameHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/libs/README">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.22">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/build.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.12">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="18" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.2">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09647059">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1">
+          <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Spell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Trap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.98">
+          <caret line="199" column="35" selection-start-line="199" selection-start-column="31" selection-end-line="199" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1261#1268#0" expanded="true" />
+            <element signature="e#1318#1324#0" expanded="true" />
+            <element signature="e#26310#26318#0" expanded="true" />
+            <element signature="e#26632#26640#0" expanded="true" />
+            <element signature="e#27659#27670#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55764705">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIXAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIXListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/FormObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15882353">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/MovementAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/MovementEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/MovementListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/Pixel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.4">
+          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/WebCamCapture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.097647056">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+          <caret line="132" column="31" selection-start-line="132" selection-start-column="31" selection-end-line="132" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -4026,11 +4224,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26608697">
-          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/QRCodeProcessing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15026833">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

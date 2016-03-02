@@ -1,11 +1,11 @@
 package com.mygdx.game.game;
 
-import imageprocessing.APIX;
-import imageprocessing.APIXAdapter;
-import imageprocessing.MovementEvent;
-import imageprocessing.QRCodeEvent;
+import com.mygdx.game.imageprocessing.APIX;
+import com.mygdx.game.imageprocessing.APIXAdapter;
+import com.mygdx.game.imageprocessing.MovementEvent;
+import com.mygdx.game.imageprocessing.QRCodeEvent;
 
-import java.lang.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -19,16 +19,9 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import ai.AStar;
-import ai.CharacterData;
-import ai.CommandHandler;
-import ai.CommandListener;
-import ai.ActionEvent;
-import ai.WindowGameData;
-import data.*;
-import exception.IllegalActionException;
-import exception.IllegalCaracterClassException;
-import exception.IllegalMovementException;
+import com.mygdx.game.ai.*;
+import com.mygdx.game.data.*;
+import com.mygdx.game.exception.*;
 
 /**
  * Main class which handle the game Contain the init method for creating all
@@ -53,8 +46,8 @@ public class WindowGame extends BasicGame {
 	private MessageHandler messageHandler;
 	private ArrayList<Event> events = new ArrayList<Event>();
 	private ArrayList<Trap> traps = new ArrayList<Trap>();
-	private java.lang.Character previousCharacter = null;
-	private java.lang.Character currentCharacter;
+	private Character previousCharacter = null;
+	private Character currentCharacter;
 	private ArrayList<int[]> reachableBlock = new ArrayList<int[]>();
 
 	private int playerNumber;
@@ -85,8 +78,8 @@ public class WindowGame extends BasicGame {
 		super(Data.NAME);
 	}
 
-	private WindowGame(String title, GameContainer container, MobHandler mobHandler, ArrayList<Mob> mobs, game.PlayerHandler playerHandler,
-			ArrayList<Player> players, MovementHandler movementHandler, ArrayList<Event> events, java.lang.Character currentCharacter, int playerNumber,
+	private WindowGame(String title, GameContainer container, MobHandler mobHandler, ArrayList<Mob> mobs, PlayerHandler playerHandler,
+			ArrayList<Player> players, MovementHandler movementHandler, ArrayList<Event> events, Character currentCharacter, int playerNumber,
 			int turn, int turnTimer, long timeStamp) {
 		super(title);
 		this.container = container;
@@ -696,11 +689,11 @@ public class WindowGame extends BasicGame {
 	 * @param e
 	 * @return
 	 */
-	private Focus getFirstCharacterRange(ArrayList<java.lang.Character> chars, Event e) {
+	private Focus getFirstCharacterRange(ArrayList<Character> chars, Event e) {
 		float range = Data.MAX_RANGE;
 		System.out.println("Search the first character range : " + e.toString() + ", " + chars.toString());
-		java.lang.Character focus = null;
-		for (java.lang.Character c : chars) {
+		Character focus = null;
+		for (Character c : chars) {
 			if (e.getDirection() == Data.NORTH || e.getDirection() == Data.SOUTH) {
 				int i = (Math.abs(c.getY() - (e.getYOnBoard())));
 				System.out.println("c.getY() = [" + c.getY() + "], e.getYOnBoard = [" + (e.getYOnBoard()) + "], i = [" + i + "]");
@@ -872,7 +865,7 @@ public class WindowGame extends BasicGame {
 	}
 	
 
-	public java.lang.Character getCurrentPlayer() {
+	public Character getCurrentPlayer() {
 		return currentCharacter;
 	}
 	
@@ -902,9 +895,9 @@ public class WindowGame extends BasicGame {
 	 * @param direction
 	 * @return ArrayList<Character>
 	 */
-	private ArrayList<java.lang.Character> getCharacterPositionOnLine(int x, int y, int direction) {
+	private ArrayList<Character> getCharacterPositionOnLine(int x, int y, int direction) {
 
-		ArrayList<java.lang.Character> c = new ArrayList<java.lang.Character>();
+		ArrayList<Character> c = new ArrayList<Character>();
 		
 		if(direction == Data.SELF)
 		{
@@ -952,7 +945,7 @@ public class WindowGame extends BasicGame {
 	 * @param y
 	 * @return Character
 	 */
-	private java.lang.Character getCharacterByPosition(int x, int y) {
+	private Character getCharacterByPosition(int x, int y) {
 		for (int i = 0; i < players.size(); i++)
 			if (players.get(i).getX() == x && players.get(i).getY() == y)
 				return players.get(i);
@@ -966,9 +959,9 @@ public class WindowGame extends BasicGame {
 
 	private class Focus {
 		protected float range;
-		protected java.lang.Character character;
+		protected Character character;
 
-		public Focus(float range, java.lang.Character character) {
+		public Focus(float range, Character character) {
 			this.range = range;
 			this.character = character;
 		}

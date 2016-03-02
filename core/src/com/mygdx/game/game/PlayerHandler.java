@@ -8,8 +8,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import data.Data;
-import data.Stats;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.Stats;
 
 public class PlayerHandler {
 	private ArrayList<Player> player ;
