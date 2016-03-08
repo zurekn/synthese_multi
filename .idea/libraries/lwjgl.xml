@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="lwjgl">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/libs/jar/lwjgl.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
