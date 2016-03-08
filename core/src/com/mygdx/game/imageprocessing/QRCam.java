@@ -1,7 +1,11 @@
 package com.mygdx.game.imageprocessing;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.mygdx.game.data.Data;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,20 +17,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.event.EventListenerList;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
-//import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
-
-import com.mygdx.game.data.Data;
-import com.mygdx.game.imageprocessing. QRCodeProcessing;
 
 public class QRCam extends JFrame implements Runnable, ThreadFactory {
 	

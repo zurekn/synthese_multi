@@ -1,5 +1,12 @@
 package com.mygdx.game.testpackage;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.mygdx.game.imageprocessing.QRCodeProcessing;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
@@ -10,19 +17,6 @@ import java.util.concurrent.ThreadFactory;
 
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
-
-import com.mygdx.game.imageprocessing. QRCodeProcessing;
 
 public class WebCamQRCode extends JFrame implements Runnable, ThreadFactory {
 	
