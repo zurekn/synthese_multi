@@ -1,9 +1,9 @@
 package com.mygdx.game.testpackage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import javax.swing.SwingUtilities;
 import com.google.zxing.NotFoundException;
-import com.mygdx.game.imageprocessing.*;
+import com.mygdx.game.imageprocessing.ImageProcessing;
+import com.mygdx.game.imageprocessing.QRCodeProcessing;
+
+import java.io.IOException;
  
 public class TraitementQRTest {
 
