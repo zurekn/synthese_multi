@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="zxing-2.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/zxing-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/libs/jar/zxing-2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,6 +1,6 @@
 package com.mygdx.game.testpackage;
 
-import imageprocessing.WebCamCapture;
+import com.mygdx.game.imageprocessing.WebCamCapture;
 
 import javax.swing.SwingUtilities;
 

@@ -9,14 +9,14 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-import imageprocessing.FormObject;
-import imageprocessing.ImageProcessing;
-import imageprocessing.Pixel;
+import com.mygdx.game.imageprocessing.FormObject;
+import com.mygdx.game.imageprocessing.ImageProcessing;
+import com.mygdx.game.imageprocessing.Pixel;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 
-import data.Data;
+import com.mygdx.game.data.Data;
 
 
 public class ImageProcessingTest{
