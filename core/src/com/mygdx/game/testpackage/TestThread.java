@@ -1,6 +1,6 @@
 package com.mygdx.game.testpackage;
 
-import ai.AIHandler;
+import com.mygdx.game.ai.AIHandler;
 
 public class TestThread {
 

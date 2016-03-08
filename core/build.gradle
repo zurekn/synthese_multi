@@ -16,4 +16,8 @@ dependencies {
     compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/jdom-2.0.5.jar')
     compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/jinput.jar')
     compile files('C:/Users/nicolas/Google Drive/Dev/synthese_multi/android/libs/core-2.1.jar')
+    compile files('D:/Dev/synthese_multi/android/libs/jar/core-3.1.0-sources.jar')
+    compile files('D:/Dev/synthese_multi/android/libs/jar/javase-3.1.0-sources.jar')
+    compile files('D:/Dev/synthese_multi/android/libs/jar/zxing.appspot.com-3.1.0-sources.jar')
+    compile files('D:/Dev/synthese_multi/android/libs/jar/zxingorg-3.1.0-sources.jar')
 }

@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 import com.google.zxing.NotFoundException;
-import imageprocessing.*;
+import com.mygdx.game.imageprocessing.*;
  
 public class TraitementQRTest {
 
