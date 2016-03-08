@@ -1,6 +1,6 @@
 package com.mygdx.game.data;
 
-import game.Mob;
+import com.mygdx.game.game.Mob;
 
 import java.io.File;
 import java.io.IOException;

@@ -6,10 +6,10 @@ import java.awt.GraphicsEnvironment;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-import ai.AStar;
-import data.Data;
-import game.Mob;
-import game.WindowGame;
+import com.mygdx.game.ai.AStar;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.game.Mob;
+import com.mygdx.game.game.WindowGame;
 
 public class Main {
 	

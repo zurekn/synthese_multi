@@ -1,6 +1,6 @@
 package com.mygdx.game.game;
 
-import data.TrapD;
+import com.mygdx.game.data.TrapD;
 
 public class Block {
 	private int x;

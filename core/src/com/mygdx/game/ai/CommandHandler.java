@@ -1,9 +1,9 @@
 package com.mygdx.game.ai;
 
-import game.Character;
-import game.Mob;
-import game.Player;
-import game.WindowGame;
+import com.mygdx.game.game.Character;
+import com.mygdx.game.game.Mob;
+import com.mygdx.game.game.Player;
+import com.mygdx.game.game.WindowGame;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,7 +12,7 @@ import javax.swing.event.EventListenerList;
 
 import org.lwjgl.Sys;
 
-import data.Handler;
+import com.mygdx.game.data.Handler;
 
 //TODO add some done signal so the main thread cam make this one sleep
 public class CommandHandler extends Handler {

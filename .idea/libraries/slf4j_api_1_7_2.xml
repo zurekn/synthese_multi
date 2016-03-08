@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="slf4j-api-1.7.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/libs/slf4j-api-1.7.2.jar!/" />
+      <root url="jar://$USER_HOME$/Google Drive/Dev/synthese_multi/android/libs/slf4j-api-1.7.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -8,8 +8,8 @@ import java.util.List;
 import org.jdom2.DataConversionException;
 import org.jdom2.Element;
 
-import data.TrapD;
-import data.TrapData;
+import com.mygdx.game.data.TrapD;
+import com.mygdx.game.data.TrapData;
 
 public class Map {
 	private int xSize;

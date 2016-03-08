@@ -3,11 +3,11 @@ package com.mygdx.game.ai;
 import java.util.ArrayList;
 import java.util.Random;
 
-import data.Data;
-import data.HeroData;
-import data.Stats;
-import game.Character;
-import game.Spell;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.HeroData;
+import com.mygdx.game.data.Stats;
+import com.mygdx.game.game.Character;
+import com.mygdx.game.game.Spell;
 
 public class AlphaBeta {
 	// TODO debug

@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import data.Data;
+import com.mygdx.game.data.Data;
 
 
 public class ImageProcessing {

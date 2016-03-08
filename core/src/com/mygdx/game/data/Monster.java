@@ -1,6 +1,6 @@
 package com.mygdx.game.data;
 
-import game.Spell;
+import com.mygdx.game.game.Spell;
 
 import java.util.ArrayList;
 

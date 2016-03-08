@@ -1,6 +1,6 @@
 package com.mygdx.game.imageprocessing;
 
-import game.WindowGame;
+import com.mygdx.game.game.WindowGame;
 
 import java.awt.im.InputMethodHighlight;
 import java.awt.image.BufferedImage;
@@ -15,8 +15,8 @@ import javax.swing.event.EventListenerList;
 import com.github.sarxos.webcam.Webcam;
 import com.sun.java.swing.plaf.windows.resources.windows;
 
-import data.Data;
-import data.Handler;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.Handler;
 
 public class ImageProcessingHandler extends Handler {
 
@@ -130,7 +130,7 @@ public class ImageProcessingHandler extends Handler {
 			List<FormObject> lf = new ArrayList<FormObject>();
 			if(WindowGame.getInstance().getCurrentPlayer() != null)
 			{
-				game.Character currentPlayer = WindowGame.getInstance().getCurrentPlayer();
+				com.mygdx.game.game.Character currentPlayer = WindowGame.getInstance().getCurrentPlayer();
 				int tempLimitMinX = ((currentPlayer.getX()*(int)APIX.blockSizeX + (int)APIX.relativeX) - ((int)APIX.blockSizeX*(currentPlayer.getStats().getMovementPoints()+2)));
 				tempLimitMinX = tempLimitMinX < (int)APIX.relativeX ? 
 												(int)APIX.relativeX : 

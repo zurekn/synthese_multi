@@ -31,7 +31,7 @@ import com.google.zxing.multi.qrcode.QRCodeMultiReader;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.google.zxing.qrcode.encoder.ByteMatrix;
 
-import data.Data;
+import com.mygdx.game.data.Data;
 
 
 public class QRCodeProcessing {

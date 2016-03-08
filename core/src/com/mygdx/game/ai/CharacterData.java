@@ -1,15 +1,15 @@
 package com.mygdx.game.ai;
 
-import game.Character;
-import game.Spell;
+import com.mygdx.game.game.Character;
+import com.mygdx.game.game.Spell;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import data.Data;
-import data.Stats;
-import exception.IllegalActionException;
-import exception.IllegalMovementException;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.Stats;
+import com.mygdx.game.exception.IllegalActionException;
+import com.mygdx.game.exception.IllegalMovementException;
 
 public class CharacterData {
 	private String id;

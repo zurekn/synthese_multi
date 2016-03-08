@@ -1,7 +1,7 @@
 package com.mygdx.game.data;
 
-import game.Mob;
-import game.WindowGame;
+import com.mygdx.game.game.Mob;
+import com.mygdx.game.game.WindowGame;
 
 import java.awt.GraphicsConfigTemplate;
 import java.awt.GraphicsConfiguration;

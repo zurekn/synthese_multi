@@ -1,7 +1,7 @@
 package com.mygdx.game.imageprocessing;
 
-import game.GameHandler;
-import game.WindowGame;
+import com.mygdx.game.game.GameHandler;
+import com.mygdx.game.game.WindowGame;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,8 +25,8 @@ import com.github.sarxos.webcam.WebcamCompositeDriver;
 import com.github.sarxos.webcam.WebcamResolution;
 import com.github.sarxos.webcam.ds.buildin.WebcamDefaultDriver;
 
-import data.Data;
-import data.Handler;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.data.Handler;
 
 import javax.swing.event.EventListenerList;
 

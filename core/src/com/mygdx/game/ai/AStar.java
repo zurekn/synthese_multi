@@ -1,14 +1,14 @@
 //TODO optimize a star
 package com.mygdx.game.ai;
 
-import game.WindowGame;
-import game.Character;
+import com.mygdx.game.game.WindowGame;
+import com.mygdx.game.game.Character;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Set;
 
-import data.Data;
+import com.mygdx.game.data.Data;
 
 public class AStar {
 	private Node initMap[][];

@@ -1,6 +1,6 @@
 package com.mygdx.game.game;
 
-import data.Handler;
+import com.mygdx.game.data.Handler;
 
 public class GameHandler extends Handler {
 	public GameHandler(Thread t) {
