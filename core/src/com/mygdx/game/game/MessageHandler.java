@@ -2,9 +2,10 @@ package com.mygdx.game.game;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.data.Data;
 
 public class MessageHandler {
@@ -21,14 +22,14 @@ public class MessageHandler {
 	private ArrayList<ArrayList<Message>> deletedPlayerMessage = new ArrayList<ArrayList<Message>>();
 	private ArrayList<ArrayList<Message>> waitingPlayerMessage = new ArrayList<ArrayList<Message>>();
 
-	public void render(GameContainer container, Graphics g) {
+	public void render(Batch batch) {
 		int i = 10;
 		for(Message m : waitingMessage)
 			globalMessages.add(m);
 		waitingMessage.clear();
 		
 		for (Message m : globalMessages) {
-			m.render(container, g, initialX, inittialY + i);
+			m.render(batch, initialX, inittialY + i);
 			if (m.update())
 				deletedMessage.add(m);
 			i += Data.FONT_HEIGHT;
@@ -48,19 +49,42 @@ public class MessageHandler {
 			waitingPlayerMessage.get(i).clear();
 			i++;
 		}
-		
-		
+/*
+		public void show() {
+			font = new BitmapFont(Gdx.files.internal("someFont.ttf"));
+			oldTransformMatrix = spriteBatch.getTransformMatrix().cpy();
+			mx4Font.rotate(new Vector3(0, 0, 1), angle);
+			mx4Font.trn(posX, posY, 0);
+		}
+
+		@Override
+		public void render() {
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			spriteBatch.setTransformMatrix(mx4Font);
+			spriteBatch.begin();
+			font.draw(spriteBatch, text, 0, 0);
+			spriteBatch.end();
+			spriteBatch.setTransformMatrix(oldTransformMatrix);
+		}
+		*/
 		n = 0;
 		i = 0;
+		Matrix4 oldMatrix = batch.getTransformMatrix().cpy();
+        Matrix4 matrix = new Matrix4();
 		for (ArrayList<Message> list : playerMessages) {
-			g.rotate(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, n * 90);
+            matrix.rotate(new Vector3(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, 0), n * 90);
+            batch.setTransformMatrix(matrix); // set the rotation
+
+			//g.rotate(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, n * 90);
 			for (Message m : list) {
-				m.render(container, g, Data.PLAYER_MESSAGE_X_POS + Data.MAP_X, Data.PLAYER_MESSAGE_Y_POS + Data.MAP_Y + Data.MAP_HEIGHT + i);
-				if (m.update())
+				//m.render(container, g, Data.PLAYER_MESSAGE_X_POS + Data.MAP_X, Data.PLAYER_MESSAGE_Y_POS + Data.MAP_Y + Data.MAP_HEIGHT + i);
+				m.render(batch,Data.PLAYER_MESSAGE_X_POS + Data.MAP_X, Data.PLAYER_MESSAGE_Y_POS + Data.MAP_Y + Data.MAP_HEIGHT + i);
+                if (m.update())
 					deletedPlayerMessage.get(n).add(m);
 				i += Data.FONT_HEIGHT;
 			}
-			g.rotate(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, n * 90);
+            batch.setTransformMatrix(oldMatrix);
+			//g.rotate(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, n * 90);
 			i = 0;
 			n++;
 		}
