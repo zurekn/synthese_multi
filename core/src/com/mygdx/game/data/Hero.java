@@ -1,27 +1,26 @@
 package com.mygdx.game.data;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.game.Spell;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import org.newdawn.slick.Image;
 
 public class Hero {
 
 	private String caracterClass;
 	private Stats stat;
-	private Image icon;
+	private Texture icon;
 	private ArrayList<Spell> spells = new ArrayList<Spell>();
 
-	public Hero(String caracterClass, Image icon, Stats stat) {
+	public Hero(String caracterClass, Texture icon, Stats stat) {
 		super();
 		this.icon = icon;
 		this.caracterClass = caracterClass;
 		this.stat = stat;
 	}
 
-	public Image getIcon(){
+	public Texture getIcon(){
 		return icon;
 	}
 	

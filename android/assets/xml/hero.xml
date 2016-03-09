@@ -1,6 +1,6 @@
 <heros>
 	<hero id="mage">
-		<icon>Synthese/res/images/tiles/class/mage_icon.png</icon>
+		<icon>images/tiles/class/mage_icon.png</icon>
 		<life>200</life>
 		<armor>0</armor>
 		<mana>100</mana>
@@ -26,7 +26,7 @@
 		<value>0</value>
 	</hero>
 	<hero id="rogue">
-		<icon>Synthese/res/images/tiles/class/rogue_icon.png</icon>
+		<icon>images/tiles/class/rogue_icon.png</icon>
 		<life>200</life>
 		<armor>10</armor>
 		<mana>100</mana>
@@ -44,7 +44,7 @@
 		<value>5</value>
 	</hero>
 	<hero id="barbarian">
-		<icon>Synthese/res/images/tiles/class/war_icon.png</icon>
+		<icon>images/tiles/class/war_icon.png</icon>
 		<life>200</life>
 		<armor>25</armor>
 		<mana>100</mana>
@@ -60,7 +60,7 @@
 		<value>10</value>
 	</hero>
 	<hero id="cleric">
-		<icon>Synthese/res/images/tiles/class/priest_icon.png</icon>
+		<icon>images/tiles/class/priest_icon.png</icon>
 		<life>200</life>
 		<armor>0</armor>
 		<mana>125</mana>

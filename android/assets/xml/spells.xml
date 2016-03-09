@@ -1,6 +1,6 @@
 <spells>
 	<spell id="s1">
-		<file>Synthese/res/images/tiles/Spells/HolyRay.png</file>
+		<file>images/tiles/Spells/HolyRay.png</file>
 		<celX>60</celX>
 		<celY>60</celY>
 		<celNumber>4</celNumber>
@@ -11,11 +11,11 @@
 		<name>Holly Ray</name>
 		<range>6</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/holy_ray.wav</sound>
+		<sound>sounds/holy_ray.wav</sound>
 		<speed>0.5</speed>
 	</spell>
 	<spell id="s2">
-		<file>Synthese/res/images/tiles/Spells/fireball.png</file>
+		<file>images/tiles/Spells/fireball.png</file>
 		<celX>64</celX>
 		<celY>51</celY>
 		<celNumber>4</celNumber>
@@ -26,11 +26,11 @@
 		<name>Fire Ball</name>
 		<range>5</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/fireball.wav</sound>
+		<sound>sounds/fireball.wav</sound>
 		<speed>0.5</speed>
 	</spell>
 	<spell id="s3">
-		<file>Synthese/res/images/tiles/Spells/Dark Matter.png</file>
+		<file>images/tiles/Spells/Dark Matter.png</file>
 		<celX>84</celX>
 		<celY>80</celY>
 		<celNumber>5</celNumber>
@@ -41,11 +41,11 @@
 		<name>Dark Mater</name>
 		<range>6</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/Dark_matter.wav</sound>
+		<sound>sounds/Dark_matter.wav</sound>
 		<speed>0.5</speed>
 	</spell>
 	<spell id="s4">
-		<file>Synthese/res/images/tiles/Spells/water wave.png</file>
+		<file>images/tiles/Spells/water wave.png</file>
 		<celX>81</celX>
 		<celY>37</celY>
 		<celNumber>4</celNumber>
@@ -56,11 +56,11 @@
 		<name>Water Wave</name>
 		<range>8</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/Water_wave.wav</sound>
+		<sound>sounds/Water_wave.wav</sound>
 		<speed>0.5</speed>
 	</spell>
 	<spell id="s5">
-		<file>Synthese/res/images/tiles/Spells/sword slash.png</file>
+		<file>images/tiles/Spells/sword slash.png</file>
 		<celX>158</celX>
 		<celY>75</celY>
 		<celNumber>3</celNumber>
@@ -71,11 +71,11 @@
 		<name>Sword Slash</name>
 		<range>2</range>
 		<type>physic</type>
-		<sound>Synthese/res/sounds/sword_slash.wav</sound>
+		<sound>sounds/sword_slash.wav</sound>
 		<speed>0.5</speed>
 	</spell>
 	<spell id="s6">
-		<file>Synthese/res/images/tiles/Spells/Lunar Light.png</file>
+		<file>images/tiles/Spells/Lunar Light.png</file>
 		<celX>101</celX>
 		<celY>100</celY>
 		<celNumber>3</celNumber>
@@ -86,12 +86,12 @@
 		<name>Lunar light</name>
 		<range>7</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/Lunar_light.wav</sound>
+		<sound>sounds/Lunar_light.wav</sound>
 		<speed>0.1</speed>
 	</spell>
 
 	<spell id="s7">
-		<file>Synthese/res/images/tiles/Spells/Aero.png</file>
+		<file>images/tiles/Spells/Aero.png</file>
 		<celX>72</celX>
 		<celY>41</celY>
 		<celNumber>4</celNumber>
@@ -102,12 +102,12 @@
 		<name>Aero</name>
 		<range>5</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/Aero.wav</sound>
+		<sound>sounds/Aero.wav</sound>
 		<speed>0.7</speed>
 	</spell>
 	
 	<spell id="s8">
-		<file>Synthese/res/images/tiles/Spells/Shoot.png</file>
+		<file>images/tiles/Spells/Shoot.png</file>
 		<celX>38</celX>
 		<celY>38</celY>
 		<celNumber>3</celNumber>
@@ -118,11 +118,11 @@
 		<name>Shoot</name>
 		<range>10</range>
 		<type>physic</type>
-		<sound>Synthese/res/sounds/Shoot.wav</sound>
+		<sound>sounds/Shoot.wav</sound>
 		<speed>1</speed>
 	</spell>
 	<spell id="s9">
-		<file>Synthese/res/images/tiles/Spells/Meteor.png</file>
+		<file>images/tiles/Spells/Meteor.png</file>
 		<celX>107</celX>
 		<celY>110</celY>
 		<celNumber>5</celNumber>
@@ -133,11 +133,11 @@
 		<name>Meteor</name>
 		<range>6</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/Meteor.wav</sound>
+		<sound>sounds/Meteor.wav</sound>
 		<speed>0.7</speed>
 	</spell>
 	<spell id="s10">
-		<file>Synthese/res/images/tiles/Spells/holy_strike.png</file>
+		<file>images/tiles/Spells/holy_strike.png</file>
 		<celX>80</celX>
 		<celY>90</celY>
 		<celNumber>7</celNumber>
@@ -148,11 +148,11 @@
 		<name>Holy Strike</name>
 		<range>1</range>
 		<type>physic</type>
-		<sound>Synthese/res/sounds/holy_strike.wav</sound>
+		<sound>sounds/holy_strike.wav</sound>
 		<speed>1</speed>
 	</spell>
 	<spell id="s11">
-		<file>Synthese/res/images/tiles/Spells/Ice Crush.png</file>
+		<file>images/tiles/Spells/Ice Crush.png</file>
 		<celX>76</celX>
 		<celY>94</celY>
 		<celNumber>5</celNumber>
@@ -163,7 +163,7 @@
 		<name>Ice Crush</name>
 		<range>6</range>
 		<type>magic</type>
-		<sound>Synthese/res/sounds/Ice_Crush.wav</sound>
+		<sound>sounds/Ice_Crush.wav</sound>
 		<speed>0.7</speed>
 	</spell>
 </spells>
