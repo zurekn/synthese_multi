@@ -1,5 +1,8 @@
 package com.mygdx.game.data;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,8 +11,6 @@ import java.util.Random;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 public class HeroData {
 
@@ -69,13 +70,9 @@ public class HeroData {
 			movementPoints = Integer.parseInt(el.getChildText("movementPoints"));
 			magicResist = Integer.parseInt(el.getChildText("magicResist"));
 			eyeSight = Integer.parseInt(el.getChildText("eyeSight"));
-			Image icon = null;
-			try {
-				icon = new Image(el.getChildText("icon"));
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			Texture icon =new Texture(Gdx.files.internal(el.getChildText("icon")));
+
 			Hero h = new Hero(id, icon, new Stats(life, armor, mana, strength, magicPower, luck, movementPoints, magicResist, eyeSight ,id));
 			CLASSES_VALUES.put(id, Integer.parseInt(el.getChildText("value")));
 			Iterator<Element> ii =  el.getChild("spells").getChildren("spell").iterator();

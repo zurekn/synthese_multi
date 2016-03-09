@@ -413,7 +413,7 @@ public class WindowGame implements ApplicationListener {
         if (gameEnded) {
             //Data.map.render(Data.MAP_X, Data.MAP_Y);
             tiledMapRenderer.render();
-            mobHandler.render(batch);
+            mobHandler.render(batch, shapeRenderer);
             renderDeckArea();
             playerHandler.render(batch, shapeRenderer);
             if (gameWin) {
@@ -447,7 +447,7 @@ public class WindowGame implements ApplicationListener {
             tiledMapRenderer.render();
 
             if (gameOn) {
-                mobHandler.render(batch);
+                mobHandler.render(batch,shapeRenderer);
                 renderDeckArea();
                 playerHandler.render(batch, shapeRenderer);
                 renderReachableBlocks();

@@ -3,9 +3,6 @@ package com.mygdx.game.main;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.SlickException;
-
 import com.mygdx.game.ai.AStar;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.game.Mob;
@@ -13,7 +10,7 @@ import com.mygdx.game.game.WindowGame;
 
 public class Main {
 	
-	public static void main(String[] args) throws SlickException {
+	public static void main(String[] args) {
         
 		//Load the screen size
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -23,9 +20,9 @@ public class Main {
 		Data.SCREEN_WIDTH = 1920;
 		Data.SCREEN_HEIGHT = 1080;
 		Data.checkValuesIni("paramTI.ini"); // V�rification des variables dans le fichier .ini
-        AppGameContainer gameContaineur =  new AppGameContainer(WindowGame.getInstance(), Data.SCREEN_WIDTH, Data.SCREEN_HEIGHT, Data.FULLSCREEN);
-    	gameContaineur.setTargetFrameRate(30);
-    	gameContaineur.start();
+       // AppGameContainer gameContaineur =  new AppGameContainer(WindowGame.getInstance(), Data.SCREEN_WIDTH, Data.SCREEN_HEIGHT, Data.FULLSCREEN);
+    	//gameContaineur.setTargetFrameRate(30);
+    	//gameContaineur.start();
     	
 	}
 

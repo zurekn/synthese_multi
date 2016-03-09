@@ -1,8 +1,5 @@
 package com.mygdx.game.game;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-
 import com.mygdx.game.data.Event;
 
 public class Spell {
@@ -121,8 +118,8 @@ public class Spell {
 				+ ", type=" + type + "]";
 	}
 
-	public void render(GameContainer container, Graphics g) {
+	/*public void render(GameContainer container, Graphics g) {
 		g.drawAnimation(event.getAnimation()[0], x, y);
-	}
+	}*/
 
 }
