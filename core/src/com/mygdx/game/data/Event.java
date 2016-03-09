@@ -1,5 +1,7 @@
 package com.mygdx.game.data;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -238,7 +240,7 @@ public class Event {
 		return e;
 	}
 
-	public void render(GameContainer container, Graphics g) {
+	public void render(Batch batch) {
 		int dx = 0, dy = 0;
 		int finalDirection = direction - spriteDirection;
 		int finalFrame = (animation[0].getFrameCount() - 1);
@@ -298,7 +300,7 @@ public class Event {
 		}
 	}
 	
-	public void renderPostRemove(GameContainer container, Graphics g) {
+	public void renderPostRemove(Batch batch) {
 		int dx = 0, dy = 0;
 		int finalDirection = direction - spriteDirection;
 		int finalFrame = (animation[0].getFrameCount() - 1);

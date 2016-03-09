@@ -1,9 +1,8 @@
 package com.mygdx.game.game;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.mygdx.game.data.Data;
 
 public class Message {
@@ -76,10 +75,10 @@ public class Message {
 		this.message = message;
 	}
 
-	public void render(GameContainer container, Graphics g, int x, int y) {
-		g.setColor(color);
-		g.drawString(message, x, y);
-
+	public void render(Batch batch, int x, int y) {
+		//g.setColor(color);
+		Data.font.setColor(color);
+		Data.font.draw(batch, message, x, y);
 	}
 
 	public boolean update() {

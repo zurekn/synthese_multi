@@ -11,4 +11,5 @@ dependencies {
     compile 'com.google.zxing:javase:2.2'
 
     compile fileTree(dir : '../android/libs/jars', include: '*.jar')
+    compile 'org.lwjgl.lwjgl:lwjgl_util:2.9.2'
 }

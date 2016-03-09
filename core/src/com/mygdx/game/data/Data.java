@@ -1,39 +1,30 @@
 package com.mygdx.game.data;
 
-import com.mygdx.game.game.Mob;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.game.WindowGame;
 
-import java.awt.GraphicsConfigTemplate;
-import java.awt.GraphicsConfiguration;
-import java.awt.font.GraphicAttribute;
+import org.jdom2.DataConversionException;
+import org.jdom2.Document;
+import org.jdom2.Element;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.imageio.ImageIO;
-
-import org.jdom2.DataConversionException;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.lwjgl.Sys;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
-import org.newdawn.slick.tiled.TiledMap;
 
 /**
  * Class witch contains all static variables
@@ -56,7 +47,9 @@ public class Data {
 	public static final int DEBUG_PLAYER = 0;
 	//public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
 	public static String IMAGE_DIR = "C:/Users/fr�d�ric/Google Drive/Master Cergy/Projet_PlateauJeu/Synth�se/ImageDeTest/";
-	
+
+	public static BitmapFont font;
+
 	// Const TI Part
 	public static long WAIT_TI = 5000;
 	public static int SEUILINITTI = 100;
@@ -65,7 +58,7 @@ public class Data {
 	public static int MAX_SEUIL_FORM = 5000;
 	public static int QRCamSeuil = 60;//Data.SEUILETI;
 	
-	public static String NAME = "Jeu de plateau";
+	public static String TITLE = "Jeu de plateau";
 	public static int MAP_WIDTH;
 	public static int MAP_HEIGHT;
 	public static int BLOCK_SIZE_X;
@@ -79,8 +72,8 @@ public class Data {
 	public static int RELATIVE_X_POS;
 	public static int RELATIVE_Y_POS;
 	public static float SCALE;
-	public static int SCREEN_WIDTH;
-	public static int SCREEN_HEIGHT;
+	public static int SCREEN_WIDTH = 1920;
+	public static int SCREEN_HEIGHT = 1080;
 	public static int TOTAL_WIDTH;
 	public static int TOTAL_HEIGHT;
 
@@ -124,8 +117,8 @@ public class Data {
 	public static final HashMap<String, Boolean> departureBlocks = new HashMap<String, Boolean>();
 	public static final int MAX_RANGE = Integer.MAX_VALUE;
 	public static final long WAINTING_TIME = 1000;
-	public static  Color BLOCK_REACHABLE_COLOR = new Color(1f, 0f, 0f, .1f);
-	public static final Color TEXT_COLOR = new Color(Color.black);
+	public static Color BLOCK_REACHABLE_COLOR = new Color(1f, 0f, 0f, .1f);
+	public static final Color TEXT_COLOR = new Color(Color.BLACK);
 	public static  boolean SHOW_MOB_REACHABLE_BLOCKS = false;
 	public static int MAX_PLAYER = 4;
 	public static int INIT_MAX_TIME = 40;
@@ -133,6 +126,7 @@ public class Data {
 	private static boolean initImageDir = false;
 
 	public static TiledMap map;
+	public static TiledMapRenderer tiledMapRenderer;
 	public static MonsterData monsterData;
 	public static WindowGame game;
 	public static long beginTime;
@@ -178,14 +172,14 @@ public class Data {
 	
 	//MESSAGES PARAM
 	public static final long MESSAGE_DURATION = 3000;
-	public static final Color MESSAGE_COLOR_TYPE_1 = new Color(Color.red);
-	public static final Color MESSAGE_COLOR_TYPE_0 = new Color(Color.white);
-	private static final Color MESSAGE_COLOR_TYPE_2 = new Color(Color.green);
+	public static final Color MESSAGE_COLOR_TYPE_1 = new Color(Color.RED);
+	public static final Color MESSAGE_COLOR_TYPE_0 = new Color(Color.WHITE);
+	private static final Color MESSAGE_COLOR_TYPE_2 = new Color(Color.GREEN);
 	public static final int MESSAGE_TYPE_INFO = 0;
 	public static final int MESSAGE_TYPE_ERROR = 1;
 	public static final int MESSAGE_TYPE_CONSTANT = -1;
 	private static final int MESSAGE_TYPE_SUCCES = 2;
-	public static final Color DEFAULT_COLOR = Color.black;
+	public static final Color DEFAULT_COLOR = Color.BLACK;
 	public static final int ACTION_PER_TURN = 1;
 	
 	//ERROR MESSAGES
@@ -212,14 +206,16 @@ public class Data {
 	/**
 	 * Load all game variables
 	 * 
-	 * @throws SlickException
+	 *
 	 */
-	public static void loadGame() throws SlickException {
+	public static void loadGame(){
 
 		System.out.println(" Begin data init ");
 		beginTime = System.currentTimeMillis();
 
-		map = new TiledMap(Data.MAP_FILE);
+		map = new TmxMapLoader().load(Data.MAP_FILE);
+		tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+
 
 		Data.BLOCK_NUMBER_X = map.getHeight();
 		Data.BLOCK_NUMBER_Y = map.getWidth();
@@ -240,7 +236,10 @@ public class Data {
 		Data.ENDING_ANIMATION_SCALE = (float)Data.MAP_WIDTH / (float)Data.WIN_IMAGE.getWidth();
 		Data.ENDING_ANIMATION_X = Data.MAP_X;
 		Data.ENDING_ANIMATION_Y = Data.MAP_Y - Data.WIN_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE;
-		
+
+		//load font
+		font = new BitmapFont(Gdx.files.internal("font/Font.fnt"),true);
+		font.setColor(TEXT_COLOR);
 		System.out.println("MAP_FILE = " + Data.MAP_FILE + ", MAP_WIDTH = "
 				+ Data.MAP_WIDTH + ", MAP_HEIGHT = " + Data.MAP_HEIGHT
 				+ ", BLOCK_NUMBER = " + Data.BLOCK_NUMBER_X

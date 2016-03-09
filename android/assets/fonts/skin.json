@@ -1,0 +1,31 @@
+{
+  "com.badlogic.gdx.graphics.g2d.BitmapFont": {
+    "font": { "file": "Font/Font.fnt" }
+  },
+  "com.badlogic.gdx.graphics.Color": {
+    "white": { "r": 1, "g": 1, "b": 1, "a": 1 },
+    "black": { "r": 0, "g": 0, "b": 0, "a": 1 },
+    "red": { "r": 1, "g": 0, "b": 0, "a": 1 }
+    "yellow": { "r": 0.5, "g": 0.5, "b": 0, "a": 1 },
+    "orange": {"r": 1, "g": 0.5, "b": 0.2, "a": 1}
+
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+    "default": { "up": "buttonLong_brown" , "down": "buttonLong_brown_pressed", "font": font, "pressedOffsetY": -4, "fontColor": black }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default": { "font": font, "fontColor": black},
+    "title": {"font": font, "fontColor": orange},
+    "white": {"font": font, "fontColor": white},
+    "red": {"font": font, "fontColor": red},
+    "message_default": {"font": font, "fontColor": black},
+    "message_red": {"font": font, "fontColor": red},
+    "message_white": {"font": font, "fontColor": white}
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+    "music": {
+      "imageChecked": "musicOff",
+      "up": "musicOn"
+    }
+  }
+}
