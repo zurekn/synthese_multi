@@ -471,5 +471,6 @@ public class Data {
      */
     public static void disposeData(){
         BACKGROUND_MUSIC.dispose();
+        IMAGE_HALO.dispose();
     }
 }

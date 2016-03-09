@@ -397,7 +397,7 @@ public class WindowGame implements ApplicationListener {
 
         update();
 
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         camera.update();
@@ -409,17 +409,18 @@ public class WindowGame implements ApplicationListener {
         g.scale(Data.SCALE, Data.SCALE);
          */
 
-        /*
+
         if (gameEnded) {
-            Data.map.render(Data.MAP_X, Data.MAP_Y);
-            mobHandler.render(container, g);
-            renderDeckArea(container, g);
-            playerHandler.render(container, g);
+            //Data.map.render(Data.MAP_X, Data.MAP_Y);
+            tiledMapRenderer.render();
+            mobHandler.render(batch);
+            renderDeckArea();
+            playerHandler.render(batch, shapeRenderer);
             if (gameWin) {
-                Data.WIN_IMAGE.draw(Data.ENDING_ANIMATION_X, Data.ENDING_ANIMATION_Y, (float) Data.WIN_IMAGE.getWidth() * Data.ENDING_ANIMATION_SCALE, (float) Data.WIN_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE);
+                batch.draw(Data.WIN_IMAGE, Data.ENDING_ANIMATION_X, Data.ENDING_ANIMATION_Y, (float) Data.WIN_IMAGE.getWidth() * Data.ENDING_ANIMATION_SCALE, (float) Data.WIN_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE);
             }
             if (gameLose) {
-                Data.LOSE_IMAGE.draw(Data.ENDING_ANIMATION_X, Data.ENDING_ANIMATION_Y, (float) Data.LOSE_IMAGE.getWidth() * Data.ENDING_ANIMATION_SCALE, (float) Data.LOSE_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE);
+                batch.draw(Data.LOSE_IMAGE, Data.ENDING_ANIMATION_X, Data.ENDING_ANIMATION_Y, (float) Data.LOSE_IMAGE.getWidth() * Data.ENDING_ANIMATION_SCALE, (float) Data.LOSE_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE);
             }
 
             if (Data.ENDING_ANIMATION_Y < (Data.MAP_HEIGHT - Data.LOSE_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE) / 2)
@@ -427,14 +428,14 @@ public class WindowGame implements ApplicationListener {
             return;
         }
         if (!apix.isInit()) {
-            g.setColor(Color.black);
-            g.setBackground(Color.white);
+            shapeRenderer.setColor(Color.BLACK);
+            //g.setBackground(Color.white);
             // TOP LEFT
-            g.fillRect(Data.MAP_X - 20, Data.MAP_Y - 20, 40, 40);
+            shapeRenderer.rect(Data.MAP_X - 20, Data.MAP_Y - 20, 40, 40);
             // TOP RIGHT
-            g.fillRect(Data.MAP_X + Data.MAP_WIDTH - 20, Data.MAP_Y - 20, 40, 40);
+            shapeRenderer.rect(Data.MAP_X + Data.MAP_WIDTH - 20, Data.MAP_Y - 20, 40, 40);
             // //BOTTOM left
-            g.fillRect(Data.MAP_X - 20, Data.MAP_Y + Data.MAP_HEIGHT - 20, 40, 40);
+            shapeRenderer.rect(Data.MAP_X - 20, Data.MAP_Y + Data.MAP_HEIGHT - 20, 40, 40);
             i++;
             if (i > 60)
                 apix.initTI();
@@ -442,21 +443,22 @@ public class WindowGame implements ApplicationListener {
             timerInitPlayer = Data.INIT_MAX_TIME;
 
         } else {
-            Data.map.render(Data.MAP_X, Data.MAP_Y);
+            //Data.map.render(Data.MAP_X, Data.MAP_Y);
+            tiledMapRenderer.render();
 
             if (gameOn) {
-                mobHandler.render(container, g);
-                renderDeckArea(container, g);
-                playerHandler.render(container, g);
-                renderReachableBlocks(container, g);
-                renderEvents(container, g);
+                mobHandler.render(batch);
+                renderDeckArea();
+                playerHandler.render(batch, shapeRenderer);
+                renderReachableBlocks();
+                renderEvents();
             } else {
-                playerHandler.renderInitBlock(container, g);
+                playerHandler.renderInitBlock(batch, shapeRenderer);
             }
-            playerHandler.renderPlayerStat(container, g);
-            renderText(container, g);
+            playerHandler.renderPlayerStat(batch, shapeRenderer);
+            renderText();
         }
-    */
+
         batch.end();
     }
 

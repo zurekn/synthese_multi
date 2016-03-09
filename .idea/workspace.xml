@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" afterPath="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/xml/hero.xml" afterPath="$PROJECT_DIR$/android/assets/xml/hero.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/xml/map.xml" afterPath="$PROJECT_DIR$/android/assets/xml/map.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/xml/map2.xml" afterPath="$PROJECT_DIR$/android/assets/xml/map2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/xml/monstersData.xml" afterPath="$PROJECT_DIR$/android/assets/xml/monstersData.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/xml/spells.xml" afterPath="$PROJECT_DIR$/android/assets/xml/spells.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/assets/xml/traps.xml" afterPath="$PROJECT_DIR$/android/assets/xml/traps.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Synthese_multi.iws" />
@@ -82,31 +74,70 @@
       <file leaf-file-name="WindowGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30206898">
-              <caret line="563" column="38" selection-start-line="563" selection-start-column="38" selection-end-line="563" selection-end-column="38" />
+            <state vertical-scroll-proportion="3.5746715">
+              <caret line="458" column="23" selection-start-line="458" selection-start-column="23" selection-end-line="458" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4056#4063#0" expanded="true" />
                 <element signature="e#4116#4122#0" expanded="true" />
+                <element signature="e#5795#5796#0" expanded="true" />
+                <element signature="e#5834#5835#0" expanded="true" />
                 <element signature="method#initPlayers#0;class#WindowGame#0" expanded="false" />
-                <element signature="method#addChalenger#0;class#WindowGame#0" expanded="false" />
-                <element signature="method#initAPIX#0;class#WindowGame#0" expanded="false" />
-                <element signature="e#16351#16352#0" expanded="true" />
-                <element signature="e#16394#16395#0" expanded="true" />
-                <element signature="e#16436#16437#0" expanded="true" />
-                <element signature="e#16480#16481#0" expanded="true" />
-                <element signature="e#32854#32862#0" expanded="true" />
-                <element signature="e#33224#33232#0" expanded="true" />
-                <element signature="e#33418#33419#0" expanded="true" />
-                <element signature="e#33445#33446#0" expanded="true" />
-                <element signature="e#33490#33491#0" expanded="true" />
-                <element signature="e#33520#33521#0" expanded="true" />
-                <element signature="e#33559#33560#0" expanded="true" />
-                <element signature="e#33589#33590#0" expanded="true" />
-                <element signature="e#33633#33634#0" expanded="true" />
-                <element signature="e#33672#33673#0" expanded="true" />
-                <element signature="e#34468#34479#0" expanded="true" />
+                <element signature="e#8682#8709#0" expanded="true" />
+                <element signature="method#initCommandHandler#0;class#WindowGame#0" expanded="false" />
+                <element signature="e#16427#16428#0" expanded="true" />
+                <element signature="e#16470#16471#0" expanded="true" />
+                <element signature="e#16512#16513#0" expanded="true" />
+                <element signature="e#16556#16557#0" expanded="true" />
+                <element signature="e#32930#32938#0" expanded="true" />
+                <element signature="e#33300#33308#0" expanded="true" />
+                <element signature="e#33494#33495#0" expanded="true" />
+                <element signature="e#33521#33522#0" expanded="true" />
+                <element signature="e#33566#33567#0" expanded="true" />
+                <element signature="e#33596#33597#0" expanded="true" />
+                <element signature="e#33635#33636#0" expanded="true" />
+                <element signature="e#33665#33666#0" expanded="true" />
+                <element signature="e#33709#33710#0" expanded="true" />
+                <element signature="e#33748#33749#0" expanded="true" />
+                <element signature="e#34544#34555#0" expanded="true" />
                 <element signature="method#getCharacterByPosition#0;class#WindowGame#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MobHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/MobHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Data.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="473" column="29" selection-start-line="473" selection-start-column="29" selection-end-line="473" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4172#4187#0" expanded="true" />
+                <element signature="e#4270#4287#0" expanded="true" />
+                <element signature="e#4366#4383#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2968,7 +2999,6 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Map.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/APIX.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessing.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java" />
@@ -2993,10 +3023,11 @@
         <option value="$PROJECT_DIR$/android/assets/xml/traps.xml" />
         <option value="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
       </list>
     </option>
@@ -3797,7 +3828,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457517489783</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Changed all path to assets and corrected Player render">
+      <created>1457522151349</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1457522151350</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3806,7 +3843,7 @@
     <layout>
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12873563" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12873563" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -3821,7 +3858,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21168274" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21168274" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -3842,7 +3879,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33333334" sideWeight="0.50428724" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.50428724" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3854,11 +3891,11 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32873562" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12873563" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33333334" sideWeight="0.49571276" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.49571276" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988507" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329582" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3890,7 +3927,8 @@
     <MESSAGE value="=========IMPORTANT COMMIT============&#10;Remove the Slick.jar from import (barbarian method), this commit is the beginning of switching to libgdx !!&#10;=========IMPORTANT COMMIT============" />
     <MESSAGE value="First commit for libgdx modification" />
     <MESSAGE value="Corrected all errors in WindowGame" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected all errors in WindowGame" />
+    <MESSAGE value="Changed all path to assets and corrected Player render" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed all path to assets and corrected Player render" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3905,51 +3943,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/imageprocessing/ImageProcessingHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="132" column="31" selection-start-line="132" selection-start-column="31" selection-end-line="132" selection-end-column="31" />
-          <folding>
-            <element signature="e#8536#8537#0" expanded="false" />
-            <element signature="e#8561#8562#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/ImageProcessingTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="12" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/WebCamTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/testpackage/TestThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06148282">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/core/build/libs/core-1.0.jar!/com/mygdx/game/Game.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40425533">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4186,16 +4179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6308244">
-          <caret line="24" column="43" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.60454005">
@@ -4280,14 +4263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23655914">
@@ -4306,14 +4281,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14896552">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.0620689">
@@ -4322,10 +4289,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Hero.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.24413793">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/HeroData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12137931">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Monster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12137931">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/TrapD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12137931">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5751724">
+          <caret line="24" column="43" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5489656">
-          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+        <state vertical-scroll-proportion="2.3351724">
+          <caret line="79" column="101" selection-start-line="79" selection-start-column="101" selection-end-line="79" selection-end-column="101" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -4334,8 +4353,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75724137">
-          <caret line="294" column="32" selection-start-line="294" selection-start-column="32" selection-end-line="294" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="473" column="29" selection-start-line="473" selection-start-column="29" selection-end-line="473" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4172#4187#0" expanded="true" />
@@ -4345,32 +4364,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/PlayerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/MobHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30206898">
-          <caret line="563" column="38" selection-start-line="563" selection-start-column="38" selection-end-line="563" selection-end-column="38" />
+        <state vertical-scroll-proportion="3.5746715">
+          <caret line="458" column="23" selection-start-line="458" selection-start-column="23" selection-end-line="458" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4056#4063#0" expanded="true" />
             <element signature="e#4116#4122#0" expanded="true" />
+            <element signature="e#5795#5796#0" expanded="true" />
+            <element signature="e#5834#5835#0" expanded="true" />
             <element signature="method#initPlayers#0;class#WindowGame#0" expanded="false" />
-            <element signature="method#addChalenger#0;class#WindowGame#0" expanded="false" />
-            <element signature="method#initAPIX#0;class#WindowGame#0" expanded="false" />
-            <element signature="e#16351#16352#0" expanded="true" />
-            <element signature="e#16394#16395#0" expanded="true" />
-            <element signature="e#16436#16437#0" expanded="true" />
-            <element signature="e#16480#16481#0" expanded="true" />
-            <element signature="e#32854#32862#0" expanded="true" />
-            <element signature="e#33224#33232#0" expanded="true" />
-            <element signature="e#33418#33419#0" expanded="true" />
-            <element signature="e#33445#33446#0" expanded="true" />
-            <element signature="e#33490#33491#0" expanded="true" />
-            <element signature="e#33520#33521#0" expanded="true" />
-            <element signature="e#33559#33560#0" expanded="true" />
-            <element signature="e#33589#33590#0" expanded="true" />
-            <element signature="e#33633#33634#0" expanded="true" />
-            <element signature="e#33672#33673#0" expanded="true" />
-            <element signature="e#34468#34479#0" expanded="true" />
+            <element signature="e#8682#8709#0" expanded="true" />
+            <element signature="method#initCommandHandler#0;class#WindowGame#0" expanded="false" />
+            <element signature="e#16427#16428#0" expanded="true" />
+            <element signature="e#16470#16471#0" expanded="true" />
+            <element signature="e#16512#16513#0" expanded="true" />
+            <element signature="e#16556#16557#0" expanded="true" />
+            <element signature="e#32930#32938#0" expanded="true" />
+            <element signature="e#33300#33308#0" expanded="true" />
+            <element signature="e#33494#33495#0" expanded="true" />
+            <element signature="e#33521#33522#0" expanded="true" />
+            <element signature="e#33566#33567#0" expanded="true" />
+            <element signature="e#33596#33597#0" expanded="true" />
+            <element signature="e#33635#33636#0" expanded="true" />
+            <element signature="e#33665#33666#0" expanded="true" />
+            <element signature="e#33709#33710#0" expanded="true" />
+            <element signature="e#33748#33749#0" expanded="true" />
+            <element signature="e#34544#34555#0" expanded="true" />
             <element signature="method#getCharacterByPosition#0;class#WindowGame#0" expanded="false" />
           </folding>
         </state>
