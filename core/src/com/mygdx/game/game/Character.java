@@ -1,5 +1,8 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.SpellD;
 import com.mygdx.game.data.Stats;
@@ -25,7 +28,7 @@ public abstract class Character {
 	
 	private int sizeCharacter;
 
-	private Animation[] animation;
+	private TextureRegion[] animationFrames;
 	private Stats stats;
 	private boolean myTurn = false;
 	private ArrayList<Spell> spells = new ArrayList<Spell>();
@@ -35,7 +38,7 @@ public abstract class Character {
 	private boolean npc = true;
 	protected boolean monster = true;
 
-	public abstract void render(GameContainer container, Graphics g);
+	public abstract void render(SpriteBatch batch, ShapeRenderer shapeRenderer);
 
 	public abstract void init();
 
@@ -229,12 +232,12 @@ public abstract class Character {
 		this.stats = stats;
 	}
 
-	public Animation[] getAnimation() {
-		return animation;
+	public TextureRegion[] getAnimationFrames() {
+		return animationFrames;
 	}
 
-	public void setAnimation(Animation[] animation) {
-		this.animation = animation;
+	public void setAnimationFrames(TextureRegion[] frames) {
+		this.animationFrames = frames;
 	}
 
 	public void setMyTurn(boolean b) {
@@ -366,7 +369,7 @@ public abstract class Character {
 	@Override
 	public String toString() {
 		return "Character [x=" + x + ", y=" + y + ", id=" + id + ", animation="
-				+ Arrays.toString(animation) + ", stats=" + stats + ", myTurn="
+				+ Arrays.toString(animationFrames) + ", stats=" + stats + ", myTurn="
 				+ myTurn + ", spells=" + spells + ", name=" + name + "]";
 	}
 

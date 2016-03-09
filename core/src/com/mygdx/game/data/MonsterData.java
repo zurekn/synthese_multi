@@ -1,20 +1,16 @@
 package com.mygdx.game.data;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.game.Mob;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 public class MonsterData {
 	
@@ -24,10 +20,10 @@ public class MonsterData {
 		monsters.add(m);
 	}
 	
-	public static Animation[] getAnimationById(String id){
+	public static TextureRegion[] getAnimationById(String id){
 		for(int i = 0; i < monsters.size(); i++){
 			if(monsters.get(i).getId().equals(id)){
-				return monsters.get(i).getAnimation();
+				return monsters.get(i).getAnimationFrames();
 			}
 		}
 		return null;
@@ -84,14 +80,14 @@ public class MonsterData {
 
 		List monsters = root.getChildren("monster");
 
-		Iterator i = monsters.iterator();
+		Iterator it = monsters.iterator();
 		String name;
 		int life, armor, mana, strength, magicPower, luck, movementPoints, magicResist, eyeSight;
 		List <Element> spells = new ArrayList<Element>();
 		String aiType ;
-		while (i.hasNext()) {
+		while (it.hasNext()) {
 
-			Element el = (Element) i.next();
+			Element el = (Element) it.next();
 			try {
 				name = el.getChildText("name");
 				life = Integer.parseInt(el.getChildText("life"));
@@ -106,13 +102,21 @@ public class MonsterData {
 				magicResist = Integer.parseInt(el.getChildText("magicResist"));
 				eyeSight = Integer.parseInt(el.getChildText("eyeSight"));
 				Iterator<Element> ii = spells.iterator();
-				SpriteSheet ss = new SpriteSheet("" + el.getChildText("file"),
-						Integer.parseInt(el.getChildText("celDimensionX")),
+
+				Texture img = new Texture(Gdx.files.internal(el.getChildText("file")));
+
+				TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildText("celDimensionX")),
 						Integer.parseInt(el.getChildText("celDimensionY")));
+				TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
+				int index = 0;
+				for(int i = 0 ; i < tmpFrames.length;i++)
+					for(int j = 0 ; j < tmpFrames[i].length;j++)
+						animationFrames[index++] = tmpFrames[j][i];
+
 				Stats stats = new Stats(life, armor, mana, strength,
 						magicPower, luck, movementPoints, magicResist, eyeSight);
 				aiType = el.getChildText("aiType");
-				Monster m = new Monster(id, aiType, name, ss, stats);
+				Monster m = new Monster(id, aiType, name, animationFrames, stats);
 				while(ii.hasNext()){
 					Element e = (Element) ii.next();
 					SpellD s = SpellData.getSpellById(e.getText());
@@ -122,9 +126,6 @@ public class MonsterData {
 				}
 				System.out.println("	Monster : "+m.getName());
 				monsterData.addMonster(m);
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}catch (NumberFormatException e){
 				e.printStackTrace();
 			}

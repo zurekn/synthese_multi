@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Event {
 	private String id;
 
-	TextureRegion[] animationFrames;
-	Animation animation;
-	float elapsedTime;
+	private TextureRegion[] animationFrames;
+	private Animation animation;
+	private float elapsedTime;
 
 	private Sound sound;
 	private int x;

@@ -3,6 +3,7 @@ package com.mygdx.game.game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Hero;
@@ -70,7 +71,8 @@ public class Player extends Character {
         return icon;
     }
 
-    public void render(Batch batch, ShapeRenderer shapeRenderer) {
+    @Override
+    public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLACK);
         if (isMyTurn())
