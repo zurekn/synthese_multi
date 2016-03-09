@@ -291,8 +291,6 @@ public class Data {
 			LOSE_IMAGE = new Image(root.getChildText("lose_image"));
 		} catch (DataConversionException e) {
 			e.printStackTrace();
-		} catch (SlickException e) {
-			e.printStackTrace();
 		}
 
 		

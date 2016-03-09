@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="=========IMPORTANT COMMIT============&#10;Remove the Slick.jar from import (barbarian method), this commit is the beginning of switching to libgdx !!&#10;=========IMPORTANT COMMIT============">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/fonts/Font_0.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/fonts/Font.fnt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/android/assets/fonts/skin.json" />
-      <change type="DELETED" beforePath="D:\Dev\synthese_multi\.idea\libraries\slick.xml" afterPath="" />
+    <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/InputHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" afterPath="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Event.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/data/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/build.gradle" afterPath="$PROJECT_DIR$/core/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/core.iml" afterPath="$PROJECT_DIR$/core/core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/desktop.iml" afterPath="$PROJECT_DIR$/desktop/desktop.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Synthese_multi.iws" />
@@ -91,34 +80,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WindowGame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WindowGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20908004">
-              <caret line="804" column="46" selection-start-line="804" selection-start-column="46" selection-end-line="804" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="167" column="19" selection-start-line="167" selection-start-column="19" selection-end-line="167" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3959#3966#0" expanded="true" />
                 <element signature="e#4019#4025#0" expanded="true" />
-                <element signature="e#4864#4865#0" expanded="true" />
-                <element signature="e#4887#4888#0" expanded="true" />
+                <element signature="e#4868#4869#0" expanded="true" />
+                <element signature="e#4891#4892#0" expanded="true" />
+                <element signature="e#5698#5699#0" expanded="true" />
+                <element signature="e#5737#5738#0" expanded="true" />
                 <element signature="method#initPlayers#0;class#WindowGame#0" expanded="false" />
-                <element signature="e#8309#8336#0" expanded="true" />
-                <element signature="method#addChalenger#0;class#WindowGame#0" expanded="false" />
-                <element signature="method#addPlayer#0;class#WindowGame#0" expanded="false" />
-                <element signature="method#initAPIX#0;class#WindowGame#0" expanded="false" />
-                <element signature="method#decodeAction#0;class#WindowGame#0" expanded="false" />
-                <element signature="method#getFirstCharacterRange#0;class#WindowGame#0" expanded="false" />
+                <element signature="e#8453#8480#0" expanded="true" />
                 <element signature="method#move#0;class#WindowGame#0" expanded="false" />
                 <element signature="method#getMobById#0;class#WindowGame#0" expanded="false" />
                 <element signature="method#getAllPositions#0;class#WindowGame#0" expanded="false" />
-                <element signature="e#35164#35172#0" expanded="true" />
+                <element signature="e#32318#32326#0" expanded="true" />
                 <element signature="method#getAllTraps#0;class#WindowGame#0" expanded="false" />
-                <element signature="e#35534#35542#0" expanded="true" />
+                <element signature="e#32688#32696#0" expanded="true" />
                 <element signature="method#checkEndGame#0;class#WindowGame#0" expanded="false" />
                 <element signature="method#getCharacterPositionOnLine#0;class#WindowGame#0" expanded="false" />
-                <element signature="e#36778#36789#0" expanded="true" />
+                <element signature="e#33932#33943#0" expanded="true" />
                 <element signature="method#getCharacterByPosition#0;class#WindowGame#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InputHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/InputHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4134#4135#0" expanded="true" />
+                <element signature="e#4162#4163#0" expanded="true" />
+                <element signature="e#4259#4260#0" expanded="true" />
+                <element signature="e#4287#4288#0" expanded="true" />
+                <element signature="e#4382#4383#0" expanded="true" />
+                <element signature="e#4410#4411#0" expanded="true" />
+                <element signature="e#4498#4499#0" expanded="true" />
+                <element signature="e#4526#4527#0" expanded="true" />
+                <element signature="e#4599#4600#0" expanded="true" />
+                <element signature="e#4627#4628#0" expanded="true" />
+                <element signature="e#4684#4685#0" expanded="true" />
+                <element signature="e#4712#4713#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -158,11 +168,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Data.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="240" column="8" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.5436081">
+              <caret line="293" column="10" selection-start-line="293" selection-start-column="10" selection-end-line="293" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4110#4125#0" expanded="true" />
@@ -185,6 +195,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -3052,10 +3069,11 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Game.java" />
         <option value="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/MessageHandler.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Event.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/InputHandler.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
       </list>
     </option>
   </component>
@@ -3277,6 +3295,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="synthese_multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="android" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -3350,6 +3394,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1142" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="SearchEverywhereHistoryKey" value="Color&#9;PSI&#9;JAVA://android.graphics.Color" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -3829,7 +3875,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457446774438</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="First commit for libgdx modification">
+      <created>1457515350681</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1457515350681</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3920,7 +3972,8 @@
     <MESSAGE value="Create Jars directory" />
     <MESSAGE value="Corrected the gradle build" />
     <MESSAGE value="=========IMPORTANT COMMIT============&#10;Remove the Slick.jar from import (barbarian method), this commit is the beginning of switching to libgdx !!&#10;=========IMPORTANT COMMIT============" />
-    <option name="LAST_COMMIT_MESSAGE" value="=========IMPORTANT COMMIT============&#10;Remove the Slick.jar from import (barbarian method), this commit is the beginning of switching to libgdx !!&#10;=========IMPORTANT COMMIT============" />
+    <MESSAGE value="First commit for libgdx modification" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit for libgdx modification" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3940,13 +3993,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Mob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/MovementHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.09647059">
@@ -4308,18 +4354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="240" column="8" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4110#4125#0" expanded="true" />
-            <element signature="e#4208#4225#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Message.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4348,33 +4382,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/InputHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="97" column="22" selection-start-line="97" selection-start-column="22" selection-end-line="97" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4134#4135#0" expanded="true" />
+            <element signature="e#4162#4163#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+            <element signature="e#4382#4383#0" expanded="true" />
+            <element signature="e#4410#4411#0" expanded="true" />
+            <element signature="e#4498#4499#0" expanded="true" />
+            <element signature="e#4526#4527#0" expanded="true" />
+            <element signature="e#4599#4600#0" expanded="true" />
+            <element signature="e#4627#4628#0" expanded="true" />
+            <element signature="e#4684#4685#0" expanded="true" />
+            <element signature="e#4712#4713#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20908004">
-          <caret line="804" column="46" selection-start-line="804" selection-start-column="46" selection-end-line="804" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="167" column="19" selection-start-line="167" selection-start-column="19" selection-end-line="167" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3959#3966#0" expanded="true" />
             <element signature="e#4019#4025#0" expanded="true" />
-            <element signature="e#4864#4865#0" expanded="true" />
-            <element signature="e#4887#4888#0" expanded="true" />
+            <element signature="e#4868#4869#0" expanded="true" />
+            <element signature="e#4891#4892#0" expanded="true" />
+            <element signature="e#5698#5699#0" expanded="true" />
+            <element signature="e#5737#5738#0" expanded="true" />
             <element signature="method#initPlayers#0;class#WindowGame#0" expanded="false" />
-            <element signature="e#8309#8336#0" expanded="true" />
-            <element signature="method#addChalenger#0;class#WindowGame#0" expanded="false" />
-            <element signature="method#addPlayer#0;class#WindowGame#0" expanded="false" />
-            <element signature="method#initAPIX#0;class#WindowGame#0" expanded="false" />
-            <element signature="method#decodeAction#0;class#WindowGame#0" expanded="false" />
-            <element signature="method#getFirstCharacterRange#0;class#WindowGame#0" expanded="false" />
+            <element signature="e#8453#8480#0" expanded="true" />
             <element signature="method#move#0;class#WindowGame#0" expanded="false" />
             <element signature="method#getMobById#0;class#WindowGame#0" expanded="false" />
             <element signature="method#getAllPositions#0;class#WindowGame#0" expanded="false" />
-            <element signature="e#35164#35172#0" expanded="true" />
+            <element signature="e#32318#32326#0" expanded="true" />
             <element signature="method#getAllTraps#0;class#WindowGame#0" expanded="false" />
-            <element signature="e#35534#35542#0" expanded="true" />
+            <element signature="e#32688#32696#0" expanded="true" />
             <element signature="method#checkEndGame#0;class#WindowGame#0" expanded="false" />
             <element signature="method#getCharacterPositionOnLine#0;class#WindowGame#0" expanded="false" />
-            <element signature="e#36778#36789#0" expanded="true" />
+            <element signature="e#33932#33943#0" expanded="true" />
             <element signature="method#getCharacterByPosition#0;class#WindowGame#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5436081">
+          <caret line="293" column="10" selection-start-line="293" selection-start-column="10" selection-end-line="293" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4110#4125#0" expanded="true" />
+            <element signature="e#4208#4225#0" expanded="true" />
           </folding>
         </state>
       </provider>

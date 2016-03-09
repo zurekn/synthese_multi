@@ -106,10 +106,10 @@ public class WindowGame extends ApplicationAdapter {
     private int actionLeft = ACTION_PER_TURN;
 
     //
-    public boolean gameOn = false;
-    private boolean gameEnded = false;
-    private boolean gameWin = false;
-    private boolean gameLose = false;
+    public static boolean gameOn = false;
+    public boolean gameEnded = false;
+    public boolean gameWin = false;
+    public boolean gameLose = false;
     private int timerInitPlayer;
 
     //
@@ -150,6 +150,9 @@ public class WindowGame extends ApplicationAdapter {
         this.timeStamp = timeStamp;
     }
 
+    public Character getCurrentCharacter(){
+        return currentCharacter;
+    }
 
     @Override
     public void create() {
@@ -158,6 +161,8 @@ public class WindowGame extends ApplicationAdapter {
 
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+
+        Gdx.input.setInputProcessor(new InputHandler());
 
         loadMap();
         loadGame();
@@ -195,7 +200,7 @@ public class WindowGame extends ApplicationAdapter {
     /**
      * Start the game (call in init player)
      */
-    private void start() {
+    public void start() {
         playerNumber = players.size() + mobs.size();
 
         turnTimer = TURN_MAX_TIME;
@@ -460,10 +465,8 @@ public class WindowGame extends ApplicationAdapter {
     /**
      * Render the Deck Area
      *
-     * @param container
-     * @param g
      */
-    private void renderDeckArea{
+    private void renderDeckArea(){
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.MAGENTA);
         // TOP
@@ -524,8 +527,11 @@ public class WindowGame extends ApplicationAdapter {
     }
 
 
-    @Override
-    public void update(GameContainer container, int delta) throws SlickException {
+    /**
+     * TODO Switch to the update from libgdx
+     * @param delta
+     */
+    public void update(int delta){
         if (gameEnded)
             return;
         long time = System.currentTimeMillis();
@@ -792,84 +798,6 @@ public class WindowGame extends ApplicationAdapter {
         if (debug && focus != null)
             System.out.println("The Range is : " + range + ", focus is " + focus.toString());
         return new Focus(range, focus);
-    }
-
-    /**
-     * Key handler
-     * TODO Need to be changed to libgdx code
-     *
-     * @param key
-     * @param c
-     */
-    @Override
-    public void keyReleased(int key, char c) {
-        if (debug) {
-            if (gameOn)
-                if (!currentCharacter.isNpc()) {
-                    System.out.println("WindowGame, keyReleased : " + key + ", char : " + c);
-                    try {
-                        if (Input.KEY_LEFT == key)
-                            decodeAction("m:" + (currentCharacter.getX() - 1) + ":" + currentCharacter.getY());
-                        if (Input.KEY_RIGHT == key)
-                            decodeAction("m:" + (currentCharacter.getX() + 1) + ":" + currentCharacter.getY());
-                        if (Input.KEY_UP == key)
-                            decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() - 1));
-                        if (Input.KEY_DOWN == key)
-                            decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() + 1));
-                        if (Input.KEY_NUMPAD8 == key)
-                            decodeAction("s3:" + NORTH);
-                        if (Input.KEY_NUMPAD6 == key)
-                            decodeAction("s9:" + EAST);
-                        if (Input.KEY_NUMPAD2 == key)
-                            decodeAction("s10:" + SOUTH);
-                        if (Input.KEY_NUMPAD4 == key)
-                            decodeAction("s4:" + WEST);
-                        if (Input.KEY_NUMPAD5 == key)
-                            decodeAction("s1:" + SELF);
-                    } catch (IllegalActionException e) {
-                        System.err.println(e.getMessage());
-                    }
-                }
-
-            if (Input.KEY_DIVIDE == key) {
-                currentCharacter.takeDamage(20, "magic");
-            }
-            if (Input.KEY_SUBTRACT == key) {
-                start();
-            }
-            if (Input.KEY_ADD == key) {
-                try {
-                    Random rand = new Random();
-                    int x = rand.nextInt(BLOCK_NUMBER_X - 0) + 0;
-                    int y = rand.nextInt(BLOCK_NUMBER_Y - 0) + 0;
-                    addChalenger(x, y, -1);
-                } catch (IllegalCaracterClassException e) {
-                    e.printStackTrace();
-                } catch (IllegalMovementException e) {
-                    e.printStackTrace();
-                } catch (IllegalActionException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (Input.KEY_L == key) {
-                gameEnded = true;
-                gameLose = true;
-                stopAllThread();
-            }
-
-            if (Input.KEY_W == key) {
-                gameEnded = true;
-                gameWin = true;
-                stopAllThread();
-            }
-
-
-        }
-
-        if (Input.KEY_ESCAPE == key) {
-            container.exit();
-        }
     }
 
     /**
