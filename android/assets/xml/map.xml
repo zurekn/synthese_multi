@@ -1,6 +1,6 @@
 <map>
 	<mapInfo>
-		<background>Synthese/res/images/map3.tmx</background>
+		<background>images/map3.tmx</background>
 		<x>25</x>
 		<y>25</y>
 		<RandomTraps>3</RandomTraps>
@@ -152,9 +152,9 @@
 		<block x="24" y="12" />
 	</departure>
 	
-	<music>Synthese/res/musics/ChronoTriggerAmbient.wav</music>
-	<halo_image>Synthese/res/images/tiles/Other/halo.png</halo_image>
-	<win_image>Synthese/res/images/tiles/Other/You_Win.png</win_image>
-	<lose_image>Synthese/res/images/tiles/Other/You_Lose.png</lose_image>
+	<music>musics/ChronoTriggerAmbient.wav</music>
+	<halo_image>images/tiles/Other/halo.png</halo_image>
+	<win_image>images/tiles/Other/You_Win.png</win_image>
+	<lose_image>images/tiles/Other/You_Lose.png</lose_image>
 
 </map>

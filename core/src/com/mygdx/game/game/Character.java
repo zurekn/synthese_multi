@@ -1,21 +1,15 @@
 package com.mygdx.game.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
-
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.util.pathfinding.AStarPathFinder;
-
-import com.mygdx.game.ai.AStar;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.SpellD;
 import com.mygdx.game.data.Stats;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalMovementException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Class representing a character which can be either a player or a monster.

@@ -1,13 +1,15 @@
 package com.mygdx.game.data;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.game.WindowGame;
 
 import org.jdom2.DataConversionException;
@@ -37,10 +39,10 @@ public class Data {
 	public static final boolean FULLSCREEN = false;
 	public static final boolean DEBUG_DEPARTURE = true;
 	public static final boolean tiDebug = true;
-	public static final boolean debug = true;
+	public static boolean debug = true;
 	public static final boolean DISPLAY_PLAYER = true;
 	public static final boolean runQRCam = false;
-	public static final boolean RUN_APIX = false;
+	public static boolean RUN_APIX = false;
 	public static boolean debugPicture = false; 
 	public static final boolean inTest = true;
 	public static final boolean debugQR = false;
@@ -133,8 +135,9 @@ public class Data {
 	
 	public static final long REFRESH_TIME_EVENT = 500;//in milli
 	
-	public static Music BACKGROUND_MUSIC; 
-	
+	public static Sound BACKGROUND_MUSIC;
+    public static long backgroudMusicId;
+
 	//AI
 	public static final long TIME_LIMIT = 10000;
 	public static final float[] AI_BORDERS = {-10.f,-5.f,-2.f};
@@ -191,19 +194,20 @@ public class Data {
 	public static final String DEPARTURE_BLOCK_ERROR = "Le pion doit �tre sur une case de d�part !";
 	public static final int FONT_SIZE = 10;
 	public static final int FONT_HEIGHT = 12;
-	public static Image IMAGE_HALO = null;
+	public static Texture IMAGE_HALO = null;
 	public static float MUSIC_VOLUM = .1f;
 	public static float MUSIC_PITCH = 1;
 	public static String MAIN_TEXT = "";
 	public static int MESSAGE_MAX_LENGTH;
 
-	public static Image WIN_IMAGE;
-	public static Image LOSE_IMAGE;
+	public static Texture WIN_IMAGE;
+	public static Texture LOSE_IMAGE;
 	public static float ENDING_ANIMATION_Y = 0;
 	public static float ENDING_ANIMATION_X = 0;
 	public static float ENDING_ANIMATION_SCALE = 0;
 
-	/**
+
+    /**
 	 * Load all game variables
 	 * 
 	 *
@@ -216,11 +220,11 @@ public class Data {
 		map = new TmxMapLoader().load(Data.MAP_FILE);
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
-
-		Data.BLOCK_NUMBER_X = map.getHeight();
-		Data.BLOCK_NUMBER_Y = map.getWidth();
-		Data.BLOCK_SIZE_X = map.getTileHeight();
-		Data.BLOCK_SIZE_Y = map.getTileWidth();
+        MapProperties mapP = map.getProperties();
+		Data.BLOCK_NUMBER_X = mapP.get("height", Integer.class);
+		Data.BLOCK_NUMBER_Y = mapP.get("width", Integer.class);
+		Data.BLOCK_SIZE_X = mapP.get("tilewidth", Integer.class);
+		Data.BLOCK_SIZE_Y = mapP.get("tileheight", Integer.class);
 		Data.MAP_HEIGHT = Data.BLOCK_NUMBER_Y * Data.BLOCK_SIZE_Y;
 		Data.MAP_WIDTH = Data.BLOCK_NUMBER_X * Data.BLOCK_SIZE_X;
 		Data.DECK_AREA_SIZE_X = Data.MAP_WIDTH  / 2; // Voir pour la largeur de la surface des cartes
@@ -284,11 +288,11 @@ public class Data {
 				if(debug)
 					System.out.println("New departure blok at : ["+x+":"+y+"]");
 			}
-			
-			BACKGROUND_MUSIC = new Music(root.getChildText("music"));
-			IMAGE_HALO = new Image(root.getChildText("halo_image"));
-			WIN_IMAGE = new Image(root.getChildText("win_image"));
-			LOSE_IMAGE = new Image(root.getChildText("lose_image"));
+
+			BACKGROUND_MUSIC = Gdx.audio.newSound(Gdx.files.internal(root.getChildText("music")));
+			IMAGE_HALO = new Texture(Gdx.files.internal(root.getChildText("halo_image")));
+			WIN_IMAGE = new Texture(Gdx.files.internal(root.getChildText("win_image")));
+			LOSE_IMAGE = new Texture(Gdx.files.internal(root.getChildText("lose_image")));
 		} catch (DataConversionException e) {
 			e.printStackTrace();
 		}
@@ -297,12 +301,12 @@ public class Data {
 	}
 	
 	public static void playBackgroundMusic(){
-		BACKGROUND_MUSIC.loop(MUSIC_PITCH, MUSIC_VOLUM);
+        backgroudMusicId = BACKGROUND_MUSIC.loop(MUSIC_VOLUM);
 	}
 	
-	public static void musicVolumeUp(int volume){
+	public static void musicVolumeUp(float volume){
 		MUSIC_VOLUM = volume;
-		BACKGROUND_MUSIC.setVolume(MUSIC_VOLUM);
+		BACKGROUND_MUSIC.setVolume(backgroudMusicId, MUSIC_VOLUM);
 		
 	}
 	
@@ -461,4 +465,11 @@ public class Data {
 			return MESSAGE_DURATION;
 		}
 	}
+
+    /**
+     * Dispose all ressource from class Data
+     */
+    public static void disposeData(){
+        BACKGROUND_MUSIC.dispose();
+    }
 }

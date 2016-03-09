@@ -1,6 +1,7 @@
 package com.mygdx.game.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -75,7 +76,7 @@ import static com.mygdx.game.data.Data.untraversableBlocks;
  *
  * @author bob
  */
-public class WindowGame extends ApplicationAdapter {
+public class WindowGame implements ApplicationListener {
 
     //
     private APIX apix;
@@ -87,6 +88,7 @@ public class WindowGame extends ApplicationAdapter {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+    private final String LABEL = "WINDOW_GAME";
     //
     private MobHandler mobHandler;
     private ArrayList<Mob> mobs;
@@ -197,6 +199,11 @@ public class WindowGame extends ApplicationAdapter {
         // start();
     }
 
+    @Override
+    public void resize(int width, int height) {
+        Gdx.app.log(LABEL, "Resize ["+width+" / "+height+"]");
+    }
+
     /**
      * Start the game (call in init player)
      */
@@ -291,7 +298,7 @@ public class WindowGame extends ApplicationAdapter {
 
         timerInitPlayer = INIT_MAX_TIME;
         if (players.size() >= MAX_PLAYER) {
-            System.out.println(" ----Max player reached ----");
+            Gdx.app.log(LABEL, " ----Max player reached ----");
             start();
         }
     }
@@ -321,7 +328,7 @@ public class WindowGame extends ApplicationAdapter {
         commands.addCommandListener(new CommandListener() {
 
             public void newAction(ActionEvent e) {
-                System.out.println("Nouvelle action recup de CommandHandler  : " + e.toString());
+                Gdx.app.log(LABEL, "Nouvelle action recup de CommandHandler  : " + e.toString());
                 try {
                     decodeAction(e.getEvent());
                 } catch (IllegalActionException e1) {
@@ -342,7 +349,7 @@ public class WindowGame extends ApplicationAdapter {
         apix.addAPIXListener(new APIXAdapter() {
             @Override
             public void newQRCode(QRCodeEvent e) {
-                System.out.println("Un nouveau QRCode vien d'�tre recup�rer par WindowGame [" + e.toString() + "]");
+                Gdx.app.log(LABEL, "Un nouveau QRCode vien d'�tre recup�rer par WindowGame [" + e.toString() + "]");
                 try {
                     decodeAction(e.getId() + ":" + e.getDirection());
                 } catch (IllegalActionException e1) {
@@ -351,7 +358,7 @@ public class WindowGame extends ApplicationAdapter {
             }
 
             public void newMouvement(MovementEvent e) {
-                System.out.println("Une nouvelle position  vient d'�tre r�cup�r�e par WindowGame [" + e.toString() + "], position sur le plateau ["
+                Gdx.app.log(LABEL, "Une nouvelle position  vient d'�tre r�cup�r�e par WindowGame [" + e.toString() + "], position sur le plateau ["
                         + e.getX() / apix.getBlockSizeX() + ":" + e.getY() / apix.getBlockSizeY() + "]");
                 try {
                     if (gameOn)
@@ -387,6 +394,9 @@ public class WindowGame extends ApplicationAdapter {
      */
     @Override
     public void render() {
+
+        update();
+
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
@@ -450,6 +460,23 @@ public class WindowGame extends ApplicationAdapter {
         batch.end();
     }
 
+    @Override
+    public void pause() {
+        Gdx.app.log(LABEL, "Pause");
+    }
+
+    @Override
+    public void resume() {
+        Gdx.app.log(LABEL, "Resume");
+    }
+
+    @Override
+    public void dispose() {
+        Gdx.app.log(LABEL, "Dispose");
+        batch.dispose();
+        shapeRenderer.dispose();
+    }
+
     /**
      * Display the reachables blocks of the current caracter
      */
@@ -511,7 +538,7 @@ public class WindowGame extends ApplicationAdapter {
                     e.move();
 
                 if (e.getRange() <= 1) {
-                    //	System.out.println("range <= 1");
+                    //	Gdx.app.log(LABEL, "range <= 1");
                     e.setMobile(false);
                 }
 
@@ -529,9 +556,8 @@ public class WindowGame extends ApplicationAdapter {
 
     /**
      * TODO Switch to the update from libgdx
-     * @param delta
      */
-    public void update(int delta){
+    public void update(){
         if (gameEnded)
             return;
         long time = System.currentTimeMillis();
@@ -565,7 +591,7 @@ public class WindowGame extends ApplicationAdapter {
      */
     public void switchTurn() {
         // Reset the timer
-        System.out.println("turn = " + turn + ", playerNumber = " + playerNumber + ", turnTimer = " + turnTimer);
+        Gdx.app.log(LABEL, "turn = " + turn + ", playerNumber = " + playerNumber + ", turnTimer = " + turnTimer);
         messageHandler.addGlobalMessage(new Message("Next turn"));
         turnTimer = TURN_MAX_TIME;
         turn = (turn + 1) % playerNumber;
@@ -597,15 +623,15 @@ public class WindowGame extends ApplicationAdapter {
 
         // print the current turn in the console
         if (debug) {
-            System.out.println("========================");
+            Gdx.app.log(LABEL, "========================");
             if (turn < players.size()) {
-                System.out.println("Tour du Joueur " + turn);
-                System.out.println("Player : " + players.get(turn).toString());
+                Gdx.app.log(LABEL, "Tour du Joueur " + turn);
+                Gdx.app.log(LABEL, "Player : " + players.get(turn).toString());
             } else {
-                System.out.println("Tour du Monster" + (turn - players.size()));
-                System.out.println("Monster " + mobs.get(turn - players.size()).toString());
+                Gdx.app.log(LABEL, "Tour du Monster" + (turn - players.size()));
+                Gdx.app.log(LABEL, "Monster " + mobs.get(turn - players.size()).toString());
             }
-            System.out.println("========================");
+            Gdx.app.log(LABEL, "========================");
         }
     }
 
@@ -648,7 +674,7 @@ public class WindowGame extends ApplicationAdapter {
             e.setY(MAP_Y + currentCharacter.getY() * BLOCK_SIZE_Y);
             // Get the range to the next character to hit
             Focus focus = getFirstCharacterRange(getCharacterPositionOnLine(currentCharacter.getX(), currentCharacter.getY(), e.getDirection()), e);
-            //System.out.println("get focus : " + focus.toString());
+            //Gdx.app.log(LABEL, "get focus : " + focus.toString());
             if (focus.range > e.getRange()) {
                 focus.range = e.getRange();
                 focus.character = null;
@@ -675,9 +701,9 @@ public class WindowGame extends ApplicationAdapter {
                     }
                     if (currentCharacter.checkDeath()) {
                         // TODO ADD a textual event
-                        System.out.println("-----------------------------------------");
-                        System.out.println("DEATH FOR" + currentCharacter.toString());
-                        System.out.println("-----------------------------------------");
+                        Gdx.app.log(LABEL, "-----------------------------------------");
+                        Gdx.app.log(LABEL, "DEATH FOR" + currentCharacter.toString());
+                        Gdx.app.log(LABEL, "-----------------------------------------");
                         messageHandler.addPlayerMessage(new Message(currentCharacter.getName() + "Died "), turn);
                         turn--;
                         players.remove(currentCharacter);
@@ -711,9 +737,9 @@ public class WindowGame extends ApplicationAdapter {
 
                         }
                         if (focus.character.checkDeath()) {
-                            System.out.println("-----------------------------------------");
-                            System.out.println("DEATH FOR" + focus.character.toString());
-                            System.out.println("-----------------------------------------");
+                            Gdx.app.log(LABEL, "-----------------------------------------");
+                            Gdx.app.log(LABEL, "DEATH FOR" + focus.character.toString());
+                            Gdx.app.log(LABEL, "-----------------------------------------");
                             messageHandler.addPlayerMessage(new Message(focus.character.getName() + "Died "), turn);
                             int index = Math.max(players.indexOf(focus.character), mobs.indexOf(focus.character));
                             int indexCurrent = Math.max(players.indexOf(currentCharacter), mobs.indexOf(currentCharacter));
@@ -729,16 +755,16 @@ public class WindowGame extends ApplicationAdapter {
                     }
                 }
                 events.add(e);
-                System.out.println("Created " + e.toString());
+                Gdx.app.log(LABEL, "Created " + e.toString());
                 actionLeft--;
             } catch (IllegalActionException iae) {
                 //iae.printStackTrace();
-                System.out.println(iae.getLocalizedMessage() + "----------------------------" + iae.getMessage());
+                Gdx.app.log(LABEL, iae.getLocalizedMessage() + "----------------------------" + iae.getMessage());
                 messageHandler.addPlayerMessage(new Message(iae.getLocalizedMessage(), MESSAGE_TYPE_ERROR), turn);
             }
 
         } else if (action.startsWith("t")) { // Trap action
-            System.out.println("Find a trap action");
+            Gdx.app.log(LABEL, "Find a trap action");
         } else if (action.startsWith("m")) {// Movement action
             try {
                 String[] tokens = action.split(":");
@@ -767,12 +793,12 @@ public class WindowGame extends ApplicationAdapter {
      */
     private Focus getFirstCharacterRange(ArrayList<Character> chars, Event e) {
         float range = MAX_RANGE;
-        System.out.println("Search the first character range : " + e.toString() + ", " + chars.toString());
+        Gdx.app.log(LABEL, "Search the first character range : " + e.toString() + ", " + chars.toString());
         Character focus = null;
         for (Character c : chars) {
             if (e.getDirection() == NORTH || e.getDirection() == SOUTH) {
                 int i = (Math.abs(c.getY() - (e.getYOnBoard())));
-                System.out.println("c.getY() = [" + c.getY() + "], e.getYOnBoard = [" + (e.getYOnBoard()) + "], i = [" + i + "]");
+                Gdx.app.log(LABEL, "c.getY() = [" + c.getY() + "], e.getYOnBoard = [" + (e.getYOnBoard()) + "], i = [" + i + "]");
 
                 if (i < range) {
                     range = i;
@@ -780,7 +806,7 @@ public class WindowGame extends ApplicationAdapter {
                 }
             }
             if (e.getDirection() == EAST || e.getDirection() == WEST) {
-                System.out.println("c.getX() = [" + c.getX() + "], e.getXOnBoard = [" + (e.getXOnBoard()) + "], i = [" + (c.getX() - e.getXOnBoard())
+                Gdx.app.log(LABEL, "c.getX() = [" + c.getX() + "], e.getXOnBoard = [" + (e.getXOnBoard()) + "], i = [" + (c.getX() - e.getXOnBoard())
                         + "]");
                 int i = (Math.abs(c.getX() - (e.getXOnBoard())));
 
@@ -796,7 +822,7 @@ public class WindowGame extends ApplicationAdapter {
         }
 
         if (debug && focus != null)
-            System.out.println("The Range is : " + range + ", focus is " + focus.toString());
+            Gdx.app.log(LABEL, "The Range is : " + range + ", focus is " + focus.toString());
         return new Focus(range, focus);
     }
 
@@ -807,7 +833,7 @@ public class WindowGame extends ApplicationAdapter {
      */
     @Deprecated
     public void move(String str) {
-        System.out.println("WindowGame get new movement : " + str);
+        Gdx.app.log(LABEL, "WindowGame get new movement : " + str);
         if (turn < players.size()) {
             try {
                 players.get(turn).moveTo(str);
@@ -935,7 +961,7 @@ public class WindowGame extends ApplicationAdapter {
             if (direction == WEST && mobs.get(i).getY() == y && mobs.get(i).getX() < x)
                 c.add(mobs.get(i));
         }
-        System.out.println("getCharacterePositionOnLine From [" + x + ", " + y + "], Found" + c.toString());
+        Gdx.app.log(LABEL, "getCharacterePositionOnLine From [" + x + ", " + y + "], Found" + c.toString());
         return c;
     }
 

@@ -7,6 +7,8 @@ import com.mygdx.game.data.Data;
 
 public class Message {
 
+    private final String LABEL = "MESSAGE";
+
 	private int x;
 	private int y;
 	private String message;

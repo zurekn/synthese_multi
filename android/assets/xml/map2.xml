@@ -1,6 +1,6 @@
 <map>
 	<mapInfo>
-		<background>Synthese/res/images/map2.tmx</background>
+		<background>images/map2.tmx</background>
 		<x>25</x>
 		<y>25</y>
 		<RandomTraps>3</RandomTraps>

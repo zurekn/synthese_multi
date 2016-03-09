@@ -11,6 +11,12 @@ public class DesktopLauncher {
 		config.title = Data.TITLE;
 		config.height = Data.SCREEN_HEIGHT;
 		config.width = Data.SCREEN_WIDTH;
-		new LwjglApplication(new Game(), config);
+
+        Data.checkValuesIni("paramTI.ini");
+
+        Data.RUN_APIX = false;
+        Data.debug = true;
+
+        new LwjglApplication(new Game(), config);
 	}
 }
