@@ -10,9 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Event {
 	private String id;
 
-	TextureRegion[] animationFrames;
-	Animation animation;
-	float elapsedTime;
+	private TextureRegion[] animationFrames;
+	private Animation animation;
+	private float elapsedTime;
 
 	private Sound sound;
 	private int x;
@@ -41,7 +41,7 @@ public class Event {
 		if (type.equalsIgnoreCase("S")) {// Spells
 			this.animationFrames = SpellData.getAnimationFramesById(id);
 		} else if (type.equalsIgnoreCase("T")) { // Traps
-			this.animationFrames = TrapData.getAnimationById(id);
+			this.animationFrames = TrapData.getAnimationFramesById(id);
 		} else if (type.equalsIgnoreCase("D")) { // Deaths
 
 		}
