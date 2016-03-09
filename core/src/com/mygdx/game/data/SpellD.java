@@ -1,9 +1,7 @@
 package com.mygdx.game.data;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.Sound;
-import org.newdawn.slick.SpriteSheet;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class SpellD {
 
@@ -19,7 +17,7 @@ public class SpellD {
 	private float speed;
 
 	public SpellD(String id, int damage, int heal, int mana, int range, String name,
-			int celNumber, String type, SpriteSheet ss, Sound sound, int spriteDirection, float speed) {
+			int celNumber, String type, TextureRegion[] frames, Sound sound, int spriteDirection, float speed) {
 		this.id = id;
 		this.damage = damage;
 		this.heal = heal;
@@ -30,9 +28,10 @@ public class SpellD {
 		this.event = new Event(id,sound);
 		this.spriteDirection = spriteDirection;
 		this.speed = speed;
-		initEventAnimation(celNumber, ss);
+		//TODO check if these two methods can be removed
+//		initEventAnimation(celNumber, ss);
 	}
-
+/*
 	private void initEventAnimation(int n, SpriteSheet ss) {
 		Animation[] a = new Animation[1];
 		a[0]= loadAnimation(ss, 0, n, 0);
@@ -47,7 +46,7 @@ public class SpellD {
 			animation.addFrame(spriteSheet.getSprite(x, y), 100);
 		}
 		return animation;
-	}
+	}*/
 
 	public int getSpriteDirection() {
 		return spriteDirection;
@@ -134,9 +133,4 @@ public class SpellD {
 				+ ", heal=" + heal + ", mana=" + mana + ", range=" + range
 				+ ", type=" + type + ", event=" + event + "]";
 	}
-
-	
-	
-	
-
 }

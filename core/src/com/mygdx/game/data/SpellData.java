@@ -1,5 +1,9 @@
 package com.mygdx.game.data;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.game.Spell;
 
 import java.io.File;
@@ -12,11 +16,6 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-import org.newdawn.slick.SpriteSheet;
 
 public class SpellData {
 
@@ -26,7 +25,7 @@ public class SpellData {
 		spells.add(spell);
 	}
 	
-	public static Animation[] getAnimationById(String id){
+	public static TextureRegion[] getAnimationFramesById(String id){
 		for(int i = 0; i < spells.size(); i++){
 			if(spells.get(i).getId().equals(id)){
 				return spells.get(i).getEvent().getAnimation();
@@ -46,12 +45,12 @@ public class SpellData {
 
 		List monsters = root.getChildren("spell");
 
-		Iterator i = monsters.iterator();
+		Iterator it = monsters.iterator();
 		int damage, heal, mana, celNumber, range, direction;
 		String id, name, type, file;
-		while (i.hasNext()) {
+		while (it.hasNext()) {
 			try {
-			Element el = (Element) i.next();
+			Element el = (Element) it.next();
 			damage = Integer.parseInt(el.getChildText("damage"));
 			heal = Integer.parseInt(el.getChildText("heal"));
 			mana = Integer.parseInt(el.getChildText("mana"));
@@ -62,26 +61,27 @@ public class SpellData {
 			type = el.getChildText("type");
 			direction = Integer.parseInt(el.getChildText("direction"));
 			celNumber = Integer.parseInt(el.getChildText("celNumber"));
-			Sound sound = new Sound(el.getChildText("sound"));
+			Sound sound = Gdx.audio.newSound(Gdx.files.internal(el.getChildText("sound")));
 			float speed = Float.parseFloat(el.getChildText("speed"));
-			SpriteSheet ss;
-			
-				ss = new SpriteSheet("" + el.getChildText("file"),
-						Integer.parseInt(el.getChildText("celX")),
-						Integer.parseInt(el.getChildText("celY")));
-				SpellD spell = new SpellD(id, damage, heal, mana, range, name, celNumber, type, ss, sound, direction, speed);
+
+			Texture img = new Texture(Gdx.files.internal(el.getChildText("file")));
+
+			TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildText("celX")),
+					Integer.parseInt(el.getChildText("celY")));
+			TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
+			int index = 0;
+			for(int i = 0 ; i < tmpFrames.length;i++)
+				for(int j = 0 ; j < tmpFrames[i].length;j++)
+					animationFrames[index++] = tmpFrames[j][i];
+
+			SpellD spell = new SpellD(id, damage, heal, mana, range, name, celNumber, type, animationFrames, sound, direction, speed);
 			spells.add(spell);
 			System.out.println("	Spell : "+spell.toString());
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	public static SpellD getSpellById(String text) {

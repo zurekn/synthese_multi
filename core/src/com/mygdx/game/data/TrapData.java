@@ -1,5 +1,9 @@
 package com.mygdx.game.data;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,11 +14,6 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
-import org.newdawn.slick.SpriteSheet;
 
 public class TrapData {
 	public static ArrayList<TrapD> traps = new ArrayList<TrapD>();
@@ -32,7 +31,7 @@ public class TrapData {
 		return null;
 	}
 	
-	public static Animation[] getAnimationById(String id){
+	public static TextureRegion[] getAnimationById(String id){
 		for(int i = 0; i < traps.size(); i++){
 			if(traps.get(i).getId().equals(id)){
 				return traps.get(i).getEvent().getAnimation();
@@ -53,12 +52,12 @@ public class TrapData {
 
 		List trapsList = root.getChildren("trap");
 
-		Iterator i = trapsList.iterator();
+		Iterator it = trapsList.iterator();
 		int damage, celNumber;
 		String id, name, damageType, file, sound;
-		while (i.hasNext()) {
+		while (it.hasNext()) {
 			try {
-			Element el = (Element) i.next();
+			Element el = (Element) it.next();
 			damage = Integer.parseInt(el.getChildText("damage"));
 			name = el.getChildText("name");
 			id = el.getAttributeValue("id");
@@ -66,23 +65,21 @@ public class TrapData {
 			sound = el.getChildText("sound");
 			celNumber = Integer.parseInt(el.getChildText("celNumber"));
 			damageType = el.getChildText("damageType");
-			SpriteSheet ss;
-			
-				ss = new SpriteSheet("" + el.getChildText("file"),
-						Integer.parseInt(el.getChildText("celX")),
-						Integer.parseInt(el.getChildText("celY")));
-			traps.add(new TrapD(id, damage, damageType, name, celNumber, ss, new Sound(sound)));
+			Texture img = new Texture(Gdx.files.internal(el.getChildText("file")));
+
+			TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildText("celX")),
+					Integer.parseInt(el.getChildText("celY")));
+			TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
+			int index = 0;
+			for(int i = 0 ; i < tmpFrames.length;i++)
+				for(int j = 0 ; j < tmpFrames[i].length;j++)
+					animationFrames[index++] = tmpFrames[j][i];
+			traps.add(new TrapD(id, damage, damageType, name, celNumber, animationFrames, Gdx.audio.newSound(Gdx.files.internal(sound))));
 			System.out.println("   Trap : ["+name+"] load end");
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
 		}
-
 	}
-
 }

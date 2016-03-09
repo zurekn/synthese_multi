@@ -1,9 +1,7 @@
 package com.mygdx.game.data;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.Music;
-import org.newdawn.slick.Sound;
-import org.newdawn.slick.SpriteSheet;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TrapD {
 	private String id;
@@ -16,17 +14,18 @@ public class TrapD {
 	
 
 	public TrapD(String id, int damage, String damageType, String name, int celNumber,
-			SpriteSheet ss, Sound sound) {
+			TextureRegion[] frames , Sound sound) {
 		this.id = id;
 		this.damage = damage;
 		this.name = name;
 		this.celNumber = celNumber;
 		this.damageType = damageType;
 		this.event = new Event(id, sound);
-		initEventAnimation(celNumber, ss);
+		//TODO check if these two methods can be removed
+		//initEventAnimation(celNumber, ss);
 	}
 	
-	private void initEventAnimation(int n, SpriteSheet ss) {
+	/*private void initEventAnimation(int n, SpriteSheet ss) {
 		Animation[] a = new Animation[1];
 		a[0]= loadAnimation(ss, 0, n, 0);
 		this.event.setAnimation(a);
@@ -39,7 +38,7 @@ public class TrapD {
 			animation.addFrame(spriteSheet.getSprite(x, y), 100);
 		}
 		return animation;
-	}
+	}*/
 
 	public String getId() {
 		return id;
