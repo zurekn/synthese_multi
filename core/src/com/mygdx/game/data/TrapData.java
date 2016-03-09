@@ -31,7 +31,7 @@ public class TrapData {
 		return null;
 	}
 	
-	public static TextureRegion[] getAnimationById(String id){
+	public static TextureRegion[] getAnimationFramesById(String id){
 		for(int i = 0; i < traps.size(); i++){
 			if(traps.get(i).getId().equals(id)){
 				return traps.get(i).getEvent().getAnimation();

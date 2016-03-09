@@ -41,7 +41,7 @@ public class Event {
 		if (type.equalsIgnoreCase("S")) {// Spells
 			this.animationFrames = SpellData.getAnimationFramesById(id);
 		} else if (type.equalsIgnoreCase("T")) { // Traps
-			this.animationFrames = TrapData.getAnimationById(id);
+			this.animationFrames = TrapData.getAnimationFramesById(id);
 		} else if (type.equalsIgnoreCase("D")) { // Deaths
 
 		}
