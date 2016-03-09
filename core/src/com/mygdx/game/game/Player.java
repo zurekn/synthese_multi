@@ -72,7 +72,6 @@ public class Player extends Character {
     }
 
     public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLACK);
         if (isMyTurn())
             batch.draw(Data.IMAGE_HALO, getX() * Data.BLOCK_SIZE_X + Data.MAP_X - 10, getY() * Data.BLOCK_SIZE_Y + Data.MAP_Y - 10, Data.BLOCK_SIZE_X + 20, Data.BLOCK_SIZE_Y + 20);

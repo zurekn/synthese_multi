@@ -111,7 +111,7 @@ public class MonsterData {
 				int index = 0;
 				for(int i = 0 ; i < tmpFrames.length;i++)
 					for(int j = 0 ; j < tmpFrames[i].length;j++)
-						animationFrames[index++] = tmpFrames[j][i];
+						animationFrames[index++] = tmpFrames[i][j];
 
 				Stats stats = new Stats(life, armor, mana, strength,
 						magicPower, luck, movementPoints, magicResist, eyeSight);

@@ -23,7 +23,6 @@ public class PlayerHandler {
 
 public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		for(int i = 0; i < player.size(); i++){
 			Stats s = player.get(i).getStats();
 			switch(player.get(i).getNumber()){
@@ -120,7 +119,6 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 		Set<String> set = Data.departureBlocks.keySet();
 		Iterator<String> it = set.iterator();
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(Data.BLOCK_REACHABLE_COLOR);
 		//g.setColor(Data.BLOCK_REACHABLE_COLOR);
 		while(it.hasNext()){
@@ -132,7 +130,6 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 				shapeRenderer.rect(Data.MAP_X + x * Data.BLOCK_SIZE_X, Data.MAP_Y + y * Data.BLOCK_SIZE_Y, Data.BLOCK_SIZE_X, Data.BLOCK_SIZE_Y);
 			}
 		}
-		//g.setColor(Data.DEFAULT_COLOR);
 	}
 	
 	

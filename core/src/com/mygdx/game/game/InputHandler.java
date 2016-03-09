@@ -18,6 +18,8 @@ import static com.mygdx.game.data.Data.WEST;
 import static com.mygdx.game.data.Data.debug;
 
 /**
+ * Class witch handle all input in the WindowGame
+ *
  * Created by nicolas on 09/03/2016.
  */
 public class InputHandler implements InputProcessor {
@@ -37,9 +39,9 @@ public class InputHandler implements InputProcessor {
                             windowGame.decodeAction("m:" + (currentCharacter.getX() - 1) + ":" + currentCharacter.getY());
                         if (Input.Keys.RIGHT == keycode)
                             windowGame.decodeAction("m:" + (currentCharacter.getX() + 1) + ":" + currentCharacter.getY());
-                        if (Input.Keys.UP == keycode)
-                            windowGame.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() - 1));
                         if (Input.Keys.DOWN == keycode)
+                            windowGame.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() - 1));
+                        if (Input.Keys.UP == keycode)
                             windowGame.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() + 1));
                         if (Input.Keys.NUMPAD_8 == keycode)
                             windowGame.decodeAction("s3:" + NORTH);

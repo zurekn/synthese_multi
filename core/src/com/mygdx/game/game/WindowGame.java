@@ -191,11 +191,14 @@ public class WindowGame implements ApplicationListener {
         // Set the timer
         timerInitPlayer = INIT_MAX_TIME;
 
-        //TODO CHECK FOR SOUND IN LIBGDX
-        /*
-        if (!Data.BACKGROUND_MUSIC.playing())
-            Data.BACKGROUND_MUSIC.loop(Data.MUSIC_PITCH, Data.MUSIC_VOLUM);
-            */
+
+        camera = new OrthographicCamera();
+        camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //camera.position.set(Data.SCREEN_WIDTH/2f, Data.SCREEN_HEIGHT/2f, 0);
+        camera.update();
+
+        Data.BACKGROUND_MUSIC.loop( Data.MUSIC_VOLUM);
+
         // start();
     }
 
@@ -400,6 +403,8 @@ public class WindowGame implements ApplicationListener {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
         camera.update();
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
@@ -458,7 +463,7 @@ public class WindowGame implements ApplicationListener {
             playerHandler.renderPlayerStat(batch, shapeRenderer);
             renderText();
         }
-
+        shapeRenderer.end();
         batch.end();
     }
 
@@ -483,12 +488,10 @@ public class WindowGame implements ApplicationListener {
      * Display the reachables blocks of the current caracter
      */
     private void renderReachableBlocks() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(BLOCK_REACHABLE_COLOR);
         for (int[] var : reachableBlock) {
             shapeRenderer.rect(MAP_X + var[0] * BLOCK_SIZE_X, MAP_Y + var[1] * BLOCK_SIZE_Y, BLOCK_SIZE_X, BLOCK_SIZE_Y);
         }
-        shapeRenderer.end();
     }
 
     /**
@@ -496,7 +499,6 @@ public class WindowGame implements ApplicationListener {
      *
      */
     private void renderDeckArea(){
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.MAGENTA);
         // TOP
         shapeRenderer.rect(MAP_X, RELATIVE_Y_POS, DECK_AREA_SIZE_X, DECK_AREA_SIZE_Y);
@@ -506,7 +508,6 @@ public class WindowGame implements ApplicationListener {
         shapeRenderer.rect(MAP_X - DECK_AREA_SIZE_Y, MAP_Y + MAP_WIDTH / 2, DECK_AREA_SIZE_Y, DECK_AREA_SIZE_X);
         // RIGHT
         shapeRenderer.rect(MAP_X + MAP_WIDTH, DECK_AREA_SIZE_Y, DECK_AREA_SIZE_Y, DECK_AREA_SIZE_X);
-        shapeRenderer.end();
     }
 
     /**

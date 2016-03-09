@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.Game;
 import com.mygdx.game.data.Data;
+import com.mygdx.game.game.WindowGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -17,6 +18,6 @@ public class DesktopLauncher {
         Data.RUN_APIX = false;
         Data.debug = true;
 
-        new LwjglApplication(new Game(), config);
+        new LwjglApplication(WindowGame.getInstance(), config);
 	}
 }

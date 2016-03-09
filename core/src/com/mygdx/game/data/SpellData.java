@@ -71,8 +71,9 @@ public class SpellData {
 			TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
 			int index = 0;
 			for(int i = 0 ; i < tmpFrames.length;i++)
-				for(int j = 0 ; j < tmpFrames[i].length;j++)
-					animationFrames[index++] = tmpFrames[j][i];
+				for(int j = 0 ; j < tmpFrames[i].length;j++) {
+                    animationFrames[index++] = tmpFrames[i][j];
+                }
 
 			SpellD spell = new SpellD(id, damage, heal, mana, range, name, celNumber, type, animationFrames, sound, direction, speed);
 			spells.add(spell);

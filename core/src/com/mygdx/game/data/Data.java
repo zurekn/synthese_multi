@@ -108,11 +108,11 @@ public class Data {
 	public static final int INF = 500;
 
 	public static String MAP_FILE = "";
-	public static final String MONSTER_DATA_XML = "Synthese/res/xml/monstersData.xml";
-	public static final String SPELLS_DATA_XML = "Synthese/res/xml/spells.xml";
-	public static final String TRAPS_DATA_XML = "Synthese/res/xml/traps.xml";
-	public static final String MAP_XML = "Synthese/res/xml/map.xml";
-	public static final String HERO_XML = "Synthese/res/xml/hero.xml";
+	public static final String MONSTER_DATA_XML = "xml/monstersData.xml";
+	public static final String SPELLS_DATA_XML = "xml/spells.xml";
+	public static final String TRAPS_DATA_XML = "xml/traps.xml";
+	public static final String MAP_XML = "xml/map.xml";
+	public static final String HERO_XML = "xml/hero.xml";
 
 	public static final HashMap<String, Event> eventMap = new HashMap<String, Event>();
 	public static final HashMap<String, Boolean> untraversableBlocks = new HashMap<String, Boolean>();
@@ -242,7 +242,7 @@ public class Data {
 		Data.ENDING_ANIMATION_Y = Data.MAP_Y - Data.WIN_IMAGE.getHeight() * Data.ENDING_ANIMATION_SCALE;
 
 		//load font
-		font = new BitmapFont(Gdx.files.internal("font/Font.fnt"),true);
+		font = new BitmapFont(Gdx.files.internal("fonts/Font.fnt"),true);
 		font.setColor(TEXT_COLOR);
 		System.out.println("MAP_FILE = " + Data.MAP_FILE + ", MAP_WIDTH = "
 				+ Data.MAP_WIDTH + ", MAP_HEIGHT = " + Data.MAP_HEIGHT
@@ -256,7 +256,7 @@ public class Data {
 	}
 
 	public static void loadMap() {
-		Document doc = XMLReader.readXML(Data.MAP_XML);
+		Document doc = XMLReader.readXML(Gdx.files.internal(Data.MAP_XML).path());
 
 		try {
 			Element root = doc.getRootElement();
