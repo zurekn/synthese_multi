@@ -5,12 +5,20 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.mygdx.game.Game;
+import com.mygdx.game.data.Data;
+import com.mygdx.game.game.WindowGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new Game(), config);
+
+        Data.checkValuesIni("paramTI.ini");
+
+        Data.RUN_APIX = false;
+        Data.debug = true;
+
+		initialize(WindowGame.getInstance(), config);
 	}
 }

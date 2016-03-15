@@ -2,6 +2,8 @@ package com.mygdx.game.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
 
 public class HeroData {
 
@@ -46,11 +46,9 @@ public class HeroData {
 	
 	public static void loadHeros(){
 		HeroData heroData = new HeroData();
-		Document doc = XMLReader.readXML(Data.HERO_XML);
-		
-		Element root = doc.getRootElement();
+		Element root = XMLReader.readXML(Data.HERO_XML);
 
-		List heros = root.getChildren("hero");
+		Array heros = root.getChildrenByName("hero");
 
 		Iterator i = heros.iterator();
 		String id;
@@ -60,26 +58,26 @@ public class HeroData {
 		while(i.hasNext()){
 			Element el = (Element) i.next();
 			
-			id = el.getAttributeValue("id");
-			life = Integer.parseInt(el.getChildText("life"));
-			armor = Integer.parseInt(el.getChildText("armor"));
-			mana = Integer.parseInt(el.getChildText("mana"));
-			strength = Integer.parseInt(el.getChildText("strength"));
-			magicPower = Integer.parseInt(el.getChildText("magicPower"));
-			luck = Integer.parseInt(el.getChildText("luck"));
-			movementPoints = Integer.parseInt(el.getChildText("movementPoints"));
-			magicResist = Integer.parseInt(el.getChildText("magicResist"));
-			eyeSight = Integer.parseInt(el.getChildText("eyeSight"));
+			id = el.getAttribute("id");
+			life = Integer.parseInt(el.getChildByName("life").getText());
+			armor = Integer.parseInt(el.getChildByName("armor").getText());
+			mana = Integer.parseInt(el.getChildByName("mana").getText());
+			strength = Integer.parseInt(el.getChildByName("strength").getText());
+			magicPower = Integer.parseInt(el.getChildByName("magicPower").getText());
+			luck = Integer.parseInt(el.getChildByName("luck").getText());
+			movementPoints = Integer.parseInt(el.getChildByName("movementPoints").getText());
+			magicResist = Integer.parseInt(el.getChildByName("magicResist").getText());
+			eyeSight = Integer.parseInt(el.getChildByName("eyeSight").getText());
 
-			Texture icon =new Texture(Gdx.files.internal(el.getChildText("icon")));
+			Texture icon =new Texture(Gdx.files.internal(el.getChildByName("icon").getText()));
 
 			Hero h = new Hero(id, icon, new Stats(life, armor, mana, strength, magicPower, luck, movementPoints, magicResist, eyeSight ,id));
-			CLASSES_VALUES.put(id, Integer.parseInt(el.getChildText("value")));
-			Iterator<Element> ii =  el.getChild("spells").getChildren("spell").iterator();
+			CLASSES_VALUES.put(id, Integer.parseInt(el.getChildByName("value").getText()));
+			Iterator<Element> ii =  el.getChildByName("spells").getChildrenByName("spell").iterator();
 			
 			while(ii.hasNext()){
 				Element e = (Element) ii.next();
-				SpellD s = SpellData.getSpellById(e.getAttributeValue("id"));
+				SpellD s = SpellData.getSpellById(e.getAttribute("id"));
 				if(s != null)
 					h.addSpell(s);
 			}

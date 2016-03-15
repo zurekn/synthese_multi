@@ -3,14 +3,16 @@ package com.mygdx.game.data;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader;
 import com.mygdx.game.game.Mob;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
+import static com.badlogic.gdx.utils.XmlReader.*;
+
 
 public class MonsterData {
 	
@@ -45,10 +47,9 @@ public class MonsterData {
 	public static ArrayList<Mob> initMobs() {
 		ArrayList<Mob> mobs = new ArrayList<Mob>();	
 		
-		Document doc = XMLReader.readXML(Data.MAP_XML);
-			
-		Element root = doc.getRootElement();
-		List monsters = root.getChildren("monster");
+		Element root = XMLReader.readXML(Data.MAP_XML);
+
+		Array monsters = root.getChildrenByName("monster");
 
 		Iterator i = monsters.iterator();
 		int posX, posY;
@@ -58,9 +59,9 @@ public class MonsterData {
 		while (i.hasNext()) {
 
 			Element el = (Element) i.next();
-			id = el.getAttributeValue("id");
-			posX = Integer.parseInt(el.getChildText("x"));
-			posY = Integer.parseInt(el.getChildText("y"));
+			id = el.getAttribute("id");
+			posX = Integer.parseInt(el.getChildByName("x").getText());
+			posY = Integer.parseInt(el.getChildByName("y").getText());
 			Mob m = new Mob(posX, posY, id,"m"+idCount);
 			mobs.add(m);
 			idCount++;
@@ -74,39 +75,38 @@ public class MonsterData {
 	public static void loadMonster() {
 		MonsterData monsterData = new MonsterData();
 
-		Document doc = XMLReader.readXML(Data.MONSTER_DATA_XML);
+		Element root = XMLReader.readXML(Data.MONSTER_DATA_XML);
 		
-		Element root = doc.getRootElement();
 
-		List monsters = root.getChildren("monster");
+		Array monsters = root.getChildrenByName("monster");
 
 		Iterator it = monsters.iterator();
 		String name;
 		int life, armor, mana, strength, magicPower, luck, movementPoints, magicResist, eyeSight;
-		List <Element> spells = new ArrayList<Element>();
+		Array <Element> spells = new Array<Element>();
 		String aiType ;
 		while (it.hasNext()) {
 
 			Element el = (Element) it.next();
 			try {
-				name = el.getChildText("name");
-				life = Integer.parseInt(el.getChildText("life"));
-				armor = Integer.parseInt(el.getChildText("armor"));
-				mana = Integer.parseInt(el.getChildText("mana"));
-				strength = Integer.parseInt(el.getChildText("strength"));
-				magicPower= Integer.parseInt(el.getChildText("magicPower"));
-				luck = Integer.parseInt(el.getChildText("luck"));
-				movementPoints = Integer.parseInt(el.getChildText("movementPoints"));
-				String id = el.getAttributeValue("id");
-				spells = el.getChild("spells").getChildren("spell");
-				magicResist = Integer.parseInt(el.getChildText("magicResist"));
-				eyeSight = Integer.parseInt(el.getChildText("eyeSight"));
+				name = el.getChildByName("name").getText();
+				life = Integer.parseInt(el.getChildByName("life").getText());
+				armor = Integer.parseInt(el.getChildByName("armor").getText());
+				mana = Integer.parseInt(el.getChildByName("mana").getText());
+				strength = Integer.parseInt(el.getChildByName("strength").getText());
+				magicPower= Integer.parseInt(el.getChildByName("magicPower").getText());
+				luck = Integer.parseInt(el.getChildByName("luck").getText());
+				movementPoints = Integer.parseInt(el.getChildByName("movementPoints").getText());
+				String id = el.getAttribute("id");
+				spells = el.getChildByName("spells").getChildrenByName("spell");
+				magicResist = Integer.parseInt(el.getChildByName("magicResist").getText());
+				eyeSight = Integer.parseInt(el.getChildByName("eyeSight").getText());
 				Iterator<Element> ii = spells.iterator();
 
-				Texture img = new Texture(Gdx.files.internal(el.getChildText("file")));
+				Texture img = new Texture(Gdx.files.internal(el.getChildByName("file").getText()));
 
-				TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildText("celDimensionX")),
-						Integer.parseInt(el.getChildText("celDimensionY")));
+				TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildByName("celDimensionX").getText()),
+						Integer.parseInt(el.getChildByName("celDimensionY").getText()));
 				TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
 				int index = 0;
 				for(int i = 0 ; i < tmpFrames.length;i++)
@@ -115,7 +115,7 @@ public class MonsterData {
 
 				Stats stats = new Stats(life, armor, mana, strength,
 						magicPower, luck, movementPoints, magicResist, eyeSight);
-				aiType = el.getChildText("aiType");
+				aiType = el.getChildByName("aiType").getText();
 				Monster m = new Monster(id, aiType, name, animationFrames, stats);
 				while(ii.hasNext()){
 					Element e = (Element) ii.next();

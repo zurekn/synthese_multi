@@ -3,6 +3,8 @@ package com.mygdx.game.data;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
+import static com.badlogic.gdx.utils.XmlReader.*;
+
 
 public class TrapData {
 	public static ArrayList<TrapD> traps = new ArrayList<TrapD>();
@@ -46,11 +46,9 @@ public class TrapData {
 	public static void loadTrap(){
 
 
-		Document doc = XMLReader.readXML(Data.TRAPS_DATA_XML);
-		
-		Element root = doc.getRootElement();
+		Element root = XMLReader.readXML(Data.TRAPS_DATA_XML);
 
-		List trapsList = root.getChildren("trap");
+		Array trapsList = root.getChildrenByName("trap");
 
 		Iterator it = trapsList.iterator();
 		int damage, celNumber;
@@ -58,17 +56,17 @@ public class TrapData {
 		while (it.hasNext()) {
 			try {
 			Element el = (Element) it.next();
-			damage = Integer.parseInt(el.getChildText("damage"));
-			name = el.getChildText("name");
-			id = el.getAttributeValue("id");
-			file = el.getChildText("file");
-			sound = el.getChildText("sound");
-			celNumber = Integer.parseInt(el.getChildText("celNumber"));
-			damageType = el.getChildText("damageType");
-			Texture img = new Texture(Gdx.files.internal(el.getChildText("file")));
+			damage = Integer.parseInt(el.getChildByName("damage").getText());
+			name = el.getChildByName("name").getText();
+			id = el.getAttribute("id");
+			file = el.getChildByName("file").getText();
+			sound = el.getChildByName("sound").getText();
+			celNumber = Integer.parseInt(el.getChildByName("celNumber").getText());
+			damageType = el.getChildByName("damageType").getText();
+			Texture img = new Texture(Gdx.files.internal(el.getChildByName("file").getText()));
 
-			TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildText("celX")),
-					Integer.parseInt(el.getChildText("celY")));
+			TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildByName("celX").getText()),
+					Integer.parseInt(el.getChildByName("celY").getText()));
 			TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
 			int index = 0;
 			for(int i = 0 ; i < tmpFrames.length;i++)

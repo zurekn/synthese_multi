@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Stats;
 
@@ -121,13 +122,15 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
 		shapeRenderer.setColor(Data.BLOCK_REACHABLE_COLOR);
 		//g.setColor(Data.BLOCK_REACHABLE_COLOR);
+        Vector3 v = WindowGame.getInstance().getCamera().position;
+        float scale = WindowGame.getInstance().getCamera().zoom;
 		while(it.hasNext()){
 			var = ((String) it.next());
 			if(!Data.departureBlocks.get(var)){
 				split = var.split(":");
 				x = Integer.parseInt(split[0]);
 				y = Integer.parseInt(split[1]);
-				shapeRenderer.rect(Data.MAP_X + x * Data.BLOCK_SIZE_X, Data.MAP_Y + y * Data.BLOCK_SIZE_Y, Data.BLOCK_SIZE_X, Data.BLOCK_SIZE_Y);
+				shapeRenderer.rect(Data.MAP_X + x * Data.BLOCK_SIZE_X, Data.MAP_Y + y * Data.BLOCK_SIZE_Y, Data.BLOCK_SIZE_X / scale,  Data.BLOCK_SIZE_Y / scale);
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 package com.mygdx.game.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -29,10 +29,8 @@ import com.mygdx.game.imageprocessing.QRCodeEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
-import static com.mygdx.game.data.Data.BLOCK_NUMBER_X;
 import static com.mygdx.game.data.Data.BLOCK_NUMBER_Y;
 import static com.mygdx.game.data.Data.BLOCK_REACHABLE_COLOR;
 import static com.mygdx.game.data.Data.BLOCK_SIZE_X;
@@ -76,7 +74,7 @@ import static com.mygdx.game.data.Data.untraversableBlocks;
  *
  * @author bob
  */
-public class WindowGame implements ApplicationListener {
+public class WindowGame extends Game {
 
     //
     private APIX apix;
@@ -85,7 +83,7 @@ public class WindowGame implements ApplicationListener {
     private GameHandler handler;
 
     //LIBGDX Variables
-    private OrthographicCamera camera;
+    private CameraHandler camera;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private final String LABEL = "WINDOW_GAME";
@@ -152,8 +150,12 @@ public class WindowGame implements ApplicationListener {
         this.timeStamp = timeStamp;
     }
 
-    public Character getCurrentCharacter(){
+    public Character getCurrentCharacter() {
         return currentCharacter;
+    }
+
+    public CameraHandler getCamera(){
+        return camera;
     }
 
     @Override
@@ -192,25 +194,24 @@ public class WindowGame implements ApplicationListener {
         timerInitPlayer = INIT_MAX_TIME;
 
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //camera.position.set(Data.SCREEN_WIDTH/2f, Data.SCREEN_HEIGHT/2f, 0);
-        camera.update();
+        camera = new CameraHandler();
+        camera.init();
+        Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
 
-        Data.BACKGROUND_MUSIC.loop( Data.MUSIC_VOLUM);
-
-        // start();
     }
 
     @Override
     public void resize(int width, int height) {
-        Gdx.app.log(LABEL, "Resize ["+width+" / "+height+"]");
+        Gdx.app.log(LABEL, "Resize [" + width + " / " + height + "]");
+        camera.resize(width, height);
     }
 
     /**
      * Start the game (call in init player)
      */
     public void start() {
+        if(players.size() == 0)
+            return;
         playerNumber = players.size() + mobs.size();
 
         turnTimer = TURN_MAX_TIME;
@@ -343,10 +344,10 @@ public class WindowGame implements ApplicationListener {
     }
 
     public void initAPIX() {
-        apix = APIX.getInstance();
-        if (!RUN_APIX)
+        if (!RUN_APIX) {
             return;
-
+        }
+        apix = APIX.getInstance();
         movementHandler = new MovementHandler(this);
 
         apix.addAPIXListener(new APIXAdapter() {
@@ -409,11 +410,20 @@ public class WindowGame implements ApplicationListener {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(camera.position.x, camera.position.y, 20 / camera.zoom, 20 / camera.zoom);
 
-        /* TODO SEE FOR LIBGDX SCALING
-        g.scale(Data.SCALE, Data.SCALE);
-         */
-
+        if (gameOn) {
+            mobHandler.render(batch, shapeRenderer);
+            renderDeckArea();
+            playerHandler.render(batch, shapeRenderer);
+            renderReachableBlocks();
+            renderEvents();
+        } else {
+            playerHandler.renderInitBlock(batch, shapeRenderer);
+        }
+        playerHandler.renderPlayerStat(batch, shapeRenderer);
+        renderText();
 
         if (gameEnded) {
             //Data.map.render(Data.MAP_X, Data.MAP_Y);
@@ -432,37 +442,28 @@ public class WindowGame implements ApplicationListener {
                 Data.ENDING_ANIMATION_Y++;
             return;
         }
-        if (!apix.isInit()) {
-            shapeRenderer.setColor(Color.BLACK);
-            //g.setBackground(Color.white);
-            // TOP LEFT
-            shapeRenderer.rect(Data.MAP_X - 20, Data.MAP_Y - 20, 40, 40);
-            // TOP RIGHT
-            shapeRenderer.rect(Data.MAP_X + Data.MAP_WIDTH - 20, Data.MAP_Y - 20, 40, 40);
-            // //BOTTOM left
-            shapeRenderer.rect(Data.MAP_X - 20, Data.MAP_Y + Data.MAP_HEIGHT - 20, 40, 40);
-            i++;
-            if (i > 60)
-                apix.initTI();
-            // Reset the timer unteal the paix init is over
-            timerInitPlayer = Data.INIT_MAX_TIME;
+        if (Data.RUN_APIX)
+            if (!apix.isInit()) {
+                shapeRenderer.setColor(Color.BLACK);
+                //g.setBackground(Color.white);
+                // TOP LEFT
+                shapeRenderer.rect(Data.MAP_X - 20, Data.MAP_Y - 20, 40, 40);
+                // TOP RIGHT
+                shapeRenderer.rect(Data.MAP_X + Data.MAP_WIDTH - 20, Data.MAP_Y - 20, 40, 40);
+                // //BOTTOM left
+                shapeRenderer.rect(Data.MAP_X - 20, Data.MAP_Y + Data.MAP_HEIGHT - 20, 40, 40);
+                i++;
+                if (i > 60)
+                    apix.initTI();
+                // Reset the timer unteal the paix init is over
+                timerInitPlayer = Data.INIT_MAX_TIME;
 
-        } else {
-            //Data.map.render(Data.MAP_X, Data.MAP_Y);
-            tiledMapRenderer.render();
-
-            if (gameOn) {
-                mobHandler.render(batch,shapeRenderer);
-                renderDeckArea();
-                playerHandler.render(batch, shapeRenderer);
-                renderReachableBlocks();
-                renderEvents();
             } else {
-                playerHandler.renderInitBlock(batch, shapeRenderer);
+                //Data.map.render(Data.MAP_X, Data.MAP_Y);
+                tiledMapRenderer.render();
+
+
             }
-            playerHandler.renderPlayerStat(batch, shapeRenderer);
-            renderText();
-        }
         shapeRenderer.end();
         batch.end();
     }
@@ -496,9 +497,8 @@ public class WindowGame implements ApplicationListener {
 
     /**
      * Render the Deck Area
-     *
      */
-    private void renderDeckArea(){
+    private void renderDeckArea() {
         shapeRenderer.setColor(Color.MAGENTA);
         // TOP
         shapeRenderer.rect(MAP_X, RELATIVE_Y_POS, DECK_AREA_SIZE_X, DECK_AREA_SIZE_Y);
@@ -560,7 +560,7 @@ public class WindowGame implements ApplicationListener {
     /**
      * TODO Switch to the update from libgdx
      */
-    public void update(){
+    public void update() {
         if (gameEnded)
             return;
         long time = System.currentTimeMillis();

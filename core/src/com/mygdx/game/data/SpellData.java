@@ -4,18 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.XmlReader;
 import com.mygdx.game.game.Spell;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
+import static com.badlogic.gdx.utils.XmlReader.*;
+
 
 public class SpellData {
 
@@ -39,11 +37,9 @@ public class SpellData {
 	 */
 	public static void loadSpell(){
 
-		Document doc = XMLReader.readXML(Data.SPELLS_DATA_XML);
-		
-		Element root = doc.getRootElement();
-
-		List monsters = root.getChildren("spell");
+		Element root = XMLReader.readXML(Data.SPELLS_DATA_XML);
+        
+		Array monsters = root.getChildrenByName("spell");
 
 		Iterator it = monsters.iterator();
 		int damage, heal, mana, celNumber, range, direction;
@@ -51,23 +47,23 @@ public class SpellData {
 		while (it.hasNext()) {
 			try {
 			Element el = (Element) it.next();
-			damage = Integer.parseInt(el.getChildText("damage"));
-			heal = Integer.parseInt(el.getChildText("heal"));
-			mana = Integer.parseInt(el.getChildText("mana"));
-			range = Integer.parseInt(el.getChildText("range"));
-			name = el.getChildText("name");
-			id = el.getAttributeValue("id");
-			file = el.getChildText("file");
-			type = el.getChildText("type");
-			direction = Integer.parseInt(el.getChildText("direction"));
-			celNumber = Integer.parseInt(el.getChildText("celNumber"));
-			Sound sound = Gdx.audio.newSound(Gdx.files.internal(el.getChildText("sound")));
-			float speed = Float.parseFloat(el.getChildText("speed"));
+			damage = Integer.parseInt(el.getChildByName("damage").getText());
+			heal = Integer.parseInt(el.getChildByName("heal").getText());
+			mana = Integer.parseInt(el.getChildByName("mana").getText());
+			range = Integer.parseInt(el.getChildByName("range").getText());
+			name = el.getChildByName("name").getText();
+			id = el.getAttribute("id");
+			file = el.getChildByName("file").getText();
+			type = el.getChildByName("type").getText();
+			direction = Integer.parseInt(el.getChildByName("direction").getText());
+			celNumber = Integer.parseInt(el.getChildByName("celNumber").getText());
+			Sound sound = Gdx.audio.newSound(Gdx.files.internal(el.getChildByName("sound").getText()));
+			float speed = Float.parseFloat(el.getChildByName("speed").getText());
 
-			Texture img = new Texture(Gdx.files.internal(el.getChildText("file")));
+			Texture img = new Texture(Gdx.files.internal(el.getChildByName("file").getText()));
 
-			TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildText("celX")),
-					Integer.parseInt(el.getChildText("celY")));
+			TextureRegion[][] tmpFrames = TextureRegion.split(img,Integer.parseInt(el.getChildByName("celX").getText()),
+					Integer.parseInt(el.getChildByName("celY").getText()));
 			TextureRegion[] animationFrames = new TextureRegion[tmpFrames.length*tmpFrames[0].length];
 			int index = 0;
 			for(int i = 0 ; i < tmpFrames.length;i++)

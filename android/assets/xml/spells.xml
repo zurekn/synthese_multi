@@ -91,7 +91,7 @@
 	</spell>
 
 	<spell id="s7">
-		<file>images/tiles/Spells/Aero.png</file>
+		<file>images/tiles/Spells/aero.png</file>
 		<celX>72</celX>
 		<celY>41</celY>
 		<celNumber>4</celNumber>

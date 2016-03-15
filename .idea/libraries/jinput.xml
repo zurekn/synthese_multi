@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jinput">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/libs/jars/jinput.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/libs/jinput.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

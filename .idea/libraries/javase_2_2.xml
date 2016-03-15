@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="javase-2.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.zxing/javase/2.2/49c7efbaa67727bef5f2dd79efba1ca35f3e7f0/javase-2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.zxing/javase/2.2/132b93ee55d5d1da05ac8d78bd3dc197cff43e8b/javase-2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
