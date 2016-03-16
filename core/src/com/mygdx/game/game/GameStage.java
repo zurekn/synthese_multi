@@ -232,10 +232,12 @@ public class GameStage extends Stage {
 
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        camera.update();
+        //camera.update();
+        /* Render map */
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
@@ -243,7 +245,8 @@ public class GameStage extends Stage {
         shapeRenderer.rect(camera.position.x, camera.position.y, 20 / camera.zoom, 20 / camera.zoom);
 
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(Data.SCREEN_WIDTH / 2 - camera.position.x, Data.SCREEN_HEIGHT / 2 - camera.position.y, 10, 10);
+        shapeRenderer.rect(Data.MAP_X, Data.MAP_Y, 10, 10);
+
         if (gameOn) {
             mobHandler.render(batch, shapeRenderer);
             renderDeckArea();
@@ -292,8 +295,6 @@ public class GameStage extends Stage {
             } else {
                 //Data.map.render(Data.MAP_X, Data.MAP_Y);
                 tiledMapRenderer.render();
-
-
             }
         shapeRenderer.end();
         batch.end();

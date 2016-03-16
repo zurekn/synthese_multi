@@ -44,8 +44,6 @@
     <orderEntry type="library" exported="" name="jinput-platform-2.0.5-natives-osx" level="project" />
     <orderEntry type="library" exported="" name="bridj-0.6.2" level="project" />
     <orderEntry type="library" exported="" name="javase-3.1.0-sources" level="project" />
-    <orderEntry type="library" exported="" name="jdom-2.0.5-javadoc" level="project" />
-    <orderEntry type="library" exported="" name="jdom-2.0.5" level="project" />
     <orderEntry type="library" exported="" name="jinput" level="project" />
     <orderEntry type="library" exported="" name="lwjgl" level="project" />
     <orderEntry type="library" exported="" name="slf4j-api-1.7.2" level="project" />

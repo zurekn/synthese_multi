@@ -32,6 +32,10 @@ public class CameraHandler extends OrthographicCamera {
         Gdx.app.log(TAG,"Create camera at ["+camX+"/"+camY+"]");
 
         viewPort= new FitViewport(Data.SCREEN_WIDTH, Data.SCREEN_HEIGHT, this);
+
+        Data.MAP_X = (Data.SCREEN_WIDTH / 2) - position.x / zoom;
+        Data.MAP_Y = (Data.SCREEN_HEIGHT / 2) - position.y / zoom;
+
         this.update();
     }
 
@@ -46,8 +50,7 @@ public class CameraHandler extends OrthographicCamera {
             //Gdx.app.log(TAG, "Translate camera of [" + v.x + "/" + v.y + "] from [" + this.position.x + "/" + this.position.y + "]");
             if (!cameraOutOfLimit(v)) {
                 this.translate(v);
-                Data.MAP_X = (Data.SCREEN_WIDTH / 2) - position.x;
-                Data.MAP_Y = (Data.SCREEN_HEIGHT / 2) - position.y;
+               reloadMapPosition();
             }
         }
     }
@@ -62,4 +65,9 @@ public class CameraHandler extends OrthographicCamera {
     }
 
 
+    public void reloadMapPosition() {
+        Data.scale = zoom;
+        Data.MAP_X = (Data.SCREEN_WIDTH / 2) - position.x / zoom;
+        Data.MAP_Y = (Data.SCREEN_HEIGHT / 2) - position.y / zoom;
+    }
 }

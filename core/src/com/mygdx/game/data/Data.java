@@ -202,6 +202,8 @@ public class Data {
     public static float ENDING_ANIMATION_X = 0;
     public static float ENDING_ANIMATION_SCALE = 0;
 
+    public static float scale = 1.0f;
+
 
     /**
      * Load all game variables

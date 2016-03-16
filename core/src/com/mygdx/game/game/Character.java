@@ -1,5 +1,6 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -29,7 +30,9 @@ public abstract class Character {
 	private int sizeCharacter;
 
 	private TextureRegion[] animationFrames;
-	private Stats stats;
+    private Animation animation;
+
+    private Stats stats;
 	private boolean myTurn = false;
 	private ArrayList<Spell> spells = new ArrayList<Spell>();
 	private String name;
@@ -184,7 +187,7 @@ public abstract class Character {
 	}
 
 	public void heal(int heal) {
-		System.out.println(id + "take : ["+heal+"] heal");
+		System.out.println(id + "take : [" + heal + "] heal");
 		stats.setLife(stats.getLife() + heal);
 	}
 
@@ -381,4 +384,10 @@ public abstract class Character {
 		stats.setMana(stats.getMana() + stats.getMagicPower() + stats.getMaxMana() / 10);
 	}
 
+    public Animation getAnimation() {
+        return animation;
+    }
+    public void setAnimation(Animation animation) {
+        this.animation = animation;
+    }
 }

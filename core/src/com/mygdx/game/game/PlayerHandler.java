@@ -130,7 +130,7 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 				split = var.split(":");
 				x = Integer.parseInt(split[0]);
 				y = Integer.parseInt(split[1]);
-				shapeRenderer.rect(Data.MAP_X + x * Data.BLOCK_SIZE_X, Data.MAP_Y + y * Data.BLOCK_SIZE_Y, Data.BLOCK_SIZE_X / scale,  Data.BLOCK_SIZE_Y / scale);
+				shapeRenderer.rect(Data.MAP_X + x * Data.BLOCK_SIZE_X / scale, Data.MAP_Y + y * Data.BLOCK_SIZE_Y / scale, Data.BLOCK_SIZE_X / scale,  Data.BLOCK_SIZE_Y / scale);
 
             }
 		}

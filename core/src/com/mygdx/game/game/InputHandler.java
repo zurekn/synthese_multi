@@ -98,9 +98,11 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
                 stage.gameWin = true;
                 stage.stopAllThread();
             }
-
-
         }
+        if(Input.Keys.ESCAPE == keycode){
+            Gdx.app.exit();
+        }
+
         return false;
     }
 
@@ -151,6 +153,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
         else if(amount == -1 && stage.getCamera().zoom - 0.2f > CameraHandler.MAX_ZOOM ){
             stage.getCamera().zoom -= .2f;
         }
+        stage.getCamera().reloadMapPosition();
         return false;
     }
 
