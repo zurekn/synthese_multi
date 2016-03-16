@@ -61,8 +61,8 @@ public class Data {
     public static int MAP_HEIGHT;
     public static int BLOCK_SIZE_X;
     public static int BLOCK_SIZE_Y;
-    public static int MAP_X;
-    public static int MAP_Y;
+    public static float MAP_X;
+    public static float MAP_Y;
     public static int BLOCK_NUMBER_X;
     public static int BLOCK_NUMBER_Y;
     public static int DECK_AREA_SIZE_X;
@@ -225,8 +225,8 @@ public class Data {
         Data.DECK_AREA_SIZE_Y = Data.BLOCK_SIZE_Y * 3;
         Data.RELATIVE_X_POS = 288;//Data.DECK_AREA_SIZE_Y * 3;
         Data.RELATIVE_Y_POS = 0;
-        Data.MAP_X = Data.RELATIVE_X_POS + Data.DECK_AREA_SIZE_Y;
-        Data.MAP_Y = Data.RELATIVE_Y_POS + Data.DECK_AREA_SIZE_Y;
+        Data.MAP_X = 0;
+        Data.MAP_Y = 0;
         Data.TOTAL_HEIGHT = Data.MAP_HEIGHT + 2 * Data.DECK_AREA_SIZE_Y;
         Data.TOTAL_WIDTH = Data.MAP_WIDTH + 2 * Data.DECK_AREA_SIZE_Y;
         Data.SCALE = (float) Data.SCREEN_HEIGHT / Data.TOTAL_HEIGHT;

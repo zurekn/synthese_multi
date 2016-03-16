@@ -5,6 +5,7 @@ import com.github.sarxos.webcam.WebcamResolution;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Handler;
 import com.mygdx.game.game.GameHandler;
+import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.WindowGame;
 
 import java.awt.Color;
@@ -78,7 +79,7 @@ public class APIX extends Handler {
 	 * Launch the webcam for QR Code detection and Image processing
 	 */
 	public void run() {
-		GameHandler game = WindowGame.getInstance().getHandler();
+		GameHandler game = GameStage.gameStage.getHandler();
 		lock(2);
 		
 		// Init the QRCode part

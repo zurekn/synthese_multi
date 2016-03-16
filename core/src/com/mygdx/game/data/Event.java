@@ -15,8 +15,8 @@ public class Event {
 	private float elapsedTime;
 
 	private Sound sound;
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	private int direction = Data.NORTH;
 	private int duration = Data.INF;
 	private float range;
@@ -61,7 +61,7 @@ public class Event {
 
 	
 
-	public Event(String id, TextureRegion[] frames, Sound sound, int x, int y, int direction, int duration, float range, float xRelative, float yRelative,
+	public Event(String id, TextureRegion[] frames, Sound sound, float x, float y, int direction, int duration, float range, float xRelative, float yRelative,
 			int spriteDirection, float speed) {
 		super();
 		this.id = id;
@@ -105,27 +105,27 @@ public class Event {
 		this.type = type;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public int getXOnBoard() {
+	public float getXOnBoard() {
 		return (x - Data.MAP_X) / Data.BLOCK_SIZE_X;
 	}
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
-	public int getYOnBoard() {
+	public float getYOnBoard() {
 		return (y - Data.MAP_Y) / Data.BLOCK_SIZE_Y;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 

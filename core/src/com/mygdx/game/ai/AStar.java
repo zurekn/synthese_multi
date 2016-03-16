@@ -1,6 +1,7 @@
 //TODO optimize a star
 package com.mygdx.game.ai;
 
+import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.WindowGame;
 import com.mygdx.game.game.Character;
 
@@ -67,7 +68,7 @@ public class AStar {
 	public String[] pathfinder(Character c, int goalX, int goalY) {
 		openList = new ArrayList<Node>();
 		closedList = new ArrayList<Node>();
-		positions = WindowGame.getInstance().getAllPositions();
+		positions = GameStage.gameStage.getAllPositions();
 		goal = new Node(goalX, goalY);
 		int gMax = c.getStats().getMovementPoints() * WEIGHT;
 		String[] path = null;

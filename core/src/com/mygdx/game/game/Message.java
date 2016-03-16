@@ -77,7 +77,7 @@ public class Message {
 		this.message = message;
 	}
 
-	public void render(Batch batch, int x, int y) {
+	public void render(Batch batch, float x, float y) {
 		//g.setColor(color);
 		Data.font.setColor(color);
 		Data.font.draw(batch, message, x, y);

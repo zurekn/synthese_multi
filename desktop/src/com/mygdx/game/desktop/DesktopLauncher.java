@@ -18,6 +18,6 @@ public class DesktopLauncher {
         Data.RUN_APIX = false;
         Data.debug = true;
 
-        new LwjglApplication(WindowGame.getInstance(), config);
+        new LwjglApplication(new WindowGame(), config);
 	}
 }

@@ -3,6 +3,7 @@ package com.mygdx.game.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.mygdx.game.data.Data;
 
 /**
  * Created by nicolas on 15/03/2016.
@@ -11,7 +12,10 @@ public class GameScreen implements Screen {
 
     private GameStage stage;
 
-    public GameScreen(){
+    private WindowGame game;
+
+    public GameScreen(final WindowGame game){
+        this.game = game;
         stage = new GameStage();
     }
 
@@ -24,13 +28,15 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.act();
-        stage.draw();
+        stage.act(delta);
+        stage.draw(delta);
     }
 
     @Override
     public void resize(int width, int height) {
-
+        Data.SCREEN_WIDTH = width;
+        Data.SCREEN_HEIGHT = height;
+        stage.resize(width, height);
     }
 
     @Override

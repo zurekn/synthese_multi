@@ -1,5 +1,6 @@
 package com.mygdx.game.imageprocessing;
 
+import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.WindowGame;
 
 import java.awt.im.InputMethodHighlight;
@@ -128,9 +129,9 @@ public class ImageProcessingHandler extends Handler {
 			//Test de version opti
 //			List<FormObject> lf = ip.etiquetageIntuitifImageGiveList2(imageRef, image, seuil);
 			List<FormObject> lf = new ArrayList<FormObject>();
-			if(WindowGame.getInstance().getCurrentPlayer() != null)
+			if(GameStage.gameStage.getCurrentPlayer() != null)
 			{
-				com.mygdx.game.game.Character currentPlayer = WindowGame.getInstance().getCurrentPlayer();
+				com.mygdx.game.game.Character currentPlayer = GameStage.gameStage.getCurrentPlayer();
 				int tempLimitMinX = ((currentPlayer.getX()*(int)APIX.blockSizeX + (int)APIX.relativeX) - ((int)APIX.blockSizeX*(currentPlayer.getStats().getMovementPoints()+2)));
 				tempLimitMinX = tempLimitMinX < (int)APIX.relativeX ? 
 												(int)APIX.relativeX : 
@@ -258,7 +259,7 @@ public class ImageProcessingHandler extends Handler {
 
 	public List<FormObject> compareObjects(List<FormObject> fo)
 	{
-		int currentSize = WindowGame.getInstance().getCurrentPlayer().getSizeCharacter();
+		int currentSize = GameStage.gameStage.getCurrentPlayer().getSizeCharacter();
 		FormObject final_fo = null;
 		List<FormObject> lf = new ArrayList<FormObject>();
 		int zeroSize = Integer.MAX_VALUE;

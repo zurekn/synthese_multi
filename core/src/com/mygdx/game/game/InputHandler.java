@@ -24,44 +24,43 @@ import static com.mygdx.game.data.Data.WEST;
 import static com.mygdx.game.data.Data.debug;
 
 /**
- * Class witch handle all input in the WindowGame
+ * Class witch handle all input in the stage
  *
  * Created by nicolas on 09/03/2016.
  */
 public class InputHandler implements InputProcessor, GestureDetector.GestureListener {
-
-    private WindowGame windowGame = WindowGame.getInstance();
 
     private static final String TAG = "InputHandler";
 
     private Vector3 lastTouch = new Vector3();
     @Override
     public boolean keyDown(int keycode) {
+        GameStage stage = GameStage.gameStage;
         if (debug) {
-            Character currentCharacter = windowGame.getCurrentCharacter();
-            if (windowGame.gameOn) {
+            Character currentCharacter = stage.getCurrentCharacter();
+            if (stage.gameOn) {
 
                 if (!currentCharacter.isNpc()) {
                     System.out.println("InputHandler, keycodeDownn : " + keycode);
                     try {
                         if (Input.Keys.LEFT == keycode)
-                            windowGame.decodeAction("m:" + (currentCharacter.getX() - 1) + ":" + currentCharacter.getY());
+                            stage.decodeAction("m:" + (currentCharacter.getX() - 1) + ":" + currentCharacter.getY());
                         if (Input.Keys.RIGHT == keycode)
-                            windowGame.decodeAction("m:" + (currentCharacter.getX() + 1) + ":" + currentCharacter.getY());
+                            stage.decodeAction("m:" + (currentCharacter.getX() + 1) + ":" + currentCharacter.getY());
                         if (Input.Keys.DOWN == keycode)
-                            windowGame.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() - 1));
+                            stage.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() - 1));
                         if (Input.Keys.UP == keycode)
-                            windowGame.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() + 1));
+                            stage.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() + 1));
                         if (Input.Keys.NUMPAD_8 == keycode)
-                            windowGame.decodeAction("s3:" + NORTH);
+                            stage.decodeAction("s3:" + NORTH);
                         if (Input.Keys.NUMPAD_6 == keycode)
-                            windowGame.decodeAction("s9:" + EAST);
+                            stage.decodeAction("s9:" + EAST);
                         if (Input.Keys.NUMPAD_2 == keycode)
-                            windowGame.decodeAction("s10:" + SOUTH);
+                            stage.decodeAction("s10:" + SOUTH);
                         if (Input.Keys.NUMPAD_4 == keycode)
-                            windowGame.decodeAction("s4:" + WEST);
+                            stage.decodeAction("s4:" + WEST);
                         if (Input.Keys.NUMPAD_5 == keycode)
-                            windowGame.decodeAction("s1:" + SELF);
+                            stage.decodeAction("s1:" + SELF);
                     } catch (IllegalActionException e) {
                         System.err.println(e.getMessage());
                     }
@@ -71,14 +70,14 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
                 currentCharacter.takeDamage(20, "magic");
             }
             if (Input.Keys.MINUS == keycode) {
-                windowGame.start();
+                stage.start();
             }
             if (Input.Keys.PLUS == keycode) {
                 try {
                     Random rand = new Random();
                     int x = rand.nextInt(BLOCK_NUMBER_X - 0) + 0;
                     int y = rand.nextInt(BLOCK_NUMBER_Y - 0) + 0;
-                    windowGame.addChalenger(x, y, -1);
+                    stage.addChalenger(x, y, -1);
                 } catch (IllegalCaracterClassException e) {
                     e.printStackTrace();
                 } catch (IllegalMovementException e) {
@@ -89,15 +88,15 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
             }
 
             if (Input.Keys.L == keycode) {
-                windowGame.gameEnded = true;
-                windowGame.gameLose = true;
-                windowGame.stopAllThread();
+                stage.gameEnded = true;
+                stage.gameLose = true;
+                stage.stopAllThread();
             }
 
             if (Input.Keys.W == keycode) {
-                windowGame.gameEnded = true;
-                windowGame.gameWin = true;
-                windowGame.stopAllThread();
+                stage.gameEnded = true;
+                stage.gameWin = true;
+                stage.stopAllThread();
             }
 
 
@@ -132,8 +131,8 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        //Gdx.app.log(TAG, "Touch dragged on ["+screenX+"/"+screenY+"], pointer ["+pointer+"]");
-        WindowGame.getInstance().getCamera().moveCamera((int) (lastTouch.x - screenX), (int) (lastTouch.y - screenY));
+        Gdx.app.log(TAG, "Touch dragged on ["+screenX+"/"+screenY+"], pointer ["+pointer+"]");
+        GameStage.gameStage.getCamera().moveCamera((int) (lastTouch.x - screenX), (int) (lastTouch.y - screenY));
         lastTouch.set(screenX, screenY, 0);
         return false;
     }
@@ -145,11 +144,12 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean scrolled(int amount) {
-        if(amount == 1 && WindowGame.getInstance().getCamera().zoom - 0.2f < CameraHandler.MIN_ZOOM){
-            WindowGame.getInstance().getCamera().zoom += .2f;
+        GameStage stage = GameStage.gameStage;
+        if(amount == 1 && stage.getCamera().zoom - 0.2f < CameraHandler.MIN_ZOOM){
+            stage.getCamera().zoom += .2f;
         }
-        else if(amount == -1 && WindowGame.getInstance().getCamera().zoom - 0.2f > CameraHandler.MAX_ZOOM ){
-            WindowGame.getInstance().getCamera().zoom -= .2f;
+        else if(amount == -1 && stage.getCamera().zoom - 0.2f > CameraHandler.MAX_ZOOM ){
+            stage.getCamera().zoom -= .2f;
         }
         return false;
     }
@@ -195,9 +195,10 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
+        GameStage stage = GameStage.gameStage;
         float ratio = initialDistance / distance; //I get this
-        WindowGame.getInstance().getCamera().zoom = CameraHandler.initialScale * ratio; //This doesn't make sense to me because it seems like every time you pinch to zoom, it resets to the original zoom which is 1. So basically it wouldn't 'save' the zoom right?
-        System.out.println(WindowGame.getInstance().getCamera().zoom); //Prints the camera zoom
+        stage.getCamera().zoom = CameraHandler.initialScale * ratio; //This doesn't make sense to me because it seems like every time you pinch to zoom, it resets to the original zoom which is 1. So basically it wouldn't 'save' the zoom right?
+        System.out.println(stage.getCamera().zoom); //Prints the camera zoom
         return false;
     }
 

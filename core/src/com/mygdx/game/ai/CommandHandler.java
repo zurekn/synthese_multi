@@ -1,6 +1,7 @@
 package com.mygdx.game.ai;
 
 import com.mygdx.game.game.Character;
+import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Mob;
 import com.mygdx.game.game.Player;
 import com.mygdx.game.game.WindowGame;
@@ -50,7 +51,7 @@ public class CommandHandler extends Handler {
 					// ID useless for this case
 					newAction("", getFirstCommand());
 				} else if (calculationDone)
-					WindowGame.getInstance().getHandler().waitLock();
+					GameStage.gameStage.getHandler().waitLock();
 		}
 
 	}

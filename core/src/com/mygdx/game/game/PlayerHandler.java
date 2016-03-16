@@ -122,8 +122,8 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
 		shapeRenderer.setColor(Data.BLOCK_REACHABLE_COLOR);
 		//g.setColor(Data.BLOCK_REACHABLE_COLOR);
-        Vector3 v = WindowGame.getInstance().getCamera().position;
-        float scale = WindowGame.getInstance().getCamera().zoom;
+        Vector3 v = GameStage.gameStage.getCamera().position;
+        float scale = GameStage.gameStage.getCamera().zoom;
 		while(it.hasNext()){
 			var = ((String) it.next());
 			if(!Data.departureBlocks.get(var)){
@@ -131,7 +131,8 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 				x = Integer.parseInt(split[0]);
 				y = Integer.parseInt(split[1]);
 				shapeRenderer.rect(Data.MAP_X + x * Data.BLOCK_SIZE_X, Data.MAP_Y + y * Data.BLOCK_SIZE_Y, Data.BLOCK_SIZE_X / scale,  Data.BLOCK_SIZE_Y / scale);
-			}
+
+            }
 		}
 	}
 	

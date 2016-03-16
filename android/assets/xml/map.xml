@@ -146,10 +146,10 @@
 	<!--Traps -->
 
 	<departure>
-		<block x="5" y="24" />
-		<block x="12" y="24" />
-		<block x="24" y="16" />
-		<block x="24" y="12" />
+		<block x="5" y="2" />
+		<block x="12" y="2" />
+		<block x="24" y="14" />
+		<block x="24" y="10" />
 	</departure>
 	
 	<music>musics/ChronoTriggerAmbient.wav</music>

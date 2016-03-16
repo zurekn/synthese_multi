@@ -119,14 +119,14 @@ public class MessageHandler {
 	public void addPlayerMessage(Message message, int player) {
 		// first call we create the playerList
 		if (playerMessages.size() < 1)
-			for (int i = 0; i < WindowGame.getInstance().getPlayers().size(); i++) {
+			for (int i = 0; i < GameStage.gameStage.getPlayers().size(); i++) {
 				playerMessages.add(new ArrayList<Message>());
 				deletedPlayerMessage.add(new ArrayList<Message>());
 				waitingPlayerMessage.add(new ArrayList<Message>());
 			}
 
 		ArrayList<Message> splitMessage = split(message);
-		if (player >= WindowGame.getInstance().getPlayers().size())
+		if (player >= GameStage.gameStage.getPlayers().size())
 			for (Message m : splitMessage)
 				addGlobalMessage(m);
 		else {

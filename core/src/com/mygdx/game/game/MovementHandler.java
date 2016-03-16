@@ -1,6 +1,5 @@
 package com.mygdx.game.game;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import com.mygdx.game.data.Data;
@@ -17,10 +16,10 @@ public class MovementHandler implements Runnable {
 	private Scanner sc;
 	private String str;
 
-	private WindowGame windowGame;
+	private GameStage stage;
 
-	public MovementHandler(WindowGame windowGame) {
-		this.windowGame = windowGame;
+	public MovementHandler(GameStage stage) {
+		this.stage = stage;
 		init();
 	}
 
@@ -41,7 +40,7 @@ public class MovementHandler implements Runnable {
 			if (Data.debug) {
 
 				str = sc.nextLine();
-				windowGame.move(str);
+				stage.move(str);
 			}
 		}
 

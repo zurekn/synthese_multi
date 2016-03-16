@@ -42,9 +42,13 @@ public class CameraHandler extends OrthographicCamera {
     public void moveCamera(int touchX, int touchY) {
         if(movementOn) {
             Vector3 v = new Vector3(touchX, -touchY, 0);
+
             //Gdx.app.log(TAG, "Translate camera of [" + v.x + "/" + v.y + "] from [" + this.position.x + "/" + this.position.y + "]");
-            if (!cameraOutOfLimit(v))
+            if (!cameraOutOfLimit(v)) {
                 this.translate(v);
+                Data.MAP_X = (Data.SCREEN_WIDTH / 2) - position.x;
+                Data.MAP_Y = (Data.SCREEN_HEIGHT / 2) - position.y;
+            }
         }
     }
 
