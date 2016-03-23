@@ -1,6 +1,7 @@
 package com.mygdx.game.data;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class SpellD {
@@ -29,17 +30,17 @@ public class SpellD {
 		this.spriteDirection = spriteDirection;
 		this.speed = speed;
 		//TODO check if these two methods can be removed
-//		initEventAnimation(celNumber, ss);
+		initEventAnimation(frames, 1f / 4f);
 	}
-/*
-	private void initEventAnimation(int n, SpriteSheet ss) {
-		Animation[] a = new Animation[1];
-		a[0]= loadAnimation(ss, 0, n, 0);
+
+	private void initEventAnimation(TextureRegion[] tr, float v) {
+		Animation a = new Animation(v, tr[0]);
 		this.event.setAnimation(a);
 		this.event.setSpriteDirection(spriteDirection);
 	}
 
-	private Animation loadAnimation(SpriteSheet spriteSheet, int startX,
+    /*
+	private Animation loadAnimation(TextureRegion[] spriteSheet, int startX,
 			int endX, int y) {
 		Animation animation = new Animation();
 		for (int x = startX; x < endX; x++) {

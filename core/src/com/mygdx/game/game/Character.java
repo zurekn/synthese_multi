@@ -1,5 +1,6 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,7 +21,8 @@ import java.util.Random;
  * 
  */
 public abstract class Character {
-	private int x;
+    private static final String TAG = "Character";
+    private int x;
 	private int y;
 	private int lastX;
 	private int lastY;
@@ -29,8 +31,15 @@ public abstract class Character {
 	
 	private int sizeCharacter;
 
-	private TextureRegion[] animationFrames;
-    private Animation animation;
+    /* Animation */
+	private TextureRegion[][] animationFrames;
+    private Animation animationUp;
+    private Animation animationDown;
+    private Animation animationLeft;
+    private Animation animationRight;
+
+    /* movement */
+    int direction = Data.DOWN;
 
     private Stats stats;
 	private boolean myTurn = false;
@@ -235,11 +244,11 @@ public abstract class Character {
 		this.stats = stats;
 	}
 
-	public TextureRegion[] getAnimationFrames() {
+	public TextureRegion[][] getAnimationFrames() {
 		return animationFrames;
 	}
 
-	public void setAnimationFrames(TextureRegion[] frames) {
+	public void setAnimationFrames(TextureRegion[][] frames) {
 		this.animationFrames = frames;
 	}
 
@@ -384,10 +393,47 @@ public abstract class Character {
 		stats.setMana(stats.getMana() + stats.getMagicPower() + stats.getMaxMana() / 10);
 	}
 
-    public Animation getAnimation() {
-        return animation;
+    public Animation getAnimation(int direction) {
+        switch(direction){
+            case Data.UP:
+                return animationUp;
+            case Data.DOWN:
+                return animationDown ;
+            case Data.RIGHT:
+                return animationRight ;
+            case Data.LEFT:
+                return animationLeft;
+            default:
+                Gdx.app.log(TAG, "Error can't find animation for direction ["+direction+"]");
+                return null;
+        }
     }
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
+    public void setAnimation(int direction, Animation animation) {
+        switch(direction){
+            case Data.UP:
+                this.animationUp = animation;
+                break;
+            case Data.DOWN:
+                this.animationDown = animation;
+                break;
+            case Data.RIGHT:
+                this.animationRight = animation;
+                break;
+            case Data.LEFT:
+                this.animationLeft = animation;
+                break;
+            default:
+                Gdx.app.log(TAG, "Error : can't set animation for direction ["+direction+"]");
+                break;
+        }
+    }
+
+    public void initAnimation(TextureRegion[][] animationFrames, float v) {
+        this.animationFrames = animationFrames;
+        animationUp = new Animation(v, animationFrames[Data.UP]);
+        animationDown = new Animation(v, animationFrames[Data.DOWN]);
+        animationLeft = new Animation(v, animationFrames[Data.LEFT]);
+        animationRight = new Animation(v, animationFrames[Data.RIGHT]);
+
     }
 }

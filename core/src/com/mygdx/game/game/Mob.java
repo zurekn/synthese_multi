@@ -28,9 +28,9 @@ public class Mob extends Character {
 
 	public void init() {
 		Monster m = MonsterData.getMonsterById(this.getId());
-		this.setAnimationFrames(m.getAnimationFrames());
 		//TODO check animation time
-		this.setAnimation(new Animation(1f / 4f, getAnimationFrames()));
+        this.initAnimation(m.getAnimationFrames(), 1f / 4f);
+
 		this.setStats(m.getStats());
 		this.setName(m.getName());
 		this.setSpells(m.getSpells());
@@ -39,37 +39,16 @@ public class Mob extends Character {
 	}
 
 	public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-		TextureRegion[] animationFrames = this.getAnimationFrames();
-		int x = this.getX();
-		int y = this.getY();
-		// g.drawRect(getX() * Data.BLOCK_SIZE_X, getY() * Data.BLOCK_SIZE_Y,
-		// Data.BLOCK_SIZE_X, Data.BLOCK_SIZE_Y);
-        TextureRegion reg = getAnimation().getKeyFrame(elapsedTime, true);
+        TextureRegion reg = getAnimation(direction).getKeyFrame(elapsedTime, true);
+
 		if (isMyTurn()) {
             batch.draw(Data.IMAGE_HALO, getX() * Data.BLOCK_SIZE_X + Data.MAP_X - 10, getY() * Data.BLOCK_SIZE_Y + Data.MAP_Y - 10, Data.BLOCK_SIZE_X + 20, Data.BLOCK_SIZE_Y + 20);
         }
 		elapsedTime+= Gdx.graphics.getDeltaTime();
 
-		batch.draw(getAnimation().getKeyFrame(elapsedTime, true), Data.MAP_X + getX() * Data.BLOCK_SIZE_X / Data.scale, Data.MAP_Y + getY() * Data.BLOCK_SIZE_Y / Data.scale);
+        batch.draw(reg, Data.MAP_X + getX() * Data.BLOCK_SIZE_X / Data.scale, Data.MAP_Y + getY() * Data.BLOCK_SIZE_Y / Data.scale, reg.getRegionWidth() / Data.scale, reg.getRegionHeight() / Data.scale);
 
-
-        shapeRenderer.setColor(Color.MAGENTA);
-		shapeRenderer.rect(100, 100, 100, 100);
-		/*animation[6].draw(Data.MAP_X + x * Data.BLOCK_SIZE_X, Data.MAP_Y + y
-				* Data.BLOCK_SIZE_Y, Data.BLOCK_SIZE_X, Data.BLOCK_SIZE_Y);*/
-		/*if (isMyTurn()) {
-			int posX = Data.MAP_X + getX() * Data.BLOCK_SIZE_X
-					+ Data.BLOCK_SIZE_X / 2 - getStats().getMovementPoints()
-					* Data.BLOCK_SIZE_X - Data.BLOCK_SIZE_X / 2;
-			int posY = Data.MAP_Y + getY() * Data.BLOCK_SIZE_Y
-					+ Data.BLOCK_SIZE_Y / 2 - getStats().getMovementPoints()
-					* Data.BLOCK_SIZE_Y - Data.BLOCK_SIZE_Y / 2;
-			int sizeX = 2 * getStats().getMovementPoints() * Data.BLOCK_SIZE_X
-					+ Data.BLOCK_SIZE_X;
-			int sizeY = 2 * getStats().getMovementPoints() * Data.BLOCK_SIZE_Y
-					+ Data.BLOCK_SIZE_Y;
-			g.drawOval(posX, posY, sizeX, sizeY);
-		}
+		/*
 		if(Data.debug){
 			if(getFocusedOn()!=null)
 				shapeRenderer.line(Data.MAP_X + x * Data.BLOCK_SIZE_X+ Data.BLOCK_SIZE_X / 2, Data.MAP_Y + y

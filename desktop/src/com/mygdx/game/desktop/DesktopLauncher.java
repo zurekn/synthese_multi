@@ -18,6 +18,8 @@ public class DesktopLauncher {
         Data.RUN_APIX = false;
         Data.debug = true;
 
+        Data.singlePlayer = true;
+
         new LwjglApplication(new WindowGame(), config);
 	}
 }

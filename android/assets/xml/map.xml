@@ -13,100 +13,13 @@
 	</blockInfo>
 
 	<!-- Blocks -->
-	<block x="5" y="0">
+	<block x="5" y="24">
 		<untraversable></untraversable>
 	</block>
-	<block x="5" y="1">
+	<block x="5" y="23">
 		<untraversable></untraversable>
 	</block>
-	<block x="5" y="2">
-		<untraversable></untraversable>
-	</block>
-	<block x="21" y="0">
-		<untraversable></untraversable>
-	</block>
-	<block x="22" y="0">
-		<untraversable></untraversable>
-	</block>
-	<block x="23" y="0">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="0">
-		<untraversable></untraversable>
-	</block>
-	<block x="22" y="1">
-		<untraversable></untraversable>
-	</block>
-	<block x="23" y="1">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="1">
-		<untraversable></untraversable>
-	</block>
-	<block x="23" y="2">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="2">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="3">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="19">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="20">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="21">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="22">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="23">
-		<untraversable></untraversable>
-	</block>
-	<block x="24" y="24">
-		<untraversable></untraversable>
-	</block>
-	<block x="16" y="20">
-		<untraversable></untraversable>
-	</block>
-	<block x="17" y="20">
-		<untraversable></untraversable>
-	</block>
-	<block x="15" y="21">
-		<untraversable></untraversable>
-	</block>
-	<block x="16" y="21">
-		<untraversable></untraversable>
-	</block>
-	<block x="17" y="21">
-		<untraversable></untraversable>
-	</block>
-	<block x="15" y="23">
-		<untraversable></untraversable>
-	</block>
-	<block x="16" y="23">
-		<untraversable></untraversable>
-	</block>
-	<block x="15" y="24">
-		<untraversable></untraversable>
-	</block>
-	<block x="16" y="24">
-		<untraversable></untraversable>
-	</block>
-	<block x="17" y="24">
-		<untraversable></untraversable>
-	</block>
-	<block x="18" y="24">
-		<untraversable></untraversable>
-	</block>
-	<block x="19" y="24">
-		<untraversable></untraversable>
-	</block>
-	<block x="20" y="24">
+	<block x="5" y="22">
 		<untraversable></untraversable>
 	</block>
 	<block x="21" y="24">
@@ -121,7 +34,94 @@
 	<block x="24" y="24">
 		<untraversable></untraversable>
 	</block>
-	<block x="1" y="1">
+	<block x="22" y="23">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y="23">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="23">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y = "22">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y = "22">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y = "21">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="5">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="4">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="3">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="3">
+		<untraversable></untraversable>
+	</block>
+	<block x="17" y="3">
+		<untraversable></untraversable>
+	</block>
+	<block x="15" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="17" y="2">
+		<untraversable></untraversable>
+	</block>
+	<block x="15" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="1">
+		<untraversable></untraversable>
+	</block>
+	<block x="15" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="16" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="17" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="18" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="19" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="20" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="21" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="22" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="23" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="24" y="0">
+		<untraversable></untraversable>
+	</block>
+	<block x="1" y="23">
 		<damage type="fire">10</damage>
 	</block>
 
@@ -146,8 +146,8 @@
 	<!--Traps -->
 
 	<departure>
-		<block x="5" y="2" />
-		<block x="12" y="2" />
+		<block x="5" y = "22" />
+		<block x="12" y = "22" />
 		<block x="24" y="14" />
 		<block x="24" y="10" />
 	</departure>

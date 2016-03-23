@@ -16,9 +16,12 @@ public class AndroidLauncher extends AndroidApplication {
 
         Data.checkValuesIni("paramTI.ini");
 
+        Data.singlePlayer = true;
+
         Data.RUN_APIX = false;
+
         Data.debug = true;
 
-		initialize(WindowGame.getInstance(), config);
+		initialize(new WindowGame(), config);
 	}
 }

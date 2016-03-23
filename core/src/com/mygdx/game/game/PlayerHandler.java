@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,12 +16,23 @@ import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Stats;
 
 public class PlayerHandler {
+
+    private Player mainPlayer;
+
 	private ArrayList<Player> player ;
 	
 	public PlayerHandler(ArrayList<Player> player2){
 		this.player = player2;
-		
 	}
+
+
+    public void setMainPlayer(Player mainPlayer) {
+        this.mainPlayer = mainPlayer;
+    }
+
+    public Player getMainPlayer() {
+        return mainPlayer;
+    }
 
 public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
@@ -108,7 +120,7 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 	}
 
 	public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-		for(int i = 0; i < player.size(); i++)
+        for(int i = 0; i < player.size(); i++)
 			player.get(i).render(batch, shapeRenderer);
 	}
 
@@ -135,6 +147,6 @@ public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
             }
 		}
 	}
-	
-	
+
+
 }

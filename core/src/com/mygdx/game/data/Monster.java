@@ -10,12 +10,12 @@ public class Monster {
 
 	private String id;
 	private String name;
-	private TextureRegion[] animationFrames;
+	private TextureRegion[][] animationFrames;
 	private Stats stats;
 	private ArrayList<Spell> spells = new ArrayList<Spell>();
 	private String aiType;
 	
-	public Monster(String id, String aiType, String name, TextureRegion[] frames, Stats stats) {
+	public Monster(String id, String aiType, String name, TextureRegion[][] frames, Stats stats) {
 		super();
 		this.id = id;
 		this.animationFrames = frames;
@@ -24,7 +24,7 @@ public class Monster {
 		this.aiType = aiType;
 	}
 	
-	public Monster(String id, String aiType, TextureRegion[] frames, Stats stats, ArrayList<Spell> spells) {
+	public Monster(String id, String aiType, TextureRegion[][] frames, Stats stats, ArrayList<Spell> spells) {
 		super();
 		this.id = id;
 		this.animationFrames = frames;
@@ -49,11 +49,11 @@ public class Monster {
 		this.id = id;
 	}
 
-	public TextureRegion[] getAnimationFrames() {
+	public TextureRegion[][] getAnimationFrames() {
 		return animationFrames;
 	}
 
-	public void setAnimationFrames(TextureRegion[] frames) {
+	public void setAnimationFrames(TextureRegion[][] frames) {
 		this.animationFrames = frames;
 	}
 	

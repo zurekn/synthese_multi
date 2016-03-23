@@ -22,7 +22,7 @@ public class MonsterData {
 		monsters.add(m);
 	}
 	
-	public static TextureRegion[] getAnimationById(String id){
+	public static TextureRegion[][] getAnimationById(String id){
 		for(int i = 0; i < monsters.size(); i++){
 			if(monsters.get(i).getId().equals(id)){
 				return monsters.get(i).getAnimationFrames();
@@ -116,8 +116,8 @@ public class MonsterData {
 				Stats stats = new Stats(life, armor, mana, strength,
 						magicPower, luck, movementPoints, magicResist, eyeSight);
 				aiType = el.getChildByName("aiType").getText();
-				Monster m = new Monster(id, aiType, name, animationFrames, stats);
-				while(ii.hasNext()){
+                Monster m = new Monster(id, aiType, name, tmpFrames, stats);
+                while(ii.hasNext()){
 					Element e = (Element) ii.next();
 					SpellD s = SpellData.getSpellById(e.getText());
 					if(s != null)

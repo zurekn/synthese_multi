@@ -91,15 +91,20 @@ public class Data {
     public static int PLAYER_MESSAGE_X_POS = 120;
     public static int PLAYER_MESSAGE_Y_POS = 10;
 
+
+    public static final int UP = 0;
+    public static final int LEFT = 1;
+    public static final int DOWN = 2;
+    public static final int RIGHT = 3;
     public static final int SELF = 360;
-    public static final int NORTH = 0;
-    public static final int NORTH_EAST = 45;
+    public static final int SOUTH = 0;
+    public static final int SOUTH_EAST = 45;
+    public static final int SOUTH_WEST = -45;
     public static final int EAST = 90;
-    public static final int SOUTH_EAST = 135;
-    public static final int SOUTH = 180;
-    public static final int SOUTH_WEST = -135;
+    public static final int NORTH_EAST = 135;
+    public static final int NORTH = 180;
+    public static final int NORTH_WEST = -135;
     public static final int WEST = -90;
-    public static final int NORTH_WEST = -45;
 
     public static final int INF = 500;
 
@@ -203,6 +208,8 @@ public class Data {
     public static float ENDING_ANIMATION_SCALE = 0;
 
     public static float scale = 1.0f;
+
+    public static boolean singlePlayer = false;
 
 
     /**

@@ -8,11 +8,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 
 public class Event {
+    private static final String TAG = "Event";
+
 	private String id;
 
-	private TextureRegion[] animationFrames;
-	private Animation animation;
-	private float elapsedTime;
+	private Animation animationFrames;
+    private float elapsedTime;
 
 	private Sound sound;
 	private float x;
@@ -34,8 +35,9 @@ public class Event {
 	private String type;
 	private int spriteDirection;
 	private float speed;
+    private float rangeRemaining;
 
-	public Event(String id) {
+    public Event(String id) {
 		this.id = id;
 		String type = id.substring(0, 1);
 		if (type.equalsIgnoreCase("S")) {// Spells
@@ -43,8 +45,10 @@ public class Event {
 		} else if (type.equalsIgnoreCase("T")) { // Traps
 			this.animationFrames = TrapData.getAnimationFramesById(id);
 		} else if (type.equalsIgnoreCase("D")) { // Deaths
-
-		}
+            Gdx.app.error(TAG, "Error their is no  death frame for id"+id);
+		}else{
+            Gdx.app.error(TAG, "Error their is no frame for id"+id);
+        }
 	}
 
 	public Event(String id, Sound sound) {
@@ -61,7 +65,7 @@ public class Event {
 
 	
 
-	public Event(String id, TextureRegion[] frames, Sound sound, float x, float y, int direction, int duration, float range, float xRelative, float yRelative,
+	public Event(String id, Animation frames, Sound sound, float x, float y, int direction, int duration, float range, float xRelative, float yRelative,
 			int spriteDirection, float speed) {
 		super();
 		this.id = id;
@@ -129,12 +133,12 @@ public class Event {
 		this.y = y;
 	}
 
-	public TextureRegion[] getAnimation() {
+	public Animation getAnimation() {
 		return animationFrames;
 	}
 
-	public void setAnimation(TextureRegion[] frames) {
-		this.animationFrames = frames;
+	public void setAnimation(Animation animation) {
+		this.animationFrames = animation;
 	}
 
 	public Sound getSound() {
@@ -165,21 +169,21 @@ public class Event {
 			this.xRelative = 0;
 			this.yRelative = 0;
 			break;
-		case Data.NORTH:
-			this.xRelative = 0;
-			this.yRelative = (0-this.speed) * Data.BLOCK_SIZE_Y;
-			break;
 		case Data.SOUTH:
 			this.xRelative = 0;
-			this.yRelative = this.speed * Data.BLOCK_SIZE_Y;
+			this.yRelative = (0-this.speed);
+			break;
+		case Data.NORTH:
+			this.xRelative = 0;
+			this.yRelative = this.speed;
 			break;
 
 		case Data.EAST:
-			this.xRelative = this.speed * Data.BLOCK_SIZE_X;
+			this.xRelative = this.speed;
 			this.yRelative = 0;
 			break;
 		case Data.WEST:
-			this.xRelative = (0-this.speed) * Data.BLOCK_SIZE_X;
+			this.xRelative = (0-this.speed);
 			this.yRelative = 0;
 			break;
 		}
@@ -216,6 +220,7 @@ public class Event {
 
 	public void setRange(float range) {
 		this.range = range;
+        this.rangeRemaining = range;
 	}
 	
 	public boolean isFinalFrame() {
@@ -244,65 +249,15 @@ public class Event {
 	}
 
 	public void render(SpriteBatch batch) {
-		int dx = 0, dy = 0;
-		int width = animationFrames[0].getRegionWidth();
-		int height = animationFrames[0].getRegionHeight();
-		int finalDirection = direction - spriteDirection;
-		//TODO animation time
-		animation = new Animation(1f/4f,animationFrames);
-		elapsedTime += Gdx.graphics.getDeltaTime();
 
-		if (spriteDirection == 90) {
-			if (finalDirection == Data.NORTH - spriteDirection) {
-				dx = (2 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (Data.BLOCK_SIZE_X - height )/ 2;
+        TextureRegion region = animationFrames.getKeyFrame(elapsedTime, false);
+        int width = region.getRegionWidth();
+        int height = region.getRegionHeight();
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        int finalDirection = direction - spriteDirection;
 
-			} else if (finalDirection == Data.SOUTH - spriteDirection) {
-				dx = (4 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (-Data.BLOCK_SIZE_X - height) / 2;
-
-			} else if (finalDirection == Data.EAST - spriteDirection) {
-				dx = (4 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (Data.BLOCK_SIZE_X - height) / 2;
-
-			} else if (finalDirection == Data.WEST - spriteDirection) {
-				dx = (2 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (-Data.BLOCK_SIZE_X - height) / 2;
-			}
-		}
-		//g.rotate(x, y, direction - spriteDirection);
-
-		//TODO check if it works
-		batch.draw(animation.getKeyFrame(elapsedTime), x, y, width / 2, height / 2, width, height, 1f, 1f, finalDirection);
-
-		/*if(!mobile && animation[0].getFrame()<finalFrame-1){
-			animation[0].setCurrentFrame(animation[0].getFrame()+1);
-		}
-		if(showFirstFrame){ // On n'affiche la premi�re frame qu'une fois
-			animation[0].restart();
-			g.drawAnimation(animation[0], x + dx, y + dy);
-			showFirstFrame = false;
-		}else if(countShowFirst<4)	{
-			g.drawAnimation(animation[0], x + dx, y + dy);
-				countShowFirst += 1;
-				if(countShowFirst == 4)
-					animation[0].setCurrentFrame(1);
-		}else if(animation[0].getFrame()== finalFrame-1){ // On n'affiche pas la derni�re frame
-			
-			animation[0].stop();
-			g.drawAnimation(animation[0], x + dx, y + dy);
-			animation[0].setCurrentFrame(1);
-			if(!mobile)
-				this.finalFrame = true;
-			
-		}else if(animation[0].getFrame()!= 0 ){ // On affiche chaque frame interm�diaire
-			g.drawAnimation(animation[0], x + dx, y + dy);
-		}else{ 									// On r�affiche pas la premi�re frame
-			animation[0].setCurrentFrame(1);
-			g.drawAnimation(animation[0], x + dx, y + dy);
-		}*/
-		
-		//g.rotate(x, y, -direction + spriteDirection);
+        Gdx.app.log("Event", "Draw the event "+this.toString());
+		batch.draw(region, Data.MAP_X + x * Data.BLOCK_SIZE_X / Data.scale, Data.MAP_Y + y * Data.BLOCK_SIZE_Y / Data.scale, (width / 2) / Data.scale, (height / 2) / Data.scale, width, height, 1f, 1f, finalDirection);
 
 		if (playSound) {
 			playSound = false;
@@ -311,52 +266,38 @@ public class Event {
 	}
 	
 	public void renderPostRemove(SpriteBatch batch) {
-		int dx = 0, dy = 0;
+        Gdx.app.log("Event", "renderPostRemove the event "+this.toString());
+
+        int dx = 0, dy = 0;
 		int finalDirection = direction - spriteDirection;
-		int width = animationFrames[0].getRegionWidth();
-		int height = animationFrames[0].getRegionHeight();
-		if (spriteDirection == 90) {
-			if (finalDirection == Data.NORTH - spriteDirection) {
-				dx = (2 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (Data.BLOCK_SIZE_X - height) / 2;
+        TextureRegion region = animationFrames.getKeyFrames()[animationFrames.getKeyFrames().length-1];
+        int width = region.getRegionWidth();
+		int height = region.getRegionHeight();
 
-			} else if (finalDirection == Data.SOUTH - spriteDirection) {
-				dx = (4 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (-Data.BLOCK_SIZE_X - height) / 2;
+        batch.draw(region, Data.MAP_X + x * Data.BLOCK_SIZE_X / Data.scale, Data.MAP_Y + y * Data.BLOCK_SIZE_Y / Data.scale, (width / 2) / Data.scale, (height / 2) / Data.scale, width, height, 1f, 1f, finalDirection);
 
-			} else if (finalDirection == Data.EAST - spriteDirection) {
-				dx = (4 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (Data.BLOCK_SIZE_X - height) / 2;
-
-			} else if (finalDirection == Data.WEST - spriteDirection) {
-				dx = (2 * Data.BLOCK_SIZE_Y - width) / 2;
-				dy = (-Data.BLOCK_SIZE_X - height) / 2;
-			}
-		}
-		/*g.rotate(x, y, direction - spriteDirection);
-		
-		animation[0].setCurrentFrame(finalFrame);
-		animation[0].stop();
 		if(countShowFinal<3){
-			g.drawAnimation(animation[0], x + dx, y + dy);
 				countShowFinal += 1;
 				if(countShowFinal == 3)
 					neeDelete = true;
 		}
-
-		animation[0].restart();
-		g.rotate(x, y, -direction + spriteDirection);*/
 	}
 	
 	public void move() {
-		this.x += this.xRelative;
-		this.y += this.yRelative;
-		float test = range;
+        if(rangeRemaining > 0 ){
+            rangeRemaining -= speed;
+            this.x += this.xRelative;
+            this.y += this.yRelative;
+        }else{
+            this.mobile = false;
+            this.finalFrame = true;
+        }
+
 		switch (direction) {
-		case Data.NORTH:
+		case Data.SOUTH:
 			range += yRelative / Data.BLOCK_SIZE_Y;
 			break;
-		case Data.SOUTH:
+		case Data.NORTH:
 			range -= yRelative / Data.BLOCK_SIZE_Y;
 			break;
 		case Data.EAST:
@@ -371,11 +312,6 @@ public class Event {
 			range -= 1;
 			break;
 		}
-		/*
-		if(test == range)
-			System.out.println(" === WHAAT === ...  "+" xRelative = "+ xRelative+" yRelative = "+yRelative+
-					" Block X = "+ Data.BLOCK_SIZE_X+" Block Y = "+ Data.BLOCK_SIZE_Y );
-					*/
 	}
 
 	@Override

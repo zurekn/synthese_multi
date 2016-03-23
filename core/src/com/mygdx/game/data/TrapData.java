@@ -2,6 +2,7 @@ package com.mygdx.game.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
@@ -31,7 +32,7 @@ public class TrapData {
 		return null;
 	}
 	
-	public static TextureRegion[] getAnimationFramesById(String id){
+	public static Animation getAnimationFramesById(String id){
 		for(int i = 0; i < traps.size(); i++){
 			if(traps.get(i).getId().equals(id)){
 				return traps.get(i).getEvent().getAnimation();

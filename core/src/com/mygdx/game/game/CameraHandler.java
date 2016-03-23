@@ -56,7 +56,6 @@ public class CameraHandler extends OrthographicCamera {
     }
 
     private boolean cameraOutOfLimit(Vector3 v) {
-        Gdx.app.log(TAG, ""+(position.x)+" / "+(position.y));
         int left = (int) (position.x - v.x - Data.MAP_WIDTH * zoom/2);
         int right = (int) (position.x - v.x + Data.MAP_WIDTH * zoom/ 2);
         int top = (int) (position.y - v.y - Data.MAP_HEIGHT * zoom/ 2);

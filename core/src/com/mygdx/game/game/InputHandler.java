@@ -52,15 +52,15 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
                         if (Input.Keys.UP == keycode)
                             stage.decodeAction("m:" + currentCharacter.getX() + ":" + (currentCharacter.getY() + 1));
                         if (Input.Keys.NUMPAD_8 == keycode)
-                            stage.decodeAction("s3:" + NORTH);
+                            stage.decodeAction("s2:" + NORTH);
                         if (Input.Keys.NUMPAD_6 == keycode)
-                            stage.decodeAction("s9:" + EAST);
+                            stage.decodeAction("s2:" + EAST);
                         if (Input.Keys.NUMPAD_2 == keycode)
-                            stage.decodeAction("s10:" + SOUTH);
+                            stage.decodeAction("s2:" + SOUTH);
                         if (Input.Keys.NUMPAD_4 == keycode)
-                            stage.decodeAction("s4:" + WEST);
+                            stage.decodeAction("s2:" + WEST);
                         if (Input.Keys.NUMPAD_5 == keycode)
-                            stage.decodeAction("s1:" + SELF);
+                            stage.decodeAction("s2:" + SELF);
                     } catch (IllegalActionException e) {
                         System.err.println(e.getMessage());
                     }
@@ -133,7 +133,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Gdx.app.log(TAG, "Touch dragged on ["+screenX+"/"+screenY+"], pointer ["+pointer+"]");
+        //Gdx.app.log(TAG, "Touch dragged on ["+screenX+"/"+screenY+"], pointer ["+pointer+"]");
         GameStage.gameStage.getCamera().moveCamera((int) (lastTouch.x - screenX), (int) (lastTouch.y - screenY));
         lastTouch.set(screenX, screenY, 0);
         return false;

@@ -3,6 +3,7 @@ package com.mygdx.game.game;
 import java.util.ArrayList;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -117,8 +118,9 @@ public class MessageHandler {
 	}
 
 	public void addPlayerMessage(Message message, int player) {
-		// first call we create the playerList
-		if (playerMessages.size() < 1)
+        Gdx.app.log("MessageHandler", "Create message "+message.toString()+" for player "+player);
+        // first call we create the playerList
+		if (playerMessages.size() < 1 )
 			for (int i = 0; i < GameStage.gameStage.getPlayers().size(); i++) {
 				playerMessages.add(new ArrayList<Message>());
 				deletedPlayerMessage.add(new ArrayList<Message>());

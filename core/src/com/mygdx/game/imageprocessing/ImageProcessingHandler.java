@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.event.EventListenerList;
 
 import com.github.sarxos.webcam.Webcam;
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Handler;

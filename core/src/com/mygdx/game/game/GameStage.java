@@ -16,6 +16,7 @@ import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Event;
 import com.mygdx.game.data.HeroData;
 import com.mygdx.game.data.MonsterData;
+import com.mygdx.game.data.SpellD;
 import com.mygdx.game.data.SpellData;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalCaracterClassException;
@@ -210,6 +211,19 @@ public class GameStage extends Stage {
 
         playerHandler = new PlayerHandler(players);
 
+        if (Data.singlePlayer) {
+            try {
+                createMainPlayer(5, 2);
+            } catch (IllegalActionException e) {
+                e.printStackTrace();
+            } catch (IllegalMovementException e) {
+                e.printStackTrace();
+            } catch (IllegalCaracterClassException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         //new Thread(movementHandler).start();
         // Set the timer
         timerInitPlayer = INIT_MAX_TIME;
@@ -220,7 +234,6 @@ public class GameStage extends Stage {
         Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
 
     }
-
 
     /************************************/
     /* RENDER BLOCK */
@@ -233,13 +246,16 @@ public class GameStage extends Stage {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        //camera.update();
+
+
         /* Render map */
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
+
+        /* begin texture rendering */
+        batch.begin();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(camera.position.x, camera.position.y, 20 / camera.zoom, 20 / camera.zoom);
@@ -249,7 +265,7 @@ public class GameStage extends Stage {
 
         if (gameOn) {
             mobHandler.render(batch, shapeRenderer);
-            renderDeckArea();
+
             playerHandler.render(batch, shapeRenderer);
             renderReachableBlocks();
             renderEvents();
@@ -293,8 +309,7 @@ public class GameStage extends Stage {
                 timerInitPlayer = Data.INIT_MAX_TIME;
 
             } else {
-                //Data.map.render(Data.MAP_X, Data.MAP_Y);
-                tiledMapRenderer.render();
+                renderDeckArea();
             }
         shapeRenderer.end();
         batch.end();
@@ -354,14 +369,6 @@ public class GameStage extends Stage {
 
                 if (e.isMobile())
                     e.move();
-
-                if (e.getRange() <= 1) {
-                    //	Gdx.app.log(LABEL, "range <= 1");
-                    e.setMobile(false);
-                }
-
-                if (x < xMin || x > xMax || y < yMin || y > yMax)
-                    e.setFinalFrame(true);
             } else {
                 e.renderPostRemove(batch);
                 if (e.isNeeDelete())
@@ -375,6 +382,7 @@ public class GameStage extends Stage {
      * TODO Switch to the update from libgdx
      */
     public void act(float delta) {
+        camera.update();
         if (gameEnded)
             return;
         long time = System.currentTimeMillis();
@@ -430,12 +438,12 @@ public class GameStage extends Stage {
      * Create all the player (call in create)
      */
     public void initPlayers() {
-
+        Gdx.app.log(LABEL, "Player Initialisation");
         players = new ArrayList<Player>();
 
         Collection<String> pos = departureBlocks.keySet();
         pos.iterator();
-        if (debug) {
+        if (debug && !Data.singlePlayer) {
             try {
                 if (DEBUG_PLAYER > 0)
                     addChalenger(10, 8, -1);
@@ -453,9 +461,7 @@ public class GameStage extends Stage {
             } catch (IllegalActionException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 
     /**
@@ -475,9 +481,6 @@ public class GameStage extends Stage {
         String position = x + ":" + y;
 
         if (getAllPositions().contains(position)) {
-            // messageHandler.addMessage(new
-            // Message("Position ["+position+"] non disponible", 1));
-
             throw new IllegalMovementException("Caracter already at the position [" + position + "]");
         }
 
@@ -508,6 +511,47 @@ public class GameStage extends Stage {
             Gdx.app.log(LABEL, " ----Max player reached ----");
             start();
         }
+
+    }
+
+    private void createMainPlayer(int x, int y) throws IllegalActionException, IllegalMovementException, IllegalCaracterClassException {
+        String position = x + ":" + y;
+        Gdx.app.log(LABEL, "Creating main player at position " + position);
+        if (gameOn)
+            throw new IllegalActionException("Can not add player when game is on!");
+
+
+        if (getAllPositions().contains(position)) {
+            throw new IllegalMovementException("Caracter already at the position [" + position + "]");
+        }
+
+        if (untraversableBlocks.containsKey(position)) {
+            messageHandler.addGlobalMessage(new Message("Position [" + position + "] non disponible", 1));
+            throw new IllegalMovementException("Untraversable block at [" + position + "]");
+        }
+
+        if (!departureBlocks.containsKey(position) && !DEBUG_DEPARTURE) {
+            messageHandler.addGlobalMessage(new Message(DEPARTURE_BLOCK_ERROR, MESSAGE_TYPE_ERROR));
+            throw new IllegalMovementException("Caracter must be at a departure position");
+        } else {
+            departureBlocks.put(position, true);
+        }
+
+        if (playerHandler.getMainPlayer() != null)
+            return;
+        String id = "P" + players.size();
+        String type = "mage";
+
+        Player p = new Player(x, y, id, type);
+        p.setNumber(players.size());
+        p.setSizeCharacter(-1);
+        players.add(p);
+        playerHandler.setMainPlayer(p);
+
+
+        Gdx.app.log(LABEL, " -- Main player created --");
+        start();
+
     }
 
     public void addPlayer(String position) {
@@ -671,15 +715,16 @@ public class GameStage extends Stage {
             int direction = Integer.parseInt(tokens[1]);
 
             if (currentCharacter.getSpell(spellID) == null) {
-                messageHandler.addPlayerMessage(new Message("Vous n'avez pas le sort : " + SpellData.getSpellById(spellID).getName(), MESSAGE_TYPE_ERROR), turn);
+                SpellD s = SpellData.getSpellById(spellID);
+                messageHandler.addPlayerMessage(new Message("Vous n'avez pas le sort : " + (s != null ? s.getName() : null), MESSAGE_TYPE_ERROR), turn);
                 throw new IllegalActionException("Spell [" + spellID + "] not found");
             }
             float speed = currentCharacter.getSpell(spellID).getSpeed();
             Event e = currentCharacter.getSpell(spellID).getEvent().getCopiedEvent();
 
             e.setDirection(direction, speed);
-            e.setX(MAP_X + currentCharacter.getX() * BLOCK_SIZE_X);
-            e.setY(MAP_Y + currentCharacter.getY() * BLOCK_SIZE_Y);
+            e.setX(currentCharacter.getX());
+            e.setY(currentCharacter.getY());
             // Get the range to the next character to hit
             Focus focus = getFirstCharacterRange(getCharacterPositionOnLine(currentCharacter.getX(), currentCharacter.getY(), e.getDirection()), e);
             //Gdx.app.log(LABEL, "get focus : " + focus.toString());
@@ -713,7 +758,7 @@ public class GameStage extends Stage {
                         Gdx.app.log(LABEL, "DEATH FOR" + currentCharacter.toString());
                         Gdx.app.log(LABEL, "-----------------------------------------");
                         messageHandler.addPlayerMessage(new Message(currentCharacter.getName() + "Died "), turn);
-                        turn--;
+                        if(turn > 0 ) turn--;
                         players.remove(currentCharacter);
                         mobs.remove(currentCharacter);
                         playerNumber--;
@@ -756,6 +801,7 @@ public class GameStage extends Stage {
                             playerNumber--;
                             if (index <= indexCurrent)
                                 turn = (turn - 1) % playerNumber;
+                            if( turn < 0) turn = 0;
                             checkEndGame();
                         }
                     } else {
@@ -805,8 +851,8 @@ public class GameStage extends Stage {
         Character focus = null;
         for (Character c : chars) {
             if (e.getDirection() == NORTH || e.getDirection() == SOUTH) {
-                float i = (Math.abs(c.getY() - (e.getYOnBoard())));
-                Gdx.app.log(LABEL, "c.getY() = [" + c.getY() + "], e.getYOnBoard = [" + (e.getYOnBoard()) + "], i = [" + i + "]");
+                float i = (Math.abs(c.getY() - (e.getY())));
+                Gdx.app.log(LABEL, "c.getY() = [" + c.getY() + "], e.getYOnBoard = [" + (e.getY()) + "], i = [" + i + "]");
 
                 if (i < range) {
                     range = i;
@@ -814,9 +860,9 @@ public class GameStage extends Stage {
                 }
             }
             if (e.getDirection() == EAST || e.getDirection() == WEST) {
-                Gdx.app.log(LABEL, "c.getX() = [" + c.getX() + "], e.getXOnBoard = [" + (e.getXOnBoard()) + "], i = [" + (c.getX() - e.getXOnBoard())
+                Gdx.app.log(LABEL, "c.getX() = [" + c.getX() + "], e.getXOnBoard = [" + (e.getX()) + "], i = [" + (c.getX() - e.getX())
                         + "]");
-                float i = (Math.abs(c.getX() - (e.getXOnBoard())));
+                float i = (Math.abs(c.getX() - (e.getX())));
 
                 if (i < range) {
                     range = i;
@@ -877,10 +923,10 @@ public class GameStage extends Stage {
 
         for (int i = 0; i < players.size(); i++) {
             // above
-            if (direction == NORTH && players.get(i).getY() < y && players.get(i).getX() == x)
+            if (direction == SOUTH && players.get(i).getY() < y && players.get(i).getX() == x)
                 c.add(players.get(i));
             // bottom
-            if (direction == SOUTH && players.get(i).getY() > y && players.get(i).getX() == x)
+            if (direction == NORTH && players.get(i).getY() > y && players.get(i).getX() == x)
                 c.add(players.get(i));
             // on left
             if (direction == EAST && players.get(i).getY() == y && players.get(i).getX() > x)
@@ -892,10 +938,10 @@ public class GameStage extends Stage {
 
         for (int i = 0; i < mobs.size(); i++) {
             // above
-            if (direction == NORTH && mobs.get(i).getY() < y && mobs.get(i).getX() == x)
+            if (direction == SOUTH && mobs.get(i).getY() < y && mobs.get(i).getX() == x)
                 c.add(mobs.get(i));
             // bottom
-            if (direction == SOUTH && mobs.get(i).getY() > y && mobs.get(i).getX() == x)
+            if (direction == NORTH && mobs.get(i).getY() > y && mobs.get(i).getX() == x)
                 c.add(mobs.get(i));
             // on left
             if (direction == EAST && mobs.get(i).getY() == y && mobs.get(i).getX() > x)

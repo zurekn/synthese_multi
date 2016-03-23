@@ -5,8 +5,6 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
-import org.jdom2.Document;
-
 
 public class XMLReader {
 
@@ -19,24 +17,8 @@ public class XMLReader {
         try {
             element = reader.parse((Gdx.files.internal(path)));
         } catch (IOException e) {
-            Gdx.app.log(TAG, "Error while loading xml from ["+path+"], "+e.getLocalizedMessage());
-            //e.printStackTrace();
+            Gdx.app.log(TAG, "Error while loading xml from [" + path + "], " + e.getLocalizedMessage());
         }
-
-        /*SAXBuilder builder = new SAXBuilder();
-		Document doc = null;
-		try {
-			doc = builder.build(new File(path));
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if (doc.equals(null)) {
-			System.out.println("Error : Can't load [" + path + "]");
-			System.exit(1);
-		}
-		*/
 		return element;
 	}
 }
