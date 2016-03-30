@@ -256,7 +256,6 @@ public class Event {
         elapsedTime += Gdx.graphics.getDeltaTime();
         int finalDirection = direction - spriteDirection;
 
-        Gdx.app.log("Event", "Draw the event "+this.toString());
 		batch.draw(region, Data.MAP_X + x * Data.BLOCK_SIZE_X / Data.scale, Data.MAP_Y + y * Data.BLOCK_SIZE_Y / Data.scale, (width / 2) / Data.scale, (height / 2) / Data.scale, width, height, 1f, 1f, finalDirection);
 
 		if (playSound) {
@@ -266,7 +265,6 @@ public class Event {
 	}
 	
 	public void renderPostRemove(SpriteBatch batch) {
-        Gdx.app.log("Event", "renderPostRemove the event "+this.toString());
 
         int dx = 0, dy = 0;
 		int finalDirection = direction - spriteDirection;

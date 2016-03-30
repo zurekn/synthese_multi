@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mygdx.game.ai.AStar;
 import com.mygdx.game.ai.ActionEvent;
 import com.mygdx.game.ai.CharacterData;
@@ -21,6 +22,7 @@ import com.mygdx.game.data.SpellData;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalCaracterClassException;
 import com.mygdx.game.exception.IllegalMovementException;
+import com.mygdx.game.hud.PlayerHUD;
 import com.mygdx.game.imageprocessing.APIX;
 import com.mygdx.game.imageprocessing.APIXAdapter;
 import com.mygdx.game.imageprocessing.MovementEvent;
@@ -64,6 +66,7 @@ import static com.mygdx.game.data.Data.debug;
 import static com.mygdx.game.data.Data.departureBlocks;
 import static com.mygdx.game.data.Data.loadGame;
 import static com.mygdx.game.data.Data.loadMap;
+import static com.mygdx.game.data.Data.scale;
 import static com.mygdx.game.data.Data.tiledMapRenderer;
 import static com.mygdx.game.data.Data.untraversableBlocks;
 
@@ -96,7 +99,6 @@ public class GameStage extends Stage {
     private Character previousCharacter = null;
     private Character currentCharacter;
     private ArrayList<int[]> reachableBlock = new ArrayList<int[]>();
-
     //
     private int playerNumber;
     private int turn;
@@ -198,7 +200,8 @@ public class GameStage extends Stage {
         // TrapData.loadTrap();
 
         initAPIX();
-        initCommandHandler();
+        if(!Data.ANDROID)
+            initCommandHandler();
 
         // Create the monster list
         mobs = MonsterData.initMobs();
@@ -214,6 +217,7 @@ public class GameStage extends Stage {
         if (Data.singlePlayer) {
             try {
                 createMainPlayer(5, 2);
+                this.addActor(new PlayerHUD(this, playerHandler.getMainPlayer()));
             } catch (IllegalActionException e) {
                 e.printStackTrace();
             } catch (IllegalMovementException e) {
@@ -243,7 +247,7 @@ public class GameStage extends Stage {
 
     public void draw(float delta) {
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
@@ -260,9 +264,11 @@ public class GameStage extends Stage {
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(camera.position.x, camera.position.y, 20 / camera.zoom, 20 / camera.zoom);
 
-        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.setColor(Color.MAGENTA);
         shapeRenderer.rect(Data.MAP_X, Data.MAP_Y, 10, 10);
 
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.rect(0, 0, 10, 10);
         if (gameOn) {
             mobHandler.render(batch, shapeRenderer);
 
@@ -273,7 +279,8 @@ public class GameStage extends Stage {
             playerHandler.renderInitBlock(batch, shapeRenderer);
         }
         playerHandler.renderPlayerStat(batch, shapeRenderer);
-        renderText();
+
+        renderText(batch);
 
         if (gameEnded) {
             //Data.map.render(Data.MAP_X, Data.MAP_Y);
@@ -321,7 +328,7 @@ public class GameStage extends Stage {
     private void renderReachableBlocks() {
         shapeRenderer.setColor(BLOCK_REACHABLE_COLOR);
         for (int[] var : reachableBlock) {
-            shapeRenderer.rect(MAP_X + var[0] * BLOCK_SIZE_X, MAP_Y + var[1] * BLOCK_SIZE_Y, BLOCK_SIZE_X, BLOCK_SIZE_Y);
+            shapeRenderer.rect(MAP_X + var[0] * BLOCK_SIZE_X / scale, MAP_Y + var[1] * BLOCK_SIZE_Y / scale, BLOCK_SIZE_X / scale, BLOCK_SIZE_Y / scale);
         }
     }
 
@@ -343,9 +350,11 @@ public class GameStage extends Stage {
     /**
      * Render the Game Text
      */
-    private void renderText() {
+    private void renderText(SpriteBatch batch) {
         // render text
-        Data.font.draw(batch, MAIN_TEXT, 10, 20);
+        Label myLabel = new Label(MAIN_TEXT, Data.SKIN);
+        myLabel.setPosition(10, Data.SCREEN_HEIGHT - myLabel.getHeight() - 10);
+        myLabel.draw(batch, 1);
         messageHandler.render(batch);
 
     }
@@ -413,8 +422,10 @@ public class GameStage extends Stage {
 
     public void resize(int width, int height) {
         Gdx.app.log(LABEL, "Resize [" + width + " / " + height + "]");
-        if (camera != null)
+        if (camera != null) {
             camera.resize(width, height);
+            camera.reloadMapPosition();
+        }
     }
 
     /**
@@ -957,8 +968,8 @@ public class GameStage extends Stage {
     /**
      * Return the Character with have the x,y position
      *
-     * @param x
-     * @param y
+     * @param x, in block
+     * @param y, in block
      * @return Character
      */
     private Character getCharacterByPosition(int x, int y) {
@@ -988,8 +999,42 @@ public class GameStage extends Stage {
 
     public void stopAllThread() {
         apix.stop();
-        commands.getInstance().getThread().stop();
+        CommandHandler.getInstance().getThread().stop();
         turnTimer = Integer.MAX_VALUE;
+    }
+
+    /**
+     * TODO correct this function
+     * @param screenX, x position on the screen
+     * @param screenY, y postion on the screen
+     */
+    public void checkActionAtPosition(int screenX, int screenY) {
+        screenY = Math.abs(Data.SCREEN_HEIGHT - screenY);
+        //Gdx.app.log(LABEL, "In check action at position for ["+screenX+"/"+screenY+"] MAP position = ["+MAP_X+"/"+MAP_Y+"]");
+        int blockX, blockY;
+        blockX = (int) ((screenX - (int)MAP_X)/ (BLOCK_SIZE_X / scale));
+        blockY = (int) ((screenY - (int)MAP_Y)/ (BLOCK_SIZE_Y / scale));
+        //Gdx.app.log(LABEL, "Supposed "+blockX+"/"+blockY);
+
+        selectBlock(blockX, blockY);
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
+    public void selectBlock(int x, int y){
+        if (playerHandler.getMainPlayer() == currentCharacter){
+            //if its main player turn
+
+            //try to move to destination
+            try {
+                decodeAction("m:"+x+":"+y);
+            } catch (IllegalActionException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private class Focus {

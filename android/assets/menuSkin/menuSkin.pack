@@ -1,0 +1,33 @@
+
+menuSkin.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+buttonLong_brown
+  rotate: false
+  xy: 1, 2
+  size: 190, 49
+  orig: 190, 49
+  offset: 0, 0
+  index: -1
+buttonLong_brown_pressed
+  rotate: false
+  xy: 193, 6
+  size: 190, 45
+  orig: 190, 45
+  offset: 0, 0
+  index: -1
+musicOff
+  rotate: false
+  xy: 385, 1
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+musicOn
+  rotate: false
+  xy: 437, 1
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1

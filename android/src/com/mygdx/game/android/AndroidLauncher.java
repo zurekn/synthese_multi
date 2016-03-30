@@ -22,6 +22,8 @@ public class AndroidLauncher extends AndroidApplication {
 
         Data.debug = true;
 
+        Data.ANDROID = true;
+
 		initialize(new WindowGame(), config);
 	}
 }

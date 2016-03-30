@@ -33,6 +33,8 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     private static final String TAG = "InputHandler";
 
     private Vector3 lastTouch = new Vector3();
+
+    private boolean click = false;
     @Override
     public boolean keyDown(int keycode) {
         GameStage stage = GameStage.gameStage;
@@ -121,13 +123,16 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         //Gdx.app.log(TAG, "Touch down on ["+screenX+"/"+screenY+"], pointer ["+pointer+"], button ["+button+"]");
         lastTouch.set(screenX, screenY, 0);
+        click = true;
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         //Gdx.app.log(TAG, "Touch up on ["+screenX+"/"+screenY+"], pointer ["+pointer+"], button ["+button+"]");
-
+        if(click){
+            GameStage.gameStage.checkActionAtPosition(screenX, screenY);
+        }
         return false;
     }
 
@@ -135,6 +140,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         //Gdx.app.log(TAG, "Touch dragged on ["+screenX+"/"+screenY+"], pointer ["+pointer+"]");
         GameStage.gameStage.getCamera().moveCamera((int) (lastTouch.x - screenX), (int) (lastTouch.y - screenY));
+        click = false;
         lastTouch.set(screenX, screenY, 0);
         return false;
     }
@@ -161,6 +167,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     public boolean touchDown(float x, float y, int pointer, int button) {
         Gdx.app.log(TAG, "Touch down on ["+x+"/"+y+"], pointer ["+pointer+"], button ["+button+"]");
         lastTouch.set(x, y, 0);
+        click = true;
         return false;
     }
 

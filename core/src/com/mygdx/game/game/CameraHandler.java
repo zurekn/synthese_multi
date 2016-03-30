@@ -66,7 +66,7 @@ public class CameraHandler extends OrthographicCamera {
 
     public void reloadMapPosition() {
         Data.scale = zoom;
-        Data.MAP_X = (Data.SCREEN_WIDTH / 2) - position.x / zoom;
-        Data.MAP_Y = (Data.SCREEN_HEIGHT / 2) - position.y / zoom;
+        Data.MAP_X = (this.viewportWidth / 2) - position.x / zoom;
+        Data.MAP_Y = (this.viewportHeight / 2) - position.y / zoom;
     }
 }

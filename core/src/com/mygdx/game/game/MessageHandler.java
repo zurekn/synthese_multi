@@ -12,7 +12,7 @@ import com.mygdx.game.data.Data;
 public class MessageHandler {
 
 	private int initialX = 10;
-	private int inittialY = 50;
+	private int inittialY = Data.SCREEN_HEIGHT - 20;
 	public ArrayList<Message> globalMessages = new ArrayList<Message>();// Global
 																		// Message
 	public ArrayList<ArrayList<Message>> playerMessages = new ArrayList<ArrayList<Message>>();
@@ -24,16 +24,18 @@ public class MessageHandler {
 	private ArrayList<ArrayList<Message>> waitingPlayerMessage = new ArrayList<ArrayList<Message>>();
 
 	public void render(Batch batch) {
-		int i = 10;
+        /* Global messages */
+		int i = Data.FONT_HEIGHT + 3;
+
 		for(Message m : waitingMessage)
 			globalMessages.add(m);
 		waitingMessage.clear();
 		
 		for (Message m : globalMessages) {
-			m.render(batch, initialX, inittialY + i);
+			m.render(batch, initialX, inittialY - i);
 			if (m.update())
 				deletedMessage.add(m);
-			i += Data.FONT_HEIGHT;
+			i -= Data.FONT_HEIGHT +3;
 		}
 
 
@@ -41,7 +43,9 @@ public class MessageHandler {
 		for (Message m : deletedMessage) {
 			globalMessages.remove(m);
 		}
-		
+
+
+        /* PLayer Messages */
 		int n = 0;
 		i = 0;
 		for(ArrayList<Message> list : waitingPlayerMessage){
@@ -50,24 +54,7 @@ public class MessageHandler {
 			waitingPlayerMessage.get(i).clear();
 			i++;
 		}
-/*
-		public void show() {
-			font = new BitmapFont(Gdx.files.internal("someFont.ttf"));
-			oldTransformMatrix = spriteBatch.getTransformMatrix().cpy();
-			mx4Font.rotate(new Vector3(0, 0, 1), angle);
-			mx4Font.trn(posX, posY, 0);
-		}
 
-		@Override
-		public void render() {
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			spriteBatch.setTransformMatrix(mx4Font);
-			spriteBatch.begin();
-			font.draw(spriteBatch, text, 0, 0);
-			spriteBatch.end();
-			spriteBatch.setTransformMatrix(oldTransformMatrix);
-		}
-		*/
 		n = 0;
 		i = 0;
 		Matrix4 oldMatrix = batch.getTransformMatrix().cpy();
@@ -76,16 +63,13 @@ public class MessageHandler {
             matrix.rotate(new Vector3(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, 0), n * 90);
             batch.setTransformMatrix(matrix); // set the rotation
 
-			//g.rotate(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, n * 90);
 			for (Message m : list) {
-				//m.render(container, g, Data.PLAYER_MESSAGE_X_POS + Data.MAP_X, Data.PLAYER_MESSAGE_Y_POS + Data.MAP_Y + Data.MAP_HEIGHT + i);
 				m.render(batch,Data.PLAYER_MESSAGE_X_POS + Data.MAP_X, Data.PLAYER_MESSAGE_Y_POS + Data.MAP_Y + Data.MAP_HEIGHT + i);
                 if (m.update())
 					deletedPlayerMessage.get(n).add(m);
 				i += Data.FONT_HEIGHT;
 			}
             batch.setTransformMatrix(oldMatrix);
-			//g.rotate(Data.MAP_X + Data.MAP_WIDTH / 2, Data.MAP_Y + Data.MAP_HEIGHT / 2, n * 90);
 			i = 0;
 			n++;
 		}
@@ -105,13 +89,11 @@ public class MessageHandler {
 	}
 
 	public void update() {
-		// for(Message m : messages){
-		// if(m.update())
-		// messages.remove(m);
-		// }
+
 	}
 
 	public void addGlobalMessage(Message message) {
+        Gdx.app.log("Message Handler", "Add message "+message);
 		ArrayList<Message> splitMessage = split(message);
 		for (Message m : splitMessage)
 			waitingMessage.add(m);
@@ -119,6 +101,10 @@ public class MessageHandler {
 
 	public void addPlayerMessage(Message message, int player) {
         Gdx.app.log("MessageHandler", "Create message "+message.toString()+" for player "+player);
+        if (Data.singlePlayer) {
+            addGlobalMessage(message);
+            return;
+        }
         // first call we create the playerList
 		if (playerMessages.size() < 1 )
 			for (int i = 0; i < GameStage.gameStage.getPlayers().size(); i++) {

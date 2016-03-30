@@ -5,11 +5,13 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import com.mygdx.game.game.WindowGame;
@@ -43,6 +45,7 @@ public class Data {
     public static final boolean inTest = true;
     public static final boolean debugQR = false;
     public static final int DEBUG_PLAYER = 0;
+    public static boolean ANDROID = false;
     //public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
     public static String IMAGE_DIR = "C:/Users/fr�d�ric/Google Drive/Master Cergy/Projet_PlateauJeu/Synth�se/ImageDeTest/";
 
@@ -75,7 +78,7 @@ public class Data {
     public static int TOTAL_WIDTH;
     public static int TOTAL_HEIGHT;
 
-    public static int TURN_MAX_TIME = 30; // in sec
+    public static int TURN_MAX_TIME = 3000; // in sec
 
     //For the stat display
     public static int PLAYER_LIFE_RECT_X_POS = 10;
@@ -177,7 +180,7 @@ public class Data {
     //MESSAGES PARAM
     public static final long MESSAGE_DURATION = 3000;
     public static final Color MESSAGE_COLOR_TYPE_1 = new Color(Color.RED);
-    public static final Color MESSAGE_COLOR_TYPE_0 = new Color(Color.WHITE);
+    public static final Color MESSAGE_COLOR_TYPE_0 = new Color(Color.BLACK);
     private static final Color MESSAGE_COLOR_TYPE_2 = new Color(Color.GREEN);
     public static final int MESSAGE_TYPE_INFO = 0;
     public static final int MESSAGE_TYPE_ERROR = 1;
@@ -207,9 +210,14 @@ public class Data {
     public static float ENDING_ANIMATION_X = 0;
     public static float ENDING_ANIMATION_SCALE = 0;
 
+    /* Zoom scale */
     public static float scale = 1.0f;
 
+    /* game launched on android or pc player not on the projected game */
     public static boolean singlePlayer = false;
+
+    /* SKIN for HUD */
+    public static Skin SKIN;
 
 
     /**
@@ -247,6 +255,9 @@ public class Data {
         //load font
         font = new BitmapFont(Gdx.files.internal("fonts/Font.fnt"), true);
         font.setColor(TEXT_COLOR);
+
+        SKIN = new Skin(Gdx.files.internal("fonts/skin.json"), new TextureAtlas(Gdx.files.internal("menuSkin/menuSkin.pack")));
+
         System.out.println("MAP_FILE = " + Data.MAP_FILE + ", MAP_WIDTH = "
                 + Data.MAP_WIDTH + ", MAP_HEIGHT = " + Data.MAP_HEIGHT
                 + ", BLOCK_NUMBER = " + Data.BLOCK_NUMBER_X
