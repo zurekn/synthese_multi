@@ -18,6 +18,8 @@ public class Player extends Character {
 
     private Texture icon;
     private int number;
+    private boolean spellSelection = false;
+    private Spell spellSelected = null;
 
     /**
      * This constructor is not available
@@ -26,8 +28,8 @@ public class Player extends Character {
      * @param y
      * @param id
      * @param stats
-     * @deprecated
      */
+    @Deprecated
     public Player(int x, int y, String id, Stats stats) {
         this.setX(x);
         this.setY(y);
@@ -41,7 +43,6 @@ public class Player extends Character {
         }
     }
 
-    @SuppressWarnings("unused")
     public Player(int x, int y, String id, String caracterClass) throws IllegalCaracterClassException {
         monster = false;
         this.setX(x);
@@ -80,6 +81,22 @@ public class Player extends Character {
         if (Data.DISPLAY_PLAYER)
             shapeRenderer.rect(Data.MAP_X + getX() * Data.BLOCK_SIZE_X / scale, Data.MAP_Y + getY() * Data.BLOCK_SIZE_Y / scale,
                     Data.BLOCK_SIZE_X / scale, Data.BLOCK_SIZE_Y / scale);
+        if(this.spellSelection){
+            // draw the spell range
+            int range = spellSelected.getRange();
+            shapeRenderer.setColor(10, 10, 10, .2f);
+            for(int i = 1; i < range; i++){
+                shapeRenderer.rect(-1 + Data.MAP_X + (getX()-i) * Data.BLOCK_SIZE_X / scale, -1 + Data.MAP_Y + getY() * Data.BLOCK_SIZE_Y / scale,
+                        Data.BLOCK_SIZE_X-1 / scale, Data.BLOCK_SIZE_Y-1 / scale);
+                shapeRenderer.rect(-1 + Data.MAP_X + (getX()+i) * Data.BLOCK_SIZE_X / scale, -1 + Data.MAP_Y + getY() * Data.BLOCK_SIZE_Y / scale,
+                        Data.BLOCK_SIZE_X-1 / scale, Data.BLOCK_SIZE_Y-1 / scale);
+                shapeRenderer.rect(-1 +Data.MAP_X + (getX()) * Data.BLOCK_SIZE_X / scale,-1 +  Data.MAP_Y + (getY()-i) * Data.BLOCK_SIZE_Y / scale,
+                        Data.BLOCK_SIZE_X-1 / scale, Data.BLOCK_SIZE_Y-1 / scale);
+                shapeRenderer.rect(-1 + Data.MAP_X + (getX()) * Data.BLOCK_SIZE_X / scale, -1 + Data.MAP_Y + (getY()+i) * Data.BLOCK_SIZE_Y / scale,
+                        Data.BLOCK_SIZE_X-1 / scale, Data.BLOCK_SIZE_Y-1 / scale);
+            }
+
+        }
 
     }
 
@@ -89,5 +106,27 @@ public class Player extends Character {
 
     public void setNumber(int n) {
         this.number = n;
+    }
+
+    public void setSpellSelection(boolean spellSelection) {
+        this.spellSelection = spellSelection;
+    }
+
+    public void setSpellSelected(Spell spellSelected) {
+        this.spellSelected = spellSelected;
+    }
+    
+
+    public boolean isSpellSelection() {
+        return spellSelection;
+    }
+
+    public Spell getSpellSelected() {
+        return spellSelected;
+    }
+
+    public void resetSpellSelection() {
+        spellSelection = false;
+        spellSelected = null;
     }
 }

@@ -116,6 +116,9 @@ public class GameStage extends Stage {
     private long timeStamp = -1;
     public static GameStage gameStage = null;
 
+    //UI
+    private PlayerHUD ui;
+
 
     public GameStage() {
         create();
@@ -190,8 +193,6 @@ public class GameStage extends Stage {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        Gdx.input.setInputProcessor(new InputHandler());
-
         loadMap();
         loadGame();
         SpellData.loadSpell();
@@ -217,7 +218,8 @@ public class GameStage extends Stage {
         if (Data.singlePlayer) {
             try {
                 createMainPlayer(5, 2);
-                this.addActor(new PlayerHUD(this, playerHandler.getMainPlayer()));
+                ui = new PlayerHUD(this, playerHandler.getMainPlayer());
+                //this.addActor(ui);
             } catch (IllegalActionException e) {
                 e.printStackTrace();
             } catch (IllegalMovementException e) {
@@ -246,35 +248,27 @@ public class GameStage extends Stage {
     int i = 0;
 
     public void draw(float delta) {
-
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-
-
         /* Render map */
+        //System.out.println("Draw map at "+delta);
         tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
+        tiledMapRenderer.render();//MUST BE BEFORE batch.begin()
+
+        this.draw();//MUST BE BEFORE batch.begin()
 
         /* begin texture rendering */
         batch.begin();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(camera.position.x, camera.position.y, 20 / camera.zoom, 20 / camera.zoom);
-
-        shapeRenderer.setColor(Color.MAGENTA);
-        shapeRenderer.rect(Data.MAP_X, Data.MAP_Y, 10, 10);
-
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(0, 0, 10, 10);
         if (gameOn) {
             mobHandler.render(batch, shapeRenderer);
 
             playerHandler.render(batch, shapeRenderer);
             renderReachableBlocks();
             renderEvents();
+
         } else {
             playerHandler.renderInitBlock(batch, shapeRenderer);
         }
@@ -372,7 +366,7 @@ public class GameStage extends Stage {
         for (int i = 0; i < events.size(); i++) {
             Event e = events.get(i);
             if (!e.isFinalFrame()) {
-                e.render(batch);
+                e.render(batch, shapeRenderer);
                 x = e.getX();
                 y = e.getY();
 
@@ -390,7 +384,8 @@ public class GameStage extends Stage {
     /**
      * TODO Switch to the update from libgdx
      */
-    public void act(float delta) {
+    public void customAct(float delta) {
+        this.act(delta);
         camera.update();
         if (gameEnded)
             return;
@@ -1028,13 +1023,49 @@ public class GameStage extends Stage {
         if (playerHandler.getMainPlayer() == currentCharacter){
             //if its main player turn
 
-            //try to move to destination
+
             try {
-                decodeAction("m:"+x+":"+y);
+                if(playerHandler.getMainPlayer().isSpellSelection()){//try tu use spell
+                    int direction = getSelectedDirection(x, y);
+                    if(direction != -1) {
+                        decodeAction(playerHandler.getMainPlayer().getSpellSelected().getId() + ":" + direction);
+                        playerHandler.getMainPlayer().resetSpellSelection();
+                        ui.resetSpellSelection();
+                    }
+                }else//try to move to destination
+                    decodeAction("m:"+x+":"+y);
             } catch (IllegalActionException e) {
-                e.printStackTrace();
+                Gdx.app.error(LABEL, e.getMessage());
             }
         }
+    }
+
+    private int getSelectedDirection(int x, int y){
+        int px = playerHandler.getMainPlayer().getX();
+        int py = playerHandler.getMainPlayer().getY();
+        System.out.println(x+"/"+y);
+        if(px == x && py == y){
+            //self
+            return Data.SELF;
+        }
+
+        if(x > px && y == py){
+            //EAST
+            return Data.EAST;
+        }
+        if(x < px && y == py){
+            // WEST
+            return Data.WEST;
+        }
+        if(x == px && y > py){
+            //NORTH
+            return Data.NORTH;
+        }
+        if(x == px && y < py){
+            //SOUTH
+            return Data.SOUTH;
+        }
+        return -1;
     }
 
     private class Focus {

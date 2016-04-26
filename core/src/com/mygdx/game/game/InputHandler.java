@@ -6,7 +6,10 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalCaracterClassException;
@@ -35,6 +38,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     private Vector3 lastTouch = new Vector3();
 
     private boolean click = false;
+
     @Override
     public boolean keyDown(int keycode) {
         GameStage stage = GameStage.gameStage;
@@ -123,6 +127,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         //Gdx.app.log(TAG, "Touch down on ["+screenX+"/"+screenY+"], pointer ["+pointer+"], button ["+button+"]");
         lastTouch.set(screenX, screenY, 0);
+
         click = true;
         return false;
     }

@@ -1,6 +1,7 @@
 package com.mygdx.game.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.data.Data;
@@ -21,14 +22,17 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(new InputHandler());
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage.act(delta);
+        stage.customAct(delta);
         stage.draw(delta);
     }
 

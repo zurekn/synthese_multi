@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 
 public class Event {
@@ -248,7 +249,7 @@ public class Event {
 		return e;
 	}
 
-	public void render(SpriteBatch batch) {
+	public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
 
         TextureRegion region = animationFrames.getKeyFrame(elapsedTime, false);
         int width = region.getRegionWidth();

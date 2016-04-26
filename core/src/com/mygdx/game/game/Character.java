@@ -436,4 +436,20 @@ public abstract class Character {
         animationRight = new Animation(v, animationFrames[Data.RIGHT]);
 
     }
+
+    /**
+     * Return the spell with same name.
+     * @param name String
+     * @return Spell
+     */
+    public Spell getSpellByName(String name) {
+        for(Spell s : spells){
+            if (s.getName().equals(name)){
+                return s;
+            }
+        }
+        return null;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 {
   "com.badlogic.gdx.graphics.g2d.BitmapFont": {
-    "font": { "file": "fonts/Font.fnt" }
+    "font": { "file": "fonts/Font.fnt" },
+    "default": {"file":"fonts/Font.fnt"}
   },
   "com.badlogic.gdx.graphics.Color": {
     "white": { "r": 1, "g": 1, "b": 1, "a": 1 },
@@ -27,5 +28,8 @@
       "imageChecked": "musicOff",
       "up": "musicOn"
     }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle":{
+    "default" : {"font" : font}
   }
 }

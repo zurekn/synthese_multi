@@ -19,8 +19,8 @@ import static com.badlogic.gdx.utils.XmlReader.*;
 public class SpellData {
 
 	public static ArrayList<SpellD> spells = new ArrayList<SpellD>();
-	
-	public void addSpell(SpellD spell){
+
+    public void addSpell(SpellD spell){
 		spells.add(spell);
 	}
 	

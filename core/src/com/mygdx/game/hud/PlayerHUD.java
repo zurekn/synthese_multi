@@ -1,32 +1,38 @@
 package com.mygdx.game.hud;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.data.Data;
+import com.mygdx.game.data.SpellData;
 import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Player;
+import com.mygdx.game.game.Spell;
 
 /**
  * Created by nicolas on 23/03/2016.
  */
-public class PlayerHUD extends Actor {
-
-
-    /* sprite used by the HUD*/
-    private TextureRegion heartFull, heartHalf, heartEmpty;
-
+public class PlayerHUD {
+    private static final String TAG = "HUD";
     /* fast pointer on the currentPlayer*/
     private Player player;
 
     /* game stage  */
     private GameStage gameStage;
-
-    /* dynamic and static messages*/
-    private Array<Message> messages = new Array<Message>();
 
     /* Message padding*/
     private int padding = 10;
@@ -37,52 +43,69 @@ public class PlayerHUD extends Actor {
     /* game font */
     private BitmapFont font = Data.font;
 
-    /* the fuel bar*/
+    private SelectBox <String>spellSelectBox;
+    private List<String> list;
+    /* bar*/
     //private ProgressBar fuelBar = new ProgressBar(0f, player.getMaxFuel(), 0.1f, true, SKIN);
     //TODO find the progress bar skin needed
+
+    private Button button = new TextButton("Test", Data.SKIN);
 
     public PlayerHUD(GameStage gameStage, Player player) {
         super();
         this.gameStage = gameStage;
         this.player = player;
-
+        init();
     }
 
-    @Override
-    public void draw(Batch batch, float parentDelta) {
+    private void init(){
+        Gdx.app.log(TAG, "Init the player HUD");
 
-        /* display all messages */
-            Message m;
-            for (int i = 0; i < messages.size; i++) {
-                m = messages.get(i);
-                m.draw(batch, parentDelta);
-                //font.draw(batch, m.getMessage(), (V_WIDTH / 2) - ((m.getMessage().length() / 2) * font.getXHeight()), 200 + m.getY() );
+        Array<String> spells = new Array<String>();
+        spells.add("Select spell");
+        spells.add(" ");
+        for(Spell s : player.getSpells())
+            spells.add(s.getName());
+
+        spellSelectBox = new SelectBox(Data.SKIN);
+        spellSelectBox.setItems(spells);
+        spellSelectBox.setPosition(Data.SCREEN_WIDTH - 220, Data.SCREEN_HEIGHT - 100);
+        spellSelectBox.setSize(200, 50);
+        spellSelectBox.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Spell spell = player.getSpellByName(spellSelectBox.getSelected());
+                if(spell != null) {
+                    player.setSpellSelection(true);
+                    player.setSpellSelected(spell);
+                }else{
+                    player.setSpellSelection(false);
+                    player.setSpellSelected(null);
+                }
             }
+        });
 
+        gameStage.addActor(spellSelectBox);
 
-    }
+        Gdx.app.log(TAG, "Init spellSelectBox with : " + spellSelectBox.getItems().toString() + ", z index " + spellSelectBox.getZIndex() + ", " + spellSelectBox.getListeners());
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-        int i = 0;
-        while (i < messages.size && i >= 0) {
-            messages.get(i).act(delta);
-            if (messages.get(i).isEnded(delta)) {
-                /* remove the message if it reach time duration */
-                messages.get(i).remove();
-                messages.removeIndex(i);
-                i--;
+        /*===List===*/
+        /*
+        list = new List<String>(Data.SKIN);
+        list.setItems(spells);
+        list.setSelectedIndex(0);
+        list.setBounds(200, 200, 100, 30);
+        list.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("List changed");
             }
-            i++;
-        }
+        });
+        gameStage.addActor(list);
+        */
     }
 
-    public void pushMessage(Message m) {
-        messages.add(m);
-    }
-
-    public void showEndMenu() {
-        table.setVisible(true);
+    public void resetSpellSelection(){
+        spellSelectBox.setSelectedIndex(0);
     }
 }
