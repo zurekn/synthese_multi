@@ -31,6 +31,7 @@ public class GameScreen implements Screen {
         else
             inputMultiplexer.addProcessor(new InputHandler());
         Gdx.input.setInputProcessor(inputMultiplexer);
+
     }
 
     @Override
