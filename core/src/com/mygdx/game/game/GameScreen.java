@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.input.GestureDetector;
 import com.mygdx.game.data.Data;
 
 /**
@@ -24,7 +25,11 @@ public class GameScreen implements Screen {
     public void show() {
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(new InputHandler());
+        GestureDetector detector = new GestureDetector(new InputHandler());
+        if(Data.ANDROID)
+            inputMultiplexer.addProcessor(detector);
+        else
+            inputMultiplexer.addProcessor(new InputHandler());
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 

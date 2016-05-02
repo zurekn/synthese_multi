@@ -385,6 +385,7 @@ public class GameStage extends Stage {
      * TODO Switch to the update from libgdx
      */
     public void customAct(float delta) {
+        ui.act(delta);
         this.act(delta);
         camera.update();
         if (gameEnded)
@@ -1022,8 +1023,6 @@ public class GameStage extends Stage {
     public void selectBlock(int x, int y){
         if (playerHandler.getMainPlayer() == currentCharacter){
             //if its main player turn
-
-
             try {
                 if(playerHandler.getMainPlayer().isSpellSelection()){//try tu use spell
                     int direction = getSelectedDirection(x, y);

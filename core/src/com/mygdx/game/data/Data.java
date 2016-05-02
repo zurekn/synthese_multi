@@ -218,7 +218,7 @@ public class Data {
 
     /* SKIN for HUD */
     public static Skin SKIN;
-
+    public static TextureAtlas ATLAS;
 
     /**
      * Load all game variables
@@ -257,7 +257,7 @@ public class Data {
         font.setColor(TEXT_COLOR);
 
         SKIN = new Skin(Gdx.files.internal("ui/defaultskin.json"));
-
+        ATLAS = new TextureAtlas(Gdx.files.internal("ui/defaultskin.atlas"));
         System.out.println("MAP_FILE = " + Data.MAP_FILE + ", MAP_WIDTH = "
                 + Data.MAP_WIDTH + ", MAP_HEIGHT = " + Data.MAP_HEIGHT
                 + ", BLOCK_NUMBER = " + Data.BLOCK_NUMBER_X

@@ -160,7 +160,7 @@ public abstract class Character {
 			damage = damage / 2;
 			res = -1;
 		}
-		System.out.println(" Dommages effectu�s : "+ damage +" *****************************************************************************");
+		System.out.println("Character : "+this.id+" used spell "+spell.getName()+", which deal : "+ damage +" *****************************************************************************");
 		return damage + ":" + heal+":"+res;
 	}
 	
