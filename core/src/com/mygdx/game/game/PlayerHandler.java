@@ -34,7 +34,7 @@ public class PlayerHandler {
         return mainPlayer;
     }
 
-public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
+    public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
         if(Data.singlePlayer){
 

@@ -10,7 +10,11 @@ import com.mygdx.game.data.SpellD;
 import com.mygdx.game.data.Stats;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalMovementException;
+import com.mygdx.game.javacompiler.CompileString;
+import com.mygdx.game.javacompiler.IAGenetic;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -42,6 +46,7 @@ public abstract class Character {
     int direction = Data.DOWN;
 
     private Stats stats;
+	private IAFitness fitness;
 	private boolean myTurn = false;
 	private ArrayList<Spell> spells = new ArrayList<Spell>();
 	private String name;
@@ -50,9 +55,98 @@ public abstract class Character {
 	private boolean npc = true;
 	protected boolean monster = true;
 
+	private Class<?> cl = null;
+	private Object obj = null;
+	GameStage gameStage = GameStage.gameStage;
+
 	public abstract void render(SpriteBatch batch, ShapeRenderer shapeRenderer);
 
 	public abstract void init();
+
+
+	/**
+	 * Genere le script pour l'IA
+	 */
+	public void generateScriptGenetic() {// génération d'un script génétique
+		CompileString.generate(this.trueID);
+	}
+
+	/**
+	 *  Compile le script d'IA
+	 */
+	void compileScriptGenetic()
+	{
+		IAGenetic ch = CompileString.CompileAndInstanciateClass(this.trueID);
+		cl = ch.getC();
+		obj = ch.getObj();
+	}
+
+	public void findScriptAction(int compteur){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
+		System.out.println(this.id +"-compteur = "+compteur);
+		String result = "";
+		if(compteur>=10)
+		{
+			try {
+				gameStage.decodeAction("p");
+			} catch (IllegalActionException e) {
+				e.printStackTrace();
+			}
+		}
+		else
+		{	try
+			{
+				Method method = cl.getDeclaredMethod("run", Character.class);
+				result = (String) method.invoke(obj, this);
+				if(result !="")
+				{
+					System.out.println("### Character.findScriptAction : result = "+result);
+					int index = 0;
+					String[] decode  = result.split("!!");
+					for(String st : decode)
+					{
+						if(!st.equals("") && !(index==0 && compteur > 0)  ) gameStage.decodeAction(st);
+						index++;
+
+					}
+					method = cl.getDeclaredMethod("setActionString", String.class);
+					method.invoke(obj, "");
+				}
+				else
+				{
+					if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
+					findScriptAction(++compteur);
+					return;
+				}
+			} catch (IllegalAccessException e) {
+
+				if(compteur == 0)
+				{
+					e.printStackTrace();
+					getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
+				}
+				findScriptAction(++compteur);
+				return;
+			} catch (SecurityException e) {
+				if(compteur == 0)e.printStackTrace();findScriptAction(++compteur);
+			} catch (NoSuchMethodException e) {
+				if(compteur == 0)e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				if(compteur == 0)e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				if(compteur == 0)e.printStackTrace();
+			} catch (IllegalActionException e) {
+
+				if(compteur == 0)
+				{
+					e.printStackTrace();
+					getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
+
+				}
+				findScriptAction(++compteur);
+				return;
+			}
+		}
+	}
 
 	/**
 	 * Move the character to the position x:y if it's possible
@@ -451,5 +545,142 @@ public abstract class Character {
         return null;
     }
 
+// 					=========================   GAI METHODS  ====================================
+
+	/**
+	 * Génération d'un déplacement
+	 * ddx et ddy sont des entiers qui correspondent à :
+	 * 0 => petit déplacement
+	 * 1 => moyen déplacement
+	 * 2 => grand déplacement
+	 * Le signe de ddx et ddy déterminent la direction
+	 */
+	public String getDeplacement(int ddx, int ddy)
+	{
+		int dx=0;
+		int dy=0;
+		GameStage gameStage = GameStage.gameStage;
+		switch(ddx)
+		{
+			case -2 :
+				dx = -this.stats.getMovementPoints();
+				break;
+			case -1 :
+				dx = -(int)(this.stats.getMovementPoints())/2;
+				break;
+			case 0 :
+				dx = 1;
+			case 1 :
+				dx = (int)(this.stats.getMovementPoints())/2;
+				break;
+			case 2 :
+				dx = this.stats.getMovementPoints();
+				break;
+			default :
+				dx = 0;
+		}
+		switch(ddy)
+		{
+			case -2 :
+				dy = -this.stats.getMovementPoints();
+				break;
+			case -1 :
+				dy = -(int)(this.stats.getMovementPoints())/2;
+				break;
+			case 0 :
+				dy = 1;
+			case 1 :
+				dy = (int)(this.stats.getMovementPoints())/2;
+				break;
+			case 2 :
+				dy = this.stats.getMovementPoints();
+				break;
+			default :
+				dy = 0;
+		}
+
+
+		return "m:" + (gameStage.getCurrentPlayer().getX()+dx) + ":" + (gameStage.getCurrentPlayer().getY()+dy);
+	}
+
+	/**
+	 * Passer son tour
+	 */
+	public String passerTour()
+	{
+		return "p";
+	}
+
+	/**
+	 * Retourne le premier personnage trouvé dans la direction donnée
+	 */
+	public Character researchCharacter(int direction)
+	{
+		GameStage gameStage = GameStage.gameStage;
+		return (gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).isEmpty()? null : gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).get(0));
+
+	}
+
+	/**
+	 * Retourne le premier personnage trouvé dans la direction donnée
+	 */
+	public boolean isCharacterInLine(int direction)
+	{
+		boolean exist = false;
+		GameStage gameStage = GameStage.gameStage;
+		exist = (gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).isEmpty()? exist : true);
+		return exist;
+	}
+
+	/**
+	 * Retourne la range d'un spell
+	 */
+	public int Portee(String spellID)
+	{
+		return this.getSpell(spellID).getRange();
+	}
+
+	/**
+	 *
+	 * @return the id of the most powerful damaging spell of this character
+	 */
+	public String getMaxDamagingSpellId(){
+		String maxPowered = new String();
+		int maxPower = Integer.MIN_VALUE;
+		for(Spell s : this.getSpells()){
+			if(s.getDamage() > maxPower){
+				maxPower = s.getDamage();
+				maxPowered = s.getId();
+			}
+		}
+		return maxPowered;
+	}
+
+	/**
+	 *
+	 * @return the id of the most powerful healing spell of this character
+	 */
+	public String getMaxHealingSpellId(){
+		String maxPowered = new String();
+		int maxPower = Integer.MIN_VALUE;
+		for(Spell s : this.getSpells()){
+			if(s.getHeal() > maxPower){
+				maxPower = s.getHeal();
+				maxPowered = s.getId();
+			}
+		}
+		return maxPowered;
+	}
+
+
+
+
+	public IAFitness getFitness() {
+		return fitness;
+	}
+
+	public void setFitness(IAFitness fitness) {
+		this.fitness = fitness;
+	}
 
 }

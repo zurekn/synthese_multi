@@ -51,6 +51,12 @@ public class Data {
 
     public static BitmapFont font;
 
+    //For Genetic IA=
+    public static boolean autoIA = false;
+    public static boolean jvm = false;//jvm??
+    public static boolean generateIA = true;
+    public static int maxTurn = 20;
+
     // Const TI Part
     public static long WAIT_TI = 5000;
     public static int SEUILINITTI = 100;
@@ -81,6 +87,7 @@ public class Data {
     public static int TURN_MAX_TIME = 3000; // in sec
 
     //For the stat display
+    //Player
     public static int PLAYER_LIFE_RECT_X_POS = 10;
     public static int PLAYER_LIFE_RECT_Y_POS = 10;
     public static int PLAYER_LIFE_RECT_X_SIZE = 100;
@@ -94,6 +101,10 @@ public class Data {
     public static int PLAYER_MESSAGE_X_POS = 120;
     public static int PLAYER_MESSAGE_Y_POS = 10;
 
+    //Mob
+    public static boolean MOB_LIFE_SHOW = true;
+    public static int MOB_LIFE_RECT_X_SIZE = 30;
+    public static int MOB_LIFE_RECT_Y_SIZE = 3;
 
     public static final int UP = 0;
     public static final int LEFT = 1;
