@@ -20,7 +20,6 @@ public class DesktopLauncher {
         Data.debug = true;
 
         Data.singlePlayer = true;
-
         new LwjglApplication(new WindowGame(), config);
 	}
 }
