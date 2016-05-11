@@ -4,13 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="update Graddle">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" afterPath="$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
+    <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Synthese_multi.iws" />
@@ -4011,7 +4005,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462972656780</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="update Graddle">
+      <created>1462972791664</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1462972791664</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -4107,9 +4107,9 @@
     <MESSAGE value="Correct the map rendering, now trying to switch WindowGame to screen/stage system" />
     <MESSAGE value="orrect the position of all element on the screen, still need  to correct the animation errors" />
     <MESSAGE value="Add IAGenetic class. We have to make all modifications later." />
-    <MESSAGE value="update Graddle" />
     <MESSAGE value="début MAJ IA Genetic" />
-    <option name="LAST_COMMIT_MESSAGE" value="début MAJ IA Genetic" />
+    <MESSAGE value="update Graddle" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Graddle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
