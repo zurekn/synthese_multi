@@ -528,7 +528,6 @@ public abstract class Character {
         animationDown = new Animation(v, animationFrames[Data.DOWN]);
         animationLeft = new Animation(v, animationFrames[Data.LEFT]);
         animationRight = new Animation(v, animationFrames[Data.RIGHT]);
-
     }
 
     /**

@@ -45,6 +45,7 @@ public class Data {
     public static final boolean inTest = true;
     public static final boolean debugQR = false;
     public static final int DEBUG_PLAYER = 0;
+    public static final int DEBUG_NB_GENETIC_PLAYER = 4;
     public static boolean ANDROID = false;
     //public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
     public static String IMAGE_DIR = "C:/Users/fr�d�ric/Google Drive/Master Cergy/Projet_PlateauJeu/Synth�se/ImageDeTest/";
@@ -53,8 +54,8 @@ public class Data {
 
     //For Genetic IA=
     public static boolean autoIA = false;
-    public static boolean jvm = false;//jvm??
-    public static boolean generateIA = true;
+    public static boolean jvm = false;//Joueur versus machine
+    public static boolean generateIA = false;
     public static int maxTurn = 20;
 
     // Const TI Part

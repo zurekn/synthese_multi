@@ -1,5 +1,6 @@
 package com.mygdx.game.javacompiler;
 
+import com.badlogic.gdx.Gdx;
 import com.mygdx.game.game.Character;
 
 import java.io.BufferedReader;
@@ -23,10 +24,11 @@ import javax.tools.ToolProvider;
 public class CompileString {
 	static Boolean debug = false;
 	static String className = "";
-	static String pathClass = "Synthese/src/game/";
-	static String destPathClass = "target/classes/game/";
+    private static String rootDir;
+	static String pathClass = "/core/src/com/mygdx/game/";//"Synthese/src/game/";
+	static String destPathClass = "/core/build/classes/main/com/mygdx/game/game/";//"target/classes/game/";
 	static String classTestName = "IAScript";
-	static String packageName = "game";
+	static String packageName = "ai/";
 	static String characType = "t_character";
 	static String intType = "t_int";
 	static String floatType = "t_float";
@@ -45,13 +47,18 @@ public class CompileString {
 	private static ArrayList<String> funcString;
 	private static ArrayList<String> funcInt;
 	private static ArrayList<String> funcBoolean;
-	
+
 	public static void generate(String geneticName)
 	{
 		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		aRisque = false;
-		debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
-		Node root = advanced?DecodeScript("AdvancedAIScriptDatas.txt"):DecodeScript("AIScriptDatas.txt");
+
+
+        rootDir =  System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf("\\"));
+        rootDir =  rootDir.substring(0, rootDir.lastIndexOf("\\"));
+
+        debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
+		Node root = advanced?DecodeScript(rootDir+pathClass+"AdvancedAIScriptDatas.txt"):DecodeScript(rootDir+pathClass+"AIScriptDatas.txt");
 		ArrayList<String> contentCode = new ArrayList<String>();
 		contentCode = root.TreeToArrayList(contentCode);
 		for (String st : contentCode)
@@ -76,7 +83,7 @@ public class CompileString {
 	public static void serializeObject(String name, Node root)
 			throws IOException {
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-				new FileOutputStream("javaObjects_" + name + ".txt"));
+				new FileOutputStream(rootDir+pathClass+"javaObjects_" + name + ".txt"));
 		objectOutputStream.writeObject(root);
 		objectOutputStream.flush();
 		objectOutputStream.close();
@@ -88,7 +95,7 @@ public class CompileString {
 	public static void deserializeObject(String name) throws IOException,
 			ClassNotFoundException {
 		ObjectInputStream objectInputStream = new ObjectInputStream(
-				new FileInputStream("javaObjects_" + name + ".txt"));
+				new FileInputStream(rootDir+pathClass+"javaObjects_" + name + ".txt"));
 		Node readJSON = (Node) objectInputStream.readObject();
 		objectInputStream.close();
 		System.out.println("### Display Tree");
@@ -214,69 +221,6 @@ public class CompileString {
 		}
 		return root;
 	}
-	
-	/** Add a full condition branch node with code lines inside.
-	 * 
-	 *  Should be used like : node = addFullCondition(node)
-	 *  
-	 * @param resNode : node where we append condition
-	 * @return : resulting node with conditions appended
-	 *//*
-	public static Node addFullCondition(Node resNode, int maxDepth)
-	{
-		if(maxDepth > 0){ // Si on n'a pas atteint la profondeur max
-					int rand = 0;
-					String[] partsRandomCond = getParam(cond, -1); // condition al�atoire (if, for, etc.)
-					Node nodeCond = new Node(""); // init. supernoeud de condition
-					String conditionFull = ""; // init. valeur textuelle de la condition
-					if (partsRandomCond[0].contains("if") // test du cas if / while
-							|| partsRandomCond[0].contains("while")) {
-						if (partsRandomCond[0].contains("while")) { // Risqu� si while
-							nodeCond.setValue("while");
-							aRisque = true;
-						} else
-							nodeCond.setValue("if");
-						String[] partsRandomVar = getParam(var, -1); // LIGNE de variables al�atoire
-						conditionFull += partsRandomVar[0]; // concat�ner nom de la variable
-						conditionFull += getCompInCond(partsRandomVar[1]);
-					}
-					if (partsRandomCond[0].contains("for"))  // Cas d'un for
-					{
-						nodeCond.setValue("for"); // Ajoute "for" au niveau juste en dessous du noeud resNode
-						conditionFull += "int i = 0 ; i"; // concat�ne l'initialisation
-						String[] partsRandomComp = getParam(comp, 0); // r�cup�re les comparateurs pour les int
-						rand = new Random().nextInt(partsRandomComp.length); // choisis un comparateur int al�atoire
-						rand = (rand <= 2) ? 2 : 3; // soit "<=" soit ">=" autoris�s
-						int condRandom = rand;
-						conditionFull += partsRandomComp[rand]; // concat�nation du comparateur
-						String[] partsRandomVar = null;
-						do {
-							partsRandomVar = getParam(var, -1); //  recuperation d'une ligne "variable" int aleatoire
-						} while (!partsRandomVar[1].contains("int"));
-						// ajout de l'it�ration. i-- si ">=" , i++ si "<="
-						if (condRandom == 2 || condRandom == 6 )
-							conditionFull += partsRandomVar[0] + "; i--";
-						else
-							conditionFull += partsRandomVar[0] + "; i++";
-					}
-					resNode.addChild(nodeCond); // lier les supernoeuds
-					Node condFullNode = new Node(conditionFull); // cr�ation du sous-noeud
-					nodeCond.addChild(condFullNode); // Ajout du sous-noeud au supernoeud de condition
-					nodeCond = addCodeLineAlea(code,nbLignesCode,nodeCond); // *** Ajout des lignes de code dans la branche
-					boolean moreDeep = (new Random().nextInt(2)==0?false:true);
-					if(moreDeep)nodeCond = addFullCondition(nodeCond,maxDepth-1);// Ajout d'une autre branche conditionnelle
-					if (partsRandomCond[0].contains("if")  // Cas du if avec un else
-							&& partsRandomCond[2].contains("else")) {
-						Node nodeElse = new Node("else");
-						resNode.addChild(nodeElse);
-						nodeElse = addCodeLineAlea(code,nbLignesCode,nodeElse); // *** Ajout des lignes de code dans le ELSE
-						moreDeep = (new Random().nextInt(2)==0?false:true);
-						if(moreDeep)nodeElse = addFullCondition(nodeElse,maxDepth-1);// Ajout d'une autre branche conditionnelle
-					}
-		}
-		return resNode;
-		
-	}*/
 	
 	/** Add a full condition branch node with code lines inside. Advanced
 	 * 
@@ -564,14 +508,16 @@ public class CompileString {
 		
 		// Compilation de la classe du joueur IA
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-		System.out.println("IAGenetic : "+pathClass + className + ".java");
+        Gdx.app.log("CompileString", rootDir + pathClass+ packageName + className + ".java");
 		@SuppressWarnings("unused")
-		int result = compiler.run(null, null, null, pathClass + className + ".java");
+		int result = compiler.run(null, null, null, rootDir + pathClass+ packageName + className + ".java");
 		//System.out.println("Compile result code = " + result);
 
 		// D�placement du fichier .CLASS du r�pertoire /src au /bin
-		File afile = new File(pathClass + className + ".CLASS");
-		File destFile = new File(destPathClass + afile.getName());
+		File afile = new File(pathClass + packageName + className + ".CLASS");
+        Gdx.app.log("CompileString", afile.getAbsolutePath());
+
+        File destFile = new File(destPathClass + afile.getName());
 		if (destFile.exists())
 			destFile.delete();
 		afile.renameTo(new File(destPathClass + afile.getName()));
@@ -580,7 +526,7 @@ public class CompileString {
 		Class<?> c = null;
 		Object obj = null;
 		try {
-			c = Class.forName(packageName + "." + className);
+			c = Class.forName(packageName.substring(0, packageName.length()-1) + "." + className);
 			obj = c.newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -604,7 +550,9 @@ public class CompileString {
 	public static void ReadWriteCode(ArrayList<String> codeContent,String className) {
 		Boolean inRun = false;
 		Boolean isAdded = false;
-		File fichier = new File(pathClass + classTestName +".java");
+        //Gdx.files.internal()
+		File fichier = new File(rootDir+pathClass +packageName+ classTestName +".java"); //
+        Gdx.app.log("CompileString", rootDir+pathClass +packageName+ classTestName +".java");
 		ArrayList<String> content = new ArrayList<String>();
 		// lecture du fichier java
 		try {
@@ -642,8 +590,7 @@ public class CompileString {
 	public static void WriteCode(ArrayList<String> content, String className) {
 		// cr�ation du fichier qui va �craser l'ancien fichier java
 		try {
-			FileWriter fw = new FileWriter(new File(pathClass + className
-					+ ".java"));
+			FileWriter fw = new FileWriter(new File(rootDir+pathClass + packageName+className + ".java"));
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			for (String ln : content) {

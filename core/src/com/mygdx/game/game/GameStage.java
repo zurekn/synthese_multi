@@ -22,7 +22,9 @@ import com.mygdx.game.data.SpellData;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalCaracterClassException;
 import com.mygdx.game.exception.IllegalMovementException;
+import com.mygdx.game.hud.HUD;
 import com.mygdx.game.hud.PlayerHUD;
+import com.mygdx.game.hud.emptyHUD;
 import com.mygdx.game.imageprocessing.APIX;
 import com.mygdx.game.imageprocessing.APIXAdapter;
 import com.mygdx.game.imageprocessing.MovementEvent;
@@ -117,7 +119,7 @@ public class GameStage extends Stage {
     public static GameStage gameStage = null;
 
     //UI
-    private PlayerHUD ui;
+    private HUD ui = new emptyHUD();
 
 
     public GameStage() {
@@ -210,25 +212,32 @@ public class GameStage extends Stage {
 
         messageHandler = new MessageHandler();
 
-        // Create the player list
-        initPlayers();
-
+        players = new ArrayList<Player>();
         playerHandler = new PlayerHandler(players);
-
-        if (Data.singlePlayer) {
-            try {
-                createMainPlayer(5, 2);
-                ui = new PlayerHUD(this, playerHandler.getMainPlayer());
-                //this.addActor(ui);
-            } catch (IllegalActionException e) {
-                e.printStackTrace();
-            } catch (IllegalMovementException e) {
-                e.printStackTrace();
-            } catch (IllegalCaracterClassException e) {
-                e.printStackTrace();
+        // Create the player list
+        if(Data.autoIA && !Data.jvm)
+        {
+            initGeneticPlayers();
+            Data.singlePlayer = false;
+        }
+        else
+        {
+            initPlayers();
+            if (Data.singlePlayer)
+            {
+                try {
+                    createMainPlayer(5, 2);
+                    ui = new PlayerHUD(this, playerHandler.getMainPlayer());
+                    //this.addActor(ui);
+                } catch (IllegalActionException e) {
+                    e.printStackTrace();
+                } catch (IllegalMovementException e) {
+                    e.printStackTrace();
+                } catch (IllegalCaracterClassException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
 
         //new Thread(movementHandler).start();
         // Set the timer
@@ -446,7 +455,7 @@ public class GameStage extends Stage {
      */
     public void initPlayers() {
         Gdx.app.log(LABEL, "Player Initialisation");
-        players = new ArrayList<Player>();
+
 
         Collection<String> pos = departureBlocks.keySet();
         pos.iterator();
@@ -471,6 +480,87 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Create all the genetic players (call in create)
+     */
+    public void initGeneticPlayers()
+    {
+        Gdx.app.log(LABEL, "Player Genetic Initialisation");
+        Collection<String> pos = Data.departureBlocks.keySet();
+        Gdx.app.log(LABEL, "Player Genetic Initialisation 2");
+        pos.iterator();
+        try {
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 0)
+            {
+                addGeneticPlayer(10, 8, -1,"m5");
+            }
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 1)
+            {
+                addGeneticPlayer(15, 15, -1, "m8");
+            }
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 2)
+            {
+                addGeneticPlayer(19, 15, -1, "m7");
+            }
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 3)
+            {
+                addGeneticPlayer(7, 12, -1, "m9");
+            }
+
+        } catch (IllegalCaracterClassException e) {
+            e.printStackTrace();
+        } catch (IllegalMovementException e) {
+            e.printStackTrace();
+        } catch (IllegalActionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Add a new player (call in initGeneticPlayers)
+     */
+    @SuppressWarnings("unused")
+    public void addGeneticPlayer(int x, int y, int size, String id) throws IllegalCaracterClassException, IllegalMovementException, IllegalActionException {
+        Gdx.app.log(LABEL, "add Genetic Player");
+        if (gameOn)
+            throw new IllegalActionException("Can not add player genetic when game is on!");
+
+        String position = x + ":" + y;
+
+        if (getAllPositions().contains(position)) {
+            // messageHandler.addMessage(new
+            // Message("Position ["+position+"] non disponible", 1));
+
+            throw new IllegalMovementException("Caracter already at the position [" + position + "]");
+        }
+
+        if (Data.untraversableBlocks.containsKey(position)) {
+            messageHandler.addGlobalMessage(new Message("Position [" + position + "] non disponible", 1));
+            throw new IllegalMovementException("Untraversable block at [" + position + "]");
+        }
+
+        if (Data.departureBlocks.containsKey(position) || (Data.DEBUG_DEPARTURE && Data.debug)) {
+            Data.departureBlocks.put(position, true);
+        } else {
+            messageHandler.addGlobalMessage(new Message(Data.DEPARTURE_BLOCK_ERROR, Data.MESSAGE_TYPE_ERROR));
+            throw new IllegalMovementException("Caracter must be at a departure position");
+        }
+
+        if (Data.MAX_PLAYER <= players.size())
+            return;
+
+        Player p = new Player(x, y, id, "", "g"+players.size());
+        p.setNumber(players.size());
+        p.setSizeCharacter(size);
+        players.add(p);
+        Gdx.app.log(LABEL, "New Genetic Player : " +p.toString());
+
+        timerInitPlayer = Data.INIT_MAX_TIME;
+        if (players.size() >= Data.MAX_PLAYER) {
+            System.out.println(" ----Max genetic player reached ----");
+            start();
+        }
+    }
     /**
      * Add a new player
      *

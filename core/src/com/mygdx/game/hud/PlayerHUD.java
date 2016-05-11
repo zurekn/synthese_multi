@@ -19,7 +19,7 @@ import com.mygdx.game.game.Spell;
 /**
  * Created by nicolas on 23/03/2016.
  */
-public class PlayerHUD {
+public class PlayerHUD extends HUD{
     private static final String TAG = "HUD";
     /* fast pointer on the currentPlayer*/
     private Player player;
@@ -87,11 +87,13 @@ public class PlayerHUD {
 
     }
 
+    @Override
     public void act(float parentDelta){
         manaBar.setCurrent(player.getStats().getMana());
         healthBar.setCurrent(player.getStats().getLife());
     }
 
+    @Override
     public void resetSpellSelection(){
         spellSelectBox.setSelectedIndex(0);
     }

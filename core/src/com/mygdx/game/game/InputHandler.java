@@ -135,7 +135,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         Gdx.app.log(TAG, "Touch up on ["+screenX+"/"+screenY+"], pointer ["+pointer+"], button ["+button+"]");
-        if(click){
+        if(click && !Data.autoIA){
             GameStage.gameStage.checkActionAtPosition(screenX, screenY);
         }
         return false;
