@@ -492,19 +492,19 @@ public class GameStage extends Stage {
         try {
             if (Data.DEBUG_NB_GENETIC_PLAYER > 0)
             {
-                addGeneticPlayer(10, 8, -1,"m5");
+                addGeneticPlayer(10, 8, -1,"m1");
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 1)
             {
-                addGeneticPlayer(15, 15, -1, "m8");
+                addGeneticPlayer(15, 15, -1, "m2");
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 2)
             {
-                addGeneticPlayer(19, 15, -1, "m7");
+                addGeneticPlayer(19, 15, -1, "m3");
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 3)
             {
-                addGeneticPlayer(7, 12, -1, "m9");
+                addGeneticPlayer(7, 12, -1, "m4");
             }
 
         } catch (IllegalCaracterClassException e) {

@@ -1,6 +1,7 @@
 package com.mygdx.game.javacompiler;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.data.Data;
 import com.mygdx.game.game.Character;
 
 import java.io.BufferedReader;
@@ -21,12 +22,13 @@ import java.util.Random;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
+import static com.mygdx.game.data.Data.*;
+
 public class CompileString {
 	static Boolean debug = false;
 	static String className = "";
-    private static String rootDir;
 	static String pathClass = "/core/src/com/mygdx/game/";//"Synthese/src/game/";
-	static String destPathClass = "/core/build/classes/main/com/mygdx/game/game/";//"target/classes/game/";
+	static String destPathClass = "/core/build/classes/main/com/mygdx/game/ai/";//"target/classes/game/";
 	static String classTestName = "IAScript";
 	static String packageName = "ai/";
 	static String characType = "t_character";
@@ -508,25 +510,23 @@ public class CompileString {
 		
 		// Compilation de la classe du joueur IA
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        Gdx.app.log("CompileString", rootDir + pathClass+ packageName + className + ".java");
 		@SuppressWarnings("unused")
 		int result = compiler.run(null, null, null, rootDir + pathClass+ packageName + className + ".java");
 		//System.out.println("Compile result code = " + result);
 
 		// D�placement du fichier .CLASS du r�pertoire /src au /bin
-		File afile = new File(pathClass + packageName + className + ".CLASS");
-        Gdx.app.log("CompileString", afile.getAbsolutePath());
+		File afile = new File(rootDir + pathClass + packageName + className + ".CLASS");
+        File destFile = new File(rootDir+destPathClass + afile.getName());
 
-        File destFile = new File(destPathClass + afile.getName());
 		if (destFile.exists())
 			destFile.delete();
-		afile.renameTo(new File(destPathClass + afile.getName()));
+		afile.renameTo(new File(rootDir + destPathClass + afile.getName()));
 
 		// Instanciation de la classe du joueur IA
 		Class<?> c = null;
 		Object obj = null;
 		try {
-			c = Class.forName(packageName.substring(0, packageName.length()-1) + "." + className);
+			c = Class.forName("com.mygdx.game."+packageName.substring(0, packageName.length()-1) + "." + className);
 			obj = c.newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -552,10 +552,9 @@ public class CompileString {
 		Boolean isAdded = false;
         //Gdx.files.internal()
 		File fichier = new File(rootDir+pathClass +packageName+ classTestName +".java"); //
-        Gdx.app.log("CompileString", rootDir+pathClass +packageName+ classTestName +".java");
 		ArrayList<String> content = new ArrayList<String>();
 		// lecture du fichier java
-		try {
+        try {
 			InputStream ips = new FileInputStream(fichier);
 			InputStreamReader ipsr = new InputStreamReader(ips);
 			BufferedReader br = new BufferedReader(ipsr);
@@ -598,7 +597,8 @@ public class CompileString {
 			}
 			fichierSortie.close();
 		} catch (Exception e) {
-			System.out.println("WriteCode : "+e.toString());
+			//System.out.println("WriteCode : "+e.toString());
+            e.printStackTrace();
 		}
 	}
 

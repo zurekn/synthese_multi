@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static com.mygdx.game.data.Data.rootDir;
 
 
 public class IAFitness {
@@ -37,7 +38,7 @@ public class IAFitness {
 	private int move = 1;
 	private int pass = 1;
 	private int scoreFinal = 0;
-	private String scoreFileName = "Synthese/src/scoring/IAdebug.txt";
+	private String scoreFileName = "/core/src/com/mygdx/game/IAdebug.txt";//"Synthese/src/scoring/IAdebug.txt";
 	private String historyActions="";
 	
 	//used for overall fitness
@@ -181,8 +182,8 @@ public class IAFitness {
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
-		File oldfile =new File(this.scoreFileName);
-		File newfile =new File(this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
+		File oldfile =new File(rootDir+this.scoreFileName);
+		File newfile =new File(rootDir+this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
 		try {
 			Files.copy(oldfile.toPath(), newfile.toPath());
 		} catch (IOException e) {
@@ -193,13 +194,14 @@ public class IAFitness {
 	public void debugFile(String message, boolean append)
 	{
 		try {
-			FileWriter fw = new FileWriter(new File(this.scoreFileName), append);
+			FileWriter fw = new FileWriter(new File(rootDir+this.scoreFileName), append);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			fichierSortie.println(message);
 			fichierSortie.close();
 		} catch (Exception e) {
-			System.out.println("WriteCode : "+e.toString());
+			//System.out.println("WriteCode : "+e.toString());
+			e.printStackTrace();
 		}
 	}
 	
@@ -212,7 +214,8 @@ public class IAFitness {
 			fichierSortie.println(this.historyActions);
 			fichierSortie.close();
 		} catch (Exception e) {
-			System.out.println("WriteCode : "+e.toString());
+			//System.out.println("WriteCode : "+e.toString());
+			e.printStackTrace();
 		}
 	}
 	

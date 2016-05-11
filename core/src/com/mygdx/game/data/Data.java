@@ -53,10 +53,11 @@ public class Data {
     public static BitmapFont font;
 
     //For Genetic IA=
-    public static boolean autoIA = false;
+    public static boolean autoIA = true;
     public static boolean jvm = false;//Joueur versus machine
-    public static boolean generateIA = false;
+    public static boolean generateIA = true;
     public static int maxTurn = 20;
+    public static String rootDir="";
 
     // Const TI Part
     public static long WAIT_TI = 5000;

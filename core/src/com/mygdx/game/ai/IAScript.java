@@ -1,6 +1,8 @@
-package com.mygdx.game.game;
+package com.mygdx.game.ai;
 
 import com.mygdx.game.data.Data;
+import com.mygdx.game.game.*;
+import com.mygdx.game.game.Character;
 
 public class IAScript {
 	GameStage gameStage = GameStage.gameStage;
@@ -10,7 +12,7 @@ public class IAScript {
 	int down=Data.SOUTH;
 	int left=Data.WEST;
 	int right=Data.EAST;
-	Character defaultC = null;
+	com.mygdx.game.game.Character defaultC = null;
 	String defaultString = "";
 	int defaultInt = 0;
 	float defaultFloat = 0f;
