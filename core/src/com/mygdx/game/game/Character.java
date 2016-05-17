@@ -114,8 +114,13 @@ public abstract class Character {
 				}
 				else
 				{
-					if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
-					findScriptAction(++compteur);
+					//if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
+					//findScriptAction(++compteur);
+					try {
+						GameStage.gameStage.decodeAction("p");
+					} catch (IllegalActionException ex) {
+						ex.printStackTrace();
+					}
 					return;
 				}
 			} catch (IllegalAccessException e) {
@@ -123,9 +128,14 @@ public abstract class Character {
 				if(compteur == 0)
 				{
 					e.printStackTrace();
-					getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
+					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
 				}
-				findScriptAction(++compteur);
+				//findScriptAction(++compteur);
+			try {
+				GameStage.gameStage.decodeAction("p");
+			} catch (IllegalActionException ex) {
+				ex.printStackTrace();
+			}
 				return;
 			} catch (SecurityException e) {
 				if(compteur == 0)e.printStackTrace();findScriptAction(++compteur);
@@ -143,8 +153,9 @@ public abstract class Character {
 					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
 
 				}
-				 findScriptAction(++compteur);
-				return;
+				 //findScriptAction(++compteur);
+
+				return ;
 			}
 		}
 	}

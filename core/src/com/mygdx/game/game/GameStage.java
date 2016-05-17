@@ -506,11 +506,11 @@ public class GameStage extends Stage {
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 1)
             {
-                addGeneticPlayer(15, 15, -1, "m2");
+                addGeneticPlayer(10, 10, -1, "m2");
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 2)
             {
-                addGeneticPlayer(19, 15, -1, "m3");
+                addGeneticPlayer(12, 12, -1, "m3");
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 3)
             {
@@ -958,7 +958,6 @@ public class GameStage extends Stage {
             //currentCharacter.getFitness().addHistory(currentCharacter.getId()+";"+action.toString());
             //currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")+
              //       currentCharacter.getName()+" "+currentCharacter.getTrueID()+" PASSE son tour ."+currentCharacter.getFitness().toStringFitness(),true);
-
             switchTurn();
         }else if (action.startsWith("m")) {// Movement action
             try {
@@ -970,7 +969,6 @@ public class GameStage extends Stage {
                 // TODO call aStar and check if character don't fall into trap
                 currentCharacter.moveTo(position);
                 switchTurn();
-
             } catch (IllegalMovementException ime) {
                 throw new IllegalActionException("Mob can't reach this block");
             }
