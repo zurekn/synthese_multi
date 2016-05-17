@@ -92,8 +92,10 @@ public class GameStage extends Stage {
     //
     private MobHandler mobHandler;
     private ArrayList<Mob> mobs;
+    private ArrayList<Mob> originMobs;
     private PlayerHandler playerHandler;
     private ArrayList<Player> players;
+    private ArrayList<Player> originPlayers;
     private MovementHandler movementHandler;
     private MessageHandler messageHandler;
     private ArrayList<Event> events = new ArrayList<Event>();
@@ -104,6 +106,7 @@ public class GameStage extends Stage {
     //
     private int playerNumber;
     private int turn;
+    private int global_turn;
     private int actionLeft = ACTION_PER_TURN;
 
     //
@@ -125,6 +128,7 @@ public class GameStage extends Stage {
     public GameStage() {
         create();
         gameStage = this;
+        start();
     }
 
     /*************************************/
@@ -214,6 +218,8 @@ public class GameStage extends Stage {
 
         players = new ArrayList<Player>();
         playerHandler = new PlayerHandler(players);
+        originMobs = new ArrayList<Mob>(mobs);
+
         // Create the player list
         if(Data.autoIA && !Data.jvm)
         {
@@ -238,16 +244,15 @@ public class GameStage extends Stage {
                 }
             }
         }
+        originPlayers = new ArrayList<Player>(players);
 
         //new Thread(movementHandler).start();
         // Set the timer
         timerInitPlayer = INIT_MAX_TIME;
 
-
         camera = new CameraHandler();
         camera.init();
         Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
-
     }
 
     /************************************/
@@ -439,15 +444,21 @@ public class GameStage extends Stage {
     public void start() {
         if (players.size() == 0)
             return;
-        playerNumber = players.size() + mobs.size();
 
         turnTimer = TURN_MAX_TIME;
         turn = 0;
+        global_turn=1;
         players.get(turn).setMyTurn(true);
+        playerNumber = players.size() + mobs.size();
         currentCharacter = players.get(turn);
 
-        reachableBlock = AStar.getInstance().getReachableNodes(new WindowGameData(players, mobs, turn), new CharacterData(currentCharacter));
         gameOn = true;
+
+        if(!Data.autoIA)
+            reachableBlock = AStar.getInstance().getReachableNodes(new WindowGameData(players, mobs, turn), new CharacterData(currentCharacter));
+        else
+            currentCharacter.findScriptAction(0);//Pour lancer l'action du premier joueur
+
     }
 
     /**
@@ -485,9 +496,8 @@ public class GameStage extends Stage {
      */
     public void initGeneticPlayers()
     {
-        Gdx.app.log(LABEL, "Player Genetic Initialisation");
+        //Gdx.app.log(LABEL, "Player Genetic Initialisation");
         Collection<String> pos = Data.departureBlocks.keySet();
-        Gdx.app.log(LABEL, "Player Genetic Initialisation 2");
         pos.iterator();
         try {
             if (Data.DEBUG_NB_GENETIC_PLAYER > 0)
@@ -521,7 +531,7 @@ public class GameStage extends Stage {
      */
     @SuppressWarnings("unused")
     public void addGeneticPlayer(int x, int y, int size, String id) throws IllegalCaracterClassException, IllegalMovementException, IllegalActionException {
-        Gdx.app.log(LABEL, "add Genetic Player");
+        //Gdx.app.log(LABEL, "add Genetic Player");
         if (gameOn)
             throw new IllegalActionException("Can not add player genetic when game is on!");
 
@@ -553,12 +563,12 @@ public class GameStage extends Stage {
         p.setNumber(players.size());
         p.setSizeCharacter(size);
         players.add(p);
-        Gdx.app.log(LABEL, "New Genetic Player : " +p.toString());
+        //Gdx.app.log(LABEL, "New Genetic Player : " + p.toString());
 
         timerInitPlayer = Data.INIT_MAX_TIME;
         if (players.size() >= Data.MAX_PLAYER) {
             System.out.println(" ----Max genetic player reached ----");
-            start();
+            //start();
         }
     }
     /**
@@ -745,6 +755,30 @@ public class GameStage extends Stage {
         turnTimer = TURN_MAX_TIME;
         turn = (turn + 1) % playerNumber;
 
+        if(turn == 0)
+        {
+            //currentCharacter.getFitness().debugFile("\n\t\t\t\t=== TOUR "+global_turn+" ===", true);
+            checkEndGame();
+
+            global_turn++;
+            messageHandler.addPlayerMessage(new Message("Tour de jeu numéro  "+global_turn, Data.MESSAGE_TYPE_INFO), turn);
+            for(Mob mo:mobs){
+                mo.getFitness().addTurn();
+            }
+            if(Data.autoIA){
+                if(!Data.jvm)
+                {
+                    for(Player po:players){
+                        po.getFitness().addTurn();
+                    }
+                }else{
+                    for(Player po:players){
+                        po.getFitness().addTurn();
+                    }
+                }
+            }
+        }
+
         previousCharacter = currentCharacter;
         previousCharacter.regenMana();
         // Switch the turn
@@ -767,8 +801,11 @@ public class GameStage extends Stage {
         messageHandler.addGlobalMessage(new Message("Turn of " + currentCharacter.getName()));
         actionLeft = ACTION_PER_TURN;
 
-        if (currentCharacter.isNpc() && !previousCharacter.isNpc())
-            commands.startCommandsCalculation(currentCharacter, players, mobs, turn);
+        if (currentCharacter.isNpc())// && !previousCharacter.isNpc())// mettre le run du bot IAGénétique
+            currentCharacter.findScriptAction(0); //commands.startCommandsCalculation(currentCharacter, players, mobs, turn);
+
+        if(!currentCharacter.isNpc())//currentCharacter.
+            if(Data.autoIA && Data.jvm)currentCharacter.findScriptAction(0);
 
         // print the current turn in the console
         if (debug) {
@@ -916,7 +953,14 @@ public class GameStage extends Stage {
 
         } else if (action.startsWith("t")) { // Trap action
             Gdx.app.log(LABEL, "Find a trap action");
-        } else if (action.startsWith("m")) {// Movement action
+        } else if (action.startsWith("p")) { // Pass turn
+            //currentCharacter.getFitness().scorePassTurn();
+            //currentCharacter.getFitness().addHistory(currentCharacter.getId()+";"+action.toString());
+            //currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")+
+             //       currentCharacter.getName()+" "+currentCharacter.getTrueID()+" PASSE son tour ."+currentCharacter.getFitness().toStringFitness(),true);
+
+            switchTurn();
+        }else if (action.startsWith("m")) {// Movement action
             try {
                 String[] tokens = action.split(":");
                 if (tokens.length != 3)

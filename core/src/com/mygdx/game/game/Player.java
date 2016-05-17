@@ -188,7 +188,7 @@ public class Player extends Character {
     @Override
     public String toString() {
         return "Mob [name=" + getName() + ", x=" + getX() + ", y=" + getY()
-                + ", id=" + getId() + "]";
+                + ", id=" + getId() + "]"+ ", true id=" + getTrueID() + "]";
     }
 
     public String toStringAll() {

@@ -63,19 +63,20 @@ public class CompileString {
 		Node root = advanced?DecodeScript(rootDir+pathClass+"AdvancedAIScriptDatas.txt"):DecodeScript(rootDir+pathClass+"AIScriptDatas.txt");
 		ArrayList<String> contentCode = new ArrayList<String>();
 		contentCode = root.TreeToArrayList(contentCode);
-		for (String st : contentCode)
-			System.out.println(st);
+		//for (String st : contentCode)
+			//System.out.println(st);
 		
 		className = geneticName + (aRisque ? "_Arisque" : "");
 		ReadWriteCode(contentCode, className);
 		try {
 			serializeObject("serialized_"+geneticName, root);
-			deserializeObject("serialized_"+geneticName);
+			//deserializeObject("serialized_"+geneticName);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
+		/*catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}*/
 		// CompileAndExecuteClass(className, "run");
 	}
 

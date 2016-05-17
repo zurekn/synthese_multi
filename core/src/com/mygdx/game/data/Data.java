@@ -44,7 +44,7 @@ public class Data {
     public static boolean debugPicture = false;
     public static final boolean inTest = true;
     public static final boolean debugQR = false;
-    public static final int DEBUG_PLAYER = 0;
+    public static final int DEBUG_PLAYER = 4;
     public static final int DEBUG_NB_GENETIC_PLAYER = 4;
     public static boolean ANDROID = false;
     //public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
