@@ -193,7 +193,7 @@ public class IAFitness {
 	
 	public void debugFile(String message, boolean append)
 	{
-		try {
+		/*try {
 			FileWriter fw = new FileWriter(new File(rootDir+this.scoreFileName), append);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
@@ -202,7 +202,7 @@ public class IAFitness {
 		} catch (Exception e) {
 			//System.out.println("WriteCode : "+e.toString());
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public void writeHistory(Character currentCharacter, boolean append)

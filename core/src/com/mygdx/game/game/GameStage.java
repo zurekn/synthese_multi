@@ -795,7 +795,7 @@ public class GameStage extends Stage {
         previousCharacter.setMyTurn(false);
         if (currentCharacter.isMonster() && !SHOW_MOB_REACHABLE_BLOCKS)
             reachableBlock = new ArrayList<int[]>();
-        else
+        else if(!Data.autoIA)
             reachableBlock = AStar.getInstance().getReachableNodes(new WindowGameData(players, mobs, turn), new CharacterData(currentCharacter));
 
         messageHandler.addGlobalMessage(new Message("Turn of " + currentCharacter.getName()));
@@ -1116,7 +1116,7 @@ public class GameStage extends Stage {
 
 
     public void checkEndGame() {
-        if (mobs.size() <= 0 || players.size() <= 0) {
+        /*if (mobs.size() <= 0 || players.size() <= 0) {
             //GAME WIN
             stopAllThread();
             gameEnded = true;
@@ -1124,6 +1124,47 @@ public class GameStage extends Stage {
                 gameWin = true;
             if (players.size() <= 0)
                 gameLose = true;
+        }*/
+
+        if(mobs.size() == 0 || players.size() == 0)
+        {
+            if( mobs.size() <= 0 ){
+                //GAME WIN
+                gameEnded = true;
+                gameWin = true;
+            }else if( (players.size() <= 0 && !Data.autoIA) || global_turn == Data.maxTurn)
+            {
+                //GAME LOSE
+                gameEnded = true;
+                gameLose = true;
+            }
+        }
+        if(gameEnded)
+        {
+
+            System.out.println("mob size : "+ mobs.size()+" genPlayers size : "+players.size());
+            System.out.println("-- FIN DE JEU-- ");
+            /*originMobs.get(0).getFitness().debugFile("-- FIN DE JEU --", true);
+            boolean winOrLoose = ((players.size()<=0)? true : false);
+            for(Mob mo : originMobs){
+                System.out.println("Mob id="+mo.getId()+" name="+mo.getName()+" "+mo.getFitness().toStringFitness());
+
+                mo.getFitness().debugFile(	"Mob id="+mo.getTrueID()+" name="+mo.getName()+
+                        " score final = "+mo.getFitness().calculFinalScore(winOrLoose, global_turn)+""+
+                        mo.getFitness().toStringFitness(), true);
+                mo.getFitness().writeHistory(mo, false);
+            }
+            if(Data.autoIA)
+            {
+                for(PlayerGenetic po : originGenPlayers){
+                    po.getFitness().debugFile("Player id="+po.getTrueID()+" name="+po.getName()+
+                            " score final = "+po.getFitness().calculFinalScore(gameWin, global_turn)+""+
+                            po.getFitness().toStringFitness(), true);
+                    po.getFitness().writeHistory(po, false);
+                }
+            }
+            originMobs.get(0).getFitness().renameScoreFile();*/
+            stopAllThread();
         }
     }
 

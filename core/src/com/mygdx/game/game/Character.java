@@ -82,7 +82,7 @@ public abstract class Character {
 	}
 
 	public void findScriptAction(int compteur){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
-		Gdx.app.log("Character", this.trueID +"-compteur = "+compteur);
+		Gdx.app.log("Character", this.trueID +" compteur = "+compteur);
 		String result = "";
 		if(compteur>=10)
 		{
@@ -140,10 +140,10 @@ public abstract class Character {
 				if(compteur == 0)
 				{
 					e.printStackTrace();
-					getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
+					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
 
 				}
-				findScriptAction(++compteur);
+				 findScriptAction(++compteur);
 				return;
 			}
 		}
