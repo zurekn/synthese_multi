@@ -87,6 +87,12 @@ public class PlayerHUD {
 
     }
 
+    public void resize(){
+        spellSelectBox.setPosition(Data.SCREEN_WIDTH - 220, Data.SCREEN_HEIGHT - 100);
+        healthBar.setPosition(20, Data.SCREEN_HEIGHT - 50);
+        manaBar.setPosition(20, Data.SCREEN_HEIGHT - 80);
+    }
+
     public void act(float parentDelta){
         manaBar.setCurrent(player.getStats().getMana());
         healthBar.setCurrent(player.getStats().getLife());

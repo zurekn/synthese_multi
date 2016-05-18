@@ -422,6 +422,8 @@ public class GameStage extends Stage {
             camera.resize(width, height);
             camera.reloadMapPosition();
         }
+        if(ui != null)
+            ui.resize();
     }
 
     /**

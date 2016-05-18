@@ -134,7 +134,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.log(TAG, "Touch up on ["+screenX+"/"+screenY+"], pointer ["+pointer+"], button ["+button+"]");
+        Gdx.app.log(TAG, "Touch up on [" + screenX + "/" + screenY + "], pointer [" + pointer + "], button [" + button + "]");
         if(click){
             GameStage.gameStage.checkActionAtPosition(screenX, screenY);
         }
@@ -179,6 +179,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     @Override
     public boolean tap(float x, float y, int count, int button) {
         Gdx.app.log(TAG, "Tap on ["+x+"/"+y+"], count ["+count+"], button ["+button+"]");
+        GameStage.gameStage.checkActionAtPosition((int)x, (int)y);
         return false;
     }
 
@@ -203,7 +204,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-        Gdx.app.log(TAG, "Pan stop on ["+x+"/"+y+"], pointer ["+pointer+"], button ["+button+"]");
+        Gdx.app.log(TAG, "Pan stop on [" + x + "/" + y + "], pointer [" + pointer + "], button [" + button + "]");
 
         return false;
     }
@@ -212,8 +213,16 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
     public boolean zoom(float initialDistance, float distance) {
         GameStage stage = GameStage.gameStage;
         float ratio = initialDistance / distance; //I get this
-        stage.getCamera().zoom = CameraHandler.initialScale * ratio; //This doesn't make sense to me because it seems like every time you pinch to zoom, it resets to the original zoom which is 1. So basically it wouldn't 'save' the zoom right?
-        System.out.println(stage.getCamera().zoom); //Prints the camera zoom
+        float newZoom = stage.getCamera().zoom * ratio;
+        if(newZoom < CameraHandler.MIN_ZOOM){
+            stage.getCamera().zoom = CameraHandler.MIN_ZOOM;
+        }
+        else if(newZoom > CameraHandler.MAX_ZOOM ){
+            stage.getCamera().zoom = CameraHandler.MAX_ZOOM;
+        }
+
+        stage.getCamera().zoom = newZoom; //This doesn't make sense to me because it seems like every time you pinch to zoom, it resets to the original zoom which is 1. So basically it wouldn't 'save' the zoom right?
+        stage.getCamera().reloadMapPosition();
         return false;
     }
 
@@ -223,4 +232,5 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
         return false;
     }
+
 }
