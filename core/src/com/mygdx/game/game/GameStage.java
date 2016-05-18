@@ -223,6 +223,11 @@ public class GameStage extends Stage {
         // Create the player list
         if(Data.autoIA && !Data.jvm)
         {
+            Gdx.app.log("create", "Auto IA launch !");
+            Gdx.app.log("", "");
+            Gdx.app.log("", "");
+            Gdx.app.log("", "");
+            Gdx.app.log("", "");
             initGeneticPlayers();
             Data.singlePlayer = false;
         }
@@ -273,7 +278,11 @@ public class GameStage extends Stage {
         this.draw();//MUST BE BEFORE batch.begin()
 
         /* begin texture rendering */
+        if(batch.isDrawing())
+            batch.end();
         batch.begin();
+        if(shapeRenderer.isDrawing())
+            shapeRenderer.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         if (gameOn) {
@@ -508,7 +517,7 @@ public class GameStage extends Stage {
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 1)
             {
-                addGeneticPlayer(10, 10, -1, "m2");
+                addGeneticPlayer(11, 10, -1, "m2");
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 2)
             {
@@ -533,7 +542,7 @@ public class GameStage extends Stage {
      */
     @SuppressWarnings("unused")
     public void addGeneticPlayer(int x, int y, int size, String id) throws IllegalCaracterClassException, IllegalMovementException, IllegalActionException {
-        //Gdx.app.log(LABEL, "add Genetic Player");
+        //Gdx.app.log(LABEL, "add Genetic Player id : "+id);
         if (gameOn)
             throw new IllegalActionException("Can not add player genetic when game is on!");
 
@@ -972,6 +981,8 @@ public class GameStage extends Stage {
                 currentCharacter.moveTo(position);
                 switchTurn();
             } catch (IllegalMovementException ime) {
+                if(Data.autoIA && currentCharacter.isNpc())
+                    switchTurn();
                 throw new IllegalActionException("Mob can't reach this block");
             }
         } else {
@@ -1126,13 +1137,13 @@ public class GameStage extends Stage {
                 gameLose = true;
         }*/
 
-        if(mobs.size() == 0 || players.size() == 0)
+        if(mobs.size() == 0 || players.size() == 0 || global_turn == Data.maxTurn)
         {
             if( mobs.size() <= 0 ){
                 //GAME WIN
                 gameEnded = true;
                 gameWin = true;
-            }else if( (players.size() <= 0 && !Data.autoIA) || global_turn == Data.maxTurn)
+            }else
             {
                 //GAME LOSE
                 gameEnded = true;
@@ -1169,7 +1180,8 @@ public class GameStage extends Stage {
     }
 
     public void stopAllThread() {
-        apix.stop();
+        if(Data.RUN_APIX)
+            apix.stop();
         CommandHandler.getInstance().getThread().stop();
         turnTimer = Integer.MAX_VALUE;
     }

@@ -84,7 +84,7 @@ public abstract class Character {
 	public void findScriptAction(int compteur){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
 		Gdx.app.log("Character", this.trueID +" compteur = "+compteur);
 		String result = "";
-		if(compteur>=10)
+		/*if(compteur>=10)
 		{
 			try {
 				GameStage.gameStage.decodeAction("p");
@@ -93,7 +93,7 @@ public abstract class Character {
 			}
 		}
 		else
-		{	try
+		{*/	try
 			{
 				Method method = cl.getDeclaredMethod("run", Character.class);
 				result = (String) method.invoke(obj, this);
@@ -116,11 +116,8 @@ public abstract class Character {
 				{
 					//if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
 					//findScriptAction(++compteur);
-					try {
-						GameStage.gameStage.decodeAction("p");
-					} catch (IllegalActionException ex) {
-						ex.printStackTrace();
-					}
+
+					GameStage.gameStage.decodeAction("p");
 					return;
 				}
 			} catch (IllegalAccessException e) {
@@ -131,14 +128,14 @@ public abstract class Character {
 					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
 				}
 				//findScriptAction(++compteur);
-			try {
-				GameStage.gameStage.decodeAction("p");
-			} catch (IllegalActionException ex) {
-				ex.printStackTrace();
-			}
+				try {
+					GameStage.gameStage.decodeAction("p");
+				} catch (IllegalActionException ex) {
+					ex.printStackTrace();
+				}
 				return;
 			} catch (SecurityException e) {
-				if(compteur == 0)e.printStackTrace();findScriptAction(++compteur);
+				if(compteur == 0)e.printStackTrace();//findScriptAction(++compteur);
 			} catch (NoSuchMethodException e) {
 				if(compteur == 0)e.printStackTrace();
 			} catch (IllegalArgumentException e) {
@@ -154,10 +151,14 @@ public abstract class Character {
 
 				}
 				 //findScriptAction(++compteur);
-
+				try {
+					GameStage.gameStage.decodeAction("p");
+				} catch (IllegalActionException ex) {
+					ex.printStackTrace();
+				}
 				return ;
 			}
-		}
+		//}
 	}
 
 	/**
