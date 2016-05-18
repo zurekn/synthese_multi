@@ -95,7 +95,7 @@ public class CompileString {
 	/*
 	 * D�-s�rialize un objet
 	 */
-	public static void deserializeObject(String name) throws IOException,
+	public static Node deserializeObject(String name) throws IOException,
 			ClassNotFoundException {
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 				new FileInputStream(rootDir+pathClass+"javaObjects_" + name + ".txt"));
@@ -106,13 +106,96 @@ public class CompileString {
 		System.out.println("### Tree displayed");
 		readJSON.getSubTree(1).displayNode();
 		System.out.println("### Fin deserialize");
+		return readJSON;
 	}
-	
+
+
+	/** This method combine 2 genetic IA scripts into a random fusion of both.
+	 *
+	 * @param name1 : String, true ID of first serialized IA
+	 * @param name2 : String, true ID of second serialized IA
+	 * @param name : String, file name of resulting IA
+	 */
+	public static void combineTrees(String name1, String name2, String name){
+		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+		debugSys("Combining Trees "+name1+" and "+name2+" into "+name);
+		Node root1;
+		Node root2;
+		Node resRoot;
+		Node tmpRoot1 = null;
+		Node tmpRoot2 = null;
+		try {
+			// Get monster 1 & 2 trees
+			root1 = deserializeObject("serialized_"+name1);
+			root2 = deserializeObject("serialized_"+name2);
+			boolean done = false;
+			// While we didn't combined...
+			while(!done){
+				tmpRoot1 = root1.getSubTree(-1); // get Random subtree from root1
+				System.out.println("#Random root1. found"+tmpRoot1.getValue());
+				//if we get a 'if' node, we search another 'if' node
+				if(tmpRoot1.getValue().equals("if")){
+
+					tmpRoot2 = root2.searchSubTreeByValue("if"); // search 'if' if 'if' found
+					if(tmpRoot2.getValue().equals("if"))
+						done = true;
+				}else if(tmpRoot1.getValue().equals("else")){
+
+					tmpRoot2 = root2.searchSubTreeByValue("else"); // search 'else' if 'else' found
+					if(tmpRoot2.getValue().equals("else"))
+						done = true;
+				}else{
+					tmpRoot2 = root2.getSubTree(-1);
+
+					if(!tmpRoot2.getValue().equals("else") ){
+						if( !(tmpRoot1.getParent().getValue().equals("if") &&
+								tmpRoot1.getParent().getChildren().get(0).getValue().equals(tmpRoot1.getValue())) ){
+							done = true;
+						}
+					}
+				}
+				debugSys("##found "+tmpRoot2.getValue()+" in root2");
+			}
+			debugSys("\t========= Replacing ==========" );
+			tmpRoot1.displayTree();
+			debugSys("\t========= With =============" );
+			tmpRoot2.displayTree();
+
+			// Replace tmpRoot1 with tmpRoot2
+			if(tmpRoot1.hasParent()){
+				resRoot = tmpRoot1.getParent();
+				resRoot.replaceChild(tmpRoot1, tmpRoot2);
+				while(resRoot.hasParent()){ // Retourner a la racine (run)
+					resRoot = resRoot.getParent();
+				}
+			}
+			else{ // s tmpRoot1 n'a pas de parent, resRoot = tmpRoot1
+				resRoot = tmpRoot1;
+			}
+			debugSys("###### COmbining end. Result is : ");
+
+			// Save result
+			ArrayList<String> contentCode = new ArrayList<String>();
+			contentCode = resRoot.TreeToArrayList(contentCode);
+			resRoot.displayTree();
+		/*	for (String st : contentCode)
+				System.out.println(st);*/
+			ReadWriteCode(contentCode, name);
+			//serializeObject(name,lastRoot);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/*
 	public static Node getRandomChild(Node node){
 		Node resultNode = new Node("");
 		resultNode = node.getSubTree(-1);
 		return resultNode;
-	}
+	}*/
 	
 /** Creation of genetic AI tree from a text file.
  * 	Creation stages : 
