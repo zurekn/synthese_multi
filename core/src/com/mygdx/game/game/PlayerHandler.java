@@ -36,7 +36,7 @@ public class PlayerHandler {
 
     public void renderPlayerStat(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
-        if(Data.singlePlayer){
+        if(Data.singlePlayer || Data.autoIA){
 
         }else{
             renderBoardStats(batch, shapeRenderer);

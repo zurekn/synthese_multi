@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Game;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.SpellD;
 import com.mygdx.game.data.Stats;
@@ -57,12 +58,10 @@ public abstract class Character {
 
 	private Class<?> cl = null;
 	private Object obj = null;
-	GameStage gameStage = GameStage.gameStage;
 
 	public abstract void render(SpriteBatch batch, ShapeRenderer shapeRenderer);
 
 	public abstract void init();
-
 
 	/**
 	 * Genere le script pour l'IA
@@ -77,17 +76,18 @@ public abstract class Character {
 	void compileScriptGenetic()
 	{
 		IAGenetic ch = CompileString.CompileAndInstanciateClass(this.trueID);
+		Gdx.app.log("Character compileScriptGenetic", this.trueID);
 		cl = ch.getC();
 		obj = ch.getObj();
 	}
 
 	public void findScriptAction(int compteur){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
-		System.out.println(this.id +"-compteur = "+compteur);
+		Gdx.app.log("Character", this.trueID +" compteur = "+compteur);
 		String result = "";
 		if(compteur>=10)
 		{
 			try {
-				gameStage.decodeAction("p");
+				GameStage.gameStage.decodeAction("p");
 			} catch (IllegalActionException e) {
 				e.printStackTrace();
 			}
@@ -104,7 +104,8 @@ public abstract class Character {
 					String[] decode  = result.split("!!");
 					for(String st : decode)
 					{
-						if(!st.equals("") && !(index==0 && compteur > 0)  ) gameStage.decodeAction(st);
+						if(!st.equals("") && !(index==0 && compteur > 0)  )
+							GameStage.gameStage.decodeAction(st);
 						index++;
 
 					}
@@ -113,8 +114,13 @@ public abstract class Character {
 				}
 				else
 				{
-					if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
-					findScriptAction(++compteur);
+					//if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
+					//findScriptAction(++compteur);
+					try {
+						GameStage.gameStage.decodeAction("p");
+					} catch (IllegalActionException ex) {
+						ex.printStackTrace();
+					}
 					return;
 				}
 			} catch (IllegalAccessException e) {
@@ -122,9 +128,14 @@ public abstract class Character {
 				if(compteur == 0)
 				{
 					e.printStackTrace();
-					getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
+					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
 				}
-				findScriptAction(++compteur);
+				//findScriptAction(++compteur);
+			try {
+				GameStage.gameStage.decodeAction("p");
+			} catch (IllegalActionException ex) {
+				ex.printStackTrace();
+			}
 				return;
 			} catch (SecurityException e) {
 				if(compteur == 0)e.printStackTrace();findScriptAction(++compteur);
@@ -139,11 +150,12 @@ public abstract class Character {
 				if(compteur == 0)
 				{
 					e.printStackTrace();
-					getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
+					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
 
 				}
-				findScriptAction(++compteur);
-				return;
+				 //findScriptAction(++compteur);
+
+				return ;
 			}
 		}
 	}
@@ -617,6 +629,7 @@ public abstract class Character {
 	public Character researchCharacter(int direction)
 	{
 		GameStage gameStage = GameStage.gameStage;
+		Gdx.app.log("Character researchCharacter", gameStage.getCurrentPlayer().toString());
 		return (gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).isEmpty()? null : gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).get(0));
 
 	}

@@ -1,5 +1,6 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,6 +9,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Hero;
 import com.mygdx.game.data.HeroData;
+import com.mygdx.game.data.Monster;
+import com.mygdx.game.data.MonsterData;
 import com.mygdx.game.data.SpellData;
 import com.mygdx.game.data.Stats;
 import com.mygdx.game.exception.IllegalCaracterClassException;
@@ -30,13 +33,19 @@ public class Player extends Character {
      * @param stats
      */
     @Deprecated
-    public Player(int x, int y, String id, Stats stats) {
+    public Player(int x, int y, String id, Stats stats, String trueID) {
         this.setX(x);
         this.setY(y);
         this.setId(id);
-        this.setStats(stats);
-        this.setSpells(SpellData.getSpellForClass(this.getStats().getCharacterClass()));
-        init();
+        this.setTrueID(trueID);
+
+        if(Data.generateIA) {
+            init();
+        }
+        else {
+            this.setStats(stats);
+            this.setSpells(SpellData.getSpellForClass(this.getStats().getCharacterClass()));
+        }
 
         if (Data.debug) {
             System.out.println("Debug : Player " + getId() + " created");
@@ -48,18 +57,53 @@ public class Player extends Character {
         this.setX(x);
         this.setY(y);
         this.setId(id);
-        this.setAiType("player");
         this.setTrueID(id);
-        this.setName(id);
-        this.setNpc(false);
-        Hero h = HeroData.getHeroByClass(caracterClass);
-        icon = h.getIcon();
-        if (h == null) {
-            throw (new IllegalCaracterClassException(caracterClass + "Doesn't exist in hero.xml"));
+
+        if(Data.autoIA) {
+            init();
+        }
+        else {
+            this.setAiType("player");
+            this.setName(id);
+            this.setNpc(false);
+            Hero h = HeroData.getHeroByClass(caracterClass);
+            icon = h.getIcon();
+            if (h == null) {
+                throw (new IllegalCaracterClassException(caracterClass + "Doesn't exist in hero.xml"));
+            }
+            this.setStats(h.getStat().clone());
+            this.setSpells(h.getSpells());
         }
 
-        this.setStats(h.getStat().clone());
-        this.setSpells(h.getSpells());
+
+        if (Data.debug) {
+            System.out.println("Debug : Player " + this.toString() + " created");
+        }
+    }
+
+    public Player(int x, int y, String id, String caracterClass, String trueID) throws IllegalCaracterClassException {
+        monster = false;
+        this.setX(x);
+        this.setY(y);
+        this.setId(id);
+        this.setTrueID(trueID);
+
+        if(Data.autoIA) {
+            init();
+        }
+        else {
+            this.setAiType("player");
+            this.setName(id);
+            this.setNpc(false);
+            Hero h = HeroData.getHeroByClass(caracterClass);
+            icon = h.getIcon();
+            if (h == null) {
+                throw (new IllegalCaracterClassException(caracterClass + "Doesn't exist in hero.xml"));
+            }
+            this.setStats(h.getStat().clone());
+            this.setSpells(h.getSpells());
+        }
+
 
         if (Data.debug) {
             System.out.println("Debug : Player " + this.toString() + " created");
@@ -67,7 +111,19 @@ public class Player extends Character {
     }
 
     public void init() {
+        monster=false;
+        Monster m = MonsterData.getMonsterById(this.getId());
+        Gdx.app.log("GameStage", "monster id : "+this.getId()+"m.getid() : "+m.getId()+"-"+m.toString());
 
+        this.initAnimation(m.getAnimationFrames(), 1f / 4f);
+        this.setStats(m.getStats());
+        this.setName(m.getName());
+        this.setSpells(m.getSpells());
+        this.setAiType(m.getAiType());
+        if(Data.generateIA)
+            this.generateScriptGenetic();
+        this.compileScriptGenetic();
+        this.setFitness(new IAFitness(true));
     }
 
     public Texture getIcon() {
@@ -115,7 +171,6 @@ public class Player extends Character {
     public void setSpellSelected(Spell spellSelected) {
         this.spellSelected = spellSelected;
     }
-    
 
     public boolean isSpellSelection() {
         return spellSelection;
@@ -128,5 +183,17 @@ public class Player extends Character {
     public void resetSpellSelection() {
         spellSelection = false;
         spellSelected = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Mob [name=" + getName() + ", x=" + getX() + ", y=" + getY()
+                + ", id=" + getId() + "]"+ ", true id=" + getTrueID() + "]";
+    }
+
+    public String toStringAll() {
+        return "Mob [name=" + getName() + ", x=" + getX() + ", y=" + getY()
+                + ", id=" + getId() + ", " + getStats().toString()
+                + ", Spells " + getSpells().toString() + "]";
     }
 }

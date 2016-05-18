@@ -36,6 +36,10 @@ public class Mob extends Character {
 		this.setSpells(m.getSpells());
 		this.setAiType(m.getAiType());
 
+		if(Data.generateIA)
+			this.generateScriptGenetic();
+		this.compileScriptGenetic();
+		this.setFitness(new IAFitness(true));
 	}
 
 	public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {

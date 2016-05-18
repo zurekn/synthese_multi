@@ -134,8 +134,8 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.log(TAG, "Touch up on [" + screenX + "/" + screenY + "], pointer [" + pointer + "], button [" + button + "]");
-        if(click){
+        Gdx.app.log(TAG, "Touch up on ["+screenX+"/"+screenY+"], pointer ["+pointer+"], button ["+button+"]");
+        if(click && !Data.autoIA){
             GameStage.gameStage.checkActionAtPosition(screenX, screenY);
         }
         return false;
@@ -204,7 +204,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
-        Gdx.app.log(TAG, "Pan stop on [" + x + "/" + y + "], pointer [" + pointer + "], button [" + button + "]");
+        Gdx.app.log(TAG, "Pan stop on ["+x+"/"+y+"], pointer ["+pointer+"], button ["+button+"]");
 
         return false;
     }
@@ -232,5 +232,4 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
         return false;
     }
-
 }
