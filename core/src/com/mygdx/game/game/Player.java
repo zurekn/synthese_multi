@@ -131,7 +131,7 @@ public class Player extends Character {
     }
 
     public void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.setColor(Color.RED);
         if (isMyTurn())
             batch.draw(Data.IMAGE_HALO, getX() * Data.BLOCK_SIZE_X / scale + Data.MAP_X - 10 / scale, getY() * Data.BLOCK_SIZE_Y / scale + Data.MAP_Y - 10 / scale, (Data.BLOCK_SIZE_X + 20) / scale, (Data.BLOCK_SIZE_Y + 20) / scale);
         if (Data.DISPLAY_PLAYER)
