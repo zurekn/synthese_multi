@@ -66,6 +66,7 @@ public class CameraHandler extends OrthographicCamera {
 
     public void reloadMapPosition() {
         Data.scale = zoom;
+        Gdx.app.log(TAG, "recalculate scale : "+zoom);
         Data.MAP_X = (this.viewportWidth / 2) - position.x / zoom;
         Data.MAP_Y = (this.viewportHeight / 2) - position.y / zoom;
     }
