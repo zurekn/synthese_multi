@@ -1247,10 +1247,16 @@ public class GameStage extends Stage {
         turnTimer = Integer.MAX_VALUE;
     }
 
+    public void quitGame()
+    {
+        Gdx.app.exit();
+    }
+
     public void resetGame()
     {
+
         Gdx.app.log("resetGame", "");
-        Gdx.app.exit();
+        quitGame();
     }
 
     /**
