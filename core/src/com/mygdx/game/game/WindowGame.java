@@ -79,6 +79,7 @@ public class WindowGame extends Game {
     @Override
     public void create(){
         this.setScreen(new GameScreen(this));
+//        Gdx.app.log("Window Game", "Create()");
     }
 
 }

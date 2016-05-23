@@ -5,16 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29c418e3-0f41-481e-a680-b0d6383dc8ce" name="Default" comment="update Graddle">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/Eye seeyou_m4.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/Ghost_m1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/IAdebug_2016_05_23_10_41_21.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/IAdebug_2016_05_23_10_43_35.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/IAdebug_2016_05_23_10_54_06.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/IAdebug_2016_05_23_10_56_54.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/Pumpking_m2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/Slime_m3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_g0.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_g1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_g2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_g3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_m1.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_m2.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_m3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/javaObjects_serialized_m4.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/javacompiler/CompileString.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/javacompiler/CompileString.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/IAFitness.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/IAFitness.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/android.iml" afterPath="$PROJECT_DIR$/android/android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/IAdebug.txt" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/IAlogs/IAdebug.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Synthese_multi.iws" />
@@ -68,11 +81,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameStage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameStage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1214" column="15" selection-start-line="1214" selection-start-column="15" selection-end-line="1214" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.41880342">
+              <caret line="1252" column="5" selection-start-line="1252" selection-start-column="5" selection-end-line="1252" selection-end-column="5" />
               <folding>
                 <element signature="docComment;class#GameStage#0" expanded="false" />
                 <element signature="docComment;method#getMobById#0;class#GameStage#0" expanded="false" />
@@ -103,6 +116,7 @@
                 <element signature="docComment;method#initGeneticPlayers#0;class#GameStage#0" expanded="false" />
                 <element signature="method#initGeneticPlayers#0;class#GameStage#0" expanded="false" />
                 <element signature="docComment;method#addGeneticPlayer#0;class#GameStage#0" expanded="false" />
+                <element signature="e#17671#17698#0" expanded="true" />
                 <element signature="method#addGeneticPlayer#0;class#GameStage#0" expanded="false" />
                 <element signature="e#18135#18167#0" expanded="false" />
                 <element signature="docComment;method#addChalenger#0;class#GameStage#0" expanded="false" />
@@ -111,6 +125,8 @@
                 <element signature="method#addPlayer#0;class#GameStage#0" expanded="false" />
                 <element signature="docComment;method#initCommandHandler#0;class#GameStage#0" expanded="false" />
                 <element signature="method#initCommandHandler#0;class#GameStage#0" expanded="false" />
+                <element signature="e#23686#24091#0" expanded="true" />
+                <element signature="e#24090#24091#0" expanded="true" />
                 <element signature="method#initAPIX#0;class#GameStage#0" expanded="false" />
                 <element signature="class#24333:26052" expanded="false" />
                 <element signature="method#newQRCode#0;class#24333:26052" expanded="false" />
@@ -129,8 +145,10 @@
                 <element signature="method#getCharacterPositionOnLine#0;class#GameStage#0" expanded="false" />
                 <element signature="docComment;method#getCharacterByPosition#0;class#GameStage#0" expanded="false" />
                 <element signature="method#getCharacterByPosition#0;class#GameStage#0" expanded="false" />
-                <element signature="method#endGameLogs#0;class#GameStage#0" expanded="false" />
+                <element signature="method#checkEndGame#0;class#GameStage#0" expanded="false" />
                 <element signature="method#stopAllThread#0;class#GameStage#0" expanded="false" />
+                <element signature="e#50289#50290#0" expanded="true" />
+                <element signature="e#50319#50320#0" expanded="true" />
                 <element signature="docComment;method#checkActionAtPosition#0;class#GameStage#0" expanded="false" />
                 <element signature="method#checkActionAtPosition#0;class#GameStage#0" expanded="false" />
                 <element signature="docComment;method#selectBlock#0;class#GameStage#0" expanded="false" />
@@ -144,131 +162,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-              <folding>
-                <element signature="docComment;class#Character#0" expanded="false" />
-                <element signature="docComment;method#moveTo#0;class#Character#0" expanded="false" />
-                <element signature="method#moveTo#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#moveAiTo#0;class#Character#0" expanded="false" />
-                <element signature="method#moveAiTo#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#useSpell#0;class#Character#0" expanded="false" />
-                <element signature="method#useSpell#0;class#Character#0" expanded="false" />
-                <element signature="method#distanceFrom#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#takeDamage#0;class#Character#0" expanded="false" />
-                <element signature="method#takeDamage#0;class#Character#0" expanded="false" />
-                <element signature="method#heal#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#addSpell#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#getSpell#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#isSpellLearned#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#regenMana#0;class#Character#0" expanded="false" />
-                <element signature="method#regenMana#0;class#Character#0" expanded="false" />
-                <element signature="method#getAnimation#0;class#Character#0" expanded="false" />
-                <element signature="method#setAnimation#0;class#Character#0" expanded="false" />
-                <element signature="method#initAnimation#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#getSpellByName#0;class#Character#0" expanded="false" />
-                <element signature="method#getSpellByName#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#getDeplacement#0;class#Character#0" expanded="false" />
-                <element signature="method#getDeplacement#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#passerTour#0;class#Character#0" expanded="false" />
-                <element signature="docComment;method#researchCharacter#0;class#Character#0" expanded="false" />
-                <element signature="method#researchCharacter#0;class#Character#0" expanded="false" />
-                <element signature="method#getMaxDamagingSpellId#0;class#Character#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IAFitness.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/IAFitness.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-              <folding>
-                <element signature="method#IAFitness#0;class#IAFitness#0" expanded="false" />
-                <element signature="docComment;method#addTurn#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#scoreHeal#0;class#IAFitness#0" expanded="false" />
-                <element signature="e#1813#1877#0" expanded="false" />
-                <element signature="e#3119#3122#0" expanded="false" />
-                <element signature="method#scoreSpell#0;class#IAFitness#0" expanded="false" />
-                <element signature="e#3384#3408#0" expanded="false" />
-                <element signature="e#4639#4647#0" expanded="false" />
-                <element signature="method#scoreUnlessSpell#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#addHistory#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#calculFinalScore#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#renameScoreFile#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#debugFile#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#writeHistory#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#toStringFitness#0;class#IAFitness#0" expanded="false" />
-                <element signature="method#getFinalScore#0;class#IAFitness#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompileString.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/javacompiler/CompileString.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3888889">
-              <caret line="88" column="63" selection-start-line="88" selection-start-column="63" selection-end-line="88" selection-end-column="63" />
-              <folding>
-                <element signature="e#2370#2401#0" expanded="false" />
-                <element signature="method#deserializeObject#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#combineTrees#0;class#CompileString#0" expanded="false" />
-                <element signature="method#combineTrees#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#DecodeScript#0;class#CompileString#0" expanded="false" />
-                <element signature="method#DecodeScript#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#addvancedFullCondition#0;class#CompileString#0" expanded="false" />
-                <element signature="method#addvancedFullCondition#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#getParam#0;class#CompileString#0" expanded="false" />
-                <element signature="method#getParam#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#getParamByType#0;class#CompileString#0" expanded="false" />
-                <element signature="method#getParamByType#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#replaceDefault#0;class#CompileString#0" expanded="false" />
-                <element signature="method#replaceDefault#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#getCompInCond#0;class#CompileString#0" expanded="false" />
-                <element signature="method#getCompInCond#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#getCompInt#0;class#CompileString#0" expanded="false" />
-                <element signature="method#getCompInt#0;class#CompileString#0" expanded="false" />
-                <element signature="e#18840#18901#0" expanded="false" />
-                <element signature="docComment;method#getCodeBool#0;class#CompileString#0" expanded="false" />
-                <element signature="method#getCodeBool#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#addCodeLineAlea#0;class#CompileString#0" expanded="false" />
-                <element signature="method#addCodeLineAlea#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#debugSys#0;class#CompileString#0" expanded="false" />
-                <element signature="method#debugSys#0;class#CompileString#0" expanded="false" />
-                <element signature="method#CompileAndInstanciateClass#0;class#CompileString#0" expanded="false" />
-                <element signature="e#20907#20963#0" expanded="false" />
-                <element signature="docComment;method#ReadWriteCode#0;class#CompileString#0" expanded="false" />
-                <element signature="method#ReadWriteCode#0;class#CompileString#0" expanded="false" />
-                <element signature="docComment;method#WriteCode#0;class#CompileString#0" expanded="false" />
-                <element signature="method#WriteCode#0;class#CompileString#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="WindowGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding>
-                <element signature="e#3378#3379#0" expanded="true" />
-              </folding>
+              <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -3161,11 +3060,11 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Player.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/ai/g0.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/data/Data.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/IAFitness.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/javacompiler/CompileString.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java" />
       </list>
     </option>
   </component>
@@ -4025,7 +3924,19 @@
       <option name="project" value="LOCAL" />
       <updated>1463559677790</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Ajout répertoire de log&#10;Ajout fonction pour quitter l'application">
+      <created>1463993154311</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1463993154311</updated>
+    </task>
+    <task id="LOCAL-00029" summary="update Graddle">
+      <created>1463993441216</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1463993441216</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -4042,7 +3953,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18390805" sideWeight="0.49785638" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28356165" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49315068" sideWeight="0.8710602" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49315068" sideWeight="0.8710602" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988507" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -4125,9 +4036,10 @@
     <MESSAGE value="RAS" />
     <MESSAGE value="IA genetic ok mais ne tourne pas (jeu se lanse bien)" />
     <MESSAGE value="MAJ IAGenetique parti 2/3 - bug findScriptAction" />
-    <MESSAGE value="update Graddle" />
     <MESSAGE value="aide IA Gene part 2/3" />
-    <option name="LAST_COMMIT_MESSAGE" value="aide IA Gene part 2/3" />
+    <MESSAGE value="Ajout répertoire de log&#10;Ajout fonction pour quitter l'application" />
+    <MESSAGE value="update Graddle" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Graddle" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4440,101 +4352,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/IAScript.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#3378#3379#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.48433048">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/javacompiler/CompileString.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1214" column="15" selection-start-line="1214" selection-start-column="15" selection-end-line="1214" selection-end-column="15" />
+        <state vertical-scroll-proportion="0.33918127">
+          <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
           <folding>
-            <element signature="docComment;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#getMobById#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getMobById#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#getAllPositions#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getAllPositions#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getAllTraps#0;class#GameStage#0" expanded="false" />
-            <element signature="method#create#0;class#GameStage#0" expanded="false" />
-            <element signature="e#8239#8277#0" expanded="false" />
-            <element signature="docComment;field#i#0;class#GameStage#0" expanded="false" />
-            <element signature="method#draw#0;class#GameStage#0" expanded="false" />
-            <element signature="e#10710#10741#0" expanded="false" />
-            <element signature="docComment;method#renderReachableBlocks#0;class#GameStage#0" expanded="false" />
-            <element signature="method#renderReachableBlocks#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#renderDeckArea#0;class#GameStage#0" expanded="false" />
-            <element signature="method#renderDeckArea#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#renderText#0;class#GameStage#0" expanded="false" />
-            <element signature="method#renderText#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#renderEvents#0;class#GameStage#0" expanded="false" />
-            <element signature="method#renderEvents#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#customAct#0;class#GameStage#0" expanded="false" />
-            <element signature="method#customAct#0;class#GameStage#0" expanded="false" />
-            <element signature="method#resize#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#start#0;class#GameStage#0" expanded="false" />
-            <element signature="method#start#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#initPlayers#0;class#GameStage#0" expanded="false" />
-            <element signature="method#initPlayers#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#initGeneticPlayers#0;class#GameStage#0" expanded="false" />
-            <element signature="method#initGeneticPlayers#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#addGeneticPlayer#0;class#GameStage#0" expanded="false" />
-            <element signature="method#addGeneticPlayer#0;class#GameStage#0" expanded="false" />
-            <element signature="e#18135#18167#0" expanded="false" />
-            <element signature="docComment;method#addChalenger#0;class#GameStage#0" expanded="false" />
-            <element signature="method#addChalenger#0;class#GameStage#0" expanded="false" />
-            <element signature="method#createMainPlayer#0;class#GameStage#0" expanded="false" />
-            <element signature="method#addPlayer#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#initCommandHandler#0;class#GameStage#0" expanded="false" />
-            <element signature="method#initCommandHandler#0;class#GameStage#0" expanded="false" />
-            <element signature="method#initAPIX#0;class#GameStage#0" expanded="false" />
-            <element signature="class#24333:26052" expanded="false" />
-            <element signature="method#newQRCode#0;class#24333:26052" expanded="false" />
-            <element signature="method#newMouvement#0;class#24333:26052" expanded="false" />
-            <element signature="docComment;method#switchTurn#0;class#GameStage#0" expanded="false" />
-            <element signature="method#switchTurn#0;class#GameStage#0" expanded="false" />
-            <element signature="e#27525#27543#0" expanded="false" />
-            <element signature="docComment;method#decodeAction#0;class#GameStage#0" expanded="false" />
-            <element signature="method#decodeAction#0;class#GameStage#0" expanded="false" />
-            <element signature="e#41229#41241#0" expanded="false" />
-            <element signature="docComment;method#getFirstCharacterRange#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getFirstCharacterRange#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#move#0;class#GameStage#0" expanded="false" />
-            <element signature="method#move#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#getCharacterPositionOnLine#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getCharacterPositionOnLine#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#getCharacterByPosition#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getCharacterByPosition#0;class#GameStage#0" expanded="false" />
-            <element signature="method#endGameLogs#0;class#GameStage#0" expanded="false" />
-            <element signature="method#stopAllThread#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#checkActionAtPosition#0;class#GameStage#0" expanded="false" />
-            <element signature="method#checkActionAtPosition#0;class#GameStage#0" expanded="false" />
-            <element signature="docComment;method#selectBlock#0;class#GameStage#0" expanded="false" />
-            <element signature="method#selectBlock#0;class#GameStage#0" expanded="false" />
-            <element signature="method#getSelectedDirection#0;class#GameStage#0" expanded="false" />
-            <element signature="class#Focus#0;class#GameStage#0" expanded="false" />
-            <element signature="method#Focus#0;class#Focus#0;class#GameStage#0" expanded="false" />
-            <element signature="method#toString#0;class#Focus#0;class#GameStage#0" expanded="false" />
+            <element signature="e#2370#2401#0" expanded="false" />
+            <element signature="method#deserializeObject#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#combineTrees#0;class#CompileString#0" expanded="false" />
+            <element signature="method#combineTrees#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#DecodeScript#0;class#CompileString#0" expanded="false" />
+            <element signature="method#DecodeScript#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#addvancedFullCondition#0;class#CompileString#0" expanded="false" />
+            <element signature="method#addvancedFullCondition#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#getParam#0;class#CompileString#0" expanded="false" />
+            <element signature="method#getParam#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#getParamByType#0;class#CompileString#0" expanded="false" />
+            <element signature="method#getParamByType#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#replaceDefault#0;class#CompileString#0" expanded="false" />
+            <element signature="method#replaceDefault#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#getCompInCond#0;class#CompileString#0" expanded="false" />
+            <element signature="method#getCompInCond#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#getCompInt#0;class#CompileString#0" expanded="false" />
+            <element signature="method#getCompInt#0;class#CompileString#0" expanded="false" />
+            <element signature="e#18840#18901#0" expanded="false" />
+            <element signature="docComment;method#getCodeBool#0;class#CompileString#0" expanded="false" />
+            <element signature="method#getCodeBool#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#addCodeLineAlea#0;class#CompileString#0" expanded="false" />
+            <element signature="method#addCodeLineAlea#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#debugSys#0;class#CompileString#0" expanded="false" />
+            <element signature="method#debugSys#0;class#CompileString#0" expanded="false" />
+            <element signature="method#CompileAndInstanciateClass#0;class#CompileString#0" expanded="false" />
+            <element signature="e#20907#20963#0" expanded="false" />
+            <element signature="docComment;method#ReadWriteCode#0;class#CompileString#0" expanded="false" />
+            <element signature="method#ReadWriteCode#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;method#WriteCode#0;class#CompileString#0" expanded="false" />
+            <element signature="method#WriteCode#0;class#CompileString#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/IAFitness.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0350877">
+          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+          <folding>
+            <element signature="method#IAFitness#0;class#IAFitness#0" expanded="false" />
+            <element signature="docComment;method#addTurn#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#scoreHeal#0;class#IAFitness#0" expanded="false" />
+            <element signature="e#1813#1877#0" expanded="false" />
+            <element signature="e#3119#3122#0" expanded="false" />
+            <element signature="method#scoreSpell#0;class#IAFitness#0" expanded="false" />
+            <element signature="e#3384#3408#0" expanded="false" />
+            <element signature="e#4639#4647#0" expanded="false" />
+            <element signature="method#scoreUnlessSpell#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#addHistory#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#calculFinalScore#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#renameScoreFile#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#debugFile#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#writeHistory#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#toStringFitness#0;class#IAFitness#0" expanded="false" />
+            <element signature="method#getFinalScore#0;class#IAFitness#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.2982456">
           <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding>
             <element signature="docComment;class#Character#0" expanded="false" />
@@ -4568,75 +4461,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/IAScript.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/ai/CommandHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48433048">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/IAFitness.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/WindowGame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-          <folding>
-            <element signature="method#IAFitness#0;class#IAFitness#0" expanded="false" />
-            <element signature="docComment;method#addTurn#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#scoreHeal#0;class#IAFitness#0" expanded="false" />
-            <element signature="e#1813#1877#0" expanded="false" />
-            <element signature="e#3119#3122#0" expanded="false" />
-            <element signature="method#scoreSpell#0;class#IAFitness#0" expanded="false" />
-            <element signature="e#3384#3408#0" expanded="false" />
-            <element signature="e#4639#4647#0" expanded="false" />
-            <element signature="method#scoreUnlessSpell#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#addHistory#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#calculFinalScore#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#renameScoreFile#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#debugFile#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#writeHistory#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#toStringFitness#0;class#IAFitness#0" expanded="false" />
-            <element signature="method#getFinalScore#0;class#IAFitness#0" expanded="false" />
-          </folding>
+          <caret line="82" column="5" selection-start-line="82" selection-start-column="5" selection-end-line="82" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/javacompiler/CompileString.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/game/GameStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3888889">
-          <caret line="88" column="63" selection-start-line="88" selection-start-column="63" selection-end-line="88" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.41880342">
+          <caret line="1252" column="5" selection-start-line="1252" selection-start-column="5" selection-end-line="1252" selection-end-column="5" />
           <folding>
-            <element signature="e#2370#2401#0" expanded="false" />
-            <element signature="method#deserializeObject#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#combineTrees#0;class#CompileString#0" expanded="false" />
-            <element signature="method#combineTrees#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#DecodeScript#0;class#CompileString#0" expanded="false" />
-            <element signature="method#DecodeScript#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#addvancedFullCondition#0;class#CompileString#0" expanded="false" />
-            <element signature="method#addvancedFullCondition#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#getParam#0;class#CompileString#0" expanded="false" />
-            <element signature="method#getParam#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#getParamByType#0;class#CompileString#0" expanded="false" />
-            <element signature="method#getParamByType#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#replaceDefault#0;class#CompileString#0" expanded="false" />
-            <element signature="method#replaceDefault#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#getCompInCond#0;class#CompileString#0" expanded="false" />
-            <element signature="method#getCompInCond#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#getCompInt#0;class#CompileString#0" expanded="false" />
-            <element signature="method#getCompInt#0;class#CompileString#0" expanded="false" />
-            <element signature="e#18840#18901#0" expanded="false" />
-            <element signature="docComment;method#getCodeBool#0;class#CompileString#0" expanded="false" />
-            <element signature="method#getCodeBool#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#addCodeLineAlea#0;class#CompileString#0" expanded="false" />
-            <element signature="method#addCodeLineAlea#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#debugSys#0;class#CompileString#0" expanded="false" />
-            <element signature="method#debugSys#0;class#CompileString#0" expanded="false" />
-            <element signature="method#CompileAndInstanciateClass#0;class#CompileString#0" expanded="false" />
-            <element signature="e#20907#20963#0" expanded="false" />
-            <element signature="docComment;method#ReadWriteCode#0;class#CompileString#0" expanded="false" />
-            <element signature="method#ReadWriteCode#0;class#CompileString#0" expanded="false" />
-            <element signature="docComment;method#WriteCode#0;class#CompileString#0" expanded="false" />
-            <element signature="method#WriteCode#0;class#CompileString#0" expanded="false" />
+            <element signature="docComment;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#getMobById#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getMobById#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#getAllPositions#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getAllPositions#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getAllTraps#0;class#GameStage#0" expanded="false" />
+            <element signature="method#create#0;class#GameStage#0" expanded="false" />
+            <element signature="e#8239#8277#0" expanded="false" />
+            <element signature="docComment;field#i#0;class#GameStage#0" expanded="false" />
+            <element signature="method#draw#0;class#GameStage#0" expanded="false" />
+            <element signature="e#10710#10741#0" expanded="false" />
+            <element signature="docComment;method#renderReachableBlocks#0;class#GameStage#0" expanded="false" />
+            <element signature="method#renderReachableBlocks#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#renderDeckArea#0;class#GameStage#0" expanded="false" />
+            <element signature="method#renderDeckArea#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#renderText#0;class#GameStage#0" expanded="false" />
+            <element signature="method#renderText#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#renderEvents#0;class#GameStage#0" expanded="false" />
+            <element signature="method#renderEvents#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#customAct#0;class#GameStage#0" expanded="false" />
+            <element signature="method#customAct#0;class#GameStage#0" expanded="false" />
+            <element signature="method#resize#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#GameStage#0" expanded="false" />
+            <element signature="method#start#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#initPlayers#0;class#GameStage#0" expanded="false" />
+            <element signature="method#initPlayers#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#initGeneticPlayers#0;class#GameStage#0" expanded="false" />
+            <element signature="method#initGeneticPlayers#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#addGeneticPlayer#0;class#GameStage#0" expanded="false" />
+            <element signature="e#17671#17698#0" expanded="true" />
+            <element signature="method#addGeneticPlayer#0;class#GameStage#0" expanded="false" />
+            <element signature="e#18135#18167#0" expanded="false" />
+            <element signature="docComment;method#addChalenger#0;class#GameStage#0" expanded="false" />
+            <element signature="method#addChalenger#0;class#GameStage#0" expanded="false" />
+            <element signature="method#createMainPlayer#0;class#GameStage#0" expanded="false" />
+            <element signature="method#addPlayer#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#initCommandHandler#0;class#GameStage#0" expanded="false" />
+            <element signature="method#initCommandHandler#0;class#GameStage#0" expanded="false" />
+            <element signature="e#23686#24091#0" expanded="true" />
+            <element signature="e#24090#24091#0" expanded="true" />
+            <element signature="method#initAPIX#0;class#GameStage#0" expanded="false" />
+            <element signature="class#24333:26052" expanded="false" />
+            <element signature="method#newQRCode#0;class#24333:26052" expanded="false" />
+            <element signature="method#newMouvement#0;class#24333:26052" expanded="false" />
+            <element signature="docComment;method#switchTurn#0;class#GameStage#0" expanded="false" />
+            <element signature="method#switchTurn#0;class#GameStage#0" expanded="false" />
+            <element signature="e#27525#27543#0" expanded="false" />
+            <element signature="docComment;method#decodeAction#0;class#GameStage#0" expanded="false" />
+            <element signature="method#decodeAction#0;class#GameStage#0" expanded="false" />
+            <element signature="e#41229#41241#0" expanded="false" />
+            <element signature="docComment;method#getFirstCharacterRange#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getFirstCharacterRange#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#move#0;class#GameStage#0" expanded="false" />
+            <element signature="method#move#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#getCharacterPositionOnLine#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getCharacterPositionOnLine#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#getCharacterByPosition#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getCharacterByPosition#0;class#GameStage#0" expanded="false" />
+            <element signature="method#checkEndGame#0;class#GameStage#0" expanded="false" />
+            <element signature="method#stopAllThread#0;class#GameStage#0" expanded="false" />
+            <element signature="e#50289#50290#0" expanded="true" />
+            <element signature="e#50319#50320#0" expanded="true" />
+            <element signature="docComment;method#checkActionAtPosition#0;class#GameStage#0" expanded="false" />
+            <element signature="method#checkActionAtPosition#0;class#GameStage#0" expanded="false" />
+            <element signature="docComment;method#selectBlock#0;class#GameStage#0" expanded="false" />
+            <element signature="method#selectBlock#0;class#GameStage#0" expanded="false" />
+            <element signature="method#getSelectedDirection#0;class#GameStage#0" expanded="false" />
+            <element signature="class#Focus#0;class#GameStage#0" expanded="false" />
+            <element signature="method#Focus#0;class#Focus#0;class#GameStage#0" expanded="false" />
+            <element signature="method#toString#0;class#Focus#0;class#GameStage#0" expanded="false" />
           </folding>
         </state>
       </provider>

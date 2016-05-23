@@ -1,0 +1,7 @@
+m4 s2:360 Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 0;nbTurn alive = 0;-20;0;0;0;0;0
+m4 p Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 1;pMove = 0;nbTurn alive = 0;-20;0;0;1;0;0
+m4 s2:360 Fitness : pAction = -40;pHeal = 0;pActionmissed = 0;pPass = 1;pMove = 0;nbTurn alive = 1;-40;0;0;1;0;1
+m4 p Fitness : pAction = -40;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 0;nbTurn alive = 1;-40;0;0;2;0;1
+m4 s2:360 Fitness : pAction = -70;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 0;nbTurn alive = 2;-70;0;0;2;0;2
+m4 p Fitness : pAction = -70;pHeal = 0;pActionmissed = 0;pPass = 3;pMove = 0;nbTurn alive = 2;-70;0;0;3;0;2
+

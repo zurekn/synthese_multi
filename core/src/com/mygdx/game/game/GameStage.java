@@ -1254,7 +1254,6 @@ public class GameStage extends Stage {
 
     public void resetGame()
     {
-
         Gdx.app.log("resetGame", "");
         quitGame();
     }

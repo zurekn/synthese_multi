@@ -1,0 +1,195 @@
+==init==
+genPlayer Ghost g0 BOUGE en 7:9 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 0
+genPlayerPumpking g1 a lanc� un sort sur mob Pumpking g1. Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 0;nbTurn alive = 0
+genPlayer Pumpking g1 PASSE son tour .Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 1;pMove = 0;nbTurn alive = 0
+genPlayer Slime g2 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 0;nbTurn alive = 0
+genPlayer Slime g2 BOUGE en 11:13 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 1;nbTurn alive = 0
+genPlayerEye seeyou g3 a lanc� un sort sur mob Eye seeyou g3. Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 0;nbTurn alive = 0
+genPlayer Eye seeyou g3 BOUGE en 9:13 .Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 0
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 0;nbTurn alive = 0
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 1;pMove = 0;nbTurn alive = 0
+mob Pumpking m2 a lanc� un sort sur mob Pumpking m2. Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 0;nbTurn alive = 0
+mob Pumpking m2 BOUGE en 5:6 .Fitness : pAction = -20;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 0
+mob Slime m3a attaqu� personne (echec crit) .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 0;nbTurn alive = 0
+mob Slime m3 BOUGE en 10:11 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 1;nbTurn alive = 0
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 1;pMove = 0;nbTurn alive = 0
+
+				=== TOUR 1 ===
+genPlayer Ghost g0 BOUGE en 4:10 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 2;nbTurn alive = 1
+genPlayerPumpking g1 a lanc� un sort sur mob Pumpking g1. Fitness : pAction = -40;pHeal = 0;pActionmissed = 0;pPass = 1;pMove = 0;nbTurn alive = 1
+genPlayer Pumpking g1 PASSE son tour .Fitness : pAction = -40;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 0;nbTurn alive = 1
+genPlayer Slime g2 BOUGE en 10:14 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 2;nbTurn alive = 1
+genPlayerEye seeyou g3 a lanc� un sort sur mob Eye seeyou g3. Fitness : pAction = -50;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 1
+*** genPlayer Eye seeyou g3 a �t� tu� par genPlayer Eye seeyou g3.
+genPlayer Eye seeyou g3 BOUGE en 11:14 .Fitness : pAction = -50;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 2;nbTurn alive = 1
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 1;pMove = 0;nbTurn alive = 1
+mob Ghost m1 BOUGE en 8:6 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 1;pMove = 1;nbTurn alive = 1
+mob Pumpking m2 a lanc� un sort sur mob Pumpking m2. Fitness : pAction = -50;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 1
+*** mob Pumpking m2 a �t� tu� par mob Pumpking m2.
+mob Pumpking m2 BOUGE en 4:7 .Fitness : pAction = -50;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 2;nbTurn alive = 1
+mob Slime m3 BOUGE en 10:12 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 2;nbTurn alive = 1
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 0;nbTurn alive = 1
+
+				=== TOUR 2 ===
+genPlayer Ghost g0 BOUGE en 1:11 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 3;nbTurn alive = 2
+genPlayerPumpking g1 a lanc� un sort sur mob Pumpking g1. Fitness : pAction = -70;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 0;nbTurn alive = 2
+*** genPlayer Pumpking g1 a �t� tu� par genPlayer Pumpking g1.
+genPlayer Pumpking g1 PASSE son tour .Fitness : pAction = -70;pHeal = 0;pActionmissed = 0;pPass = 3;pMove = 0;nbTurn alive = 2
+genPlayer Slime g2 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 2;nbTurn alive = 2
+genPlayer Slime g2 BOUGE en 9:15 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 3;nbTurn alive = 2
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 1;pMove = 1;nbTurn alive = 2
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 2;pMove = 1;nbTurn alive = 2
+mob Slime m3 BOUGE en 10:13 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 1;pPass = 0;pMove = 3;nbTurn alive = 2
+mob Eye seeyou m4 BOUGE en 9:10 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 1;nbTurn alive = 2
+
+				=== TOUR 3 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 1;pMove = 3;nbTurn alive = 3
+genPlayer Slime g2 BOUGE en 8:16 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 4;nbTurn alive = 3
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 2;pMove = 1;nbTurn alive = 3
+mob Ghost m1 BOUGE en 11:7 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 2;pMove = 2;nbTurn alive = 3
+mob Slime m3 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 3;nbTurn alive = 3
+mob Slime m3 BOUGE en 10:14 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 4;nbTurn alive = 3
+mob Eye seeyou m4 BOUGE en 7:9 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 2;nbTurn alive = 3
+
+				=== TOUR 4 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 3;nbTurn alive = 4
+genPlayer Slime g2 BOUGE en 7:17 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 5;nbTurn alive = 4
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 2;pMove = 2;nbTurn alive = 4
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 3;pMove = 2;nbTurn alive = 4
+mob Slime m3 BOUGE en 10:15 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 5;nbTurn alive = 4
+mob Eye seeyou m4 BOUGE en 5:8 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 3;nbTurn alive = 4
+
+				=== TOUR 5 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 3;pMove = 3;nbTurn alive = 5
+genPlayer Slime g2 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 5;nbTurn alive = 5
+genPlayer Slime g2 BOUGE en 6:18 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 6;nbTurn alive = 5
+mob Ghost m1a attaqu� personne (echec crit) .Fitness : pAction = 0;pHeal = 0;pActionmissed = 6;pPass = 3;pMove = 2;nbTurn alive = 5
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 6;pPass = 4;pMove = 2;nbTurn alive = 5
+mob Slime m3 BOUGE en 10:16 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 2;pPass = 0;pMove = 6;nbTurn alive = 5
+mob Eye seeyou m4 BOUGE en 3:7 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 4;nbTurn alive = 5
+
+				=== TOUR 6 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 4;pMove = 3;nbTurn alive = 6
+genPlayer Slime g2 BOUGE en 5:19 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 7;nbTurn alive = 6
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 7;pPass = 4;pMove = 2;nbTurn alive = 6
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 7;pPass = 5;pMove = 2;nbTurn alive = 6
+mob Slime m3 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 6;nbTurn alive = 6
+mob Slime m3 BOUGE en 10:17 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 7;nbTurn alive = 6
+mob Eye seeyou m4 BOUGE en 3:6 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 5;nbTurn alive = 6
+
+				=== TOUR 7 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 5;pMove = 3;nbTurn alive = 7
+genPlayer Slime g2 BOUGE en 4:20 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 8;nbTurn alive = 7
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 8;pPass = 5;pMove = 2;nbTurn alive = 7
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 8;pPass = 6;pMove = 2;nbTurn alive = 7
+mob Slime m3 BOUGE en 10:18 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 8;nbTurn alive = 7
+mob Eye seeyou m4 BOUGE en 1:5 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 2;pMove = 6;nbTurn alive = 7
+
+				=== TOUR 8 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 6;pMove = 3;nbTurn alive = 8
+genPlayer Slime g2 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 8;nbTurn alive = 8
+genPlayer Slime g2 BOUGE en 3:21 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 9;nbTurn alive = 8
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 9;pPass = 6;pMove = 2;nbTurn alive = 8
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 9;pPass = 7;pMove = 2;nbTurn alive = 8
+mob Slime m3 BOUGE en 10:19 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 3;pPass = 0;pMove = 9;nbTurn alive = 8
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 3;pMove = 6;nbTurn alive = 8
+
+				=== TOUR 9 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 7;pMove = 3;nbTurn alive = 9
+genPlayer Slime g2 BOUGE en 2:22 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 10;nbTurn alive = 9
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 10;pPass = 7;pMove = 2;nbTurn alive = 9
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 10;pPass = 8;pMove = 2;nbTurn alive = 9
+mob Slime m3 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 9;nbTurn alive = 9
+mob Slime m3 BOUGE en 10:20 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 10;nbTurn alive = 9
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 4;pMove = 6;nbTurn alive = 9
+
+				=== TOUR 10 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 8;pMove = 3;nbTurn alive = 10
+genPlayer Slime g2 BOUGE en 1:23 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 11;nbTurn alive = 10
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 11;pPass = 8;pMove = 2;nbTurn alive = 10
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 11;pPass = 9;pMove = 2;nbTurn alive = 10
+mob Slime m3 BOUGE en 10:21 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 11;nbTurn alive = 10
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 5;pMove = 6;nbTurn alive = 10
+
+				=== TOUR 11 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 9;pMove = 3;nbTurn alive = 11
+genPlayer Slime g2 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 0;pMove = 11;nbTurn alive = 11
+genPlayer Slime g2 BOUGE en 0:24 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 0;pMove = 12;nbTurn alive = 11
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 12;pPass = 9;pMove = 2;nbTurn alive = 11
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 12;pPass = 10;pMove = 2;nbTurn alive = 11
+mob Slime m3 BOUGE en 10:22 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 4;pPass = 0;pMove = 12;nbTurn alive = 11
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 6;pMove = 6;nbTurn alive = 11
+
+				=== TOUR 12 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 10;pMove = 3;nbTurn alive = 12
+genPlayer Slime g2 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 1;pMove = 12;nbTurn alive = 12
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 13;pPass = 10;pMove = 2;nbTurn alive = 12
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 13;pPass = 11;pMove = 2;nbTurn alive = 12
+mob Slime m3 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 0;pMove = 12;nbTurn alive = 12
+mob Slime m3 BOUGE en 10:23 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 0;pMove = 13;nbTurn alive = 12
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 7;pMove = 6;nbTurn alive = 12
+
+				=== TOUR 13 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 11;pMove = 3;nbTurn alive = 13
+genPlayer Slime g2 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 2;pMove = 12;nbTurn alive = 13
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 14;pPass = 11;pMove = 2;nbTurn alive = 13
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 14;pPass = 12;pMove = 2;nbTurn alive = 13
+mob Slime m3 BOUGE en 10:24 .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 0;pMove = 14;nbTurn alive = 13
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 8;pMove = 6;nbTurn alive = 13
+
+				=== TOUR 14 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 12;pMove = 3;nbTurn alive = 14
+genPlayerSlime g2 a lanc� un sort sur mob Slime g2. Fitness : pAction = -20;pHeal = 0;pActionmissed = 5;pPass = 2;pMove = 12;nbTurn alive = 14
+genPlayer Slime g2 PASSE son tour .Fitness : pAction = -20;pHeal = 0;pActionmissed = 5;pPass = 3;pMove = 12;nbTurn alive = 14
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 15;pPass = 12;pMove = 2;nbTurn alive = 14
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 15;pPass = 13;pMove = 2;nbTurn alive = 14
+mob Slime m3 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 1;pMove = 14;nbTurn alive = 14
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 9;pMove = 6;nbTurn alive = 14
+
+				=== TOUR 15 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 13;pMove = 3;nbTurn alive = 15
+genPlayerSlime g2 a lanc� un sort sur mob Slime g2. Fitness : pAction = -50;pHeal = 0;pActionmissed = 5;pPass = 3;pMove = 12;nbTurn alive = 15
+*** genPlayer Slime g2 a �t� tu� par genPlayer Slime g2.
+genPlayer Slime g2 PASSE son tour .Fitness : pAction = -50;pHeal = 0;pActionmissed = 5;pPass = 4;pMove = 12;nbTurn alive = 15
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 16;pPass = 13;pMove = 2;nbTurn alive = 15
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 16;pPass = 14;pMove = 2;nbTurn alive = 15
+mob Slime m3 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 5;pPass = 2;pMove = 14;nbTurn alive = 15
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 10;pMove = 6;nbTurn alive = 15
+
+				=== TOUR 16 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 14;pMove = 3;nbTurn alive = 16
+mob Ghost m1 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 17;pPass = 14;pMove = 2;nbTurn alive = 16
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 17;pPass = 15;pMove = 2;nbTurn alive = 16
+mob Slime m3 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 6;pPass = 2;pMove = 14;nbTurn alive = 16
+mob Slime m3 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 6;pPass = 3;pMove = 14;nbTurn alive = 16
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 11;pMove = 6;nbTurn alive = 16
+
+				=== TOUR 17 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 15;pMove = 3;nbTurn alive = 17
+mob Ghost m1a attaqu� personne (echec crit) .Fitness : pAction = 0;pHeal = 0;pActionmissed = 18;pPass = 15;pMove = 2;nbTurn alive = 17
+*** mob Ghost m1 est mort .Fitness : pAction = 0;pHeal = 0;pActionmissed = 18;pPass = 15;pMove = 2;nbTurn alive = 17
+mob Ghost m1 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 18;pPass = 16;pMove = 2;nbTurn alive = 17
+mob Slime m3 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 6;pPass = 4;pMove = 14;nbTurn alive = 17
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 12;pMove = 6;nbTurn alive = 17
+
+				=== TOUR 18 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 16;pMove = 3;nbTurn alive = 18
+mob Slime m3 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 6;pPass = 5;pMove = 14;nbTurn alive = 18
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 13;pMove = 6;nbTurn alive = 18
+
+				=== TOUR 19 ===
+genPlayer Ghost g0 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 17;pMove = 3;nbTurn alive = 19
+mob Slime m3 a lanc� un sort sur personne .Fitness : pAction = 0;pHeal = 0;pActionmissed = 7;pPass = 5;pMove = 14;nbTurn alive = 19
+mob Slime m3 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 7;pPass = 6;pMove = 14;nbTurn alive = 19
+mob Eye seeyou m4 PASSE son tour .Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 14;pMove = 6;nbTurn alive = 19
+
+				=== TOUR 20 ===
+-- FIN DE JEU --
+Mob id=m1 name=Ghost score final = 20Fitness : pAction = 0;pHeal = 0;pActionmissed = 18;pPass = 16;pMove = 2;nbTurn alive = 17
+Mob id=m2 name=Pumpking score final = -30Fitness : pAction = -50;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 2;nbTurn alive = 1
+Mob id=m3 name=Slime score final = 20Fitness : pAction = 0;pHeal = 0;pActionmissed = 7;pPass = 6;pMove = 14;nbTurn alive = 19
+Mob id=m4 name=Eye seeyou score final = 20Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 14;pMove = 6;nbTurn alive = 19
+Player id=g0 name=Ghost score final = 0Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 17;pMove = 3;nbTurn alive = 19
+Player id=g1 name=Pumpking score final = -70Fitness : pAction = -70;pHeal = 0;pActionmissed = 0;pPass = 3;pMove = 0;nbTurn alive = 2
+Player id=g2 name=Slime score final = -50Fitness : pAction = -50;pHeal = 0;pActionmissed = 5;pPass = 4;pMove = 12;nbTurn alive = 15
+Player id=g3 name=Eye seeyou score final = -50Fitness : pAction = -50;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 2;nbTurn alive = 1
