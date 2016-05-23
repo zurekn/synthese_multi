@@ -14,7 +14,7 @@ import com.mygdx.game.data.Data;
 public class CameraHandler extends OrthographicCamera {
 
     private static final String TAG = "CameraHandler";
-
+    private static CameraHandler cameraHandler;
     public static float initialScale = 1.0f;
     public static final float MAX_ZOOM = 0.2f;
     public static final float MIN_ZOOM = 2f;
@@ -37,6 +37,12 @@ public class CameraHandler extends OrthographicCamera {
         Data.MAP_Y = (Data.SCREEN_HEIGHT / 2) - position.y / zoom;
 
         this.update();
+    }
+
+    public static CameraHandler getInstance() {
+        if (cameraHandler == null)
+            cameraHandler = new CameraHandler();
+        return cameraHandler;
     }
 
     public void resize(int width, int height){

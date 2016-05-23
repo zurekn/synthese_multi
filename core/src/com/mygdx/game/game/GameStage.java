@@ -109,12 +109,13 @@ public class GameStage extends Stage {
     private int global_turn;
     private int actionLeft = ACTION_PER_TURN;
 
-    //
+    // Game status
     public static boolean gameOn = false;
     public boolean gameEnded = false;
     public boolean gameWin = false;
     public boolean gameLose = false;
     private int timerInitPlayer;
+    private int loopNumber = 1;
 
     //
     private int turnTimer;
@@ -208,27 +209,24 @@ public class GameStage extends Stage {
         // TrapData.loadTrap();
 
         initAPIX();
-        if(!Data.ANDROID)
-            initCommandHandler();
 
-        // Create the monster list
+
+        // Create the monsters and players lists
         mobs = MonsterData.initMobs();
         mobHandler = new MobHandler(mobs);
-
-        messageHandler = new MessageHandler();
-
+        originMobs = new ArrayList<Mob>(mobs);
         players = new ArrayList<Player>();
         playerHandler = new PlayerHandler(players);
-        originMobs = new ArrayList<Mob>(mobs);
-
-        // Create the player list
+        messageHandler = new MessageHandler();
+        if(!Data.ANDROID && loopNumber == 1) {
+            initCommandHandler();
+            camera = new CameraHandler();
+            camera.init();
+            Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
+        }
+        // Fill the player list
         if(Data.autoIA && !Data.jvm)
         {
-            Gdx.app.log("create", "Auto IA launch !");
-            Gdx.app.log("", "");
-            Gdx.app.log("", "");
-            Gdx.app.log("", "");
-            Gdx.app.log("", "");
             initGeneticPlayers();
             Data.singlePlayer = false;
         }
@@ -256,9 +254,6 @@ public class GameStage extends Stage {
         // Set the timer
         timerInitPlayer = INIT_MAX_TIME;
 
-        camera = new CameraHandler();
-        camera.init();
-        Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
     }
 
     /************************************/
@@ -412,8 +407,13 @@ public class GameStage extends Stage {
         ui.act(delta);
         this.act(delta);
         camera.update();
-        if (gameEnded)
+        if (gameEnded) {
+            reinitAll();
+            loopNumber++;
+            create();
+            start();
             return;
+        }
         long time = System.currentTimeMillis();
         if (time - timeStamp > 1000) {
             if (gameOn) {
@@ -783,7 +783,7 @@ public class GameStage extends Stage {
             checkEndGame();
 
             global_turn++;
-            messageHandler.addPlayerMessage(new Message("Tour de jeu numéro  "+global_turn, Data.MESSAGE_TYPE_INFO), turn);
+            messageHandler.addPlayerMessage(new Message("Tour de jeu numï¿½ro  "+global_turn, Data.MESSAGE_TYPE_INFO), turn);
             for(Mob mo:mobs){
                 mo.getFitness().addTurn();
             }
@@ -823,7 +823,7 @@ public class GameStage extends Stage {
         messageHandler.addGlobalMessage(new Message("Turn of " + currentCharacter.getName()));
         actionLeft = ACTION_PER_TURN;
 
-        if ( (currentCharacter.isNpc() || (Data.autoIA && Data.jvm) )  && !getCurrentCharacter().getHasPlayed() )// mettre le run du bot IAGénétique
+        if ( (currentCharacter.isNpc() || (Data.autoIA && Data.jvm) )  && !getCurrentCharacter().getHasPlayed() )// mettre le run du bot IAGï¿½nï¿½tique
             currentCharacter.findScriptAction();
 
         // print the current turn in the console
@@ -908,7 +908,7 @@ public class GameStage extends Stage {
                             currentCharacter.getFitness().scoreUnlessSpell();
                             currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
                             currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
-                                    +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" a soigné personne ."+currentCharacter.getFitness().toStringFitness(),true);
+                                    +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" a soignï¿½ personne ."+currentCharacter.getFitness().toStringFitness(),true);
                         }
                         messageHandler.addPlayerMessage(new Message("Heal critic " + heal + " to the " + focus.character.getName() + "", MESSAGE_TYPE_ERROR), turn);
 
@@ -924,7 +924,7 @@ public class GameStage extends Stage {
                             currentCharacter.getFitness().scoreUnlessSpell();
                             currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
                             currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
-                                    +currentCharacter.getName()+" "+currentCharacter.getTrueID()+"a attaqué personne (echec crit) ."+currentCharacter.getFitness().toStringFitness(),true);
+                                    +currentCharacter.getName()+" "+currentCharacter.getTrueID()+"a attaquï¿½ personne (echec crit) ."+currentCharacter.getFitness().toStringFitness(),true);
                         }
                         messageHandler.addPlayerMessage(new Message("Use " + SpellData.getSpellById(spellID).getName() + " on " + currentCharacter.getName() + " and deal critic " + damage, MESSAGE_TYPE_ERROR), turn);
 
@@ -987,7 +987,7 @@ public class GameStage extends Stage {
                             int index = Math.max(players.indexOf(focus.character), mobs.indexOf(focus.character));
                             int indexCurrent = Math.max(players.indexOf(currentCharacter), mobs.indexOf(currentCharacter));
                             currentCharacter.getFitness().debugFile("*** " + (focus.character.isMonster() ? "mob " : "genPlayer ") +
-                                    focus.character.getName() + " " + focus.character.getTrueID() + " a été tué par " + (currentCharacter.isMonster() ? "mob " : "genPlayer ") + currentCharacter.getName() + " " + currentCharacter.getTrueID() + ".", true);
+                                    focus.character.getName() + " " + focus.character.getTrueID() + " a ï¿½tï¿½ tuï¿½ par " + (currentCharacter.isMonster() ? "mob " : "genPlayer ") + currentCharacter.getName() + " " + currentCharacter.getTrueID() + ".", true);
 
                             players.remove(focus.character);
 
@@ -1003,7 +1003,7 @@ public class GameStage extends Stage {
                         currentCharacter.getFitness().scoreUnlessSpell();
                         currentCharacter.getFitness().addHistory(currentCharacter.getId() + " " + action.toString()+" "+currentCharacter.getFitness().toStringFitness());
                         currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
-                                +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" a lancé un sort sur personne ."+currentCharacter.getFitness().toStringFitness(),true);
+                                +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" a lancï¿½ un sort sur personne ."+currentCharacter.getFitness().toStringFitness(),true);
 
                     }
                 }
@@ -1214,7 +1214,8 @@ public class GameStage extends Stage {
             System.out.println("-- FIN DE JEU-- ");
           if(Data.autoIA) {
               endGameLogs();
-              resetGame();
+              if(loopNumber >= Data.MAX_GAME_LOOP)
+                resetGame();
           }
         }
     }
@@ -1226,7 +1227,7 @@ public class GameStage extends Stage {
             mo.getFitness().debugFile(	"Mob id="+mo.getTrueID()+" name="+mo.getName()+
                 " score final = "+mo.getFitness().calculFinalScore(gameLose, global_turn)+""+
                 mo.getFitness().toStringFitness(), true);
-        mo.getFitness().writeHistory(mo, false);
+        mo.getFitness().writeHistory(mo, false, loopNumber);
             System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = "+mo.getFitness().getFinalScore() );
 
         }
@@ -1234,7 +1235,7 @@ public class GameStage extends Stage {
             po.getFitness().debugFile("Player id="+po.getTrueID()+" name="+po.getName()+
                     " score final = "+po.getFitness().calculFinalScore(gameWin, global_turn)+""+
                     po.getFitness().toStringFitness(), true);
-            po.getFitness().writeHistory(po, false);
+            po.getFitness().writeHistory(po, false, loopNumber);
         }
     originMobs.get(0).getFitness().renameScoreFile();
     stopAllThread();
@@ -1244,6 +1245,7 @@ public class GameStage extends Stage {
         if(Data.RUN_APIX)
             apix.stop();
         CommandHandler.getInstance().getThread().stop();
+       // CameraHandler.getInstance().getThread().stop();
         turnTimer = Integer.MAX_VALUE;
     }
 
@@ -1326,6 +1328,7 @@ public class GameStage extends Stage {
         return -1;
     }
 
+
     private class Focus {
         protected float range;
         protected Character character;
@@ -1338,5 +1341,28 @@ public class GameStage extends Stage {
         public String toString() {
             return "Focus [ range, " + range + ", " + character.toString() + "]";
         }
+    }
+
+    private void reinitAll(){
+        players.clear();
+        mobs.clear();
+        originPlayers.clear();
+        originMobs.clear();
+        gameOn = false;
+        gameWin = false;
+        gameLose = false;
+        global_turn = 0;
+        turn = 0;
+        previousCharacter = null;
+        currentCharacter = null;
+       /* try {
+            commands.getThread().wait();
+
+        }catch(InterruptedException e){
+            Gdx.app.log(LABEL,"** Reinit All datas : Interrupted Exception **");
+        }*/
+        Gdx.app.log(LABEL,"** Reinit All datas : players size = "+players.size()+", mobs size = "+mobs.size()+"**");
+        Gdx.app.log(LABEL,"** Reinit All datas : Origin players size = "+originPlayers.size()+", Origin mobs size = "+originMobs.size()+"**");
+        gameEnded = false;
     }
 }
