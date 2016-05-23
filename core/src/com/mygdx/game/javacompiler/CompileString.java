@@ -101,12 +101,28 @@ public class CompileString {
 				new FileInputStream(rootDir+pathClass+"javaObjects_" + name + ".txt"));
 		Node readJSON = (Node) objectInputStream.readObject();
 		objectInputStream.close();
-		System.out.println("### Display Tree");
+//		System.out.println("### Display Tree");
 		readJSON.displayTree();
-		System.out.println("### Tree displayed");
+//		System.out.println("### Tree displayed");
 		readJSON.getSubTree(1).displayNode();
-		System.out.println("### Fin deserialize");
+//		System.out.println("### Fin deserialize");
 		return readJSON;
+	}
+
+	public static void loadMob(String name, String geneticName)
+	{
+		try {
+			Node treeMob = deserializeObject(name);
+			ArrayList<String> contentCode = new ArrayList<String>();
+			contentCode = treeMob.TreeToArrayList(contentCode);
+			className = geneticName + (aRisque ? "_Arisque" : "");
+			ReadWriteCode(contentCode, className);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 
