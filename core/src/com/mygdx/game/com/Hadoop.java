@@ -52,6 +52,7 @@ public class Hadoop {
                 System.out.println(line);
                 line=br.readLine();
             }
+
         }catch(Exception e){
             Gdx.app.log(TAG, "Error while reading the file "+fileName);
         }
