@@ -10,6 +10,7 @@ import com.badlogic.gdx.net.SocketHints;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 
 /**
@@ -22,6 +23,7 @@ public class TCPServer {
     private ServerSocket serverSocket;
     private String hostname;
     private Socket lastClient;
+    private ArrayList<Socket> clients;
 
     private static final int DEFAULT_TIME_OUT = 500;
 
@@ -45,7 +47,13 @@ public class TCPServer {
         this(hostname, port, DEFAULT_TIME_OUT, reuseAddr);
     }
 
+    public int getPort(){
+        return port;
+
+    }
+
     public TCPServer(String hostname, int port, int timeout, Boolean reuseAddr) {
+        this.clients = new ArrayList<Socket>();
         this.port = port;
         this.hints = new ServerSocketHints();
         this.hints.acceptTimeout = timeout;
@@ -54,6 +62,7 @@ public class TCPServer {
         this.hints.performancePrefConnectionTime = 0;
         this.hints.performancePrefLatency = 0;
         this.hostname = hostname;
+        System.out.println("Bind at port "+port);
         serverSocket = Gdx.net.newServerSocket(Net.Protocol.TCP, hostname, port, this.hints);
     }
 
@@ -68,9 +77,18 @@ public class TCPServer {
     }
 
     public String receive() {
+        return receive(hints.acceptTimeout);
+    }
+
+    public String receive(int timeout) {
         try {
             SocketHints clientHints = new SocketHints();
+            int tmp = hints.acceptTimeout;
+            hints.acceptTimeout = timeout;
             lastClient = serverSocket.accept(null);
+            if(!clients.contains(lastClient))
+                clients.add(lastClient);
+            hints.acceptTimeout = tmp;
             String message = new BufferedReader(new InputStreamReader(lastClient.getInputStream())).readLine();
             Gdx.app.log("Server",  "Received : "+message);
             return message;
@@ -87,4 +105,25 @@ public class TCPServer {
     public Socket getLastClient(){
         return lastClient;
     }
+
+    public void setTimeOut(int timeOut){
+        hints.acceptTimeout = timeOut;
+    }
+
+    public void sendToAllClients(String message) {
+        for(Socket sock : clients){
+            send(message, sock);
+        }
+    }
+
+    public void close(){
+        serverSocket.dispose();
+    }
+
+    public void disposeAll(){
+        for(Socket sock : clients){
+            sock.dispose();
+        }
+    }
+
 }

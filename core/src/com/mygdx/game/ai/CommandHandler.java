@@ -62,8 +62,10 @@ public class CommandHandler extends Handler {
 
 	@Override
 	public void begin() {
-		System.out.println("Launch the Command Handler Thread");
-		getThread().start();
+		if(!getThread().isAlive()){
+			System.out.println("Launch the Command Handler Thread");
+			getThread().start();
+		}
 	}
 
 	public static CommandHandler getInstance() {

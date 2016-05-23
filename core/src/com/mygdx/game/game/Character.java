@@ -455,6 +455,14 @@ public abstract class Character {
 		return lastY;
 	}
 
+	public void setLastX(int x){
+		this.lastX = x;
+	}
+
+	public void setLastY(int y){
+		this.lastY = y;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

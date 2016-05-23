@@ -8,12 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.ai.AStar;
-import com.mygdx.game.ai.ActionEvent;
-import com.mygdx.game.ai.CharacterData;
-import com.mygdx.game.ai.CommandHandler;
-import com.mygdx.game.ai.CommandListener;
-import com.mygdx.game.ai.WindowGameData;
+
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Event;
 import com.mygdx.game.data.HeroData;

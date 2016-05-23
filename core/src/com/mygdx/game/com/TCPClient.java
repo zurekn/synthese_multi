@@ -52,6 +52,10 @@ public class TCPClient {
         }
     }
 
+    public Socket getSocket(){
+        return clientSocket;
+    }
+
     public String receive() {
         try {
             String message = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())).readLine();
