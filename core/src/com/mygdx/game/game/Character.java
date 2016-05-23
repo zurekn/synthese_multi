@@ -56,6 +56,8 @@ public abstract class Character {
 	private boolean npc = true;
 	protected boolean monster = true;
 
+	protected boolean hasPlayed = false;
+
 	private Class<?> cl = null;
 	private Object obj = null;
 
@@ -81,19 +83,10 @@ public abstract class Character {
 		obj = ch.getObj();
 	}
 
-	public void findScriptAction(int compteur){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
-		Gdx.app.log("Character", this.trueID +" compteur = "+compteur);
+	public void findScriptAction(){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
+		Gdx.app.log("Find Script action for Character", this.trueID);
 		String result = "";
-		/*if(compteur>=10)
-		{
-			try {
-				GameStage.gameStage.decodeAction("p");
-			} catch (IllegalActionException e) {
-				e.printStackTrace();
-			}
-		}
-		else
-		{*/	try
+			try
 			{
 				Method method = cl.getDeclaredMethod("run", Character.class);
 				result = (String) method.invoke(obj, this);
@@ -104,7 +97,7 @@ public abstract class Character {
 					String[] decode  = result.split("!!");
 					for(String st : decode)
 					{
-						if(!st.equals("") && !(index==0 && compteur > 0)  )
+						if(!st.equals("") /*&& !(index==0 && compteur > 0)*/  )
 							GameStage.gameStage.decodeAction(st);
 						index++;
 
@@ -121,12 +114,6 @@ public abstract class Character {
 					return;
 				}
 			} catch (IllegalAccessException e) {
-
-				if(compteur == 0)
-				{
-					e.printStackTrace();
-					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAccess", true);
-				}
 				//findScriptAction(++compteur);
 				try {
 					GameStage.gameStage.decodeAction("p");
@@ -135,22 +122,16 @@ public abstract class Character {
 				}
 				return;
 			} catch (SecurityException e) {
-				if(compteur == 0)e.printStackTrace();//findScriptAction(++compteur);
+
 			} catch (NoSuchMethodException e) {
-				if(compteur == 0)e.printStackTrace();
+
 			} catch (IllegalArgumentException e) {
-				if(compteur == 0)e.printStackTrace();
+
 			} catch (InvocationTargetException e) {
-				if(compteur == 0)e.printStackTrace();
+
 			} catch (IllegalActionException e) {
 
-				if(compteur == 0)
-				{
-					e.printStackTrace();
-					//getFitness().debugFile("error : mob = "+getTrueID()+"action = "+result+", print= illegalAction", true);
-
-				}
-				 //findScriptAction(++compteur);
+				//findScriptAction(++compteur);
 				try {
 					GameStage.gameStage.decodeAction("p");
 				} catch (IllegalActionException ex) {
@@ -687,8 +668,13 @@ public abstract class Character {
 	}
 
 
+	public boolean getHasPlayed(){
+		return hasPlayed;
+	}
 
-
+	public void setHasPlayed(boolean hP){
+		hasPlayed = hP;
+	}
 	public IAFitness getFitness() {
 		return fitness;
 	}

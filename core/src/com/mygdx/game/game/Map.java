@@ -5,7 +5,6 @@ package com.mygdx.game.game;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.data.TrapD;
 import com.mygdx.game.data.TrapData;
-
 import java.util.Iterator;
 
 import static com.badlogic.gdx.utils.XmlReader.Element;

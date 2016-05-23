@@ -58,6 +58,7 @@ public class Data {
     public static boolean generateIA = true;
     public static int maxTurn = 20;
     public static String rootDir="";
+    public static int MAX_GAME_LOOP = 10;
 
     // Const TI Part
     public static long WAIT_TI = 5000;

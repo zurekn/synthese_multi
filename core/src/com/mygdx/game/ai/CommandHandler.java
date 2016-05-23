@@ -14,6 +14,7 @@ import javax.swing.event.EventListenerList;
 import org.lwjgl.Sys;
 
 import com.mygdx.game.data.Handler;
+import com.sun.glass.ui.EventLoop;
 
 //TODO add some done signal so the main thread cam make this one sleep
 public class CommandHandler extends Handler {
@@ -63,6 +64,7 @@ public class CommandHandler extends Handler {
 	@Override
 	public void begin() {
 		System.out.println("Launch the Command Handler Thread");
+		if(!getThread().getState().equals(EventLoop.State.ACTIVE) && !getThread().getState().equals(Thread.State.RUNNABLE)  )
 		getThread().start();
 	}
 
