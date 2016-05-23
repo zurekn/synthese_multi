@@ -39,7 +39,7 @@ public class IAFitness {
 	private int pass = 1;
 	private int scoreFinal = 0;
 	private String scoreFileName = "IAdebug.txt";//"Synthese/src/scoring/IAdebug.txt";
-	private String dirHistory = "/core/src/com/mygdx/game/";
+	private String dirHistory = "/core/src/com/mygdx/game/IAlogs/";
 	private String historyActions="";
 	
 	//used for overall fitness

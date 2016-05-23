@@ -1212,7 +1212,10 @@ public class GameStage extends Stage {
 
             System.out.println("mob size : " + mobs.size() + " genPlayers size : " + players.size());
             System.out.println("-- FIN DE JEU-- ");
-          if(Data.autoIA) endGameLogs();
+          if(Data.autoIA) {
+              endGameLogs();
+              resetGame();
+          }
         }
     }
 
@@ -1236,11 +1239,18 @@ public class GameStage extends Stage {
     originMobs.get(0).getFitness().renameScoreFile();
     stopAllThread();
     }
+
     public void stopAllThread() {
         if(Data.RUN_APIX)
             apix.stop();
         CommandHandler.getInstance().getThread().stop();
         turnTimer = Integer.MAX_VALUE;
+    }
+
+    public void resetGame()
+    {
+        Gdx.app.log("resetGame", "");
+        Gdx.app.exit();
     }
 
     /**

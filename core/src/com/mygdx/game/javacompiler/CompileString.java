@@ -86,7 +86,7 @@ public class CompileString {
 	public static void serializeObject(String name, Node root)
 			throws IOException {
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-				new FileOutputStream(rootDir+pathClass+"javaObjects_" + name + ".txt"));
+				new FileOutputStream(rootDir+pathClass+"IAlogs/javaObjects_" + name + ".txt"));
 		objectOutputStream.writeObject(root);
 		objectOutputStream.flush();
 		objectOutputStream.close();
