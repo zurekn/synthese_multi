@@ -9,5 +9,6 @@ public abstract class HUD {
 
     public void resetSpellSelection(){}
 
+    public void resize(){};
 }
 
