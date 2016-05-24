@@ -12,10 +12,10 @@ import java.awt.Toolkit;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+
+        Data.setScreenSize();
+
 		config.title = Data.TITLE;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Data.SCREEN_WIDTH = (int)screenSize.getWidth();
-        Data.SCREEN_HEIGHT = (int)screenSize.getHeight();
 		config.height = Data.SCREEN_HEIGHT;
 		config.width = Data.SCREEN_WIDTH;
         config.fullscreen = false;

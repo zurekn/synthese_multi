@@ -79,7 +79,7 @@ public class PlayerHUD extends HUD{
         });
 
         gameStage.addActor(spellSelectBox);
-
+        //TODO set the position in screen percentage
         healthBar = new Bar(Color.GREEN, 20, Data.SCREEN_HEIGHT - 50, 200, 20, player.getStats().getMaxLife(), Color.RED);
         manaBar = new Bar(Color.BLUE, 20, Data.SCREEN_HEIGHT - 80, 150, 20, player.getStats().getMaxMana(), null);
         gameStage.addActor(healthBar);

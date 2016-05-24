@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import com.mygdx.game.game.WindowGame;
 import com.mygdx.game.javacompiler.CompileString;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -510,5 +512,11 @@ public class Data {
         singlePlayer = true;
         ANDROID = onAndroid;
         RUN_APIX = false;
+    }
+
+    public static void setScreenSize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        SCREEN_WIDTH = (int)screenSize.getWidth();
+        SCREEN_HEIGHT = (int)screenSize.getHeight();
     }
 }
