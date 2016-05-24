@@ -52,12 +52,13 @@ public class CompileString {
 
 	public static void generate(String geneticName)
 	{
-		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+		if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
+			System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		aRisque = false;
 
 
-        rootDir =  System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf("\\"));
-        rootDir =  rootDir.substring(0, rootDir.lastIndexOf("\\"));
+        rootDir =  System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf(File.separator));
+        rootDir =  rootDir.substring(0, rootDir.lastIndexOf(File.separator));
 
         debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
 		Node root = advanced?DecodeScript(rootDir+pathClass+"AdvancedAIScriptDatas.txt"):DecodeScript(rootDir+pathClass+"AIScriptDatas.txt");
@@ -133,7 +134,8 @@ public class CompileString {
 	 * @param name : String, file name of resulting IA
 	 */
 	public static void combineTrees(String name1, String name2, String name){
-		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+		if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
+			System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		debugSys("Combining Trees "+name1+" and "+name2+" into "+name);
 		Node root1;
 		Node root2;
@@ -605,8 +607,8 @@ public class CompileString {
 	 * String
 	 */
 	public static IAGenetic CompileAndInstanciateClass(String className) {
-
-		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+		if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
+			System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		
 		// Compilation de la classe du joueur IA
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

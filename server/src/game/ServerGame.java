@@ -198,8 +198,11 @@ public class ServerGame extends GameStage {
             throw new IllegalActionException("Action not found : " + action);
         }
 
-        server.sendToAllClients(action);
-
+        try {
+            server.sendToAllClients(action);
+        } catch(NullPointerException e){
+            Gdx.app.error(LABEL, "Can't connect to server");
+        }
         if(currentCharacter.checkDeath())
             switchTurn();
         if(action.startsWith("m"))
@@ -240,14 +243,15 @@ public class ServerGame extends GameStage {
         if (currentCharacter.isNpc() && !previousCharacter.isNpc()) {
             commands.startCommandsCalculation(currentCharacter, players, mobs, turn);
         }else{
-            String mes =server.receive();
             try {
+                String mes =server.receive();
                 decodeAction(mes);
             } catch (IllegalActionException e) {
-                e.printStackTrace();
+                Gdx.app.error(LABEL,"",e);
+            } catch (NullPointerException e){
+                Gdx.app.error(LABEL, e.getMessage());
             }
         }
-
 
         // print the current turn in the console
         if (debug) {

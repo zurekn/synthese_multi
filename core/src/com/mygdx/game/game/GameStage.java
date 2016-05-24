@@ -81,7 +81,7 @@ public class GameStage extends Stage {
     //
     private APIX apix;
     private Thread thread;
-    private CommandHandler commands;
+    protected CommandHandler commands;
     private GameHandler handler;
 
     //LIBGDX Variables
@@ -91,23 +91,23 @@ public class GameStage extends Stage {
     private final String LABEL = "GameStage";
     //
     private MobHandler mobHandler;
-    private ArrayList<Mob> mobs;
+    protected ArrayList<Mob> mobs;
     private ArrayList<Mob> originMobs;
     private PlayerHandler playerHandler;
-    private ArrayList<Player> players;
+    protected ArrayList<Player> players;
     private ArrayList<Player> originPlayers;
     private MovementHandler movementHandler;
-    private MessageHandler messageHandler;
+    protected MessageHandler messageHandler;
     private ArrayList<Event> events = new ArrayList<Event>();
     private ArrayList<Trap> traps = new ArrayList<Trap>();
-    private Character previousCharacter = null;
-    private Character currentCharacter;
-    private ArrayList<int[]> reachableBlock = new ArrayList<int[]>();
+    protected Character previousCharacter = null;
+    protected Character currentCharacter;
+    protected ArrayList<int[]> reachableBlock = new ArrayList<int[]>();
     //
-    private int playerNumber;
-    private int turn;
+    protected int playerNumber;
+    protected int turn;
     private int global_turn;
-    private int actionLeft = ACTION_PER_TURN;
+    protected int actionLeft = ACTION_PER_TURN;
 
     // Game status
     public static boolean gameOn = false;
@@ -118,7 +118,7 @@ public class GameStage extends Stage {
     private int loopNumber = 1;
 
     //
-    private int turnTimer;
+    protected int turnTimer;
     private long timeStamp = -1;
     public static GameStage gameStage = null;
 
@@ -1066,7 +1066,7 @@ public class GameStage extends Stage {
      * @param e
      * @return
      */
-    private Focus getFirstCharacterRange(ArrayList<Character> chars, Event e) {
+    protected Focus getFirstCharacterRange(ArrayList<Character> chars, Event e) {
         float range = MAX_RANGE;
         Gdx.app.log(LABEL, "Search the first character range : " + e.toString() + ", " + chars.toString());
         Character focus = null;
@@ -1331,9 +1331,9 @@ public class GameStage extends Stage {
     }
 
 
-    private class Focus {
-        protected float range;
-        protected Character character;
+    protected class Focus {
+        public float range;
+        public Character character;
 
         public Focus(float range, Character character) {
             this.range = range;
