@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jdom-2.0.5-javadoc">
+  <library name="ios.ios-1.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/android/libs/jdom-2.0.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ios/build/libs/ios-1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

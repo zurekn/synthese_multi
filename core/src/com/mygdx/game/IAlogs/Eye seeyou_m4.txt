@@ -1,4 +1,0 @@
-m4 m:8:13 Fitness : pAction = 0;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 0;0;0;0;0;1;0
-m4 s2:360 Fitness : pAction = -30;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 1;nbTurn alive = 1;-30;0;0;0;1;1
-m4 m:9:14 Fitness : pAction = -30;pHeal = 0;pActionmissed = 0;pPass = 0;pMove = 2;nbTurn alive = 1;-30;0;0;0;2;1
-

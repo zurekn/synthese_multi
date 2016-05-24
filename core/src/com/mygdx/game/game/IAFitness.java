@@ -1,5 +1,8 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.Gdx;
+import com.mygdx.game.javacompiler.CompileString;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +42,6 @@ public class IAFitness {
 	private int pass = 1;
 	private int scoreFinal = 0;
 	private String scoreFileName = "IAdebug.txt";//"Synthese/src/scoring/IAdebug.txt";
-	private String dirHistory = "/core/src/com/mygdx/game/IAlogs/";
 	private String historyActions="";
 	
 	//used for overall fitness
@@ -183,8 +185,8 @@ public class IAFitness {
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
-		File oldfile =new File(rootDir+this.dirHistory+this.scoreFileName);
-		File newfile =new File(rootDir+this.dirHistory+this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
+		File oldfile =new File(CompileString.pathClass+File.separator+this.scoreFileName);
+		File newfile =new File(CompileString.destPathClass+CompileString.pathHist+File.separator+this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
 		try {
 			Files.copy(oldfile.toPath(), newfile.toPath());
 		} catch (IOException e) {
@@ -195,7 +197,7 @@ public class IAFitness {
 	public void debugFile(String message, boolean append)
 	{
 		try {
-		FileWriter fw = new FileWriter(new File(rootDir+this.dirHistory+this.scoreFileName), append);
+		FileWriter fw = new FileWriter(new File(CompileString.pathClass+File.separator+this.scoreFileName), append);
 		BufferedWriter bw = new BufferedWriter(fw);
 		PrintWriter fichierSortie = new PrintWriter(bw);
 		fichierSortie.println(message);
@@ -209,7 +211,7 @@ public class IAFitness {
 	public void writeHistory(Character currentCharacter, boolean append, int generation)
 	{
 		try {
-			FileWriter fw = new FileWriter(new File(rootDir+this.dirHistory+currentCharacter.getName()+"_"+currentCharacter.getId()+".txt"), append);
+			FileWriter fw = new FileWriter(new File(CompileString.destPathClass+File.separator+CompileString.pathHist+File.separator+currentCharacter.getName()+"_"+currentCharacter.getId()+".txt"), append);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			fichierSortie.println(this.historyActions);

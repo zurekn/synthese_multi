@@ -16,6 +16,9 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,10 +30,12 @@ import static com.mygdx.game.data.Data.*;
 public class CompileString {
 	static Boolean debug = false;
 	static String className = "";
-	static String pathClass = "/core/src/com/mygdx/game/";//"Synthese/src/game/";
-	static String destPathClass = "/core/build/classes/main/com/mygdx/game/ai/";//"target/classes/game/";
-	static String classTestName = "IAScript";
-	static String packageName = "ai/";
+	public static final String pathLog = "AILogs";
+	public static final String pathHist = "AIHistory";
+	public static final String pathClass = "ai";//"/core/src/com/mygdx/game/";//"Synthese/src/game/";
+	public static final String destPathClass = "aiFiles"+File.separator;//"/core/build/classes/main/com/mygdx/game/ai/";//"target/classes/game/";
+	public static final String classTestName = "IAScript";
+	public static final String packageName = "ai/";
 	static String characType = "t_character";
 	static String intType = "t_int";
 	static String floatType = "t_float";
@@ -52,16 +57,15 @@ public class CompileString {
 
 	public static void generate(String geneticName)
 	{
-		if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
-			System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		aRisque = false;
 
 
-        rootDir =  System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf(File.separator));
-        rootDir =  rootDir.substring(0, rootDir.lastIndexOf(File.separator));
+        rootDir =  File.separator;// System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf("\\"));
+        //rootDir =  rootDir.substring(0, rootDir.lastIndexOf("\\"));
 
         debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
-		Node root = advanced?DecodeScript(rootDir+pathClass+"AdvancedAIScriptDatas.txt"):DecodeScript(rootDir+pathClass+"AIScriptDatas.txt");
+		Node root = advanced?DecodeScript(pathClass+"/AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+"/AIScriptDatas.txt");
 		ArrayList<String> contentCode = new ArrayList<String>();
 		contentCode = root.TreeToArrayList(contentCode);
 		//for (String st : contentCode)
@@ -86,8 +90,9 @@ public class CompileString {
 	 */
 	public static void serializeObject(String name, Node root)
 			throws IOException {
+		File f = new File(destPathClass+pathLog+File.separator+ name + ".txt");
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-				new FileOutputStream(rootDir+pathClass+"IAlogs/javaObjects_" + name + ".txt"));
+				new FileOutputStream(f));
 		objectOutputStream.writeObject(root);
 		objectOutputStream.flush();
 		objectOutputStream.close();
@@ -99,7 +104,7 @@ public class CompileString {
 	public static Node deserializeObject(String name) throws IOException,
 			ClassNotFoundException {
 		ObjectInputStream objectInputStream = new ObjectInputStream(
-				new FileInputStream(rootDir+pathClass+"javaObjects_" + name + ".txt"));
+				new FileInputStream(pathClass+"javaObjects_" + name + ".txt"));
 		Node readJSON = (Node) objectInputStream.readObject();
 		objectInputStream.close();
 //		System.out.println("### Display Tree");
@@ -134,8 +139,7 @@ public class CompileString {
 	 * @param name : String, file name of resulting IA
 	 */
 	public static void combineTrees(String name1, String name2, String name){
-		if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
-			System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		debugSys("Combining Trees "+name1+" and "+name2+" into "+name);
 		Node root1;
 		Node root2;
@@ -225,7 +229,7 @@ public class CompileString {
  * @return Node : the resulting script tree
  */
 	public static Node DecodeScript(String scriptPath) {
-		File fichier = new File(scriptPath);
+		File fichier = Gdx.files.internal(scriptPath).file();
 		Node root = new Node("run(Character ch)");
 		cond = new ArrayList<String>();
 		var = new ArrayList<String>();
@@ -607,28 +611,37 @@ public class CompileString {
 	 * String
 	 */
 	public static IAGenetic CompileAndInstanciateClass(String className) {
-		if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
-			System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
+
+		System.setProperty("java.home", "C:\\MCP-IDE\\jdk1.8.0_60\\jre");
 		
 		// Compilation de la classe du joueur IA
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		@SuppressWarnings("unused")
-		int result = compiler.run(null, null, null, rootDir + pathClass+ packageName + className + ".java");
+		int result = compiler.run(null, null, null,  destPathClass +File.separator + className + ".java");
 		//System.out.println("Compile result code = " + result);
 
 		// D�placement du fichier .CLASS du r�pertoire /src au /bin
-		File afile = new File(rootDir + pathClass + packageName + className + ".CLASS");
-        File destFile = new File(rootDir+destPathClass + afile.getName());
+		File afile = new File( pathClass + className + ".CLASS");
+        File destFile = new File(destPathClass + afile.getName());
 
 		if (destFile.exists())
 			destFile.delete();
-		afile.renameTo(new File(rootDir + destPathClass + afile.getName()));
+		afile.renameTo(new File( destPathClass + afile.getName()));
+
+
 
 		// Instanciation de la classe du joueur IA
 		Class<?> c = null;
 		Object obj = null;
 		try {
-			c = Class.forName("com.mygdx.game."+packageName.substring(0, packageName.length()-1) + "." + className);
+			File f = new File(destPathClass);
+			//c = Class.forName(destPathClass.substring(0, destPathClass.length()-1) + "."+ className);
+			/*Cette partie permet d'accéder aux classes externes*/
+			URL url = f.toURI().toURL();
+			URL[] urls = new URL[]{url};
+			ClassLoader classloader = new URLClassLoader(urls);
+			Class classloaders = classloader.loadClass(className);
+			c = classloaders;
 			obj = c.newInstance();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -639,6 +652,8 @@ public class CompileString {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		return new IAGenetic(c,obj, className);
@@ -653,7 +668,7 @@ public class CompileString {
 		Boolean inRun = false;
 		Boolean isAdded = false;
         //Gdx.files.internal()
-		File fichier = new File(rootDir+pathClass +packageName+ classTestName +".java"); //
+		File fichier = Gdx.files.internal(pathClass + File.separator + classTestName +".java").file();
 		ArrayList<String> content = new ArrayList<String>();
 		// lecture du fichier java
         try {
@@ -691,7 +706,7 @@ public class CompileString {
 	public static void WriteCode(ArrayList<String> content, String className) {
 		// cr�ation du fichier qui va �craser l'ancien fichier java
 		try {
-			FileWriter fw = new FileWriter(new File(rootDir+pathClass + packageName+className + ".java"));
+			FileWriter fw = new FileWriter(new File(destPathClass + className + ".java"));
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			for (String ln : content) {

@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import com.mygdx.game.game.WindowGame;
+import com.mygdx.game.javacompiler.CompileString;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -277,6 +278,16 @@ public class Data {
                 + ", BLOCK_NUMBER = " + Data.BLOCK_NUMBER_X
                 + ", BLOCK_SIZE_X = " + Data.BLOCK_SIZE_X + ", BLOCK_SIZE_Y = "
                 + Data.BLOCK_SIZE_Y + ", SCALE = " + Data.SCALE);
+
+        File f = new File(CompileString.destPathClass);
+        if (!f.isDirectory())
+            f.mkdir();
+        f = new File(CompileString.destPathClass+CompileString.pathLog);
+        if (!f.isDirectory())
+            f.mkdir();
+        f = new File(CompileString.destPathClass+CompileString.pathHist);
+        if (!f.isDirectory())
+            f.mkdir();
     }
 
     public static void initSpell() {
