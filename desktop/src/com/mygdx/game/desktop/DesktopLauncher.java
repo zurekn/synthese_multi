@@ -19,7 +19,8 @@ public class DesktopLauncher {
         Data.RUN_APIX = false;
         Data.debug = true;
 
-        Data.singlePlayer = true;
+        Data.setForAndroid(false);
+
         new LwjglApplication(new WindowGame(), config);
 	}
 }

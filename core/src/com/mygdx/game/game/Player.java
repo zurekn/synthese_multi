@@ -45,6 +45,7 @@ public class Player extends Character {
         else {
             this.setStats(stats);
             this.setSpells(SpellData.getSpellForClass(this.getStats().getCharacterClass()));
+            this.setFitness(new IAFitness(false));
         }
 
         if (Data.debug) {
@@ -73,6 +74,7 @@ public class Player extends Character {
             }
             this.setStats(h.getStat().clone());
             this.setSpells(h.getSpells());
+            this.setFitness(new IAFitness(false));
         }
 
 

@@ -43,12 +43,13 @@ public class IAFitness {
 	private int scoreFinal = 0;
 	private String scoreFileName = "IAdebug.txt";//"Synthese/src/scoring/IAdebug.txt";
 	private String historyActions="";
-	
+	private boolean isNPC = false;
 	//used for overall fitness
 	private int nbTurn = 0; // number of turn AI stayed alive
 	
 	public IAFitness(boolean isNPC)
 	{
+        this.isNPC = isNPC;
 		this.totalScore = 0;
 		this.pHeal = 0;
 		this.pAction = 0;
@@ -72,7 +73,10 @@ public class IAFitness {
 	 * score un heal
 	 */
 	public void scoreHeal(Character focusCharacter, Character currentCharacter)
-	{	// score : soigne quelqu'un dont la vie est inf�rieure � maxlife
+	{
+	    if(!isNPC)
+            return;
+	    // score : soigne quelqu'un dont la vie est inf�rieure � maxlife
 		//if(focusCharacter != null)
 		//{
 		if(focusCharacter.getStats().getLife()<focusCharacter.getStats().getMaxLife()) 
@@ -108,6 +112,9 @@ public class IAFitness {
 	{	// score : tue quelqu'un
 		//if(focusCharacter != null)
 		//{
+
+        if(!isNPC)
+            return;
 			if(focusCharacter.checkDeath())
 			{	
 				// score : tue ennemi
@@ -139,6 +146,9 @@ public class IAFitness {
 	 */
 	public void scoreUnlessSpell()
 	{
+
+        if(!isNPC)
+            return;
 		this.setpActionmissed(this.getpActionmissed()+this.getUnlessSpell());
 	}
 	
@@ -147,6 +157,8 @@ public class IAFitness {
 	 */
 	public void scorePassTurn()
 	{
+        if(!isNPC)
+            return;
 		this.setpPass(this.getpPass()+this.getPass());
 	}
 	
@@ -155,11 +167,15 @@ public class IAFitness {
 	 */
 	public void scoreMove()
 	{
+        if(!isNPC)
+            return;
 		this.setpMove(this.getpMove()+this.getMove());
 	}
 	
 	public void addHistory(String message)
 	{
+        if(!isNPC)
+            return;
 		this.historyActions += message + ";"
 							+ this.getpAction() + ";" 
 							+ this.getpHeal() + ";" 
@@ -171,6 +187,8 @@ public class IAFitness {
 	
 	public int calculFinalScore(boolean gagne, int nbTourMax)
 	{
+        if(!isNPC)
+            return 0;
 		if(gagne)
 			this.scoreFinal = 20+this.pAction+this.pHeal+(30*(this.nbTurn/nbTourMax));
 		else
@@ -183,6 +201,8 @@ public class IAFitness {
 	 */
 	public void renameScoreFile()
 	{
+        if(!isNPC)
+            return;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
 		File oldfile =new File(CompileString.pathClass+File.separator+this.scoreFileName);
@@ -196,6 +216,8 @@ public class IAFitness {
 	
 	public void debugFile(String message, boolean append)
 	{
+        if(!isNPC)
+            return;
 		try {
 		FileWriter fw = new FileWriter(new File(CompileString.pathClass+File.separator+this.scoreFileName), append);
 		BufferedWriter bw = new BufferedWriter(fw);
@@ -210,6 +232,8 @@ public class IAFitness {
 	
 	public void writeHistory(Character currentCharacter, boolean append, int generation)
 	{
+        if(!isNPC)
+            return;
 		try {
 			FileWriter fw = new FileWriter(new File(CompileString.destPathClass+File.separator+CompileString.pathHist+File.separator+currentCharacter.getName()+"_"+currentCharacter.getId()+".txt"), append);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -224,6 +248,8 @@ public class IAFitness {
 	
 	public String toStringFitness()
 	{
+        if(!isNPC)
+            return "Player is not a NPC !";
 		return "Fitness : pAction = " + this.getpAction() + ";pHeal = " + this.getpHeal() + 
 										";pActionmissed = " + this.getpActionmissed() + 
 										";pPass = " + this.getpPass() + 

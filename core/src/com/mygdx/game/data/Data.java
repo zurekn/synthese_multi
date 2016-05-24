@@ -38,6 +38,7 @@ public class Data {
     public static final boolean FULLSCREEN = false;
     public static final boolean DEBUG_DEPARTURE = true;
     public static final boolean tiDebug = true;
+    public static final boolean RELOAD_GAME_WHEN_ENDED = false;
     public static boolean debug = true;
     public static final boolean DISPLAY_PLAYER = true;
     public static final boolean runQRCam = false;
@@ -500,5 +501,14 @@ public class Data {
     public static void disposeData() {
         BACKGROUND_MUSIC.dispose();
         IMAGE_HALO.dispose();
+    }
+
+    public static void setForAndroid(boolean onAndroid){
+        autoIA = false;
+        generateIA = false;
+        jvm = true;
+        singlePlayer = true;
+        ANDROID = onAndroid;
+        RUN_APIX = false;
     }
 }

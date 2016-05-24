@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.mygdx.game.ai.AIHandler;
 import com.mygdx.game.ai.AStar;
 import com.mygdx.game.ai.ActionEvent;
 import com.mygdx.game.ai.CharacterData;
@@ -218,8 +219,9 @@ public class GameStage extends Stage {
         players = new ArrayList<Player>();
         playerHandler = new PlayerHandler(players);
         messageHandler = new MessageHandler();
-        if(!Data.ANDROID && loopNumber == 1) {
+        if(!Data.ANDROID)
             initCommandHandler();
+        if(loopNumber == 1) {
             camera = new CameraHandler();
             camera.init();
             Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
@@ -296,8 +298,6 @@ public class GameStage extends Stage {
         renderText(batch);
 
         if (gameEnded) {
-            //Data.map.render(Data.MAP_X, Data.MAP_Y);
-            tiledMapRenderer.render();
             mobHandler.render(batch, shapeRenderer);
             renderDeckArea();
             playerHandler.render(batch, shapeRenderer);
@@ -407,7 +407,7 @@ public class GameStage extends Stage {
         ui.act(delta);
         this.act(delta);
         camera.update();
-        if (gameEnded) {
+        if (gameEnded && Data.RELOAD_GAME_WHEN_ENDED) {
             reinitAll();
             loopNumber++;
             create();
@@ -828,6 +828,7 @@ public class GameStage extends Stage {
         if ( (currentCharacter.isNpc() || (Data.autoIA && Data.jvm) )  && !getCurrentCharacter().getHasPlayed() )// mettre le run du bot IAG�n�tique
             currentCharacter.findScriptAction();
 
+
         // print the current turn in the console
         if (debug) {
             Gdx.app.log(LABEL, "========================");
@@ -1196,7 +1197,7 @@ public class GameStage extends Stage {
 
 
     public void checkEndGame() {
-        if(mobs.size() == 0 || players.size() == 0 || global_turn == Data.maxTurn)
+        if(mobs.size() == 0 || players.size() == 0 || (global_turn == Data.maxTurn && Data.autoIA))
         {
             if( mobs.size() <= 0 ){
                 //GAME WIN
