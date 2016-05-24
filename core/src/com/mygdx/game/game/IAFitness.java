@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import static com.mygdx.game.data.Data.rootDir;
 
 
 public class IAFitness {
@@ -37,7 +38,8 @@ public class IAFitness {
 	private int move = 1;
 	private int pass = 1;
 	private int scoreFinal = 0;
-	private String scoreFileName = "Synthese/src/scoring/IAdebug.txt";
+	private String scoreFileName = "IAdebug.txt";//"Synthese/src/scoring/IAdebug.txt";
+	private String dirHistory = "/core/src/com/mygdx/game/IAlogs/";
 	private String historyActions="";
 	
 	//used for overall fitness
@@ -104,20 +106,20 @@ public class IAFitness {
 	{	// score : tue quelqu'un
 		//if(focusCharacter != null)
 		//{
-			if(focusCharacter.checkDeath()) 
+			if(focusCharacter.checkDeath())
 			{	
 				// score : tue ennemi
 				if(focusCharacter.isMonster() != currentCharacter.isMonster()) 
-					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction()+currentCharacter.getFitness().getKillEnemy());
+					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction() + currentCharacter.getFitness().getKillEnemy());
 				else // score : tue alli�
-					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction()+currentCharacter.getFitness().getKillAlly());
+					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction() + currentCharacter.getFitness().getKillAlly());
 			}
 			else // score : attaque quelqu'un dont la vie est sup�rieur ou �gale � maxlife
 			{	// score : attaque ennemi
 				if(focusCharacter.isMonster() != currentCharacter.isMonster()) 
-					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction()+currentCharacter.getFitness().getAttackEnemy());
+					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction() + currentCharacter.getFitness().getAttackEnemy());
 				else // score : attaque alli�
-					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction()+currentCharacter.getFitness().getAttackAlly());
+					currentCharacter.getFitness().setpAction(currentCharacter.getFitness().getpAction() + currentCharacter.getFitness().getAttackAlly());
 			
 			}
 			debugFile((currentCharacter.isMonster()?"mob ":"genPlayer")
@@ -181,8 +183,8 @@ public class IAFitness {
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
-		File oldfile =new File(this.scoreFileName);
-		File newfile =new File(this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
+		File oldfile =new File(rootDir+this.dirHistory+this.scoreFileName);
+		File newfile =new File(rootDir+this.dirHistory+this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
 		try {
 			Files.copy(oldfile.toPath(), newfile.toPath());
 		} catch (IOException e) {
@@ -193,26 +195,28 @@ public class IAFitness {
 	public void debugFile(String message, boolean append)
 	{
 		try {
-			FileWriter fw = new FileWriter(new File(this.scoreFileName), append);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.println(message);
-			fichierSortie.close();
-		} catch (Exception e) {
-			System.out.println("WriteCode : "+e.toString());
-		}
+		FileWriter fw = new FileWriter(new File(rootDir+this.dirHistory+this.scoreFileName), append);
+		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter fichierSortie = new PrintWriter(bw);
+		fichierSortie.println(message);
+		fichierSortie.close();
+	} catch (Exception e) {
+		//System.out.println("WriteCode : "+e.toString());
+		e.printStackTrace();
+	}
 	}
 	
-	public void writeHistory(Character currentCharacter, boolean append)
+	public void writeHistory(Character currentCharacter, boolean append, int generation)
 	{
 		try {
-			FileWriter fw = new FileWriter(new File("Synthese/src/mobHistory/"+currentCharacter.getName()+"_"+currentCharacter.getId()+".txt"), append);
+			FileWriter fw = new FileWriter(new File(rootDir+this.dirHistory+currentCharacter.getName()+"_"+currentCharacter.getId()+".txt"), append);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			fichierSortie.println(this.historyActions);
 			fichierSortie.close();
 		} catch (Exception e) {
-			System.out.println("WriteCode : "+e.toString());
+			//System.out.println("WriteCode : "+e.toString());
+			e.printStackTrace();
 		}
 	}
 	
@@ -334,6 +338,6 @@ public class IAFitness {
 	public void setNbTurn(int nbTurn) {
 		this.nbTurn = nbTurn;
 	}
-
+	public int getFinalScore(){return scoreFinal;}
 	
 }

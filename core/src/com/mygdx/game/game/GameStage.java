@@ -13,7 +13,6 @@ import com.mygdx.game.ai.CharacterData;
 import com.mygdx.game.ai.CommandHandler;
 import com.mygdx.game.ai.CommandListener;
 import com.mygdx.game.ai.WindowGameData;
-import com.mygdx.game.com.TCPServer;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Event;
 import com.mygdx.game.data.HeroData;
@@ -23,7 +22,9 @@ import com.mygdx.game.data.SpellData;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalCaracterClassException;
 import com.mygdx.game.exception.IllegalMovementException;
+import com.mygdx.game.hud.HUD;
 import com.mygdx.game.hud.PlayerHUD;
+import com.mygdx.game.hud.emptyHUD;
 import com.mygdx.game.imageprocessing.APIX;
 import com.mygdx.game.imageprocessing.APIXAdapter;
 import com.mygdx.game.imageprocessing.MovementEvent;
@@ -80,7 +81,7 @@ public class GameStage extends Stage {
     //
     private APIX apix;
     private Thread thread;
-    protected CommandHandler commands;
+    private CommandHandler commands;
     private GameHandler handler;
 
     //LIBGDX Variables
@@ -90,40 +91,46 @@ public class GameStage extends Stage {
     private final String LABEL = "GameStage";
     //
     private MobHandler mobHandler;
-    protected ArrayList<Mob> mobs;
+    private ArrayList<Mob> mobs;
+    private ArrayList<Mob> originMobs;
     private PlayerHandler playerHandler;
-    protected ArrayList<Player> players;
+    private ArrayList<Player> players;
+    private ArrayList<Player> originPlayers;
     private MovementHandler movementHandler;
-    protected MessageHandler messageHandler;
+    private MessageHandler messageHandler;
     private ArrayList<Event> events = new ArrayList<Event>();
     private ArrayList<Trap> traps = new ArrayList<Trap>();
-    protected Character previousCharacter = null;
-    protected Character currentCharacter;
-    protected ArrayList<int[]> reachableBlock = new ArrayList<int[]>();
+    private Character previousCharacter = null;
+    private Character currentCharacter;
+    private ArrayList<int[]> reachableBlock = new ArrayList<int[]>();
     //
-    protected int playerNumber;
-    protected int turn;
-    protected int actionLeft = ACTION_PER_TURN;
+    private int playerNumber;
+    private int turn;
+    private int global_turn;
+    private int actionLeft = ACTION_PER_TURN;
 
-    //
+    // Game status
     public static boolean gameOn = false;
     public boolean gameEnded = false;
     public boolean gameWin = false;
     public boolean gameLose = false;
     private int timerInitPlayer;
+    private int loopNumber = 1;
 
     //
-    protected int turnTimer;
+    private int turnTimer;
     private long timeStamp = -1;
     public static GameStage gameStage = null;
 
     //UI
-    private PlayerHUD ui;
+    private HUD ui = new emptyHUD();
 
+    private ArrayList decodeArray;
 
     public GameStage() {
         create();
         gameStage = this;
+        start();
     }
 
     /*************************************/
@@ -202,43 +209,50 @@ public class GameStage extends Stage {
         // TrapData.loadTrap();
 
         initAPIX();
-        if(!Data.ANDROID)
-            initCommandHandler();
 
-        // Create the monster list
+
+        // Create the monsters and players lists
         mobs = MonsterData.initMobs();
         mobHandler = new MobHandler(mobs);
-
-        messageHandler = new MessageHandler();
-
-        // Create the player list
-        initPlayers();
-
+        originMobs = new ArrayList<Mob>(mobs);
+        players = new ArrayList<Player>();
         playerHandler = new PlayerHandler(players);
-
-        if (Data.singlePlayer) {
-            try {
-                createMainPlayer(5, 2);
-                ui = new PlayerHUD(this, playerHandler.getMainPlayer());
-                //this.addActor(ui);
-            } catch (IllegalActionException e) {
-                e.printStackTrace();
-            } catch (IllegalMovementException e) {
-                e.printStackTrace();
-            } catch (IllegalCaracterClassException e) {
-                e.printStackTrace();
+        messageHandler = new MessageHandler();
+        if(!Data.ANDROID && loopNumber == 1) {
+            initCommandHandler();
+            camera = new CameraHandler();
+            camera.init();
+            Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
+        }
+        // Fill the player list
+        if(Data.autoIA && !Data.jvm)
+        {
+            initGeneticPlayers();
+            Data.singlePlayer = false;
+        }
+        else
+        {
+            initPlayers();
+            if (Data.singlePlayer)
+            {
+                try {
+                    createMainPlayer(5, 2);
+                    ui = new PlayerHUD(this, playerHandler.getMainPlayer());
+                    //this.addActor(ui);
+                } catch (IllegalActionException e) {
+                    e.printStackTrace();
+                } catch (IllegalMovementException e) {
+                    e.printStackTrace();
+                } catch (IllegalCaracterClassException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
+        originPlayers = new ArrayList<Player>(players);
 
         //new Thread(movementHandler).start();
         // Set the timer
         timerInitPlayer = INIT_MAX_TIME;
-
-
-        camera = new CameraHandler();
-        camera.init();
-        Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
 
     }
 
@@ -260,7 +274,11 @@ public class GameStage extends Stage {
         this.draw();//MUST BE BEFORE batch.begin()
 
         /* begin texture rendering */
+        if(batch.isDrawing())
+            batch.end();
         batch.begin();
+        if(shapeRenderer.isDrawing())
+            shapeRenderer.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         if (gameOn) {
@@ -389,8 +407,13 @@ public class GameStage extends Stage {
         ui.act(delta);
         this.act(delta);
         camera.update();
-        if (gameEnded)
+        if (gameEnded) {
+            reinitAll();
+            loopNumber++;
+            create();
+            start();
             return;
+        }
         long time = System.currentTimeMillis();
         if (time - timeStamp > 1000) {
             if (gameOn) {
@@ -415,14 +438,25 @@ public class GameStage extends Stage {
         }
 
         messageHandler.update();
+
+        // Process IA
+        if(currentCharacter.getHasPlayed() == true)
+        {
+            currentCharacter.setHasPlayed(false);
+            switchTurn();
+        }
     }
 
     public void resize(int width, int height) {
         Gdx.app.log(LABEL, "Resize [" + width + " / " + height + "]");
+        Data.SCREEN_HEIGHT = height;
+        Data.SCREEN_WIDTH = width;
         if (camera != null) {
             camera.resize(width, height);
             camera.reloadMapPosition();
         }
+        if(ui != null)
+            ui.resize();
     }
 
     /**
@@ -431,15 +465,21 @@ public class GameStage extends Stage {
     public void start() {
         if (players.size() == 0)
             return;
-        playerNumber = players.size() + mobs.size();
 
         turnTimer = TURN_MAX_TIME;
         turn = 0;
+        global_turn=1;
         players.get(turn).setMyTurn(true);
+        playerNumber = players.size() + mobs.size();
         currentCharacter = players.get(turn);
 
-        reachableBlock = AStar.getInstance().getReachableNodes(new WindowGameData(players, mobs, turn), new CharacterData(currentCharacter));
         gameOn = true;
+
+        if(!Data.autoIA)
+            reachableBlock = AStar.getInstance().getReachableNodes(new WindowGameData(players, mobs, turn), new CharacterData(currentCharacter));
+        else
+            currentCharacter.findScriptAction();//Pour lancer l'action du premier joueur
+
     }
 
     /**
@@ -447,7 +487,7 @@ public class GameStage extends Stage {
      */
     public void initPlayers() {
         Gdx.app.log(LABEL, "Player Initialisation");
-        players = new ArrayList<Player>();
+
 
         Collection<String> pos = departureBlocks.keySet();
         pos.iterator();
@@ -472,6 +512,86 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Create all the genetic players (call in create)
+     */
+    public void initGeneticPlayers()
+    {
+        //Gdx.app.log(LABEL, "Player Genetic Initialisation");
+        Collection<String> pos = Data.departureBlocks.keySet();
+        pos.iterator();
+        try {
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 0)
+            {
+                addGeneticPlayer(10, 8, -1,"m1");
+            }
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 1)
+            {
+                addGeneticPlayer(11, 10, -1, "m2");
+            }
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 2)
+            {
+                addGeneticPlayer(12, 12, -1, "m3");
+            }
+            if (Data.DEBUG_NB_GENETIC_PLAYER > 3)
+            {
+                addGeneticPlayer(7, 12, -1, "m4");
+            }
+
+        } catch (IllegalCaracterClassException e) {
+            e.printStackTrace();
+        } catch (IllegalMovementException e) {
+            e.printStackTrace();
+        } catch (IllegalActionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Add a new player (call in initGeneticPlayers)
+     */
+    @SuppressWarnings("unused")
+    public void addGeneticPlayer(int x, int y, int size, String id) throws IllegalCaracterClassException, IllegalMovementException, IllegalActionException {
+        //Gdx.app.log(LABEL, "add Genetic Player id : "+id);
+        if (gameOn)
+            throw new IllegalActionException("Can not add player genetic when game is on!");
+
+        String position = x + ":" + y;
+
+        if (getAllPositions().contains(position)) {
+            // messageHandler.addMessage(new
+            // Message("Position ["+position+"] non disponible", 1));
+
+            throw new IllegalMovementException("Caracter already at the position [" + position + "]");
+        }
+
+        if (Data.untraversableBlocks.containsKey(position)) {
+            messageHandler.addGlobalMessage(new Message("Position [" + position + "] non disponible", 1));
+            throw new IllegalMovementException("Untraversable block at [" + position + "]");
+        }
+
+        if (Data.departureBlocks.containsKey(position) || (Data.DEBUG_DEPARTURE && Data.debug)) {
+            Data.departureBlocks.put(position, true);
+        } else {
+            messageHandler.addGlobalMessage(new Message(Data.DEPARTURE_BLOCK_ERROR, Data.MESSAGE_TYPE_ERROR));
+            throw new IllegalMovementException("Caracter must be at a departure position");
+        }
+
+        if (Data.MAX_PLAYER <= players.size())
+            return;
+
+        Player p = new Player(x, y, id, "", "g"+players.size());
+        p.setNumber(players.size());
+        p.setSizeCharacter(size);
+        players.add(p);
+        //Gdx.app.log(LABEL, "New Genetic Player : " + p.toString());
+
+        timerInitPlayer = Data.INIT_MAX_TIME;
+        if (players.size() >= Data.MAX_PLAYER) {
+            System.out.println(" ----Max genetic player reached ----");
+            //start();
+        }
+    }
     /**
      * Add a new player
      *
@@ -650,11 +770,38 @@ public class GameStage extends Stage {
      * Function call for switch the current character turn
      */
     public void switchTurn() {
+        if (gameEnded)
+            return;
+
         // Reset the timer
         Gdx.app.log(LABEL, "turn = " + turn + ", playerNumber = " + playerNumber + ", turnTimer = " + turnTimer);
         messageHandler.addGlobalMessage(new Message("Next turn"));
         turnTimer = TURN_MAX_TIME;
         turn = (turn + 1) % playerNumber;
+
+        if(turn == 0)
+        {
+            currentCharacter.getFitness().debugFile("\n\t\t\t\t=== TOUR "+global_turn+" ===", true);
+            checkEndGame();
+
+            global_turn++;
+            messageHandler.addPlayerMessage(new Message("Tour de jeu num�ro  "+global_turn, Data.MESSAGE_TYPE_INFO), turn);
+            for(Mob mo:mobs){
+                mo.getFitness().addTurn();
+            }
+            if(Data.autoIA){
+                if(!Data.jvm)
+                {
+                    for(Player po:players){
+                        po.getFitness().addTurn();
+                    }
+                }else{
+                    for(Player po:players){
+                        po.getFitness().addTurn();
+                    }
+                }
+            }
+        }
 
         previousCharacter = currentCharacter;
         previousCharacter.regenMana();
@@ -672,14 +819,14 @@ public class GameStage extends Stage {
         previousCharacter.setMyTurn(false);
         if (currentCharacter.isMonster() && !SHOW_MOB_REACHABLE_BLOCKS)
             reachableBlock = new ArrayList<int[]>();
-        else
+        else if(!Data.autoIA)
             reachableBlock = AStar.getInstance().getReachableNodes(new WindowGameData(players, mobs, turn), new CharacterData(currentCharacter));
 
         messageHandler.addGlobalMessage(new Message("Turn of " + currentCharacter.getName()));
         actionLeft = ACTION_PER_TURN;
 
-        if (currentCharacter.isNpc() && !previousCharacter.isNpc())
-            commands.startCommandsCalculation(currentCharacter, players, mobs, turn);
+        if ( (currentCharacter.isNpc() || (Data.autoIA && Data.jvm) )  && !getCurrentCharacter().getHasPlayed() )// mettre le run du bot IAG�n�tique
+            currentCharacter.findScriptAction();
 
         // print the current turn in the console
         if (debug) {
@@ -753,10 +900,34 @@ public class GameStage extends Stage {
                     messageHandler.addPlayerMessage(new Message("Echec critique du sort " + SpellData.getSpellById(spellID).getName(), MESSAGE_TYPE_ERROR), turn);
                     if (heal > 0) {
                         currentCharacter.heal(heal);
+                        if(focus.character != null)
+                        {
+                            currentCharacter.getFitness().scoreHeal(focus.character, currentCharacter); // scoring
+                            currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                        }
+                        else
+                        {
+                            currentCharacter.getFitness().scoreUnlessSpell();
+                            currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                            currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
+                                    +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" a soign� personne ."+currentCharacter.getFitness().toStringFitness(),true);
+                        }
                         messageHandler.addPlayerMessage(new Message("Heal critic " + heal + " to the " + focus.character.getName() + "", MESSAGE_TYPE_ERROR), turn);
 
                     } else {
                         currentCharacter.takeDamage(damage, e.getType());
+                        if(focus.character != null)
+                        {
+                            currentCharacter.getFitness().scoreSpell(focus.character, currentCharacter); // scoring
+                            currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                        }
+                        else
+                        {
+                            currentCharacter.getFitness().scoreUnlessSpell();
+                            currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                            currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
+                                    +currentCharacter.getName()+" "+currentCharacter.getTrueID()+"a attaqu� personne (echec crit) ."+currentCharacter.getFitness().toStringFitness(),true);
+                        }
                         messageHandler.addPlayerMessage(new Message("Use " + SpellData.getSpellById(spellID).getName() + " on " + currentCharacter.getName() + " and deal critic " + damage, MESSAGE_TYPE_ERROR), turn);
 
                     }
@@ -767,12 +938,15 @@ public class GameStage extends Stage {
                         Gdx.app.log(LABEL, "-----------------------------------------");
                         messageHandler.addPlayerMessage(new Message(currentCharacter.getName() + "Died "), turn);
                         if(turn > 0 ) turn--;
+                        currentCharacter.getFitness().debugFile("*** "+(currentCharacter.isMonster()?"mob ":"genPlayer ")
+                                +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" est mort ."+currentCharacter.getFitness().toStringFitness(),true);
                         players.remove(currentCharacter);
                         mobs.remove(currentCharacter);
                         playerNumber--;
 
                         checkEndGame();
-                        switchTurn();
+                       /* switchTurn();*/
+                        currentCharacter.setHasPlayed(true);
                     }
 
                 } else {
@@ -784,10 +958,15 @@ public class GameStage extends Stage {
                                     messageHandler.addPlayerMessage(new Message("Heal critic " + heal + " to the " + focus.character.getName() + "", MESSAGE_TYPE_ERROR), turn);
                                 else
                                     messageHandler.addPlayerMessage(new Message("Heal " + heal + " to the " + focus.character.getName() + ""), turn);
+                                currentCharacter.getFitness().scoreHeal(focus.character, currentCharacter); // scoring
+                                currentCharacter.getFitness().addHistory(currentCharacter.getId() + " " + action.toString() + " " + currentCharacter.getFitness().toStringFitness());
 
                             } else {
                                 damage = focus.character.takeDamage(damage, e.getType());
                                 messageHandler.addPlayerMessage(new Message("Use " + SpellData.getSpellById(spellID).getName() + " on " + focus.character.getName() + " and deal " + damage), turn);
+                                currentCharacter.getFitness().scoreSpell(focus.character, currentCharacter); // scoring
+                                currentCharacter.getFitness().addHistory(currentCharacter.getId() + " " + action.toString() + " " + currentCharacter.getFitness().toStringFitness());
+
                             }
                         else {
                             damage = focus.character.takeDamage(damage, e.getType());
@@ -795,6 +974,11 @@ public class GameStage extends Stage {
                                 messageHandler.addPlayerMessage(new Message("Use " + SpellData.getSpellById(spellID).getName() + " on " + focus.character.getName() + " and deal critic " + damage, MESSAGE_TYPE_ERROR), turn);
                             else
                                 messageHandler.addPlayerMessage(new Message("Use " + SpellData.getSpellById(spellID).getName() + " on " + focus.character.getName() + " and deal " + damage), turn);
+                            if(focus.character != null)
+                            {
+                                currentCharacter.getFitness().scoreSpell(focus.character, currentCharacter); // scoring
+                                currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                            }
 
                         }
                         if (focus.character.checkDeath()) {
@@ -804,7 +988,11 @@ public class GameStage extends Stage {
                             messageHandler.addPlayerMessage(new Message(focus.character.getName() + "Died "), turn);
                             int index = Math.max(players.indexOf(focus.character), mobs.indexOf(focus.character));
                             int indexCurrent = Math.max(players.indexOf(currentCharacter), mobs.indexOf(currentCharacter));
+                            currentCharacter.getFitness().debugFile("*** " + (focus.character.isMonster() ? "mob " : "genPlayer ") +
+                                    focus.character.getName() + " " + focus.character.getTrueID() + " a �t� tu� par " + (currentCharacter.isMonster() ? "mob " : "genPlayer ") + currentCharacter.getName() + " " + currentCharacter.getTrueID() + ".", true);
+
                             players.remove(focus.character);
+
                             mobs.remove(focus.character);
                             playerNumber--;
                             if (index <= indexCurrent)
@@ -813,7 +1001,12 @@ public class GameStage extends Stage {
                             checkEndGame();
                         }
                     } else {
-                        messageHandler.addPlayerMessage(new Message("Vous avez lanc? " + SpellData.getSpellById(spellID).getName() + " mais personne n'a ?t? touch?"), turn);
+                        messageHandler.addPlayerMessage(new Message("Vous avez lance " + SpellData.getSpellById(spellID).getName() + " mais personne n'a ete touch?"), turn);
+                        currentCharacter.getFitness().scoreUnlessSpell();
+                        currentCharacter.getFitness().addHistory(currentCharacter.getId() + " " + action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                        currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
+                                +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" a lanc� un sort sur personne ."+currentCharacter.getFitness().toStringFitness(),true);
+
                     }
                 }
                 events.add(e);
@@ -827,7 +1020,19 @@ public class GameStage extends Stage {
 
         } else if (action.startsWith("t")) { // Trap action
             Gdx.app.log(LABEL, "Find a trap action");
-        } else if (action.startsWith("m")) {// Movement action
+        } else if (action.startsWith("p")) { // Pass turn
+            //currentCharacter.getFitness().scorePassTurn();
+            //currentCharacter.getFitness().addHistory(currentCharacter.getId()+";"+action.toString());
+            //currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")+
+             //       currentCharacter.getName()+" "+currentCharacter.getTrueID()+" PASSE son tour ."+currentCharacter.getFitness().toStringFitness(),true);
+            currentCharacter.getFitness().scorePassTurn();
+            currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+            currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")+
+                    currentCharacter.getName()+" "+currentCharacter.getTrueID()+" PASSE son tour ."+currentCharacter.getFitness().toStringFitness(),true);
+
+            currentCharacter.setHasPlayed(true);
+
+        }else if (action.startsWith("m")) {// Movement action
             try {
                 String[] tokens = action.split(":");
                 if (tokens.length != 3)
@@ -836,9 +1041,17 @@ public class GameStage extends Stage {
                 String position = tokens[1] + ":" + tokens[2];
                 // TODO call aStar and check if character don't fall into trap
                 currentCharacter.moveTo(position);
-                switchTurn();
+                currentCharacter.getFitness().scoreMove();
+                currentCharacter.getFitness().addHistory(currentCharacter.getId()+" "+action.toString()+" "+currentCharacter.getFitness().toStringFitness());
+                currentCharacter.getFitness().debugFile((currentCharacter.isMonster()?"mob ":"genPlayer ")
+                        +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" BOUGE en "+position+" ."+currentCharacter.getFitness().toStringFitness(),true);
 
+                currentCharacter.setHasPlayed(true);
+                Gdx.app.log(LABEL,"==== in the decode action movement M");
             } catch (IllegalMovementException ime) {
+
+                if(Data.autoIA && currentCharacter.isNpc())
+                    currentCharacter.setHasPlayed(true);
                 throw new IllegalActionException("Mob can't reach this block");
             }
         } else {
@@ -853,7 +1066,7 @@ public class GameStage extends Stage {
      * @param e
      * @return
      */
-    protected Focus getFirstCharacterRange(ArrayList<Character> chars, Event e) {
+    private Focus getFirstCharacterRange(ArrayList<Character> chars, Event e) {
         float range = MAX_RANGE;
         Gdx.app.log(LABEL, "Search the first character range : " + e.toString() + ", " + chars.toString());
         Character focus = null;
@@ -983,21 +1196,70 @@ public class GameStage extends Stage {
 
 
     public void checkEndGame() {
-        if (mobs.size() <= 0 || players.size() <= 0) {
-            //GAME WIN
-            stopAllThread();
-            gameEnded = true;
-            if (mobs.size() <= 0)
+        if(mobs.size() == 0 || players.size() == 0 || global_turn == Data.maxTurn)
+        {
+            if( mobs.size() <= 0 ){
+                //GAME WIN
+                gameEnded = true;
                 gameWin = true;
-            if (players.size() <= 0)
+            }else
+            {
+                //GAME LOSE
+                gameEnded = true;
                 gameLose = true;
+            }
+        }
+        if(gameEnded)
+        {
+
+            System.out.println("mob size : " + mobs.size() + " genPlayers size : " + players.size());
+            System.out.println("-- FIN DE JEU-- ");
+          if(Data.autoIA) {
+              endGameLogs();
+              if(loopNumber >= Data.MAX_GAME_LOOP)
+                resetGame();
+          }
         }
     }
 
+    public void endGameLogs(){
+        originMobs.get(0).getFitness().debugFile("-- FIN DE JEU --", true);
+       for(Mob mo : originMobs){
+
+            mo.getFitness().debugFile(	"Mob id="+mo.getTrueID()+" name="+mo.getName()+
+                " score final = "+mo.getFitness().calculFinalScore(gameLose, global_turn)+""+
+                mo.getFitness().toStringFitness(), true);
+        mo.getFitness().writeHistory(mo, false, loopNumber);
+            System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = "+mo.getFitness().getFinalScore() );
+
+        }
+        for(Player po : originPlayers){
+            po.getFitness().debugFile("Player id="+po.getTrueID()+" name="+po.getName()+
+                    " score final = "+po.getFitness().calculFinalScore(gameWin, global_turn)+""+
+                    po.getFitness().toStringFitness(), true);
+            po.getFitness().writeHistory(po, false, loopNumber);
+        }
+    originMobs.get(0).getFitness().renameScoreFile();
+    stopAllThread();
+    }
+
     public void stopAllThread() {
-        apix.stop();
+        if(Data.RUN_APIX)
+            apix.stop();
         CommandHandler.getInstance().getThread().stop();
+       // CameraHandler.getInstance().getThread().stop();
         turnTimer = Integer.MAX_VALUE;
+    }
+
+    public void quitGame()
+    {
+        Gdx.app.exit();
+    }
+
+    public void resetGame()
+    {
+        Gdx.app.log("resetGame", "");
+        quitGame();
     }
 
     /**
@@ -1068,9 +1330,10 @@ public class GameStage extends Stage {
         return -1;
     }
 
-    protected class Focus {
-        public float range;
-        public Character character;
+
+    private class Focus {
+        protected float range;
+        protected Character character;
 
         public Focus(float range, Character character) {
             this.range = range;
@@ -1080,5 +1343,28 @@ public class GameStage extends Stage {
         public String toString() {
             return "Focus [ range, " + range + ", " + character.toString() + "]";
         }
+    }
+
+    private void reinitAll(){
+        players.clear();
+        mobs.clear();
+        originPlayers.clear();
+        originMobs.clear();
+        gameOn = false;
+        gameWin = false;
+        gameLose = false;
+        global_turn = 0;
+        turn = 0;
+        previousCharacter = null;
+        currentCharacter = null;
+       /* try {
+            commands.getThread().wait();
+
+        }catch(InterruptedException e){
+            Gdx.app.log(LABEL,"** Reinit All datas : Interrupted Exception **");
+        }*/
+        Gdx.app.log(LABEL,"** Reinit All datas : players size = "+players.size()+", mobs size = "+mobs.size()+"**");
+        Gdx.app.log(LABEL,"** Reinit All datas : Origin players size = "+originPlayers.size()+", Origin mobs size = "+originMobs.size()+"**");
+        gameEnded = false;
     }
 }
