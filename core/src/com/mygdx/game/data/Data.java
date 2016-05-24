@@ -505,7 +505,7 @@ public class Data {
 
     public static void setForAndroid(boolean onAndroid){
         autoIA = false;
-        generateIA = false;
+        generateIA = true;
         jvm = true;
         singlePlayer = true;
         ANDROID = onAndroid;
