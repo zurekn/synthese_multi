@@ -40,7 +40,7 @@ public class Data {
     public static final boolean FULLSCREEN = false;
     public static final boolean DEBUG_DEPARTURE = true;
     public static final boolean tiDebug = true;
-    public static final boolean RELOAD_GAME_WHEN_ENDED = false;
+    public static boolean RELOAD_GAME_WHEN_ENDED = true;
     public static boolean debug = true;
     public static final boolean DISPLAY_PLAYER = true;
     public static final boolean runQRCam = false;
@@ -50,7 +50,7 @@ public class Data {
     public static final boolean debugQR = false;
     public static final int DEBUG_PLAYER = 4;
     public static final int DEBUG_NB_GENETIC_PLAYER = 4;
-    public static boolean ANDROID = false;
+    public static boolean ANDROID = true;
     //public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
     public static String IMAGE_DIR = "C:/Users/fr�d�ric/Google Drive/Master Cergy/Projet_PlateauJeu/Synth�se/ImageDeTest/";
 
@@ -281,7 +281,11 @@ public class Data {
                 + ", BLOCK_NUMBER = " + Data.BLOCK_NUMBER_X
                 + ", BLOCK_SIZE_X = " + Data.BLOCK_SIZE_X + ", BLOCK_SIZE_Y = "
                 + Data.BLOCK_SIZE_Y + ", SCALE = " + Data.SCALE);
+        createDirectoryIA();
+    }
 
+    public static void createDirectoryIA()
+    {
         File f = new File(CompileString.destPathClass);
         if (!f.isDirectory())
             f.mkdir();
@@ -505,13 +509,24 @@ public class Data {
         IMAGE_HALO.dispose();
     }
 
-    public static void setForAndroid(boolean onAndroid){
+    public static void setForAndroid(boolean onAndroid){//Appelé lorsqu'on ne veut PAS lancer l'apprentissage
         autoIA = false;
         generateIA = true;
         jvm = true;
         singlePlayer = true;
         ANDROID = onAndroid;
         RUN_APIX = false;
+        RELOAD_GAME_WHEN_ENDED = false;
+    }
+
+    public static void setForIAGenetic(){//Appelé lorsqu'on VEUT lancer l'apprentissage
+        autoIA = true;
+        generateIA = true;
+        jvm = false;
+        singlePlayer = false;
+        ANDROID = true;
+        RUN_APIX = false;
+        RELOAD_GAME_WHEN_ENDED = true;
     }
 
     public static void setScreenSize() {

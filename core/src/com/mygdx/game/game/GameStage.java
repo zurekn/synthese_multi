@@ -229,6 +229,7 @@ public class GameStage extends Stage {
         // Fill the player list
         if(Data.autoIA && !Data.jvm)
         {
+            Gdx.app.log("create", "autoIA");
             initGeneticPlayers();
             Data.singlePlayer = false;
         }

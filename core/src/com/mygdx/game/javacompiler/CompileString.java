@@ -19,7 +19,10 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import javax.tools.JavaCompiler;
@@ -54,7 +57,8 @@ public class CompileString {
     private static ArrayList<String> funcString;
     private static ArrayList<String> funcInt;
     private static ArrayList<String> funcBoolean;
-    private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
+    private static final String JDK_PATH = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
+    // private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
 
 
     public static void generate(String geneticName)
@@ -90,9 +94,11 @@ public class CompileString {
     /*
      * S�rialization d'un objet
      */
-    public static void serializeObject(String name, Node root)
-            throws IOException {
-        File f = new File(destPathClass+pathLog+File.separator+ name + ".txt");
+    public static void serializeObject(String name, Node root) throws IOException
+    {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
+        Date date = new Date();
+        File f = new File(destPathClass+pathLog+File.separator+ name + "_" + dateFormat.format(date) + ".txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(f));
         objectOutputStream.writeObject(root);

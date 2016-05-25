@@ -25,8 +25,8 @@ public class DesktopLauncher {
         Data.RUN_APIX = false;
         Data.debug = true;
 
-        Data.setForAndroid(false);
-
+        //Data.setForAndroid(false);
+        Data.setForIAGenetic();//Lancement en boucle de IA génétique et apprentissage
         new LwjglApplication(new WindowGame(), config);
 	}
 }
