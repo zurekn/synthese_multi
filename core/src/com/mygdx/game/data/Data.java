@@ -62,6 +62,18 @@ public class Data {
     public static boolean generateIA = true;
     public static int maxTurn = 20;
     public static String rootDir="";
+    // IA Param File Vars
+    // Directories
+    public static String poolDir = "IAPool/";
+    public static String poolToTestDir = "PoolATester/";
+    public static String poolTestedDir = "PoolTestee/";
+    public static String poolCrossedDir = "PoolCroisee/";
+    // vars in param
+    public static String poolTestName = "PoolTest";
+    public static String bestRateName = "BestMoRate";
+    public static String worstRateName = "WorstMobRate";
+    public static String crossingPoliticName = "CrossingPolitic";
+    public static String crossRateName = "CrossMobRate";
     public static int MAX_GAME_LOOP = 10;
 
     // Const TI Part

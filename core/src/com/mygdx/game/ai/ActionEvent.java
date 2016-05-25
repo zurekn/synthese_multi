@@ -4,6 +4,7 @@ public class ActionEvent {
 
 	private String action;
 	private String id;
+
 	public ActionEvent(String id, String data){
 		this.id = id;
 		this.action = data;

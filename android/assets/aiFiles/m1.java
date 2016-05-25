@@ -24,13 +24,26 @@ public class m1 {
 	
 	public String run(Character ch)
 	{
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.NORTH;
-		if(((ch.researchCharacter(left)==null)?defaultBoolean:ch.researchCharacter(left).isCharacterInLine(left))== ((ch.researchCharacter(right)==null)?defaultBoolean:ch.researchCharacter(right).isCharacterInLine(left)) )
+		    deplacementString = ch.getDeplacement(-1,-2);
+		    deplacementString = ch.getDeplacement(1,2);
+		if(((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getLifePercentage())== (ch.getStats().getManaPercentage()) )
 		{
-		    deplacementString = ch.getDeplacement(3,-1);
+		    deplacementString = ch.getDeplacement(-2,3);
+		if(((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).getStats().getMaxMana()/5)> ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).Portee(((ch.researchCharacter(left)==null)?defaultString:ch.researchCharacter(left).getMaxHealingSpellId()))) )
+		{
+		    actionString = ch.getMaxHealingSpellId()+":"+ Data.WEST;
+		}
 		}
 		else
 		{
+		if(0.3> ((ch.researchCharacter(right)==null)?defaultFloat:ch.researchCharacter(right).getStats().getManaPercentage()) )
+		{
+		    deplacementString = ch.getDeplacement(2,-2);
+		}
+		else
+		{
+		    deplacementString = ch.getDeplacement(-2,0);
+		}
 		}
 		return actionString+"!!"+deplacementString;
 	}

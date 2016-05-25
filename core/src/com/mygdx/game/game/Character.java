@@ -26,6 +26,7 @@ import java.util.Random;
  * 
  */
 public abstract class Character {
+
     private static final String TAG = "Character";
     private int x;
 	private int y;
@@ -33,7 +34,7 @@ public abstract class Character {
 	private int lastY;
 	private String id;
 	private String trueID;
-	
+	private int generation = 1;
 	private int sizeCharacter;
 
     /* Animation */
@@ -69,7 +70,7 @@ public abstract class Character {
 	 * Genere le script pour l'IA
 	 */
 	public void generateScriptGenetic() {// génération d'un script génétique
-		CompileString.generate(this.trueID);
+		CompileString.generate(this.trueID,this.generation);
 	}
 
 	/**
@@ -691,4 +692,10 @@ public abstract class Character {
 		this.fitness = fitness;
 	}
 
+	public void setGeneration(int gen){
+		generation = gen;
+	}
+	public int getGeneration(){
+		return generation;
+	}
 }

@@ -24,26 +24,23 @@ public class g3 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(3,0);
-		    deplacementString = ch.getDeplacement(1,-2);
-		if(false== ((ch.researchCharacter(left)==null)?defaultBoolean:ch.researchCharacter(left).isCharacterInLine(up)) )
+		    actionString = ch.getMaxHealingSpellId()+":"+ Data.EAST;
+		if(false== ((ch.researchCharacter(right)==null)?defaultBoolean:ch.researchCharacter(right).isCharacterInLine(up)) )
 		{
-		    deplacementString = ch.getDeplacement(-1,2);
-		    deplacementString = ch.getDeplacement(-1,3);
-		if(false== ((ch.researchCharacter(up)==null)?defaultBoolean:ch.researchCharacter(up).isCharacterInLine(up)) )
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.WEST;
+		    actionString = ch.passerTour();
+		if(false== ((ch.researchCharacter(left)==null)?defaultBoolean:ch.researchCharacter(left).isCharacterInLine(left)) )
 		{
-		    deplacementString = ch.getDeplacement(2,1);
-		    deplacementString = ch.getDeplacement(0,-2);
-		}
-		else
-		{
+		    deplacementString = ch.getDeplacement(2,2);
+		    deplacementString = ch.getDeplacement(2,0);
 		}
 		}
 		else
 		{
-		if(0.3== ((ch.researchCharacter(left)==null)?defaultFloat:ch.researchCharacter(left).getStats().getManaPercentage()) )
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SOUTH;
+		if(((ch.researchCharacter(down)==null)?defaultInt:ch.researchCharacter(down).getStats().getMagicPower())== ((ch.researchCharacter(right)==null)?defaultInt:ch.researchCharacter(right).getStats().getMaxMana()/2) )
 		{
-		    deplacementString = ch.getDeplacement(-1,-1);
+		    deplacementString = ch.getDeplacement(0,3);
 		}
 		}
 		return actionString+"!!"+deplacementString;

@@ -30,7 +30,20 @@ import com.mygdx.game.imageprocessing.APIX;
 import com.mygdx.game.imageprocessing.APIXAdapter;
 import com.mygdx.game.imageprocessing.MovementEvent;
 import com.mygdx.game.imageprocessing.QRCodeEvent;
+import com.mygdx.game.javacompiler.CompileString;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -69,9 +82,11 @@ import static com.mygdx.game.data.Data.debug;
 import static com.mygdx.game.data.Data.departureBlocks;
 import static com.mygdx.game.data.Data.loadGame;
 import static com.mygdx.game.data.Data.loadMap;
+import static com.mygdx.game.data.Data.rootDir;
 import static com.mygdx.game.data.Data.scale;
 import static com.mygdx.game.data.Data.tiledMapRenderer;
 import static com.mygdx.game.data.Data.untraversableBlocks;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Created by nicolas on 15/03/2016.
@@ -117,6 +132,14 @@ public class GameStage extends Stage {
     public boolean gameLose = false;
     private int timerInitPlayer;
     private int loopNumber = 1;
+
+    // IA Param File vars
+    private ArrayList<Character> needingTestPool;
+    private ArrayList<Character> testedPool;
+    private ArrayList<Character> crossedPool;
+    private int bestMobRate = 0;
+    private int worstMobRate = 0;
+    private int crossMobRate = 0;
 
     //
     protected int turnTimer;
@@ -210,14 +233,12 @@ public class GameStage extends Stage {
         // TrapData.loadTrap();
 
         initAPIX();
-
+        // Detects if param file exists and decodes it
+        readParamFile();
+        Gdx.app.log(LABEL, "** On a read le fichier de param. Best mob rate ="+bestMobRate+", Worst Mob Rate ="+worstMobRate+", Cross Mob Rate="+crossMobRate);
 
         // Create the monsters and players lists
-        mobs = MonsterData.initMobs();
-        mobHandler = new MobHandler(mobs);
-        originMobs = new ArrayList<Mob>(mobs);
-        players = new ArrayList<Player>();
-        playerHandler = new PlayerHandler(players);
+        loadChallengers();
         messageHandler = new MessageHandler();
         if(!Data.ANDROID)
             initCommandHandler();
@@ -226,6 +247,16 @@ public class GameStage extends Stage {
             camera.init();
             Data.BACKGROUND_MUSIC.loop(Data.MUSIC_VOLUM);
         }
+        // Set the timer
+        timerInitPlayer = INIT_MAX_TIME;
+    }
+
+    public void loadChallengers(){
+        mobs = MonsterData.initMobs();
+        mobHandler = new MobHandler(mobs);
+        originMobs = new ArrayList<Mob>(mobs);
+        players = new ArrayList<Player>();
+        playerHandler = new PlayerHandler(players);
         // Fill the player list
         if(Data.autoIA && !Data.jvm)
         {
@@ -252,10 +283,119 @@ public class GameStage extends Stage {
             }
         }
         originPlayers = new ArrayList<Player>(players);
+    }
 
-        //new Thread(movementHandler).start();
-        // Set the timer
-        timerInitPlayer = INIT_MAX_TIME;
+    public void readParamFile() {
+        Gdx.app.log(LABEL, "**readParamFile begins");
+        String filename = "Param";
+       // File fichier = new File(Data.rootDir+"/core/src/com/mygdx/game/IAPool/" + filename + ".txt");
+        File fichier = Gdx.files.internal("ai" + filename + ".txt").file();
+        if (!fichier.exists() || fichier.isDirectory()){
+            Gdx.app.log(LABEL, "**readParamFile file : "+fichier.getAbsolutePath()+" don't exist.  rootDir = "+rootDir);
+            return;
+    }
+        boolean inPoolList = false;
+        boolean inPolitic = false;
+        // lecture du fichier texte
+        try {
+            InputStream ips = new FileInputStream(fichier);
+            InputStreamReader ipsr = new InputStreamReader(ips);
+            BufferedReader br = new BufferedReader(ipsr);
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+                if(inPolitic){
+                    if (ligne.contains("}")){
+                        inPolitic= false;
+                    }else{
+                        if(ligne != null && !ligne.equals(""))
+                            CompileString.storeToPool(ligne);
+                    }
+                }
+                else if(inPoolList){
+                    if (ligne.contains("}")){
+                        inPoolList = false;
+                    }else{
+                        if(ligne != null && !ligne.equals("")) {
+                            String[] rate = ligne.split("=");
+                            if(ligne.contains(Data.bestRateName)){
+                                bestMobRate = Integer.parseInt(rate[1]);
+                            }else if(ligne.contains(Data.worstRateName)){
+                                worstMobRate = Integer.parseInt(rate[1]);
+                            }else if(ligne.contains(Data.crossRateName)){
+                                crossMobRate = Integer.parseInt(rate[1]);
+                            }
+                        }
+                    }
+                } else if (ligne.contains(Data.poolTestName)){
+                    inPoolList = true;
+                }else if (ligne.contains(Data.crossingPoliticName)){
+                    inPolitic = true;
+                }
+            }
+            br.close();
+            if(fichier.delete()){
+                Gdx.app.log(LABEL,"readParamFile : file successfully deleted");
+            }else{
+                Gdx.app.log(LABEL,"readParamFile : file not deleted, error");
+            }
+        } catch (Exception e) {
+            System.out.println("Read Param exception... "+e.toString());
+        }
+        Gdx.app.log(LABEL,"**readParamFile ends");
+    }
+
+    /** Move files depending on the switch mode
+     *  0 = From PoolATester to local
+     *  1 = From local to PoolTestee
+     *  2 = From PoolTestee to PoolCroisee
+     *  3 = From PoolCroisee to PoolATester
+     * @param switchMode
+     * @param localName
+     * @param poolFileName
+     */
+    public void switchTestPool(int switchMode, String localName, String poolFileName){
+        Gdx.app.log(LABEL,"**switchTestPool begin");
+        Path source;
+        Path target;
+        File testPoolDir;
+        //String dirPath = Data.rootDir+"/core/src/com/mygdx/game/ai/";
+        String dirPath = "aiFiles";
+        switch(switchMode){
+            // Switch FROM PoolATester TO local
+            case 0:
+                source = Paths.get(dirPath+Data.poolToTestDir+localName);
+                target = Paths.get(dirPath+localName);
+                break;
+            // Switch FROM local TO PoolTestee
+            case 1:
+                source = Paths.get(dirPath+localName);
+                target = Paths.get(dirPath+Data.poolTestedDir+localName);
+                break;
+            // Switch from PoolTestee to PoolCroisee
+            case 2:
+                source = Paths.get(dirPath+Data.poolTestedDir+localName);
+                target = Paths.get(dirPath+Data.poolCrossedDir+localName);
+                break;
+            // Switch from PoolCroisee to PoolATester
+            case 3:
+                source = Paths.get(dirPath+Data.poolCrossedDir+localName);
+                target = Paths.get(dirPath+Data.poolToTestDir+localName);
+                break;
+            default:
+                source = null;
+                target = null;
+        }
+        try {
+            testPoolDir = source.toFile();
+            if(!testPoolDir.exists()) {
+                Gdx.app.log(LABEL,"**Param Moving File : source File doesn't exists !**");
+                return;
+            }
+            Files.move(source,target,REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Gdx.app.log(LABEL,"**switchTestPool end");
 
     }
 
@@ -593,6 +733,12 @@ public class GameStage extends Stage {
             //start();
         }
     }
+
+    public void combineMobs(Character c1, Character c2, String name){
+        int genMax = 0;
+        genMax = java.lang.Math.max(c1.getGeneration(), c2.getGeneration());
+        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "" + genMax);
+    }
     /**
      * Add a new player
      *
@@ -835,10 +981,12 @@ public class GameStage extends Stage {
             Gdx.app.log(LABEL, "========================");
             if (turn < players.size()) {
                 Gdx.app.log(LABEL, "Tour du Joueur " + turn);
-                Gdx.app.log(LABEL, "Player : " + players.get(turn).toString());
+                if(players.size() > 0)
+                    Gdx.app.log(LABEL, "Player : " + players.get(turn).toString());
             } else {
                 Gdx.app.log(LABEL, "Tour du Monster" + (turn - players.size()));
-                Gdx.app.log(LABEL, "Monster " + mobs.get(turn - players.size()).toString());
+                if(mobs.size() > 0)
+                    Gdx.app.log(LABEL, "Monster " + mobs.get(turn - players.size()).toString());
             }
             Gdx.app.log(LABEL, "========================");
         }
@@ -940,10 +1088,12 @@ public class GameStage extends Stage {
                         Gdx.app.log(LABEL, "-----------------------------------------");
                         messageHandler.addPlayerMessage(new Message(currentCharacter.getName() + "Died "), turn);
                         if(turn > 0 ) turn--;
-                        currentCharacter.getFitness().debugFile("*** "+(currentCharacter.isMonster()?"mob ":"genPlayer ")
-                                +currentCharacter.getName()+" "+currentCharacter.getTrueID()+" est mort ."+currentCharacter.getFitness().toStringFitness(),true);
-                        players.remove(currentCharacter);
-                        mobs.remove(currentCharacter);
+                        currentCharacter.getFitness().debugFile("*** " + (currentCharacter.isMonster() ? "mob " : "genPlayer ")
+                                + currentCharacter.getName() + " " + currentCharacter.getTrueID() + " est mort ." + currentCharacter.getFitness().toStringFitness(), true);
+                        if(players.contains(currentCharacter))
+                            players.remove(currentCharacter);
+                        else
+                            mobs.remove(currentCharacter);
                         playerNumber--;
 
                         checkEndGame();
@@ -1218,8 +1368,10 @@ public class GameStage extends Stage {
             System.out.println("-- FIN DE JEU-- ");
           if(Data.autoIA) {
               endGameLogs();
-              if(loopNumber >= Data.MAX_GAME_LOOP)
-                resetGame();
+              if(loopNumber >= Data.MAX_GAME_LOOP) {
+                  Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adios amigos !");
+                  resetGame();
+              }
           }
         }
     }
@@ -1359,14 +1511,8 @@ public class GameStage extends Stage {
         turn = 0;
         previousCharacter = null;
         currentCharacter = null;
-       /* try {
-            commands.getThread().wait();
-
-        }catch(InterruptedException e){
-            Gdx.app.log(LABEL,"** Reinit All datas : Interrupted Exception **");
-        }*/
-        Gdx.app.log(LABEL,"** Reinit All datas : players size = "+players.size()+", mobs size = "+mobs.size()+"**");
-        Gdx.app.log(LABEL,"** Reinit All datas : Origin players size = "+originPlayers.size()+", Origin mobs size = "+originMobs.size()+"**");
+        /*Gdx.app.log(LABEL,"** Reinit All datas : players size = "+players.size()+", mobs size = "+mobs.size()+"**");
+        Gdx.app.log(LABEL,"** Reinit All datas : Origin players size = "+originPlayers.size()+", Origin mobs size = "+originMobs.size()+"**");*/
         gameEnded = false;
     }
 }

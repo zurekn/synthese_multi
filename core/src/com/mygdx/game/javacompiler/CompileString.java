@@ -3,7 +3,7 @@ package com.mygdx.game.javacompiler;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.game.Character;
-
+import static java.nio.file.StandardCopyOption.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,13 +16,15 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 import javax.tools.JavaCompiler;
@@ -31,6 +33,7 @@ import javax.tools.ToolProvider;
 import static com.mygdx.game.data.Data.*;
 
 public class CompileString {
+    private static final String LABEL = "CompileString" ;
     static Boolean debug = false;
     static String className = "";
     public static final String pathLog = "AILogs";
@@ -57,11 +60,11 @@ public class CompileString {
     private static ArrayList<String> funcString;
     private static ArrayList<String> funcInt;
     private static ArrayList<String> funcBoolean;
-    private static final String JDK_PATH = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
-    // private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
+    private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
+    private static final String JDK_PATH2 = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
 
 
-    public static void generate(String geneticName)
+    public static void generate(String geneticName, int generation)
     {
         System.setProperty("java.home", JDK_PATH);
         aRisque = false;
@@ -70,7 +73,7 @@ public class CompileString {
         rootDir =  File.separator;// System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf("\\"));
         //rootDir =  rootDir.substring(0, rootDir.lastIndexOf("\\"));
 
-        debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
+        Gdx.app.log(LABEL,"\n===========   GENERATE MOB "+geneticName+"  ===========");
         Node root = advanced?DecodeScript(pathClass+"/AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+"/AIScriptDatas.txt");
         ArrayList<String> contentCode = new ArrayList<String>();
         contentCode = root.TreeToArrayList(contentCode);
@@ -80,7 +83,7 @@ public class CompileString {
         className = geneticName + (aRisque ? "_Arisque" : "");
         ReadWriteCode(contentCode, className);
         try {
-            serializeObject("serialized_"+geneticName, root);
+            serializeObject(geneticName+"_"+generation, root);
             //deserializeObject("serialized_"+geneticName);
         } catch (IOException e) {
             e.printStackTrace();
@@ -94,11 +97,9 @@ public class CompileString {
     /*
      * S�rialization d'un objet
      */
-    public static void serializeObject(String name, Node root) throws IOException
-    {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
-        Date date = new Date();
-        File f = new File(destPathClass+pathLog+File.separator+ name + "_" + dateFormat.format(date) + ".txt");
+    public static void serializeObject(String name, Node root)
+            throws IOException {
+        File f = new File(destPathClass+pathLog+File.separator+"serialized_"+name + ".txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(f));
         objectOutputStream.writeObject(root);
@@ -112,7 +113,7 @@ public class CompileString {
     public static Node deserializeObject(String name) throws IOException,
             ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(pathClass+"javaObjects_" + name + ".txt"));
+                new FileInputStream(pathClass+"serialized_" + name + ".txt"));
         Node readJSON = (Node) objectInputStream.readObject();
         objectInputStream.close();
 //		System.out.println("### Display Tree");
@@ -122,6 +123,28 @@ public class CompileString {
 //		System.out.println("### Fin deserialize");
         return readJSON;
     }
+	/**
+	 *  Store a script into Pool a Tester from the tree of this script
+	 *
+	 * @param treeName : the tree to store as script
+	 */
+	public static void storeToPool(String treeName){
+		try {
+			Node node =	deserializeObject(treeName);
+			// Save result
+			ArrayList<String> contentCode = new ArrayList<String>();
+			contentCode = node.TreeToArrayList(contentCode);
+			ReadWriteCode(contentCode,"toMove_"+treeName);
+			File file = new File(pathClass + packageName+className +".java");
+			Path source = Paths.get(pathClass + packageName + className + ".java");
+			Path target = Paths.get(pathClass + packageName+"PoolATester/"+className +".java");
+			Files.move(source, target, REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
     public static void loadMob(String name, String geneticName)
     {
@@ -624,8 +647,14 @@ public class CompileString {
 
         // Compilation de la classe du joueur IA
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        if(compiler == null){
+            Gdx.app.log(LABEL,"Pas de compiler :(");
+            System.setProperty("java.home", JDK_PATH2);
+            compiler = ToolProvider.getSystemJavaCompiler();
+        }
         @SuppressWarnings("unused")
-        int result = compiler.run(null, null, null,  destPathClass +File.separator + className + ".java");
+        int result = compiler.run(null, null, null, destPathClass + File.separator + className + ".java");
+
         //System.out.println("Compile result code = " + result);
 
         // D�placement du fichier .CLASS du r�pertoire /src au /bin
