@@ -12,12 +12,12 @@ public class Mob extends Character {
     private static final String TAG = "MOB";
 	private float elapsedTime;
 
-	public Mob(int x, int y, String id, String trueID) {
+	public Mob(int x, int y, String id, String trueID, String targetTree) {
 		this.setX(x);
 		this.setY(y);
 		this.setId(id);
 		this.setTrueID(trueID);
-
+		this.setTargetTree(targetTree);
 		init();
 
 		if (Data.debug) {
@@ -36,8 +36,10 @@ public class Mob extends Character {
 		this.setSpells(m.getSpells());
 		this.setAiType(m.getAiType());
 
-		if(Data.generateIA)
-			this.generateScriptGenetic();
+		if(Data.generateIA) {
+//			this.generateScriptGenetic();
+			this.loadScriptFromTree();
+		}
 		this.compileScriptGenetic();
 		this.setFitness(new IAFitness(true));
 	}

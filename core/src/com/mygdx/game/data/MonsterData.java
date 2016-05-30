@@ -62,7 +62,7 @@ public class MonsterData {
 			id = el.getAttribute("id");
 			posX = Integer.parseInt(el.getChildByName("x").getText());
 			posY = Integer.parseInt(el.getChildByName("y").getText());
-			Mob m = new Mob(posX, posY, id,"m"+idCount);
+			Mob m = new Mob(posX, posY, id,"m"+idCount, Data.selectedIAFiles.get(idCount-1));
 			mobs.add(m);
 			idCount++;
 		}

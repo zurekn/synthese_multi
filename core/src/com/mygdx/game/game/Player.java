@@ -83,14 +83,14 @@ public class Player extends Character {
         }
     }
 
-    public Player(int x, int y, String id, String caracterClass, String trueID) throws IllegalCaracterClassException {
+    public Player(int x, int y, String id, String caracterClass, String trueID, String targetTree) throws IllegalCaracterClassException {
         monster = false;
         this.setX(x);
         this.setY(y);
         this.setId(id);
         this.setTrueID(trueID);
-
         if(Data.autoIA) {
+            this.setTargetTree(targetTree);
             init();
         }
         else {
@@ -122,8 +122,10 @@ public class Player extends Character {
         this.setName(m.getName());
         this.setSpells(m.getSpells());
         this.setAiType(m.getAiType());
-        if(Data.generateIA)
-            this.generateScriptGenetic();
+        if(Data.generateIA) {
+//            this.generateScriptGenetic();
+            this.loadScriptFromTree();
+        }
         this.compileScriptGenetic();
         this.setFitness(new IAFitness(true));
     }

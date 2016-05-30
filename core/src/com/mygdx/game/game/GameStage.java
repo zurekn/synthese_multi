@@ -307,8 +307,8 @@ public class GameStage extends Stage {
                     if (ligne.contains("}")){
                         inPolitic= false;
                     }else{
-                        if(ligne != null && !ligne.equals(""))
-                            CompileString.storeToPool(ligne);
+                        //if(ligne != null && !ligne.equals(""))
+                            //CompileString.storeToPool(ligne);
                     }
                 }
                 else if(inPoolList){
@@ -664,19 +664,19 @@ public class GameStage extends Stage {
         try {
             if (Data.DEBUG_NB_GENETIC_PLAYER > 0)
             {
-                addGeneticPlayer(10, 8, -1,"m1");
+                addGeneticPlayer(10, 8, -1,"m1", Data.selectedIAFiles.get(4));
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 1)
             {
-                addGeneticPlayer(11, 10, -1, "m2");
+                addGeneticPlayer(11, 10, -1, "m2", Data.selectedIAFiles.get(5));
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 2)
             {
-                addGeneticPlayer(12, 12, -1, "m3");
+                addGeneticPlayer(12, 12, -1, "m3", Data.selectedIAFiles.get(6));
             }
             if (Data.DEBUG_NB_GENETIC_PLAYER > 3)
             {
-                addGeneticPlayer(7, 12, -1, "m4");
+                addGeneticPlayer(7, 12, -1, "m4", Data.selectedIAFiles.get(7));
             }
 
         } catch (IllegalCaracterClassException e) {
@@ -692,7 +692,7 @@ public class GameStage extends Stage {
      * Add a new player (call in initGeneticPlayers)
      */
     @SuppressWarnings("unused")
-    public void addGeneticPlayer(int x, int y, int size, String id) throws IllegalCaracterClassException, IllegalMovementException, IllegalActionException {
+    public void addGeneticPlayer(int x, int y, int size, String id, String selectedTree) throws IllegalCaracterClassException, IllegalMovementException, IllegalActionException {
         //Gdx.app.log(LABEL, "add Genetic Player id : "+id);
         if (gameOn)
             throw new IllegalActionException("Can not add player genetic when game is on!");
@@ -721,7 +721,7 @@ public class GameStage extends Stage {
         if (Data.MAX_PLAYER <= players.size())
             return;
 
-        Player p = new Player(x, y, id, "", "g"+players.size());
+        Player p = new Player(x, y, id, "", "g"+players.size(), selectedTree);
         p.setNumber(players.size());
         p.setSizeCharacter(size);
         players.add(p);

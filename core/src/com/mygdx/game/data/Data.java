@@ -348,8 +348,8 @@ public class Data {
                 randIdx = r.nextInt(allGeneratedFiles.size);
             selectedIAFiles.add(allGeneratedFiles.get(randIdx));
         }
-//        for(String s : selectedIAFiles)
-//            System.out.println(s);
+        for(String s : selectedIAFiles)
+            System.out.println(s);
     }
 
     public static boolean isInArray(String st, Array<String> arrayTest)

@@ -33,6 +33,7 @@ public abstract class Character {
 	private int lastX;
 	private int lastY;
 	private String id;
+	private String targetTree;
 	private String trueID;
 	private int generation = 1;
 	private int sizeCharacter;
@@ -70,7 +71,11 @@ public abstract class Character {
 	 * Genere le script pour l'IA
 	 */
 	public void generateScriptGenetic() {// génération d'un script génétique
-		CompileString.generate(this.trueID,this.generation);
+		CompileString.generate(this.trueID);//,this.generation);
+	}
+
+	public void loadScriptFromTree() {// génération d'un script génétique
+		CompileString.loadGenetic(this.targetTree,this.trueID);//,this.generation);
 	}
 
 	/**
@@ -323,6 +328,14 @@ public abstract class Character {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public String getTargetTree() {
+		return targetTree;
+	}
+
+	public void setTargetTree(String targetTree) {
+		this.targetTree = targetTree;
 	}
 
 	public Stats getStats() {

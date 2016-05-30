@@ -120,10 +120,9 @@ public class CompileString {
     /*
      * D�-s�rialize un objet
      */
-    public static Node deserializeObject(String name, String deserializePath) throws IOException,
-            ClassNotFoundException {
+    public static Node deserializeObject(String name, String deserializePath) throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(deserializePath +serializePrefix + name + ".txt"));
+                new FileInputStream(deserializePath + name));
         Node readJSON = (Node) objectInputStream.readObject();
         objectInputStream.close();
 //		System.out.println("### Display Tree");
@@ -137,11 +136,11 @@ public class CompileString {
     public static void loadGenetic(String name, String geneticName)
     {
         try {
-            Node treeMob = deserializeObject(name, destPathClass+pathLog+File.separator);
+            Node treeMob = deserializeObject(name, destPathClass);
             ArrayList<String> contentCode = new ArrayList<String>();
             contentCode = treeMob.TreeToArrayList(contentCode);
-//            className = geneticName + (aRisque ? "_Arisque" : "");
             ReadWriteCode(contentCode, geneticName);
+            //copier fichier contenant l'arbre sérializé dans un autre répertoire
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
