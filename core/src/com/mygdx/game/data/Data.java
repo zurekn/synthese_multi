@@ -88,7 +88,7 @@ public class Data {
 
     public static int MAX_GAME_LOOP = 10;
     public static int Number_Generated_IA = 10;
-    public static int All_Plareys_Number = 8;
+    public static int All_Players_Number = 8;
     public static Array <String> selectedIAFiles;
 
     // Const TI Part
@@ -319,10 +319,16 @@ public class Data {
         File f = new File(CompileString.destPathClass);
         if (!f.isDirectory())
             f.mkdir();
-        f = new File(CompileString.destPathClass+CompileString.pathLog);
+        f = new File(CompileString.destPathClass+CompileString.pathHist);
         if (!f.isDirectory())
             f.mkdir();
-        f = new File(CompileString.destPathClass+CompileString.pathHist);
+        f = new File(CompileString.destPathClass+Data.poolToTestDir);
+        if (!f.isDirectory())
+            f.mkdir();
+        f = new File(CompileString.destPathClass+Data.poolTestedDir);
+        if (!f.isDirectory())
+            f.mkdir();
+        f = new File(CompileString.destPathClass+Data.poolCrossedDir);
         if (!f.isDirectory())
             f.mkdir();
     }
@@ -334,7 +340,7 @@ public class Data {
     {
         for(int i=1 ; i <= x ; i++)
         {
-            CompileString.generateTree("x" + i);
+            CompileString.generateTree("x" + i+"_1");
         }
     }
 
@@ -343,7 +349,7 @@ public class Data {
      */
     public static void getRandomIAGeneticList()
     {
-        File directory= new File(CompileString.destPathClass);
+        File directory= new File(CompileString.destPathClass+Data.poolToTestDir);
         Array<String> allGeneratedFiles = new Array<String>();
         for (File file : directory.listFiles()) {
             if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt"))
@@ -353,7 +359,7 @@ public class Data {
 
         Random r = new Random();
         int randIdx;
-        for(int i=0; i<All_Plareys_Number;i++) {
+        for(int i=0; i<All_Players_Number;i++) {
             randIdx = r.nextInt(allGeneratedFiles.size);
             while(isInArray(allGeneratedFiles.get(randIdx), selectedIAFiles))
                 randIdx = r.nextInt(allGeneratedFiles.size);

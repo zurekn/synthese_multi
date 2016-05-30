@@ -70,8 +70,9 @@ public abstract class Character {
 	/**
 	 * Genere le script pour l'IA
 	 */
+	@Deprecated
 	public void generateScriptGenetic() {// génération d'un script génétique
-		CompileString.generate(this.trueID);//,this.generation);
+		CompileString.generateTree(this.trueID);//,this.generation);
 	}
 
 	public void loadScriptFromTree() {// génération d'un script génétique

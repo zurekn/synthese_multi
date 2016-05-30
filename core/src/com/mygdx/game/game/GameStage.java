@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.ai.AIHandler;
 import com.mygdx.game.ai.AStar;
 import com.mygdx.game.ai.ActionEvent;
@@ -48,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
+import static com.mygdx.game.data.Data.All_Players_Number;
 import static com.mygdx.game.data.Data.BLOCK_NUMBER_Y;
 import static com.mygdx.game.data.Data.BLOCK_REACHABLE_COLOR;
 import static com.mygdx.game.data.Data.BLOCK_SIZE_X;
@@ -84,6 +86,7 @@ import static com.mygdx.game.data.Data.loadGame;
 import static com.mygdx.game.data.Data.loadMap;
 import static com.mygdx.game.data.Data.rootDir;
 import static com.mygdx.game.data.Data.scale;
+import static com.mygdx.game.data.Data.selectedIAFiles;
 import static com.mygdx.game.data.Data.tiledMapRenderer;
 import static com.mygdx.game.data.Data.untraversableBlocks;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -134,9 +137,6 @@ public class GameStage extends Stage {
     private int loopNumber = 1;
 
     // IA Param File vars
-    private ArrayList<Character> needingTestPool;
-    private ArrayList<Character> testedPool;
-    private ArrayList<Character> crossedPool;
     private int bestMobRate = 0;
     /** Taux de récupération des pires mobs pour le prochain jeu  (en %) */
     private int worstMobRate = 0;
@@ -332,18 +332,24 @@ public class GameStage extends Stage {
                     }else{
                         if(ligne != null && !ligne.equals("") && ligne.contains("_")) {
                             Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. On appelle CompileString.storeToPool sur la ligne = "+ ligne);
-                            CompileString.storeToPool(ligne);
+                            Data.selectedIAFiles.add(ligne+".txt");
                         }
                     }
                 } else if (ligne.contains(Data.poolTestName)){
+                    Data.selectedIAFiles = new Array<String>();
                     Gdx.app.log(LABEL, "Une ligne contient poolTestName");
                     inPoolList = true;
                 }else if (ligne.contains(Data.crossingPoliticName)){
                     Gdx.app.log(LABEL, "Une ligne contient crossingPoliticName");
                     inPolitic = true;
                 }
+
             }
             br.close();
+            for(int i =selectedIAFiles.size;i<All_Players_Number;i++){
+                CompileString.generateTree("x"+i);
+                selectedIAFiles.add("x"+i);
+            }
             /*
             if(fichier.delete()){
                 Gdx.app.log(LABEL,"readParamFile : file successfully deleted");

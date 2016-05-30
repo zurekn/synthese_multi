@@ -66,35 +66,25 @@ public class CompileString {
     private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
     private static final String JDK_PATH2 = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
 
-
+    @Deprecated
     public static void generate(String geneticName, int generation)
     {
         System.setProperty("java.home", JDK_PATH);
         aRisque = false;
-
-
-        rootDir =  File.separator;// System.getProperty("user.dir").substring(0,  System.getProperty("user.dir").lastIndexOf("\\"));
-        //rootDir =  rootDir.substring(0, rootDir.lastIndexOf("\\"));
+        rootDir =  File.separator;
 
         debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
         Node root = advanced?DecodeScript(pathClass+File.separator+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+File.separator+"AIScriptDatas.txt");
         ArrayList<String> contentCode = new ArrayList<String>();
         contentCode = root.TreeToArrayList(contentCode);
-        //for (String st : contentCode)
-        //System.out.println(st);
-
         className = geneticName + (aRisque ? "_Arisque" : "");
         ReadWriteCode(contentCode, className);
         try {
-            serializeObject(serializePrefix + geneticName, root, destPathClass+pathLog+File.separator);
+            serializeObject(serializePrefix + geneticName+"_"+generation, root, destPathClass+pathLog+File.separator);
             //deserializeObject("serialized_"+geneticName);
         } catch (IOException e) {
             e.printStackTrace();
         }
-		/*catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}*/
-        // CompileAndExecuteClass(className, "run");
     }
 
     public static void generateTree(String geneticName)
@@ -103,7 +93,7 @@ public class CompileString {
         debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
         Node root = advanced?DecodeScript(pathClass+File.separator+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+File.separator+"AIScriptDatas.txt");
         try {
-            serializeObject(serializePrefix + geneticName, root, destPathClass);
+            serializeObject(serializePrefix + geneticName, root, destPathClass+Data.poolToTestDir);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,33 +122,12 @@ public class CompileString {
         objectInputStream.close();
         return readJSON;
     }
-	/**
-	 *  Store a script into Pool a Tester from the tree of this script
-	 *
-	 * @param treeName : the tree to store as script
-	 */
-	public static void storeToPool(String treeName){
-		try {
-			Node node =	deserializeObject(treeName,destPathClass+pathLog);
-			// Save result
-			ArrayList<String> contentCode = new ArrayList<String>();
-			contentCode = node.TreeToArrayList(contentCode);
-			ReadWriteCode(contentCode,"toMove_"+treeName);
-			File file = new File(pathClass + packageName+className +".java");
-			Path source = Paths.get(pathClass + packageName + className + ".java");
-			Path target = Paths.get(pathClass + packageName+Data.poolToTestDir+className +".java");
-			Files.move(source, target, REPLACE_EXISTING);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+
 
     public static void loadGenetic(String name, String geneticName)
     {
         try {
-            Node treeMob = deserializeObject(name, destPathClass);
+            Node treeMob = deserializeObject(name, destPathClass+Data.poolToTestDir);
             ArrayList<String> contentCode = new ArrayList<String>();
             contentCode = treeMob.TreeToArrayList(contentCode);
             ReadWriteCode(contentCode, geneticName);
@@ -169,7 +138,6 @@ public class CompileString {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -253,13 +221,6 @@ public class CompileString {
             e.printStackTrace();
         }
     }
-	/*
-        public static Node getRandomChild(Node node){
-            Node resultNode = new Node("");
-            resultNode = node.getSubTree(-1);
-            return resultNode;
-        }
-	*/
 
     /** Creation of genetic AI tree from a text file.
      * 	Creation stages :
@@ -585,7 +546,6 @@ public class CompileString {
             System.out.println("getComptInt random : " + rand);
 
         // calcul de la variable comparante (� droite du comparateur)
-        //String test = "("+Integer.parseInt(partsRandomVar[2])+"+new Random().nextInt("+partsRandomVar[3]+"))";
         String[] testVar = getParam(var,-1);
         String rightVar = testVar[0];
         debugSys("getComptInt : rightVar = "+rightVar);
@@ -742,7 +702,7 @@ public class CompileString {
     public static void WriteCode(ArrayList<String> content, String className) {
         // cr�ation du fichier qui va �craser l'ancien fichier java
         try {
-            FileWriter fw = new FileWriter(new File(destPathClass + className + ".java"));
+            FileWriter fw = new FileWriter(new File(destPathClass +Data.poolToTestDir+ className + ".java"));
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter fichierSortie = new PrintWriter(bw);
             for (String ln : content) {

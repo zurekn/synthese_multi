@@ -73,6 +73,7 @@ public class WindowGame extends Game {
 
     @Override
     public void create(){
+        Data.createDirectoryIA();
         Data.generateXIA(Data.Number_Generated_IA);
         Data.getRandomIAGeneticList();
         this.setScreen(new GameScreen(this));
