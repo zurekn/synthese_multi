@@ -14,7 +14,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import com.mygdx.game.game.WindowGame;
+import com.mygdx.game.game.*;
+import com.mygdx.game.game.Character;
 import com.mygdx.game.javacompiler.CompileString;
 
 import java.awt.Dimension;
@@ -23,6 +24,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,12 +35,15 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 /**
  * Class witch contains all static variables
  *
  * @author bob
  */
 public class Data {
+    private static String LABEL = "DATA";
 
     public static final boolean FULLSCREEN = false;
     public static final boolean DEBUG_DEPARTURE = true;
@@ -65,16 +72,20 @@ public class Data {
     public static String rootDir="";
     // IA Param File Vars
     // Directories
-    public static String poolDir = "IAPool/";
+    public static String paramDir = "ai/";
+    public static String poolsDir = "aiFiles/";
+    public static String paramFileNAme = "Param.txt";
+
     public static String poolToTestDir = "PoolATester/";
     public static String poolTestedDir = "PoolTestee/";
     public static String poolCrossedDir = "PoolCroisee/";
     // vars in param
     public static String poolTestName = "PoolTest";
-    public static String bestRateName = "BestMoRate";
+    public static String bestRateName = "BestMobRate";
     public static String worstRateName = "WorstMobRate";
-    public static String crossingPoliticName = "CrossingPolitic";
     public static String crossRateName = "CrossMobRate";
+    public static String crossingPoliticName = "CrossingPolitic";
+
     public static int MAX_GAME_LOOP = 10;
     public static int Number_Generated_IA = 10;
     public static int All_Plareys_Number = 8;
@@ -597,4 +608,92 @@ public class Data {
         SCREEN_WIDTH = (int)screenSize.getWidth();
         SCREEN_HEIGHT = (int)screenSize.getHeight();
     }
+
+    /** This function is used to clean dirty strings.
+     * It supresses spaces, tabulations, quotes, crochets and... retours chariot
+     * @param toClean
+     * @return
+     */
+    public static String supressUselessShit(String toClean){
+        String cleaned = toClean.replaceAll(" ", "");
+        cleaned = cleaned.replaceAll("   ","");
+        cleaned = cleaned.replaceAll("\t","");
+        cleaned = cleaned.replaceAll("\n","");
+        cleaned = cleaned.replaceAll("\"", "");
+        cleaned = cleaned.replace("[", "");
+        cleaned = cleaned.replace("]", "");
+        return cleaned;
+    }
+
+    /**
+     *  Combine 2 mobs et incrémente la génération
+     * @param c1
+     * @param c2
+     * @param name
+     */
+    public void combineMobs(com.mygdx.game.game.Character c1, Character c2, String name){
+        int genMax = 0;
+        genMax = java.lang.Math.max(c1.getGeneration(), c2.getGeneration());
+        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "_" + ++genMax);
+    }
+
+
+    /** Move files depending on the switch mode
+     *  0 = From PoolATester to local
+     *  1 = From local to PoolTestee
+     *  2 = From PoolTestee to PoolCroisee
+     *  3 = From PoolCroisee to PoolATester
+     * @param switchMode
+     * @param localName
+     * @param poolFileName
+     */
+    public static void switchTestPool(int switchMode, String localName, String poolFileName){
+        Gdx.app.log(LABEL,"**switchTestPool begin");
+        Path source;
+        Path target;
+        File testPoolDir;
+        //String dirPath = Data.rootDir+"/core/src/com/mygdx/game/ai/";
+        String dirPath = "aiFiles/";
+        switch(switchMode){
+            // Switch FROM PoolATester TO local
+           /* case 0:
+                source = Paths.get(Data.poolsDir + Data.poolToTestDir + localName);
+                target = Paths.get(dirPath+localName);
+                break;
+            // Switch FROM local TO PoolTestee
+            case 1:
+                source = Paths.get(dirPath+localName);
+                target = Paths.get(dirPath+Data.poolTestedDir+localName);
+                break;*/
+            case 1:
+                source = Paths.get(Data.poolsDir + Data.poolToTestDir + localName);
+                target = Paths.get(dirPath+Data.poolTestedDir+poolFileName);
+                break;
+            // Switch from PoolTestee to PoolCroisee
+            case 2:
+                source = Paths.get(dirPath+Data.poolTestedDir+localName);
+                target = Paths.get(dirPath+Data.poolCrossedDir+poolFileName);
+                break;
+            // Switch from PoolCroisee to PoolATester
+            case 3:
+                source = Paths.get(dirPath+Data.poolCrossedDir+localName);
+                target = Paths.get(dirPath+Data.poolToTestDir+poolFileName);
+                break;
+            default:
+                source = null;
+                target = null;
+        }
+        try {
+            testPoolDir = source.toFile();
+            if(!testPoolDir.exists()) {
+                Gdx.app.log(LABEL,"**Param Moving File : source File doesn't exists !**");
+                return;
+            }
+            Files.move(source, target, REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Gdx.app.log(LABEL, "**switchTestPool end");
+    }
+
 }

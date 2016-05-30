@@ -138,10 +138,12 @@ public class GameStage extends Stage {
     private ArrayList<Character> testedPool;
     private ArrayList<Character> crossedPool;
     private int bestMobRate = 0;
+    /** Taux de récupération des pires mobs pour le prochain jeu  (en %) */
     private int worstMobRate = 0;
+    /** Taux de combinaison des mobs pour le prochain jeu  (en %) */
     private int crossMobRate = 0;
 
-    //
+
     protected int turnTimer;
     private long timeStamp = -1;
     public static GameStage gameStage = null;
@@ -285,15 +287,16 @@ public class GameStage extends Stage {
         originPlayers = new ArrayList<Player>(players);
     }
 
+    /** Read the file for parameters and update variables.
+     */
     public void readParamFile() {
         Gdx.app.log(LABEL, "**readParamFile begins");
-        String filename = "Param";
        // File fichier = new File(Data.rootDir+"/core/src/com/mygdx/game/IAPool/" + filename + ".txt");
-        File fichier = Gdx.files.internal("ai" + filename + ".txt").file();
+        File fichier = Gdx.files.internal(Data.paramDir + Data.paramFileNAme).file();
         if (!fichier.exists() || fichier.isDirectory()){
             Gdx.app.log(LABEL, "**readParamFile file : "+fichier.getAbsolutePath()+" don't exist.  rootDir = "+rootDir);
             return;
-    }
+        }
         boolean inPoolList = false;
         boolean inPolitic = false;
         // lecture du fichier texte
@@ -303,19 +306,15 @@ public class GameStage extends Stage {
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             while ((ligne = br.readLine()) != null) {
+                // Supprime les espaces inutiles
+                ligne = Data.supressUselessShit(ligne);
                 if(inPolitic){
                     if (ligne.contains("}")){
+                        Gdx.app.log(LABEL, "in Politic -> on trouve un }");
                         inPolitic= false;
                     }else{
-                        //if(ligne != null && !ligne.equals(""))
-                            //CompileString.storeToPool(ligne);
-                    }
-                }
-                else if(inPoolList){
-                    if (ligne.contains("}")){
-                        inPoolList = false;
-                    }else{
-                        if(ligne != null && !ligne.equals("")) {
+                        if(ligne != null && !ligne.equals("") && ligne.contains("=")) {
+                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. ligne = "+ligne);
                             String[] rate = ligne.split("=");
                             if(ligne.contains(Data.bestRateName)){
                                 bestMobRate = Integer.parseInt(rate[1]);
@@ -326,78 +325,37 @@ public class GameStage extends Stage {
                             }
                         }
                     }
+                }else if(inPoolList){
+                    if (ligne.contains("}")){
+                        Gdx.app.log(LABEL, "inPoolList -> on trouve un }");
+                        inPoolList = false;
+                    }else{
+                        if(ligne != null && !ligne.equals("") && ligne.contains("_")) {
+                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. On appelle CompileString.storeToPool sur la ligne = "+ ligne);
+                            CompileString.storeToPool(ligne);
+                        }
+                    }
                 } else if (ligne.contains(Data.poolTestName)){
+                    Gdx.app.log(LABEL, "Une ligne contient poolTestName");
                     inPoolList = true;
                 }else if (ligne.contains(Data.crossingPoliticName)){
+                    Gdx.app.log(LABEL, "Une ligne contient crossingPoliticName");
                     inPolitic = true;
                 }
             }
             br.close();
+            /*
             if(fichier.delete()){
                 Gdx.app.log(LABEL,"readParamFile : file successfully deleted");
             }else{
                 Gdx.app.log(LABEL,"readParamFile : file not deleted, error");
-            }
+            }*/
         } catch (Exception e) {
             System.out.println("Read Param exception... "+e.toString());
         }
         Gdx.app.log(LABEL,"**readParamFile ends");
     }
 
-    /** Move files depending on the switch mode
-     *  0 = From PoolATester to local
-     *  1 = From local to PoolTestee
-     *  2 = From PoolTestee to PoolCroisee
-     *  3 = From PoolCroisee to PoolATester
-     * @param switchMode
-     * @param localName
-     * @param poolFileName
-     */
-    public void switchTestPool(int switchMode, String localName, String poolFileName){
-        Gdx.app.log(LABEL,"**switchTestPool begin");
-        Path source;
-        Path target;
-        File testPoolDir;
-        //String dirPath = Data.rootDir+"/core/src/com/mygdx/game/ai/";
-        String dirPath = "aiFiles";
-        switch(switchMode){
-            // Switch FROM PoolATester TO local
-            case 0:
-                source = Paths.get(dirPath+Data.poolToTestDir+localName);
-                target = Paths.get(dirPath+localName);
-                break;
-            // Switch FROM local TO PoolTestee
-            case 1:
-                source = Paths.get(dirPath+localName);
-                target = Paths.get(dirPath+Data.poolTestedDir+localName);
-                break;
-            // Switch from PoolTestee to PoolCroisee
-            case 2:
-                source = Paths.get(dirPath+Data.poolTestedDir+localName);
-                target = Paths.get(dirPath+Data.poolCrossedDir+localName);
-                break;
-            // Switch from PoolCroisee to PoolATester
-            case 3:
-                source = Paths.get(dirPath+Data.poolCrossedDir+localName);
-                target = Paths.get(dirPath+Data.poolToTestDir+localName);
-                break;
-            default:
-                source = null;
-                target = null;
-        }
-        try {
-            testPoolDir = source.toFile();
-            if(!testPoolDir.exists()) {
-                Gdx.app.log(LABEL,"**Param Moving File : source File doesn't exists !**");
-                return;
-            }
-            Files.move(source,target,REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Gdx.app.log(LABEL,"**switchTestPool end");
-
-    }
 
     /************************************/
     /* RENDER BLOCK */
@@ -734,11 +692,6 @@ public class GameStage extends Stage {
         }
     }
 
-    public void combineMobs(Character c1, Character c2, String name){
-        int genMax = 0;
-        genMax = java.lang.Math.max(c1.getGeneration(), c2.getGeneration());
-        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "" + genMax);
-    }
     /**
      * Add a new player
      *
@@ -1378,7 +1331,7 @@ public class GameStage extends Stage {
 
     public void endGameLogs(){
         originMobs.get(0).getFitness().debugFile("-- FIN DE JEU --", true);
-       for(Mob mo : originMobs){
+        for(Mob mo : originMobs){
 
             mo.getFitness().debugFile(	"Mob id="+mo.getTrueID()+" name="+mo.getName()+
                 " score final = "+mo.getFitness().calculFinalScore(gameLose, global_turn)+""+
@@ -1393,8 +1346,8 @@ public class GameStage extends Stage {
                     po.getFitness().toStringFitness(), true);
             po.getFitness().writeHistory(po, false, loopNumber);
         }
-    originMobs.get(0).getFitness().renameScoreFile();
-    stopAllThread();
+        originMobs.get(0).getFitness().renameScoreFile();
+        stopAllThread();
     }
 
     public void stopAllThread() {

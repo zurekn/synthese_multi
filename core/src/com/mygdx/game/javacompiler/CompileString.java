@@ -19,23 +19,28 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
 import static com.mygdx.game.data.Data.*;
 
 public class CompileString {
+    private static final String LABEL = "CompileString" ;
     static Boolean debug = false;
     static String className = "";
-    public static final String pathLog = "AILogs";
-    public static final String pathHist = "AIHistory";
-    public static final String pathClass = "ai";//"/core/src/com/mygdx/game/";//"Synthese/src/game/";
+    public static final String pathLog = "AILogs"+File.separator;
+    public static final String pathHist = "AIHistory"+File.separator;
+    public static final String pathClass = "ai"+File.separator;//"/core/src/com/mygdx/game/";//"Synthese/src/game/";
     public static final String destPathClass = "aiFiles"+File.separator;//"/core/build/classes/main/com/mygdx/game/ai/";//"target/classes/game/";
     public static final String classTestName = "IAScript";
     public static final String serializePrefix = "serialize_";
@@ -58,11 +63,11 @@ public class CompileString {
     private static ArrayList<String> funcString;
     private static ArrayList<String> funcInt;
     private static ArrayList<String> funcBoolean;
-    private static final String JDK_PATH = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
-    // private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
+    private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
+    private static final String JDK_PATH2 = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
 
 
-    public static void generate(String geneticName)
+    public static void generate(String geneticName, int generation)
     {
         System.setProperty("java.home", JDK_PATH);
         aRisque = false;
@@ -125,13 +130,30 @@ public class CompileString {
                 new FileInputStream(deserializePath + name));
         Node readJSON = (Node) objectInputStream.readObject();
         objectInputStream.close();
-//		System.out.println("### Display Tree");
-//        readJSON.displayTree();
-//		System.out.println("### Tree displayed");
-//        readJSON.getSubTree(1).displayNode();
-//		System.out.println("### Fin deserialize");
         return readJSON;
     }
+	/**
+	 *  Store a script into Pool a Tester from the tree of this script
+	 *
+	 * @param treeName : the tree to store as script
+	 */
+	public static void storeToPool(String treeName){
+		try {
+			Node node =	deserializeObject(treeName,destPathClass+pathLog);
+			// Save result
+			ArrayList<String> contentCode = new ArrayList<String>();
+			contentCode = node.TreeToArrayList(contentCode);
+			ReadWriteCode(contentCode,"toMove_"+treeName);
+			File file = new File(pathClass + packageName+className +".java");
+			Path source = Paths.get(pathClass + packageName + className + ".java");
+			Path target = Paths.get(pathClass + packageName+Data.poolToTestDir+className +".java");
+			Files.move(source, target, REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
     public static void loadGenetic(String name, String geneticName)
     {
@@ -141,6 +163,7 @@ public class CompileString {
             contentCode = treeMob.TreeToArrayList(contentCode);
             ReadWriteCode(contentCode, geneticName);
             //copier fichier contenant l'arbre sérializé dans un autre répertoire
+            Data.switchTestPool(1,name,name);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -230,7 +253,6 @@ public class CompileString {
             e.printStackTrace();
         }
     }
-
 	/*
         public static Node getRandomChild(Node node){
             Node resultNode = new Node("");
@@ -430,13 +452,7 @@ public class CompileString {
         }
         if (debug)
             System.out.println("random : pos= "+randPosition+" string= " + dataLine);
-        dataLine = dataLine.replace("\"", "");
-        dataLine = dataLine.replace("[", "");
-        dataLine = dataLine.replaceAll(" ", "");
-        dataLine = dataLine.replaceAll("\t", "");
-        dataLine = dataLine.replaceAll("\n", "");
-        dataLine = dataLine.replaceAll("	", "");
-        dataLine = dataLine.replace("]", "");
+        dataLine = Data.supressUselessShit(dataLine);
         String[] partsRandom = dataLine.split(","); // implode des params de la
         // condition dans parts
         return partsRandom;
@@ -458,13 +474,7 @@ public class CompileString {
         }while(!(dataLine.contains(type) || dataLine.contains(characType)));
 
         debugSys("\t\tgetParamByType : line = "+dataLine);
-        dataLine = dataLine.replace("\"", "");
-        dataLine = dataLine.replace("[", "");
-        dataLine = dataLine.replaceAll(" ", "");
-        dataLine = dataLine.replaceAll("\t", "");
-        dataLine = dataLine.replaceAll("\n", "");
-        dataLine = dataLine.replaceAll("	", "");
-        dataLine = dataLine.replace("]", "");
+        dataLine = Data.supressUselessShit(dataLine);
         String[] partsRandom = dataLine.split(","); // implode des params de la
         // condition dans parts
         return partsRandom;
@@ -523,12 +533,12 @@ public class CompileString {
         String returnString;
         String rightVar;
         ArrayList<String> funcParam = new ArrayList<String>();
-        debugSys("\tgetCompInCond : r�cup�ration du comparateur pour le type "+type);
+        debugSys("\tgetCompInCond : récupération du comparateur pour le type "+type);
         partsRandomComp = getParamByType(comp, type);
         int rand = 0;
         rand = new Random().nextInt(partsRandomComp.length); // Choix random du comparateur (==, <=, >=, >, <, != )
         rand = (rand == 0) ? 1 : rand;
-        debugSys("\tgetCompInCond : r�cup�ration de variable comparante ");
+        debugSys("\tgetCompInCond : récupération de variable comparante ");
         if(type.equals(intType)){
             funcParam  = funcInt;
         }else if(type.equals(floatType)){
@@ -636,8 +646,14 @@ public class CompileString {
 
         // Compilation de la classe du joueur IA
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        if(compiler == null){
+            Gdx.app.log(LABEL,"Pas de compiler :(");
+            System.setProperty("java.home", JDK_PATH2);
+            compiler = ToolProvider.getSystemJavaCompiler();
+        }
         @SuppressWarnings("unused")
-        int result = compiler.run(null, null, null,  destPathClass +File.separator + className + ".java");
+        int result = compiler.run(null, null, null, destPathClass + File.separator + className + ".java");
+
         //System.out.println("Compile result code = " + result);
 
         // D�placement du fichier .CLASS du r�pertoire /src au /bin

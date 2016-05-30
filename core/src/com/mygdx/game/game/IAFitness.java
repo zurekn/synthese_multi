@@ -205,8 +205,8 @@ public class IAFitness {
             return;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
-		File oldfile =new File(CompileString.pathClass+File.separator+this.scoreFileName);
-		File newfile =new File(CompileString.destPathClass+CompileString.pathHist+File.separator+this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
+		File oldfile =new File(CompileString.pathClass+this.scoreFileName);
+		File newfile =new File(CompileString.destPathClass+CompileString.pathHist+this.scoreFileName.replace(".txt", "_"+dateFormat.format(date)+".txt"));
 		try {
 			Files.copy(oldfile.toPath(), newfile.toPath());
 		} catch (IOException e) {
@@ -219,7 +219,7 @@ public class IAFitness {
         if(!isNPC)
             return;
 		try {
-		FileWriter fw = new FileWriter(new File(CompileString.pathClass+File.separator+this.scoreFileName), append);
+		FileWriter fw = new FileWriter(new File(CompileString.pathClass+this.scoreFileName), append);
 		BufferedWriter bw = new BufferedWriter(fw);
 		PrintWriter fichierSortie = new PrintWriter(bw);
 		fichierSortie.println(message);
