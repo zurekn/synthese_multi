@@ -24,17 +24,14 @@ public class m3 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(-2,2);
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SELF;
-		if(false== ((ch.researchCharacter(right)==null)?defaultBoolean:ch.researchCharacter(right).isCharacterInLine(right)) )
+		    deplacementString = ch.getDeplacement(0,2);
+		if(0.5!= ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getManaPercentage()) )
 		{
-		    deplacementString = ch.getDeplacement(0,-1);
-		}
-		else
+		    deplacementString = ch.getDeplacement(-1,2);
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SOUTH;
+		if(1> ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getManaPercentage()) )
 		{
-		if(0.3== ((ch.researchCharacter(right)==null)?defaultFloat:ch.researchCharacter(right).getStats().getManaPercentage()) )
-		{
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.EAST;
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.NORTH;
 		}
 		}
 		return actionString+"!!"+deplacementString;

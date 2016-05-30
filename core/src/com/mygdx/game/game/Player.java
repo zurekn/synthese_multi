@@ -39,7 +39,7 @@ public class Player extends Character {
         this.setId(id);
         this.setTrueID(trueID);
 
-        if(Data.generateIA) {
+        if(Data.autoIA) {
             init();
         }
         else {

@@ -1,0 +1,10 @@
+PoolTest{
+    m1_1
+    m2_1
+}
+
+CrossingPolitic{
+    BestMobRate=30
+    WorstMobRate=10
+    CrossMobRate=50
+}

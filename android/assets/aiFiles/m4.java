@@ -24,11 +24,15 @@ public class m4 {
 	
 	public String run(Character ch)
 	{
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SELF;
-		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxLife()/2)!= ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).getStats().getMaxMana()/3) )
-		{
 		    deplacementString = ch.getDeplacement(3,1);
-		    deplacementString = ch.getDeplacement(0,0);
+		if(((ch.researchCharacter(down)==null)?defaultBoolean:ch.researchCharacter(down).isCharacterInLine(up))== (ch.isCharacterInLine(up)) )
+		{
+		    deplacementString = ch.getDeplacement(1,-1);
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SOUTH;
+		}
+		else
+		{
+		    deplacementString = ch.getDeplacement(2,-1);
 		}
 		return actionString+"!!"+deplacementString;
 	}
