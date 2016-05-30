@@ -38,7 +38,8 @@ public class CompileString {
     public static final String pathClass = "ai";//"/core/src/com/mygdx/game/";//"Synthese/src/game/";
     public static final String destPathClass = "aiFiles"+File.separator;//"/core/build/classes/main/com/mygdx/game/ai/";//"target/classes/game/";
     public static final String classTestName = "IAScript";
-    public static final String packageName = "ai/";
+    public static final String serializePrefix = "serialize_";
+    public static final String packageName = "ai"+File.separator;
     static String characType = "t_character";
     static String intType = "t_int";
     static String floatType = "t_float";
@@ -71,7 +72,7 @@ public class CompileString {
         //rootDir =  rootDir.substring(0, rootDir.lastIndexOf("\\"));
 
         debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
-        Node root = advanced?DecodeScript(pathClass+"/AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+"/AIScriptDatas.txt");
+        Node root = advanced?DecodeScript(pathClass+File.separator+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+File.separator+"AIScriptDatas.txt");
         ArrayList<String> contentCode = new ArrayList<String>();
         contentCode = root.TreeToArrayList(contentCode);
         //for (String st : contentCode)
@@ -80,7 +81,7 @@ public class CompileString {
         className = geneticName + (aRisque ? "_Arisque" : "");
         ReadWriteCode(contentCode, className);
         try {
-            serializeObject("serialized_"+geneticName, root);
+            serializeObject(serializePrefix + geneticName, root, destPathClass+pathLog+File.separator);
             //deserializeObject("serialized_"+geneticName);
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,14 +92,24 @@ public class CompileString {
         // CompileAndExecuteClass(className, "run");
     }
 
+    public static void generateTree(String geneticName)
+    {
+        System.setProperty("java.home", JDK_PATH);
+        debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
+        Node root = advanced?DecodeScript(pathClass+File.separator+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+File.separator+"AIScriptDatas.txt");
+        try {
+            serializeObject(serializePrefix + geneticName, root, destPathClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /*
      * S�rialization d'un objet
      */
-    public static void serializeObject(String name, Node root) throws IOException
+    public static void serializeObject(String name, Node root, String serializePath) throws IOException
     {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
-        Date date = new Date();
-        File f = new File(destPathClass+pathLog+File.separator+ name + "_" + dateFormat.format(date) + ".txt");
+        File f = new File(serializePath + name +".txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(
                 new FileOutputStream(f));
         objectOutputStream.writeObject(root);
@@ -109,28 +120,28 @@ public class CompileString {
     /*
      * D�-s�rialize un objet
      */
-    public static Node deserializeObject(String name) throws IOException,
+    public static Node deserializeObject(String name, String deserializePath) throws IOException,
             ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(
-                new FileInputStream(pathClass+"javaObjects_" + name + ".txt"));
+                new FileInputStream(deserializePath +serializePrefix + name + ".txt"));
         Node readJSON = (Node) objectInputStream.readObject();
         objectInputStream.close();
 //		System.out.println("### Display Tree");
-        readJSON.displayTree();
+//        readJSON.displayTree();
 //		System.out.println("### Tree displayed");
-        readJSON.getSubTree(1).displayNode();
+//        readJSON.getSubTree(1).displayNode();
 //		System.out.println("### Fin deserialize");
         return readJSON;
     }
 
-    public static void loadMob(String name, String geneticName)
+    public static void loadGenetic(String name, String geneticName)
     {
         try {
-            Node treeMob = deserializeObject(name);
+            Node treeMob = deserializeObject(name, destPathClass+pathLog+File.separator);
             ArrayList<String> contentCode = new ArrayList<String>();
             contentCode = treeMob.TreeToArrayList(contentCode);
-            className = geneticName + (aRisque ? "_Arisque" : "");
-            ReadWriteCode(contentCode, className);
+//            className = geneticName + (aRisque ? "_Arisque" : "");
+            ReadWriteCode(contentCode, geneticName);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -156,8 +167,8 @@ public class CompileString {
         Node tmpRoot2 = null;
         try {
             // Get monster 1 & 2 trees
-            root1 = deserializeObject("serialized_"+name1);
-            root2 = deserializeObject("serialized_"+name2);
+            root1 = deserializeObject(name1, destPathClass+pathLog+File.separator);
+            root2 = deserializeObject(name2, destPathClass+pathLog+File.separator);
             boolean done = false;
             // While we didn't combined...
             while(!done){
@@ -220,12 +231,14 @@ public class CompileString {
             e.printStackTrace();
         }
     }
+
 	/*
-	public static Node getRandomChild(Node node){
-		Node resultNode = new Node("");
-		resultNode = node.getSubTree(-1);
-		return resultNode;
-	}*/
+        public static Node getRandomChild(Node node){
+            Node resultNode = new Node("");
+            resultNode = node.getSubTree(-1);
+            return resultNode;
+        }
+	*/
 
     /** Creation of genetic AI tree from a text file.
      * 	Creation stages :

@@ -235,9 +235,7 @@ public class IAFitness {
         if(!isNPC)
             return;
 		try {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm");
-			Date date = new Date();
-			FileWriter fw = new FileWriter(new File(CompileString.destPathClass+File.separator+CompileString.pathHist+File.separator+currentCharacter.getName()+"_"+currentCharacter.getId()+ "_" +dateFormat.format(date) + ".txt"), append);
+			FileWriter fw = new FileWriter(new File(CompileString.destPathClass+File.separator+CompileString.pathHist+File.separator+currentCharacter.getName()+"_"+currentCharacter.getId()+ ".txt"), append);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			fichierSortie.println(this.historyActions);

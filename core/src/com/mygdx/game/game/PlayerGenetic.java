@@ -38,8 +38,8 @@ public class PlayerGenetic extends Character {
 		this.setName(m.getName());
 		this.setSpells(m.getSpells());
 		this.setAiType(m.getAiType());
-		if(Data.generateIA)
-			this.generateScriptGenetic();
+//		if(Data.generateIA)
+//			this.generateScriptGenetic();
 		this.compileScriptGenetic();
 		this.setFitness(new IAFitness(true));
 	}

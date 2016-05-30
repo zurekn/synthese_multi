@@ -66,10 +66,10 @@ public class MonsterData {
 			mobs.add(m);
 			idCount++;
 		}
-		
-		
+
+
 		return mobs;
-		
+
 	}
 	
 	public static void loadMonster() {

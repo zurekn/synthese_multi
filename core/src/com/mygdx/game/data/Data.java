@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -63,6 +64,9 @@ public class Data {
     public static int maxTurn = 20;
     public static String rootDir="";
     public static int MAX_GAME_LOOP = 10;
+    public static int Number_Generated_IA = 10;
+    public static int All_Plareys_Number = 8;
+    public static Array <String> selectedIAFiles;
 
     // Const TI Part
     public static long WAIT_TI = 5000;
@@ -284,6 +288,9 @@ public class Data {
         createDirectoryIA();
     }
 
+    /*
+    Create directory needed to IA
+     */
     public static void createDirectoryIA()
     {
         File f = new File(CompileString.destPathClass);
@@ -295,6 +302,50 @@ public class Data {
         f = new File(CompileString.destPathClass+CompileString.pathHist);
         if (!f.isDirectory())
             f.mkdir();
+    }
+
+    /*
+    Generate X IA mobs or players
+     */
+    public static void generateXIA(int x)
+    {
+        for(int i=1 ; i <= x ; i++)
+        {
+            CompileString.generateTree("x" + i);
+        }
+    }
+
+    /*
+    Select Random IA from repository
+     */
+    public static void getRandomIAGeneticList()
+    {
+        File directory= new File(CompileString.destPathClass);
+        Array<String> allGeneratedFiles = new Array<String>();
+        for (File file : directory.listFiles()) {
+            if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt"))
+                allGeneratedFiles.add(file.getName());
+        }
+        selectedIAFiles = new Array<String>();
+
+        Random r = new Random();
+        int randIdx;
+        for(int i=0; i<All_Plareys_Number;i++) {
+            randIdx = r.nextInt(allGeneratedFiles.size);
+            while(isInArray(allGeneratedFiles.get(randIdx), selectedIAFiles))
+                randIdx = r.nextInt(allGeneratedFiles.size);
+            selectedIAFiles.add(allGeneratedFiles.get(randIdx));
+        }
+//        for(String s : selectedIAFiles)
+//            System.out.println(s);
+    }
+
+    public static boolean isInArray(String st, Array<String> arrayTest)
+    {
+        for(String s : arrayTest)
+            if(s.contains(st))
+                return true;
+        return false;
     }
 
     public static void initSpell() {
