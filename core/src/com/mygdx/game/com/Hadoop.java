@@ -36,7 +36,7 @@ public class Hadoop {
     public static String HDFS_PATH = "hdfs://pc11.bigdata:9000";
 
     public static  String HIVE = "jdbc:hive://pc11.bigdata:9000/hive";
-    public static String driverName = "org.apache.hadoop.hive.jdbc.HiveDriver";
+    public static String driverName = "org.apache.hive.jdbc.HiveDriver";
     public static String GENETIC_TABLE_NAME = "GENETIC";
     public static String HADOOP_USER_NAME = "hduser";
     public static String HADOOP_USER_PASSWORD = "setup";
@@ -98,17 +98,19 @@ public class Hadoop {
         System.out.println(TAG+": Connect to HIVE database : "+HIVE+" with user "+HADOOP_USER_NAME+", password "+HADOOP_USER_PASSWORD);
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
         Statement stmt = con.createStatement();
-
-        stmt.executeQuery("CREATE TABLE IF NOT EXISTS "+GENETIC_TABLE_NAME
-                +"(filename String, name String," +
-                "generation String, date String," +
+        System.out.println(TAG+": Connection successful-------------------------------");
+        String query = "CREATE TABLE IF NOT EXISTS "+GENETIC_TABLE_NAME
+                +" (filename String, name String," +
+                "generation String, dateG String," +
                 "scoreG int, scoreA int," +
-                "scoreH int, scoreP int)"
-                +"COMMENT 'Genetic AI details'"
-                +"ROW FORMAT DELIMITED"
-                +"FIELDS TERMINATED BY '\\t'"
-                +"LINES TERMINATED BY '\\n'"
-                +"STORED AS TEXTFILE;");
+                "scoreH int, scoreP int) " +
+                "COMMENT 'Genetic AI details' " +
+                "ROW FORMAT DELIMITED " +
+                "FIELDS TERMINATED BY '\\t' " +
+                "LINES TERMINATED BY '\\n' " +
+                "STORED AS TEXTFILE";
+        System.out.println(TAG+": Execute query ["+query+"]");
+        stmt.executeQuery(query);
         System.out.println(TAG + ": Table " + GENETIC_TABLE_NAME + " created");
         con.close();
     }
