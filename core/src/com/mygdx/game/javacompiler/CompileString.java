@@ -1,8 +1,13 @@
 package com.mygdx.game.javacompiler;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.com.Hadoop;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.game.Character;
+
+import org.apache.hadoop.fs.Path;
+
+import static java.nio.file.StandardCopyOption.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,10 +25,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -35,6 +43,7 @@ import javax.tools.ToolProvider;
 import static com.mygdx.game.data.Data.*;
 
 public class CompileString {
+    private static final String TAG = "CompileString";
     private static final String LABEL = "CompileString" ;
     static Boolean debug = false;
     static String className = "";
@@ -69,7 +78,9 @@ public class CompileString {
     @Deprecated
     public static void generate(String geneticName, int generation)
     {
-        System.setProperty("java.home", JDK_PATH);
+        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0){
+            System.setProperty("java.home", JDK_PATH);
+        }
         aRisque = false;
         rootDir =  File.separator;
 
@@ -110,6 +121,15 @@ public class CompileString {
         objectOutputStream.writeObject(root);
         objectOutputStream.flush();
         objectOutputStream.close();
+        org.apache.hadoop.fs.Path path = new Path(f.toURI());
+        try {
+            Hadoop.saveFile(path, name+".txt");
+        } catch (IOException e){
+            Gdx.app.error(TAG, "Hadoop saving tree : "+e.getMessage());
+        } catch (URISyntaxException e) {
+            Gdx.app.error(TAG, "Hadoop saving tree : "+e.getMessage());
+        }
+
     }
 
     /*
@@ -122,6 +142,28 @@ public class CompileString {
         objectInputStream.close();
         return readJSON;
     }
+	/**
+	 *  Store a script into Pool a Tester from the tree of this script
+	 *
+	 * @param treeName : the tree to store as script
+	 */
+	public static void storeToPool(String treeName){
+		try {
+			Node node =	deserializeObject(treeName, destPathClass+Data.poolToTestDir+serializePrefix);
+			// Save result
+			ArrayList<String> contentCode = new ArrayList<String>();
+			contentCode = node.TreeToArrayList(contentCode);
+			ReadWriteCode(contentCode,"toMove_"+treeName);
+			File file = new File(pathClass + packageName+className +".java");
+			java.nio.file.Path source = Paths.get(pathClass + packageName + className + ".java");
+			java.nio.file.Path target = Paths.get(pathClass + packageName + "PoolATester/" + className + ".java");
+			Files.move(source, target, REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
 
     public static void loadGenetic(String name, String geneticName)
@@ -148,7 +190,9 @@ public class CompileString {
      * @param name : String, file name of resulting IA
      */
     public static void combineTrees(String name1, String name2, String name){
-        System.setProperty("java.home", JDK_PATH);
+        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
+            System.setProperty("java.home", JDK_PATH);
+
         debugSys("Combining Trees "+name1+" and "+name2+" into "+name);
         Node root1;
         Node root2;
@@ -232,6 +276,7 @@ public class CompileString {
      * @return Node : the resulting script tree
      */
     public static Node DecodeScript(String scriptPath) {
+        Gdx.app.log(TAG, "Loading script from file ["+scriptPath+"]");
         File fichier = Gdx.files.internal(scriptPath).file();
         Node root = new Node("run(Character ch)");
         cond = new ArrayList<String>();
@@ -251,7 +296,7 @@ public class CompileString {
         // ====== Lecture du fichier texte ==========
         try {
             InputStream ips = new FileInputStream(fichier);
-            InputStreamReader ipsr = new InputStreamReader(ips);
+            InputStreamReader ipsr = new InputStreamReader(Gdx.files.internal(scriptPath).read());
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             while ((ligne = br.readLine()) != null) {
@@ -601,8 +646,8 @@ public class CompileString {
      * String
      */
     public static IAGenetic CompileAndInstanciateClass(String className) {
-
-        System.setProperty("java.home", JDK_PATH);
+        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
+            System.setProperty("java.home", JDK_PATH);
 
         // Compilation de la classe du joueur IA
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

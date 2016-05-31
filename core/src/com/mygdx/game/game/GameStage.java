@@ -15,6 +15,7 @@ import com.mygdx.game.ai.CharacterData;
 import com.mygdx.game.ai.CommandHandler;
 import com.mygdx.game.ai.CommandListener;
 import com.mygdx.game.ai.WindowGameData;
+import com.mygdx.game.com.Hadoop;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Event;
 import com.mygdx.game.data.HeroData;
@@ -45,6 +46,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -887,7 +889,7 @@ public class GameStage extends Stage {
 
         if(turn == 0)
         {
-            currentCharacter.getFitness().debugFile("\n\t\t\t\t=== TOUR "+global_turn+" ===", true);
+            currentCharacter.getFitness().debugFile("\n\t\t\t\t=== TOUR " + global_turn + " ===", true);
             checkEndGame();
 
             global_turn++;
@@ -1335,6 +1337,9 @@ public class GameStage extends Stage {
         }
     }
 
+    /**
+     * Write all mobs logs (scores)
+     */
     public void endGameLogs(){
         originMobs.get(0).getFitness().debugFile("-- FIN DE JEU --", true);
         for(Mob mo : originMobs){
@@ -1343,14 +1348,24 @@ public class GameStage extends Stage {
                 " score final = "+mo.getFitness().calculFinalScore(gameLose, global_turn)+""+
                 mo.getFitness().toStringFitness(), true);
         mo.getFitness().writeHistory(mo, false, loopNumber);
-            System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = "+mo.getFitness().getFinalScore() );
-
-        }
+            System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = " + mo.getFitness().getFinalScore());
+           try {
+               Hadoop.saveGeneticDataOnHive(mo.getName(), ""+mo.getGeneration(), Data.getDate(), mo.getFitness().getFinalScore(), mo.getFitness().getpAction(), mo.getFitness().getpHeal(),mo.getFitness().getpPass());
+           } catch (SQLException e) {
+               Gdx.app.error(LABEL, "Save score on Hive : " + e.getMessage());
+           }
+       }
         for(Player po : originPlayers){
-            po.getFitness().debugFile("Player id="+po.getTrueID()+" name="+po.getName()+
-                    " score final = "+po.getFitness().calculFinalScore(gameWin, global_turn)+""+
+            po.getFitness().debugFile("Player id=" + po.getTrueID() + " name=" + po.getName() +
+                    " score final = " + po.getFitness().calculFinalScore(gameWin, global_turn) + "" +
                     po.getFitness().toStringFitness(), true);
             po.getFitness().writeHistory(po, false, loopNumber);
+            try {
+                Hadoop.saveGeneticDataOnHive(po.getName(), ""+po.getGeneration(), Data.getDate(), po.getFitness().getFinalScore(), po.getFitness().getpAction(), po.getFitness().getpHeal(), po.getFitness().getpPass());
+            } catch (SQLException e) {
+                Gdx.app.error(LABEL, "Save score on Hive : "+e.getMessage());
+            }
+
         }
         originMobs.get(0).getFitness().renameScoreFile();
         stopAllThread();
