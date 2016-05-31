@@ -20,10 +20,14 @@ import com.mygdx.game.javacompiler.CompileString;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -72,19 +76,25 @@ public class Data {
     public static String rootDir="";
     // IA Param File Vars
     // Directories
-    public static String paramDir = "ai/";
-    public static String poolsDir = "aiFiles/";
+    public static String paramDir = "ai"+File.separator;
+    public static String poolsDir = "aiFiles"+File.separator;
     public static String paramFileNAme = "Param.txt";
 
-    public static String poolToTestDir = "PoolATester/";
-    public static String poolTestedDir = "PoolTestee/";
-    public static String poolCrossedDir = "PoolCroisee/";
+    public static String poolToTestDir = "PoolATester"+File.separator;
+    public static String poolTestedDir = "PoolTestee"+File.separator;
     // vars in param
     public static String poolTestName = "PoolTest";
     public static String bestRateName = "BestMobRate";
     public static String worstRateName = "WorstMobRate";
     public static String crossRateName = "CrossMobRate";
     public static String crossingPoliticName = "CrossingPolitic";
+
+    // IA Param File vars
+    public static int bestMobRate = 0;
+    /** Taux de récupération des pires mobs pour le prochain jeu  (en %) */
+    public static int worstMobRate = 0;
+    /** Taux de combinaison des mobs pour le prochain jeu  (en %) */
+    public static int crossMobRate = 0;
 
     public static int MAX_GAME_LOOP = 10;
     public static int Number_Generated_IA = 10;
@@ -328,9 +338,6 @@ public class Data {
         f = new File(CompileString.destPathClass+Data.poolTestedDir);
         if (!f.isDirectory())
             f.mkdir();
-        f = new File(CompileString.destPathClass+Data.poolCrossedDir);
-        if (!f.isDirectory())
-            f.mkdir();
     }
 
     /*
@@ -340,7 +347,7 @@ public class Data {
     {
         for(int i=1 ; i <= x ; i++)
         {
-            CompileString.generateTree("x" + i+"_1");
+            CompileString.generateTree("x" + i + "_1");
         }
     }
 
@@ -653,14 +660,14 @@ public class Data {
      * @param localName
      * @param poolFileName
      */
-    public static void switchTestPool(int switchMode, String localName, String poolFileName){
-        Gdx.app.log(LABEL,"**switchTestPool begin");
+    public static void switchTestPool(int switchMode, String localName, String poolFileName) {
+        Gdx.app.log(LABEL, "**switchTestPool begin");
         Path source;
         Path target;
         File testPoolDir;
         //String dirPath = Data.rootDir+"/core/src/com/mygdx/game/ai/";
         String dirPath = "aiFiles/";
-        switch(switchMode){
+        switch (switchMode) {
             // Switch FROM PoolATester TO local
            /* case 0:
                 source = Paths.get(Data.poolsDir + Data.poolToTestDir + localName);
@@ -673,17 +680,7 @@ public class Data {
                 break;*/
             case 1:
                 source = Paths.get(Data.poolsDir + Data.poolToTestDir + localName);
-                target = Paths.get(dirPath+Data.poolTestedDir+poolFileName);
-                break;
-            // Switch from PoolTestee to PoolCroisee
-            case 2:
-                source = Paths.get(dirPath+Data.poolTestedDir+localName);
-                target = Paths.get(dirPath+Data.poolCrossedDir+poolFileName);
-                break;
-            // Switch from PoolCroisee to PoolATester
-            case 3:
-                source = Paths.get(dirPath+Data.poolCrossedDir+localName);
-                target = Paths.get(dirPath+Data.poolToTestDir+poolFileName);
+                target = Paths.get(dirPath + Data.poolTestedDir + poolFileName);
                 break;
             default:
                 source = null;
@@ -691,8 +688,8 @@ public class Data {
         }
         try {
             testPoolDir = source.toFile();
-            if(!testPoolDir.exists()) {
-                Gdx.app.log(LABEL,"**Param Moving File : source File doesn't exists !**");
+            if (!testPoolDir.exists()) {
+                Gdx.app.log(LABEL, "**Param Moving File : source File doesn't exists !**");
                 return;
             }
             Files.move(source, target, REPLACE_EXISTING);
@@ -702,4 +699,78 @@ public class Data {
         Gdx.app.log(LABEL, "**switchTestPool end");
     }
 
+    /** Read the file for parameters and update variables.
+     */
+    public static void readParamFile() {
+        Gdx.app.log(LABEL, "**readParamFile begins");
+        // File fichier = new File(Data.rootDir+"/core/src/com/mygdx/game/IAPool/" + filename + ".txt");
+        File fichier = Gdx.files.internal(Data.paramDir + Data.paramFileNAme).file();
+        if (!fichier.exists() || fichier.isDirectory()){
+            Gdx.app.log(LABEL, "**readParamFile file : "+fichier.getAbsolutePath()+" don't exist.  rootDir = "+rootDir);
+            return;
+        }
+        boolean inPoolList = false;
+        boolean inPolitic = false;
+        // lecture du fichier texte
+        try {
+            InputStream ips = new FileInputStream(fichier);
+            InputStreamReader ipsr = new InputStreamReader(ips);
+            BufferedReader br = new BufferedReader(ipsr);
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+                // Supprime les espaces inutiles
+                ligne = Data.supressUselessShit(ligne);
+                if(inPolitic){
+                    if (ligne.contains("}")){
+                        Gdx.app.log(LABEL, "in Politic -> on trouve un }");
+                        inPolitic= false;
+                    }else{
+                        if(ligne != null && !ligne.equals("") && ligne.contains("=")) {
+                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. ligne = "+ligne);
+                            String[] rate = ligne.split("=");
+                            if(ligne.contains(Data.bestRateName)){
+                                bestMobRate = Integer.parseInt(rate[1]);
+                            }else if(ligne.contains(Data.worstRateName)){
+                                worstMobRate = Integer.parseInt(rate[1]);
+                            }else if(ligne.contains(Data.crossRateName)){
+                                crossMobRate = Integer.parseInt(rate[1]);
+                            }
+                        }
+                    }
+                }else if(inPoolList){
+                    if (ligne.contains("}")){
+                        Gdx.app.log(LABEL, "inPoolList -> on trouve un }");
+                        inPoolList = false;
+                    }else{
+                        if(ligne != null && !ligne.equals("") && ligne.contains("_")) {
+                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. On appelle CompileString.storeToPool sur la ligne = "+ ligne);
+                            Data.selectedIAFiles.add(ligne+".txt");
+                        }
+                    }
+                } else if (ligne.contains(Data.poolTestName)){
+                    Data.selectedIAFiles = new Array<String>();
+                    Gdx.app.log(LABEL, "Une ligne contient poolTestName");
+                    inPoolList = true;
+                }else if (ligne.contains(Data.crossingPoliticName)){
+                    Gdx.app.log(LABEL, "Une ligne contient crossingPoliticName");
+                    inPolitic = true;
+                }
+
+            }
+            br.close();
+            for(int i =selectedIAFiles.size;i<All_Players_Number;i++){
+                CompileString.generateTree("x"+i+"_1.txt");
+                selectedIAFiles.add(CompileString.serializePrefix+"x"+i+"_1.txt");
+            }
+            /*
+            if(fichier.delete()){
+                Gdx.app.log(LABEL,"readParamFile : file successfully deleted");
+            }else{
+                Gdx.app.log(LABEL,"readParamFile : file not deleted, error");
+            }*/
+        } catch (Exception e) {
+            System.out.println("Read Param exception... " + e.toString());
+        }
+        Gdx.app.log(LABEL,"**readParamFile ends");
+    }
 }

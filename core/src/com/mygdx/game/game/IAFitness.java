@@ -235,7 +235,7 @@ public class IAFitness {
         if(!isNPC)
             return;
 		try {
-			FileWriter fw = new FileWriter(new File(CompileString.destPathClass+File.separator+CompileString.pathHist+File.separator+currentCharacter.getName()+"_"+currentCharacter.getId()+ ".txt"), append);
+			FileWriter fw = new FileWriter(new File(CompileString.destPathClass+File.separator+CompileString.pathHist+File.separator+currentCharacter.getName()+"_"+currentCharacter.getTrueID()+ ".txt"), append);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
 			fichierSortie.println(this.historyActions);

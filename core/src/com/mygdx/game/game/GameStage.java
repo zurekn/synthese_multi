@@ -136,12 +136,7 @@ public class GameStage extends Stage {
     private int timerInitPlayer;
     private int loopNumber = 1;
 
-    // IA Param File vars
-    private int bestMobRate = 0;
-    /** Taux de récupération des pires mobs pour le prochain jeu  (en %) */
-    private int worstMobRate = 0;
-    /** Taux de combinaison des mobs pour le prochain jeu  (en %) */
-    private int crossMobRate = 0;
+
 
 
     protected int turnTimer;
@@ -236,9 +231,8 @@ public class GameStage extends Stage {
 
         initAPIX();
         // Detects if param file exists and decodes it
-        readParamFile();
-        Gdx.app.log(LABEL, "** On a read le fichier de param. Best mob rate ="+bestMobRate+", Worst Mob Rate ="+worstMobRate+", Cross Mob Rate="+crossMobRate);
 
+        Data.getRandomIAGeneticList();
         // Create the monsters and players lists
         loadChallengers();
         messageHandler = new MessageHandler();
@@ -285,81 +279,6 @@ public class GameStage extends Stage {
             }
         }
         originPlayers = new ArrayList<Player>(players);
-    }
-
-    /** Read the file for parameters and update variables.
-     */
-    public void readParamFile() {
-        Gdx.app.log(LABEL, "**readParamFile begins");
-       // File fichier = new File(Data.rootDir+"/core/src/com/mygdx/game/IAPool/" + filename + ".txt");
-        File fichier = Gdx.files.internal(Data.paramDir + Data.paramFileNAme).file();
-        if (!fichier.exists() || fichier.isDirectory()){
-            Gdx.app.log(LABEL, "**readParamFile file : "+fichier.getAbsolutePath()+" don't exist.  rootDir = "+rootDir);
-            return;
-        }
-        boolean inPoolList = false;
-        boolean inPolitic = false;
-        // lecture du fichier texte
-        try {
-            InputStream ips = new FileInputStream(fichier);
-            InputStreamReader ipsr = new InputStreamReader(ips);
-            BufferedReader br = new BufferedReader(ipsr);
-            String ligne;
-            while ((ligne = br.readLine()) != null) {
-                // Supprime les espaces inutiles
-                ligne = Data.supressUselessShit(ligne);
-                if(inPolitic){
-                    if (ligne.contains("}")){
-                        Gdx.app.log(LABEL, "in Politic -> on trouve un }");
-                        inPolitic= false;
-                    }else{
-                        if(ligne != null && !ligne.equals("") && ligne.contains("=")) {
-                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. ligne = "+ligne);
-                            String[] rate = ligne.split("=");
-                            if(ligne.contains(Data.bestRateName)){
-                                bestMobRate = Integer.parseInt(rate[1]);
-                            }else if(ligne.contains(Data.worstRateName)){
-                                worstMobRate = Integer.parseInt(rate[1]);
-                            }else if(ligne.contains(Data.crossRateName)){
-                                crossMobRate = Integer.parseInt(rate[1]);
-                            }
-                        }
-                    }
-                }else if(inPoolList){
-                    if (ligne.contains("}")){
-                        Gdx.app.log(LABEL, "inPoolList -> on trouve un }");
-                        inPoolList = false;
-                    }else{
-                        if(ligne != null && !ligne.equals("") && ligne.contains("_")) {
-                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. On appelle CompileString.storeToPool sur la ligne = "+ ligne);
-                            Data.selectedIAFiles.add(ligne+".txt");
-                        }
-                    }
-                } else if (ligne.contains(Data.poolTestName)){
-                    Data.selectedIAFiles = new Array<String>();
-                    Gdx.app.log(LABEL, "Une ligne contient poolTestName");
-                    inPoolList = true;
-                }else if (ligne.contains(Data.crossingPoliticName)){
-                    Gdx.app.log(LABEL, "Une ligne contient crossingPoliticName");
-                    inPolitic = true;
-                }
-
-            }
-            br.close();
-            for(int i =selectedIAFiles.size;i<All_Players_Number;i++){
-                CompileString.generateTree("x"+i);
-                selectedIAFiles.add("x"+i);
-            }
-            /*
-            if(fichier.delete()){
-                Gdx.app.log(LABEL,"readParamFile : file successfully deleted");
-            }else{
-                Gdx.app.log(LABEL,"readParamFile : file not deleted, error");
-            }*/
-        } catch (Exception e) {
-            System.out.println("Read Param exception... "+e.toString());
-        }
-        Gdx.app.log(LABEL,"**readParamFile ends");
     }
 
 
