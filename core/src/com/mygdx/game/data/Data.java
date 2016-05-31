@@ -102,7 +102,7 @@ public class Data {
     public static int crossMobRate = 0;
 
     public static int MAX_GAME_LOOP = 10;
-    public static int Number_Generated_IA = 10;
+    public static int Number_Generated_IA = 20;
     public static int All_Players_Number = 8;
     public static Array <String> selectedIAFiles;
 
@@ -368,6 +368,10 @@ public class Data {
             if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt"))
                 allGeneratedFiles.add(file.getName());
         }
+        if(allGeneratedFiles.size < All_Players_Number )
+            for(int i =allGeneratedFiles.size;i<All_Players_Number;i++){
+                CompileString.generateTree("x" + i + "_1");
+            }
         selectedIAFiles = new Array<String>();
 
         Random r = new Random();
@@ -678,6 +682,12 @@ public class Data {
                         case "HADOOP_USER":
                             Hadoop.HADOOP_USER_NAME = value;
                             break;
+                        case "JDK":
+                            CompileString.JDK_PATH = value;
+                            break;
+                        default :
+                            System.err.println("Can't find : "+param);
+                            break;
                     }
                 }
             }
@@ -721,47 +731,46 @@ public class Data {
      *  1 = From local to PoolTestee
      *  2 = From PoolTestee to PoolCroisee
      *  3 = From PoolCroisee to PoolATester
-     * @param switchMode
-     * @param localName
-     * @param poolFileName
      */
-    public static void switchTestPool(int switchMode, String localName, String poolFileName) {
+    public static void switchAllTestPool() {
         Gdx.app.log(LABEL, "**switchTestPool begin");
+        File srcPoolDir = new File(CompileString.destPathClass+Data.poolToTestDir);
+        String name = "";
         Path source;
         Path target;
-        File testPoolDir;
-        //String dirPath = Data.rootDir+"/core/src/com/mygdx/game/ai/";
-        String dirPath = "aiFiles/";
-        switch (switchMode) {
-            // Switch FROM PoolATester TO local
-           /* case 0:
-                source = Paths.get(Data.poolsDir + Data.poolToTestDir + localName);
-                target = Paths.get(dirPath+localName);
-                break;
-            // Switch FROM local TO PoolTestee
-            case 1:
-                source = Paths.get(dirPath+localName);
-                target = Paths.get(dirPath+Data.poolTestedDir+localName);
-                break;*/
-            case 1:
-                source = Paths.get(Data.poolsDir + Data.poolToTestDir + localName);
-                target = Paths.get(dirPath + Data.poolTestedDir + poolFileName);
-                break;
-            default:
-                source = null;
-                target = null;
+        File[] srcPoolFiles;
+        if(!srcPoolDir.isDirectory()) {
+            Gdx.app.log(LABEL, "**Switch Test Pool : "+srcPoolDir.getPath()+" is not a directory. !**");
+            return;
         }
-        try {
-            testPoolDir = source.toFile();
-            if (!testPoolDir.exists()) {
-                Gdx.app.log(LABEL, "**Param Moving File : source File doesn't exists !**");
-                return;
+        srcPoolFiles = srcPoolDir.listFiles();
+        for(int i = 0; i < srcPoolFiles.length;i++) {
+            name = srcPoolFiles[i].getName();
+            source = Paths.get(CompileString.destPathClass + Data.poolToTestDir + name);
+            target = Paths.get(CompileString.destPathClass + Data.poolTestedDir + name);
+            try {
+                if (!srcPoolFiles[i].exists()) {
+                    Gdx.app.log(LABEL, "**Param Moving File : source File "+srcPoolFiles[i].getName()+" doesn't exists !**");
+                }else {
+                    Files.move(source, target, REPLACE_EXISTING);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            Files.move(source, target, REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         Gdx.app.log(LABEL, "**switchTestPool end");
+    }
+
+    /*
+    Take all serialized tree in selectedIAFiles from ToTestPool and move them throw TestedPool
+     */
+    public static void moveTo(String originPath, String destPath) {
+        File origFile, destFile;
+        for(String s : Data.selectedIAFiles)
+        {
+            origFile = new File(originPath + s);
+            origFile.renameTo(new File(destPath + s));
+        }
     }
 
     /** Read the file for parameters and update variables.
@@ -824,7 +833,7 @@ public class Data {
             }
             br.close();
             for(int i =selectedIAFiles.size;i<All_Players_Number;i++){
-                CompileString.generateTree("x"+i+"_1.txt");
+                CompileString.generateTree("x"+i+"_1");
                 selectedIAFiles.add(CompileString.serializePrefix+"x"+i+"_1.txt");
             }
             /*

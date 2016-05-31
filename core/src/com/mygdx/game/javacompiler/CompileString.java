@@ -25,7 +25,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -73,15 +72,12 @@ public class CompileString {
     private static ArrayList<String> funcString;
     private static ArrayList<String> funcInt;
     private static ArrayList<String> funcBoolean;
-    private static final String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
-    private static final String JDK_PATH2 = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
+    public static String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
 
     @Deprecated
     public static void generate(String geneticName, int generation)
     {
-        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0){
-            System.setProperty("java.home", JDK_PATH);
-        }
+        SetGenerateCompiler();
         aRisque = false;
         rootDir =  File.separator;
 
@@ -99,11 +95,10 @@ public class CompileString {
         }
     }
 
-    public static void generateTree(String geneticName)
-    {
-        System.setProperty("java.home", JDK_PATH);
-        debugSys("\n===========   GENERATE MOB "+geneticName+"  ===========");
-        Node root = advanced?DecodeScript(pathClass+File.separator+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+File.separator+"AIScriptDatas.txt");
+    public static void generateTree(String geneticName) {
+        SetGenerateCompiler();
+        debugSys("\n===========   GENERATE MOB " + geneticName + "  ===========");
+        Node root = advanced?DecodeScript(pathClass+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+"AIScriptDatas.txt");
         try {
             serializeObject(serializePrefix + geneticName, root, destPathClass+Data.poolToTestDir);
         } catch (IOException e) {
@@ -122,15 +117,6 @@ public class CompileString {
         objectOutputStream.writeObject(root);
         objectOutputStream.flush();
         objectOutputStream.close();
-        org.apache.hadoop.fs.Path path = new Path(f.toURI());
-        try {
-            Hadoop.saveFile(path, name+".txt");
-        } catch (IOException e){
-            Gdx.app.error(TAG, "Hadoop saving tree : "+e.getMessage());
-        } catch (URISyntaxException e) {
-            Gdx.app.error(TAG, "Hadoop saving tree : "+e.getMessage());
-        }
-
     }
 
     /*
@@ -191,9 +177,7 @@ public class CompileString {
      * @param name : String, file name of resulting IA
      */
     public static void combineTrees(String name1, String name2, String name){
-        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
-            System.setProperty("java.home", JDK_PATH);
-
+        SetGenerateCompiler();
         debugSys("Combining Trees "+name1+" and "+name2+" into "+name);
         Node root1;
         Node root2;
@@ -277,7 +261,7 @@ public class CompileString {
      * @return Node : the resulting script tree
      */
     public static Node DecodeScript(String scriptPath) {
-        Gdx.app.log(TAG, "Loading script from file ["+scriptPath+"]");
+        //Gdx.app.log(TAG, "Loading script from file ["+scriptPath+"]");
         File fichier = Gdx.files.internal(scriptPath).file();
         Node root = new Node("run(Character ch)");
         cond = new ArrayList<String>();
@@ -638,7 +622,7 @@ public class CompileString {
      */
     public static void debugSys(String message)
     {
-        if(debug)
+        if(debug)/**/
             System.out.println(message);
     }
 
@@ -647,16 +631,8 @@ public class CompileString {
      * String
      */
     public static IAGenetic CompileAndInstanciateClass(String className) {
-        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
-            System.setProperty("java.home", JDK_PATH);
-
         // Compilation de la classe du joueur IA
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        if(compiler == null){
-            Gdx.app.log(LABEL,"Pas de compiler :(");
-            System.setProperty("java.home", JDK_PATH2);
-            compiler = ToolProvider.getSystemJavaCompiler();
-        }
+        JavaCompiler compiler = GenerateCompiler();
         @SuppressWarnings("unused")
         int result = compiler.run(null, null, null, destPathClass + File.separator + className + ".java");
 
@@ -734,7 +710,7 @@ public class CompileString {
             }
             br.close();
         } catch (Exception e) {
-            System.out.println("ReadWriteCode"+e.toString());
+            System.out.println("ReadWriteCode" + e.toString());
         }
 
         WriteCode(content, className);
@@ -761,4 +737,18 @@ public class CompileString {
         }
     }
 
+    public static JavaCompiler GenerateCompiler()
+    {
+        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0) {
+            System.setProperty("java.home", JDK_PATH);
+        }
+        return ToolProvider.getSystemJavaCompiler();
+    }
+
+    public static void SetGenerateCompiler()
+    {
+        if(System.getProperty("os.name").toLowerCase().indexOf("win")>=0)
+            System.setProperty("java.home", JDK_PATH);
+
+    }
 }

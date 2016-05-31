@@ -1287,6 +1287,7 @@ public class GameStage extends Stage {
 
         }
         originMobs.get(0).getFitness().renameScoreFile();
+        Data.moveTo(CompileString.destPathClass + Data.poolToTestDir, CompileString.destPathClass + Data.poolTestedDir);
         stopAllThread();
     }
 
