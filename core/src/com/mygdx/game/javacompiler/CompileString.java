@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -174,7 +175,7 @@ public class CompileString {
             contentCode = treeMob.TreeToArrayList(contentCode);
             ReadWriteCode(contentCode, geneticName);
             //copier fichier contenant l'arbre sérializé dans un autre répertoire
-            Data.switchTestPool(1,name,name);
+           // Data.switchTestPool(1,name,name);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -662,12 +663,12 @@ public class CompileString {
         //System.out.println("Compile result code = " + result);
 
         // D�placement du fichier .CLASS du r�pertoire /src au /bin
-        File afile = new File( pathClass + className + ".CLASS");
+       /* File afile = new File( pathClass + className + ".CLASS");
         File destFile = new File(destPathClass + afile.getName());
 
         if (destFile.exists())
             destFile.delete();
-        afile.renameTo(new File( destPathClass + afile.getName()));
+        afile.renameTo(new File( destPathClass + afile.getName()));*/
 
 
 
@@ -747,7 +748,7 @@ public class CompileString {
     public static void WriteCode(ArrayList<String> content, String className) {
         // cr�ation du fichier qui va �craser l'ancien fichier java
         try {
-            FileWriter fw = new FileWriter(new File(destPathClass +Data.poolToTestDir+ className + ".java"));
+            FileWriter fw = new FileWriter(new File(destPathClass + className + ".java"));
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter fichierSortie = new PrintWriter(bw);
             for (String ln : content) {

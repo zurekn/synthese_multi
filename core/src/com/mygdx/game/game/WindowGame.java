@@ -75,7 +75,8 @@ public class WindowGame extends Game {
     public void create(){
         Data.createDirectoryIA();
         Data.generateXIA(Data.Number_Generated_IA);
-        Data.getRandomIAGeneticList();
+        Data.readParamFile();
+        Gdx.app.log("WndowGame", "** On a read le fichier de param. Best mob rate =" + Data.bestMobRate + ", Worst Mob Rate =" + Data.worstMobRate + ", Cross Mob Rate=" + Data.crossMobRate);
         this.setScreen(new GameScreen(this));
     }
 

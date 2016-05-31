@@ -63,6 +63,7 @@ public class MonsterData {
 			posX = Integer.parseInt(el.getChildByName("x").getText());
 			posY = Integer.parseInt(el.getChildByName("y").getText());
 			Mob m = new Mob(posX, posY, id,"m"+idCount, Data.selectedIAFiles.get(idCount-1));
+			Gdx.app.log("MonsterData ", "selected file for mob "+Data.selectedIAFiles.get(idCount-1));
 			mobs.add(m);
 			idCount++;
 		}
