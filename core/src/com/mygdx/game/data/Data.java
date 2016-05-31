@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import com.mygdx.game.com.Hadoop;
+import com.mygdx.game.game.WindowGame;
 import com.mygdx.game.game.*;
 import com.mygdx.game.game.Character;
 import com.mygdx.game.javacompiler.CompileString;
@@ -31,6 +33,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +55,8 @@ public class Data {
     public static final boolean FULLSCREEN = false;
     public static final boolean DEBUG_DEPARTURE = true;
     public static final boolean tiDebug = true;
+    private static final String CONFIG_FILE_PATH = "project_properties.txt";
+    public static boolean HADOOP = false;
     public static boolean RELOAD_GAME_WHEN_ENDED = true;
     public static boolean debug = true;
     public static final boolean DISPLAY_PLAYER = true;
@@ -274,6 +279,7 @@ public class Data {
     /* SKIN for HUD */
     public static Skin SKIN;
     public static TextureAtlas ATLAS;
+    private static boolean isInitHadoop = false;
 
     /**
      * Load all game variables
@@ -597,6 +603,7 @@ public class Data {
     }
 
     public static void setForAndroid(boolean onAndroid){//Appelé lorsqu'on ne veut PAS lancer l'apprentissage
+        System.out.println("CONFIG : Launch the game for single player in local (Single Player vs Generated Mob)");
         autoIA = false;
         generateIA = true;
         jvm = true;
@@ -607,6 +614,7 @@ public class Data {
     }
 
     public static void setForIAGenetic(){//Appelé lorsqu'on VEUT lancer l'apprentissage
+        System.out.println("CONFIG : Launch the game for Genetic AI (Mob vs Mob)");
         autoIA = true;
         generateIA = true;
         jvm = false;
@@ -620,6 +628,63 @@ public class Data {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         SCREEN_WIDTH = (int)screenSize.getWidth();
         SCREEN_HEIGHT = (int)screenSize.getHeight();
+    }
+
+    public static void setHadoop(){
+        HADOOP = true;
+    }
+
+    public static void initHadoop(){
+        if(!HADOOP)
+            setHadoop();
+        if(!isInitHadoop){
+            try {
+                Hadoop.createGeneticTable();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void loadProperties(){
+        System.out.println("Load properties from "+CONFIG_FILE_PATH);
+        File file = new File (CONFIG_FILE_PATH);
+        if(!file.exists())
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        try {
+            Scanner sc = new Scanner(file);
+            String line = "";
+            while(sc.hasNextLine()){
+                line = sc.nextLine();
+                if(line.startsWith("#"))
+                    continue;
+                if(line.contains(":")){
+                    int index = line.indexOf(":");
+                    String param = line.substring(0, index);
+                    String value = line.substring(index+1);
+                    switch(param){
+                        case "HIVE" :
+                            Hadoop.HIVE = value;
+                            break;
+                        case "HADOOP_PASSWORD":
+                            Hadoop.HADOOP_USER_PASSWORD = value;
+                            break;
+                        case "HADOOP_USER":
+                            Hadoop.HADOOP_USER_NAME = value;
+                            break;
+                    }
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /** This function is used to clean dirty strings.

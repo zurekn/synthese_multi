@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+        Data.loadProperties();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
         Data.setScreenSize();
@@ -26,7 +27,7 @@ public class DesktopLauncher {
         Data.debug = true;
 
         //Data.setForAndroid(false);
-
+        Data.initHadoop();
         new LwjglApplication(new WindowGame(), config);
 	}
 }
