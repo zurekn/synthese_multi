@@ -72,7 +72,8 @@ public class CompileString {
     private static ArrayList<String> funcString;
     private static ArrayList<String> funcInt;
     private static ArrayList<String> funcBoolean;
-    public static String JDK_PATH = "C:\\Java\\jdk1.8.0_45\\jre";
+   // public static String JDK_PATH = "C:\\Java\\jdk1.8.0_60\\jre";
+    public static String JDK_PATH = "C:\\MCP-IDE\\jdk1.8.0_60\\jre";
 
     @Deprecated
     public static void generate(String geneticName, int generation)
@@ -185,14 +186,16 @@ public class CompileString {
         Node tmpRoot1 = null;
         Node tmpRoot2 = null;
         try {
+            /*name1 = serializePrefix+name1+".txt";
+            name2 = serializePrefix+name2+".txt";*/
             // Get monster 1 & 2 trees
-            root1 = deserializeObject(name1, destPathClass+pathLog+File.separator);
-            root2 = deserializeObject(name2, destPathClass+pathLog+File.separator);
+            root1 = deserializeObject(name1, destPathClass+Data.poolToTestDir+File.separator);
+            root2 = deserializeObject(name2, destPathClass+Data.poolToTestDir+File.separator);
             boolean done = false;
             // While we didn't combined...
             while(!done){
                 tmpRoot1 = root1.getSubTree(-1); // get Random subtree from root1
-                System.out.println("#Random root1. found"+tmpRoot1.getValue());
+                debugSys("#Random root1. found"+tmpRoot1.getValue());
                 //if we get a 'if' node, we search another 'if' node
                 if(tmpRoot1.getValue().equals("if")){
 
@@ -217,9 +220,9 @@ public class CompileString {
                 debugSys("##found "+tmpRoot2.getValue()+" in root2");
             }
             debugSys("\t========= Replacing ==========" );
-            tmpRoot1.displayTree();
+           // tmpRoot1.displayTree();
             debugSys("\t========= With =============" );
-            tmpRoot2.displayTree();
+          //  tmpRoot2.displayTree();
 
             // Replace tmpRoot1 with tmpRoot2
             if(tmpRoot1.hasParent()){
@@ -237,9 +240,10 @@ public class CompileString {
             // Save result
             ArrayList<String> contentCode = new ArrayList<String>();
             contentCode = resRoot.TreeToArrayList(contentCode);
-            resRoot.displayTree();
+          //  resRoot.displayTree();
 		/*	for (String st : contentCode)
 				System.out.println(st);*/
+            serializeObject(serializePrefix + name, resRoot, destPathClass+Data.poolToTestDir);
             ReadWriteCode(contentCode, name);
             //serializeObject(name,lastRoot);
         } catch (ClassNotFoundException e) {

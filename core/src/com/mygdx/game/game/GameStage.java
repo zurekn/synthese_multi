@@ -214,13 +214,13 @@ public class GameStage extends Stage {
         // TrapData.loadTrap();
 
         initAPIX();
-        // Detects if param file exists and decodes it
+        // Cmbine 2 mobs together
 
         Data.getRandomIAGeneticList();
         // Create the monsters and players lists
         loadChallengers();
         messageHandler = new MessageHandler();
-        if(!Data.ANDROID)
+        if(!Data.ANDROID && loopNumber == 1)
             initCommandHandler();
         if(loopNumber == 1) {
             camera = new CameraHandler();
@@ -232,6 +232,7 @@ public class GameStage extends Stage {
     }
 
     public void loadChallengers(){
+
         mobs = MonsterData.initMobs();
         mobHandler = new MobHandler(mobs);
         originMobs = new ArrayList<Mob>(mobs);
@@ -1269,6 +1270,7 @@ public class GameStage extends Stage {
 
         }
         originMobs.get(0).getFitness().renameScoreFile();
+        //Data.switchAllTestPool();
         Data.moveSelectedTreeTo(CompileString.destPathClass + Data.poolToTestDir, CompileString.destPathClass + Data.poolTestedDir);
         stopAllThread();
     }

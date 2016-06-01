@@ -24,21 +24,14 @@ public class g1 {
 	
 	public String run(Character ch)
 	{
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SOUTH;
-		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMagicResist())!= (ch.getStats().getMaxMana()/5) )
-		{
 		    deplacementString = ch.getDeplacement(2,-2);
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.NORTH;
+		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxLife()/3)!= ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).getStats().getMaxMana()/2) )
+		{
+		    deplacementString = ch.getDeplacement(-2,0);
 		}
 		else
 		{
-		if(((ch.researchCharacter(left)==null)?defaultFloat:ch.researchCharacter(left).getStats().getManaPercentage())<= ((ch.researchCharacter(right)==null)?defaultFloat:ch.researchCharacter(right).getStats().getLifePercentage()) )
-		{
-		    deplacementString = ch.getDeplacement(0,3);
-		}
-		else
-		{
-		    actionString = ch.getMaxHealingSpellId()+":"+ Data.EAST;
-		}
 		}
 		return actionString+"!!"+deplacementString;
 	}

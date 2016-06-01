@@ -16,8 +16,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import com.mygdx.game.com.Hadoop;
 import com.mygdx.game.game.WindowGame;
-import com.mygdx.game.game.*;
-import com.mygdx.game.game.Character;
 import com.mygdx.game.javacompiler.CompileString;
 
 import java.awt.Dimension;
@@ -77,8 +75,11 @@ public class Data {
     public static boolean autoIA = true;
     public static boolean jvm = false;//Joueur versus machine
     public static boolean generateIA = true;
+    public static boolean combiningMode = true;
     public static int maxTurn = 20;
     public static String rootDir="";
+    public static Array<String> allFilesToTest;
+    public static Array<String> allFilesTested;
     // IA Param File Vars
     // Directories
     public static String paramDir = "ai"+File.separator;
@@ -358,30 +359,44 @@ public class Data {
         }
     }
 
+    /** Rempli des listes avec tout les fichiers de PoolATester et PoolTestee.
+     *
+     */
+    public static void setPoolsArrays(){
+        File directory= new File(CompileString.destPathClass+Data.poolToTestDir);
+        allFilesToTest = new Array<String>();
+        for (File file : directory.listFiles()) {
+            if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt")) {
+                Gdx.app.log(LABEL,"SetPoolsArray added file "+file.getName());
+                allFilesToTest.add(file.getName());
+            }
+        }
+        directory= new File(CompileString.destPathClass+Data.poolTestedDir);
+        allFilesTested = new Array<String>();
+        for (File file : directory.listFiles()) {
+            if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt"))
+                allFilesTested.add(file.getName());
+        }
+        Gdx.app.log(LABEL,"First pool to test file name "+allFilesToTest.get(0));
+    }
+
     /*
     Select Random IA from repository
      */
     public static void getRandomIAGeneticList()
     {
-        File directory= new File(CompileString.destPathClass+Data.poolToTestDir);
-        Array<String> allGeneratedFiles = new Array<String>();
-        for (File file : directory.listFiles()) {
-            if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt"))
-                allGeneratedFiles.add(file.getName());
-        }
-        if(allGeneratedFiles.size < All_Players_Number )
-            for(int i =allGeneratedFiles.size;i<All_Players_Number;i++){
+        if(allFilesToTest.size < All_Players_Number )
+            for(int i = allFilesToTest.size;i<All_Players_Number;i++){
                 CompileString.generateTree("x" + i + "_1");
             }
         selectedIAFiles = new Array<String>();
-
         Random r = new Random();
         int randIdx;
         for(int i=0; i<All_Players_Number;i++) {
-            randIdx = r.nextInt(allGeneratedFiles.size);
-            while(isInArray(allGeneratedFiles.get(randIdx), selectedIAFiles))
-                randIdx = r.nextInt(allGeneratedFiles.size);
-            selectedIAFiles.add(allGeneratedFiles.get(randIdx));
+            randIdx = r.nextInt(allFilesToTest.size);
+            while(isInArray(allFilesToTest.get(randIdx), selectedIAFiles))
+                randIdx = r.nextInt(allFilesToTest.size);
+            selectedIAFiles.add(allFilesToTest.get(randIdx));
         }
         for(String s : selectedIAFiles)
             System.out.println(s);
@@ -715,17 +730,60 @@ public class Data {
     }
 
     /**
-     *  Combine 2 mobs et incrémente la génération
-     * @param c1
-     * @param c2
-     * @param name
+     *  Combine les mobs choisi aleatoirement et incrémente la génération
      */
-    public void combineMobs(com.mygdx.game.game.Character c1, Character c2, String name){
-        int genMax = 0;
-        genMax = java.lang.Math.max(c1.getGeneration(), c2.getGeneration());
-        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "_" + ++genMax);
+    public static void combineRandomMobs(int numberOfCombine){//String name1, String name2, String resultName){
+        Gdx.app.log(LABEL,"On combine en mode Random");
+        String name1="", name2="", resultName="";
+        Random r = new Random();
+        int randomNumber1 = 0;
+        int randomNumber2 = 0;
+        int generation1 = 0;
+        int generation2 = 0;
+        int generationMax = 0;
+        for(int index=0;index<numberOfCombine;index++) {
+            name1="";
+            name2="";
+            while (name1.equals(name2)) {
+                randomNumber1 = r.nextInt(allFilesTested.size);
+                randomNumber2 = r.nextInt(allFilesTested.size);
+                name1 = allFilesTested.get(randomNumber1);
+                name2 = allFilesTested.get(randomNumber2);
+            }
+            generation1 = getGenerationFromFileName(name1);
+            generation2 = getGenerationFromFileName(name2);
+            generationMax = java.lang.Math.max(generation1, generation2);
+            resultName = "x" + randomNumber1 + "_" + (generationMax+1);
+
+            File resFile = new File(CompileString.destPathClass + Data.poolTestedDir + resultName);
+            while (resFile.exists()) {
+                resultName = "x" + randomNumber2 + "_" + (generationMax+1);
+                generationMax++;
+                resFile = new File(CompileString.destPathClass + Data.poolTestedDir + resultName);
+            }
+            Gdx.app.log(LABEL,"On combine les fichiers "+name1+" et "+name2+ "pour donner le fichier "+resultName);
+            CompileString.combineTrees(name1, name2, resultName);
+            File file1 = new File(CompileString.destPathClass+Data.poolTestedDir+ name1);
+            if(!file1.delete()){
+                Gdx.app.log(LABEL,"Supression impossible du fichier "+name1);
+            }
+            File file2 = new File(name2);
+            if(!file2.delete()){
+                Gdx.app.log(LABEL,"\"Supression impossible du fichier "+name2);
+            }
+        }
+        Gdx.app.log(LABEL,"Combinaison random terminée");
     }
 
+    public static int getGenerationFromFileName(String fileName){
+        int generation=1;
+        String[] fileParts;
+        fileName = fileName.replace(".txt", "");
+        fileName=fileName.replace(CompileString.serializePrefix, "");
+        fileParts = fileName.split("_");
+        generation = Integer.parseInt(fileParts[1]);
+        return generation;
+    }
 
     /** Move files depending on the switch mode
      *  0 = From PoolATester to local
@@ -733,9 +791,10 @@ public class Data {
      *  2 = From PoolTestee to PoolCroisee
      *  3 = From PoolCroisee to PoolATester
      */
+    @Deprecated
     public static void switchAllTestPool() {
         Gdx.app.log(LABEL, "**switchTestPool begin");
-        File srcPoolDir = new File(CompileString.destPathClass+Data.poolToTestDir);
+        File srcPoolDir = new File(Data.poolsDir+Data.poolToTestDir);
         String name = "";
         Path source;
         Path target;
@@ -747,8 +806,8 @@ public class Data {
         srcPoolFiles = srcPoolDir.listFiles();
         for(int i = 0; i < srcPoolFiles.length;i++) {
             name = srcPoolFiles[i].getName();
-            source = Paths.get(CompileString.destPathClass + Data.poolToTestDir + name);
-            target = Paths.get(CompileString.destPathClass + Data.poolTestedDir + name);
+            source = Paths.get(Data.poolsDir + Data.poolToTestDir + name);
+            target = Paths.get(Data.poolsDir + Data.poolTestedDir + name);
             try {
                 if (!srcPoolFiles[i].exists()) {
                     Gdx.app.log(LABEL, "**Param Moving File : source File "+srcPoolFiles[i].getName()+" doesn't exists !**");
@@ -767,7 +826,7 @@ public class Data {
      */
     public static void moveSelectedTreeTo(String originPath, String destPath) {
         File origFile, destFile;
-        for(String s : Data.selectedIAFiles)
+        for(String s : selectedIAFiles)
         {
             origFile = new File(originPath + s);
             origFile.renameTo(new File(destPath + s));
@@ -818,7 +877,7 @@ public class Data {
                         inPoolList = false;
                     }else{
                         if(ligne != null && !ligne.equals("") && ligne.contains("_")) {
-                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. On appelle CompileString.storeToPool sur la ligne = "+ ligne);
+                            Gdx.app.log(LABEL, "in Politic -> on trouve une ligne non nulle. On ajoute la ligne = "+ ligne);
                             Data.selectedIAFiles.add(ligne+".txt");
                         }
                     }
@@ -836,6 +895,9 @@ public class Data {
             for(int i =selectedIAFiles.size;i<All_Players_Number;i++){
                 CompileString.generateTree("x"+i+"_1");
                 selectedIAFiles.add(CompileString.serializePrefix+"x"+i+"_1.txt");
+            }
+            if(Data.combiningMode && Data.allFilesTested.size>0){
+                Data.combineRandomMobs(8);
             }
             /*
             if(fichier.delete()){
@@ -874,13 +936,17 @@ public class Data {
                         Number_Generated_IA = Integer.parseInt(line.split(":")[1]);
                         // Ajout appel de la fonction de génération
                         generateXIA(Number_Generated_IA);
+                        Data.setPoolsArrays();
                         break;
                     }
                     if(line.contains("Combine") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
                         Number_Combine_IA = Integer.parseInt(line.split(":")[1]);
+                        Data.setPoolsArrays();
+                        Data.combineRandomMobs(Number_Combine_IA);
                         //Ajout appel de la fonction de combinaison
                         // combiner tous les arbres qui sont dans PoolTestee, mettre enfants dans PoolATester
+
                         break;
                     }
                     if(line.contains("LoadMob"))

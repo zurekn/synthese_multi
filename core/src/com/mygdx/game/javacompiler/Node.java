@@ -133,17 +133,17 @@ public class Node implements Serializable {
 		if(arrayNode != null && arrayNode.size() > 0)
 			if(id < 0 || id >= arrayNode.size()){ // Si id n'est pas un des fils, on en prend un aléatoirement
 				returNode = arrayNode.get(new Random().nextInt(arrayNode.size())); // Noeud aléatoire parmi les fils direct
-				System.out.println("- Noeud fils trouve : "+returNode.getValue());
+				//System.out.println("- Noeud fils trouve : "+returNode.getValue());
 				if(returNode.getChildren() != null && returNode.getChildren().size() > 0 ){
 
-					System.out.println("-noeud avec fils .. 50% de prendre ses fils");
+				//	System.out.println("-noeud avec fils .. 50% de prendre ses fils");
 					return (new Random().nextInt(2)==0?returNode:returNode.getSubTree(id)); // 50% de chance de prendre ses fils directs
 				}else {
-					System.out.println("--noeud sans fils");
+				//	System.out.println("--noeud sans fils");
 					return returNode; // Noeud sans fils
 				}
 			}else{
-				System.out.println("choix du noeud numero "+id);
+				//System.out.println("choix du noeud numero "+id);
 				return arrayNode.get(id); // On prend le fils id
 			}
 		else

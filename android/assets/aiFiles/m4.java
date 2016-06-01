@@ -24,15 +24,22 @@ public class m4 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(3,1);
-		if(((ch.researchCharacter(down)==null)?defaultBoolean:ch.researchCharacter(down).isCharacterInLine(up))== (ch.isCharacterInLine(up)) )
+		    deplacementString = ch.getDeplacement(2,-1);
+		if(0.3< ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getManaPercentage()) )
 		{
-		    deplacementString = ch.getDeplacement(1,-1);
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SOUTH;
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SELF;
 		}
 		else
 		{
-		    deplacementString = ch.getDeplacement(2,-1);
+		    deplacementString = ch.getDeplacement(1,-2);
+		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxMana()/5)> ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getStrength()) )
+		{
+		    actionString = ch.getMaxHealingSpellId()+":"+ Data.SELF;
+		    deplacementString = ch.getDeplacement(1,0);
+		}
+		else
+		{
+		}
 		}
 		return actionString+"!!"+deplacementString;
 	}

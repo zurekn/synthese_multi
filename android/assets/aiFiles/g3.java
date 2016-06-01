@@ -24,23 +24,15 @@ public class g3 {
 	
 	public String run(Character ch)
 	{
+		    deplacementString = ch.getDeplacement(-1,2);
+		    deplacementString = ch.getDeplacement(-2,-1);
+		if(true== (ch.isCharacterInLine(left)) )
+		{
 		    actionString = ch.getMaxHealingSpellId()+":"+ Data.EAST;
-		if(false== ((ch.researchCharacter(right)==null)?defaultBoolean:ch.researchCharacter(right).isCharacterInLine(up)) )
+		if(true== ((ch.researchCharacter(down)==null)?defaultBoolean:ch.researchCharacter(down).isCharacterInLine(up)) )
 		{
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.WEST;
+		    deplacementString = ch.getDeplacement(-1,0);
 		    actionString = ch.passerTour();
-		if(false== ((ch.researchCharacter(left)==null)?defaultBoolean:ch.researchCharacter(left).isCharacterInLine(left)) )
-		{
-		    deplacementString = ch.getDeplacement(2,2);
-		    deplacementString = ch.getDeplacement(2,0);
-		}
-		}
-		else
-		{
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SOUTH;
-		if(((ch.researchCharacter(down)==null)?defaultInt:ch.researchCharacter(down).getStats().getMagicPower())== ((ch.researchCharacter(right)==null)?defaultInt:ch.researchCharacter(right).getStats().getMaxMana()/2) )
-		{
-		    deplacementString = ch.getDeplacement(0,3);
 		}
 		}
 		return actionString+"!!"+deplacementString;

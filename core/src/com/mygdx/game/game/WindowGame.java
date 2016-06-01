@@ -76,8 +76,9 @@ public class WindowGame extends Game {
         Data.createDirectoryIA();
         //Data.generateXIA(Data.Number_Generated_IA);
         Data.readParamAI();
-//        Gdx.app.log("WndowGame", "** On a read le fichier de param. Best mob rate =" + Data.bestMobRate + ", Worst Mob Rate =" + Data.worstMobRate + ", Cross Mob Rate=" + Data.crossMobRate);
-//        this.setScreen(new GameScreen(this));
+        Data.setPoolsArrays();
+        Gdx.app.log("WndowGame", "** On a read le fichier de param. Best mob rate =" + Data.bestMobRate + ", Worst Mob Rate =" + Data.worstMobRate + ", Cross Mob Rate=" + Data.crossMobRate);
+        this.setScreen(new GameScreen(this));
     }
 
 }

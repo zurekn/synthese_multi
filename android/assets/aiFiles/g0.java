@@ -24,18 +24,12 @@ public class g0 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(-2,1);
-		    deplacementString = ch.getDeplacement(0,-2);
-		if(1== ((ch.researchCharacter(down)==null)?defaultFloat:ch.researchCharacter(down).getStats().getLifePercentage()) )
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.EAST;
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SELF;
+		if((ch.getStats().getMaxLife()/2)!= (ch.Portee((ch.getMaxDamagingSpellId()))) )
 		{
-		    deplacementString = ch.getDeplacement(2,0);
-		if(((ch.researchCharacter(down)==null)?defaultInt:ch.researchCharacter(down).Portee(((ch.researchCharacter(down)==null)?defaultString:ch.researchCharacter(down).getSpells().get(0).getId())))<= ((ch.researchCharacter(right)==null)?defaultInt:ch.researchCharacter(right).getStats().getMaxMana()) )
-		{
-		    deplacementString = ch.getDeplacement(-1,2);
-		}
-		}
-		else
-		{
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SOUTH;
+		    actionString = ch.getMaxHealingSpellId()+":"+ Data.NORTH;
 		}
 		return actionString+"!!"+deplacementString;
 	}
