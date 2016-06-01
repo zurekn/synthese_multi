@@ -35,18 +35,18 @@ public class ServerScreen implements Screen {
 
             game.act(delta);
             game.draw();
-        System.out.println("Wait for message");
+        //System.out.println("Wait for message");
         //game.getLogHandler().addMessage("Wait for message"+i++);
-        try {
-            String mess = game.server.receive(2000);
-            game.getLogHandler().addMessage("Received : "+ mess);
-            game.server.respondToLastClient(mess);
-            game.getLogHandler().addMessage("Sending : "+ mess);
-        }catch(NullPointerException e){
-            System.err.println("NPE");
-        }catch(GdxRuntimeException e){
-            System.err.println(e.getMessage());
-        }
+        //try {
+        //  String mess = game.server.receive();
+        //  game.getLogHandler().addMessage("Received : "+ mess);
+        //  game.server.respondToLastClient(mess);
+        //  game.getLogHandler().addMessage("Sending : "+ mess);
+        //}catch(NullPointerException e){
+        //   System.err.println("NPE");
+        //}catch(GdxRuntimeException e){
+        //   Gdx.app.error("Server",e.getMessage(),e);
+        //}
     }
 
     @Override

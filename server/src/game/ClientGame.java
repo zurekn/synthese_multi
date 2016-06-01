@@ -4,37 +4,46 @@ import com.badlogic.gdx.Gdx;
 
 import com.mygdx.game.com.TCPClient;
 
+import com.mygdx.game.data.Data;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalMovementException;
 
 import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Message;
 
+import java.io.IOException;
+import java.net.Socket;
+
 import static com.mygdx.game.data.Data.ERROR_TOO_MUCH_ACTION;
 
 import static com.mygdx.game.data.Data.debug;
 
 
-/**
- * Created by nicolas on 15/03/2016.
- */
+
 public class ClientGame extends GameStage {
-    private TCPClient client;
+    public TCPClient client;
 
     public static ClientGame gameStage;
 
     protected final String LABEL = "ClientGame";
 
     public ClientGame() {
-        create();
-        gameStage = this;
+        //create();
+
     }
 
     @Override
     public void create() {
         super.create();
 
-        client = new TCPClient(42666);
+        gameStage = this;
+        try {
+            client = new TCPClient(new Socket((String)null, 42666));
+
+            client.sendToServer("12:12:p1:mage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void checkAction(String action) throws IllegalActionException {
@@ -83,5 +92,15 @@ public class ClientGame extends GameStage {
             throw new IllegalActionException("Action not found : " + action);
         }
         client.sendToServer(action);
+    }
+
+    @Override
+    public void decodeAction(String action) throws IllegalActionException {
+        gameStage.client.sendToServer(action);
+        super.decodeAction(action);
+    }
+
+    public void decodeServerAction(String action) throws IllegalActionException {
+        super.decodeAction(action);
     }
 }

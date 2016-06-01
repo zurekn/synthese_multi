@@ -2,14 +2,17 @@ package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
-import com.badlogic.gdx.net.ServerSocket;
+//import com.badlogic.gdx.net.ServerSocket;
+//import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.ServerSocketHints;
-import com.badlogic.gdx.net.Socket;
-import com.badlogic.gdx.net.SocketHints;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 
@@ -55,7 +58,7 @@ public class TCPServer {
     public TCPServer(String hostname, int port, int timeout, Boolean reuseAddr) {
         this.clients = new ArrayList<Socket>();
         this.port = port;
-        this.hints = new ServerSocketHints();
+        /*this.hints = new ServerSocketHints();
         this.hints.acceptTimeout = timeout;
         this.hints.reuseAddress = reuseAddr;
         this.hints.performancePrefBandwidth = 0;
@@ -63,7 +66,42 @@ public class TCPServer {
         this.hints.performancePrefLatency = 0;
         this.hostname = hostname;
         System.out.println("Bind at port "+port);
-        serverSocket = Gdx.net.newServerSocket(Net.Protocol.TCP, hostname, port, this.hints);
+        serverSocket = Gdx.net.newServerSocket(Net.Protocol.TCP, hostname, port, this.hints);*/
+        // create the server socket
+        try {
+            hints = new ServerSocketHints();
+            this.hints.acceptTimeout = timeout;
+            this.hints.reuseAddress = reuseAddr;
+            //this.hints.performancePrefBandwidth = 0;
+            //this.hints.performancePrefConnectionTime = 0;
+            //this.hints.performancePrefLatency = 0;
+
+
+            // initialize
+            serverSocket = new java.net.ServerSocket(port);
+            serverSocket.setSoTimeout(60000);
+//            serverSocket.setReuseAddress(true);
+
+
+            /*if (hints != null) {
+                serverSocket.setPerformancePreferences(hints.performancePrefConnectionTime,
+                        hints.performancePrefLatency,
+                        hints.performancePrefBandwidth);
+                serverSocket.setReuseAddress(hints.reuseAddress);
+
+                serverSocket.setReceiveBufferSize(hints.receiveBufferSize);
+            }*/
+            //serverSocket.setSoTimeout(hints.acceptTimeout);
+            // and bind the server...
+            //InetSocketAddress address = new InetSocketAddress(hostname, port);
+
+              //  serverSocket.bind(address);
+
+        }
+        catch (Exception e) {
+            throw new GdxRuntimeException("Cannot create a server socket at port " + port + ".", e);
+        }
+
     }
 
     public void send(String data, Socket clientSocket) {
@@ -77,18 +115,26 @@ public class TCPServer {
     }
 
     public String receive() {
-        return receive(hints.acceptTimeout);
-    }
-
-    public String receive(int timeout) {
         try {
-            SocketHints clientHints = new SocketHints();
-            int tmp = hints.acceptTimeout;
-            hints.acceptTimeout = timeout;
-            lastClient = serverSocket.accept(null);
+            lastClient =serverSocket.accept();
             if(!clients.contains(lastClient))
                 clients.add(lastClient);
-            hints.acceptTimeout = tmp;
+
+            String message = new BufferedReader(new InputStreamReader(lastClient.getInputStream())).readLine();
+            Gdx.app.log("Server",  "Received : "+message);
+            return message;
+        } catch (IOException e) {
+            Gdx.app.log("ServerError", "Error receiving message : " + e.getMessage());
+        }
+        return null;
+    }
+
+    public String acceptNewClient() {
+        try {
+            lastClient =serverSocket.accept();
+            if(!clients.contains(lastClient))
+                clients.add(lastClient);
+
             String message = new BufferedReader(new InputStreamReader(lastClient.getInputStream())).readLine();
             Gdx.app.log("Server",  "Received : "+message);
             return message;
@@ -100,6 +146,11 @@ public class TCPServer {
 
     public void respondToLastClient(String data){
         send(data, lastClient);
+        try {
+            lastClient.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Socket getLastClient(){
@@ -117,12 +168,20 @@ public class TCPServer {
     }
 
     public void close(){
-        serverSocket.dispose();
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void disposeAll(){
         for(Socket sock : clients){
-            sock.dispose();
+            try {
+                sock.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

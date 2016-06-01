@@ -37,7 +37,7 @@ public class InputHandler implements InputProcessor, GestureDetector.GestureList
 
     private Vector3 lastTouch = new Vector3();
 
-    private boolean click = false;
+    protected boolean click = false;
 
     @Override
     public boolean keyDown(int keycode) {

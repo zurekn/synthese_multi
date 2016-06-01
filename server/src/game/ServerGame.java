@@ -12,6 +12,7 @@ import com.mygdx.game.exception.IllegalMovementException;
 import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Message;
 import com.mygdx.game.data.Event;
+import com.mygdx.game.game.Player;
 
 import java.util.ArrayList;
 
@@ -31,31 +32,58 @@ import static com.mygdx.game.data.Data.debug;
 
 @SuppressWarnings({"ConstantConditions", "SuspiciousMethodCalls"})
 public class ServerGame extends GameStage {
+    private final int INIT_TIME = 60*1000;
+    private long startTime;
+
     public TCPServer server;
     public static ServerGame gameStage;
     private final String LABEL = "ServerGame";
     private LogHandler logHandler;
 
 
+
     public ServerGame(){
-        create();
-        gameStage = this;
-        server = new TCPServer(42666);
+        //create();
     }
 
     @Override
     public void create(){
+        Data.MUSIC_VOLUM=0;
         super.create();
-
         Data.BACKGROUND_MUSIC.stop();
-
-        logHandler = new LogHandler(this);
+        gameStage = this;
     }
 
     @Override
     public void initCommandHandler(){
 
     }
+
+    @Override
+    public void initPlayers(){
+        initServer();
+    }
+
+    private void initServer(){
+        server = new TCPServer(42666);
+        logHandler = new LogHandler(this);
+        startTime =  System.currentTimeMillis();
+        String mess;
+        String sArray[];
+        Gdx.app.log(LABEL, "Waiting for clients");
+        do{
+            mess = server.acceptNewClient();
+            try {
+                sArray = mess.split(":");
+                Player player = new Player(Integer.parseInt(sArray[0]), Integer.parseInt(sArray[1]), sArray[2], sArray[3]);
+                players.add(player);
+                new ClientThread(gameStage, server.getLastClient(), player);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }while(players.size() <= 4 && (System.currentTimeMillis() - startTime) <= INIT_TIME);
+    }
+
 
     /**
      * decode a action and create associated event

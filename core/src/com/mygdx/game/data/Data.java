@@ -67,7 +67,7 @@ public class Data {
     public static final boolean debugQR = false;
     public static final int DEBUG_PLAYER = 4;
     public static final int DEBUG_NB_GENETIC_PLAYER = 4;
-    public static boolean ANDROID = true;
+    public static boolean ANDROID = false;
     //public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
     public static String IMAGE_DIR = "C:/Users/fr�d�ric/Google Drive/Master Cergy/Projet_PlateauJeu/Synth�se/ImageDeTest/";
 
@@ -724,7 +724,7 @@ public class Data {
     public void combineMobs(com.mygdx.game.game.Character c1, Character c2, String name){
         int genMax = 0;
         genMax = java.lang.Math.max(c1.getGeneration(), c2.getGeneration());
-        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "_" +genMax);
+        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "_" + ++genMax);
     }
 
 
@@ -734,7 +734,6 @@ public class Data {
      *  2 = From PoolTestee to PoolCroisee
      *  3 = From PoolCroisee to PoolATester
      */
-    @Deprecated
     public static void switchAllTestPool() {
         Gdx.app.log(LABEL, "**switchTestPool begin");
         File srcPoolDir = new File(CompileString.destPathClass+Data.poolToTestDir);
@@ -767,7 +766,7 @@ public class Data {
     /*
     Take all serialized tree in selectedIAFiles from ToTestPool and move them throw TestedPool
      */
-    public static void moveSelectedTreeTo(String originPath, String destPath) {
+    public static void moveTo(String originPath, String destPath) {
         File origFile, destFile;
         for(String s : Data.selectedIAFiles)
         {
@@ -795,7 +794,6 @@ public class Data {
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             while ((ligne = br.readLine()) != null) {
-                System.out.println(br);
                 // Supprime les espaces inutiles
                 ligne = Data.supressUselessShit(ligne);
                 if(inPolitic){
@@ -840,6 +838,12 @@ public class Data {
                 CompileString.generateTree("x"+i+"_1");
                 selectedIAFiles.add(CompileString.serializePrefix+"x"+i+"_1.txt");
             }
+            /*
+            if(fichier.delete()){
+                Gdx.app.log(LABEL,"readParamFile : file successfully deleted");
+            }else{
+                Gdx.app.log(LABEL,"readParamFile : file not deleted, error");
+            }*/
         } catch (Exception e) {
             System.out.println("Read Param exception... " + e.toString());
         }
@@ -899,5 +903,14 @@ public class Data {
         }
         catch (FileNotFoundException e)
         {e.printStackTrace();}
+    }
+    public static void setForServer(){
+        autoIA = false;
+        generateIA = false;
+        jvm = true;
+        RUN_APIX = false;
+        SCREEN_HEIGHT = 240;
+        SCREEN_WIDTH = 360;
+        debug = true;
     }
 }
