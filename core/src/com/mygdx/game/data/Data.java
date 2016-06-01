@@ -83,7 +83,7 @@ public class Data {
     // Directories
     public static String paramDir = "ai"+File.separator;
     public static String poolsDir = "aiFiles"+File.separator;
-    public static String paramFileNAme = "Param.txt";
+    public static String paramFileNAme = "ParamAI.txt";
 
     public static String poolToTestDir = "PoolATester"+File.separator;
     public static String poolTestedDir = "PoolTestee"+File.separator;
@@ -103,6 +103,8 @@ public class Data {
 
     public static int MAX_GAME_LOOP = 10;
     public static int Number_Generated_IA = 20;
+    public static int Number_Combine_IA = 20;
+    public static int Mode_Generate_Combine_Or_Load = 0;
     public static int All_Players_Number = 8;
     public static Array <String> selectedIAFiles;
 
@@ -722,7 +724,7 @@ public class Data {
     public void combineMobs(com.mygdx.game.game.Character c1, Character c2, String name){
         int genMax = 0;
         genMax = java.lang.Math.max(c1.getGeneration(), c2.getGeneration());
-        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "_" + ++genMax);
+        CompileString.combineTrees(c1.getTrueID(), c2.getTrueID(), name + "_" +genMax);
     }
 
 
@@ -732,6 +734,7 @@ public class Data {
      *  2 = From PoolTestee to PoolCroisee
      *  3 = From PoolCroisee to PoolATester
      */
+    @Deprecated
     public static void switchAllTestPool() {
         Gdx.app.log(LABEL, "**switchTestPool begin");
         File srcPoolDir = new File(CompileString.destPathClass+Data.poolToTestDir);
@@ -764,7 +767,7 @@ public class Data {
     /*
     Take all serialized tree in selectedIAFiles from ToTestPool and move them throw TestedPool
      */
-    public static void moveTo(String originPath, String destPath) {
+    public static void moveSelectedTreeTo(String originPath, String destPath) {
         File origFile, destFile;
         for(String s : Data.selectedIAFiles)
         {
@@ -792,6 +795,7 @@ public class Data {
             BufferedReader br = new BufferedReader(ipsr);
             String ligne;
             while ((ligne = br.readLine()) != null) {
+                System.out.println(br);
                 // Supprime les espaces inutiles
                 ligne = Data.supressUselessShit(ligne);
                 if(inPolitic){
@@ -836,15 +840,64 @@ public class Data {
                 CompileString.generateTree("x"+i+"_1");
                 selectedIAFiles.add(CompileString.serializePrefix+"x"+i+"_1.txt");
             }
-            /*
-            if(fichier.delete()){
-                Gdx.app.log(LABEL,"readParamFile : file successfully deleted");
-            }else{
-                Gdx.app.log(LABEL,"readParamFile : file not deleted, error");
-            }*/
         } catch (Exception e) {
             System.out.println("Read Param exception... " + e.toString());
         }
         Gdx.app.log(LABEL,"**readParamFile ends");
+    }
+
+    public static void readParamAI()
+    {
+        Array<String> allLoadedFiles = new Array<String>();
+        Scanner scanner;
+        try {
+            File file = Gdx.files.internal(Data.paramDir + Data.paramFileNAme).file();
+            if(file.exists() && file.length() > 0)
+            {
+                scanner = new Scanner(file);
+                while (scanner.hasNextLine())
+                {
+                    String line = scanner.nextLine();
+                    line = line.replaceAll(" ", "");
+                    if(line.contains("nbLaunchGame") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
+                    {
+                        MAX_GAME_LOOP = Integer.parseInt(line.split(":")[1]);
+                        System.out.println("MAX_GAME_LOOP : "+MAX_GAME_LOOP);
+                    }
+                    if(line.contains("Generation") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
+                    {
+                        Number_Generated_IA = Integer.parseInt(line.split(":")[1]);
+                        Mode_Generate_Combine_Or_Load = 1;
+                        System.out.println("Number_Generated_IA : "+Number_Generated_IA);
+                        // Ajout appel de la fonction de génération
+                        break;
+                    }
+                    if(line.contains("Combine") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
+                    {
+                        Number_Combine_IA = Integer.parseInt(line.split(":")[1]);
+                        Mode_Generate_Combine_Or_Load = 2;
+                        System.out.println("Number_Combine_IA : "+Number_Combine_IA);
+                        //Ajout appel de la fonction de combinaison
+                        // combiner tous les arbres qui sont dans PoolTestee, mettre enfants dans PoolATester
+                        break;
+                    }
+                    if(line.contains("LoadMob"))
+                    {
+                        Mode_Generate_Combine_Or_Load = 3;
+                        //Ajout appel de la fonction load
+                        // Charger tous les arbres qui sont dans PoolATester
+                        // Attention à ce qu'il y ait suffisamment de mobs (si non générer x fois)
+                        break;
+                    }
+                }
+                System.out.println("End While");
+            }
+            else // file does not exist
+            {
+                Gdx.app.log("Data.readParamAI()", "File does not exist");
+            }
+        }
+        catch (FileNotFoundException e)
+        {e.printStackTrace();}
     }
 }

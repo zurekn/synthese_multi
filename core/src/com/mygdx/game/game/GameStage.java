@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.ai.AIHandler;
 import com.mygdx.game.ai.AStar;
 import com.mygdx.game.ai.ActionEvent;
 import com.mygdx.game.ai.CharacterData;
@@ -34,24 +32,11 @@ import com.mygdx.game.imageprocessing.MovementEvent;
 import com.mygdx.game.imageprocessing.QRCodeEvent;
 import com.mygdx.game.javacompiler.CompileString;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
-import static com.mygdx.game.data.Data.All_Players_Number;
 import static com.mygdx.game.data.Data.BLOCK_NUMBER_Y;
 import static com.mygdx.game.data.Data.BLOCK_REACHABLE_COLOR;
 import static com.mygdx.game.data.Data.BLOCK_SIZE_X;
@@ -86,12 +71,9 @@ import static com.mygdx.game.data.Data.debug;
 import static com.mygdx.game.data.Data.departureBlocks;
 import static com.mygdx.game.data.Data.loadGame;
 import static com.mygdx.game.data.Data.loadMap;
-import static com.mygdx.game.data.Data.rootDir;
 import static com.mygdx.game.data.Data.scale;
-import static com.mygdx.game.data.Data.selectedIAFiles;
 import static com.mygdx.game.data.Data.tiledMapRenderer;
 import static com.mygdx.game.data.Data.untraversableBlocks;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Created by nicolas on 15/03/2016.
@@ -1287,7 +1269,7 @@ public class GameStage extends Stage {
 
         }
         originMobs.get(0).getFitness().renameScoreFile();
-        Data.moveTo(CompileString.destPathClass + Data.poolToTestDir, CompileString.destPathClass + Data.poolTestedDir);
+        Data.moveSelectedTreeTo(CompileString.destPathClass + Data.poolToTestDir, CompileString.destPathClass + Data.poolTestedDir);
         stopAllThread();
     }
 
