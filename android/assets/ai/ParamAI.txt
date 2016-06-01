@@ -1,0 +1,4 @@
+nbLaunchGame:10
+Generation:30
+#Combine:20
+#LoadMob

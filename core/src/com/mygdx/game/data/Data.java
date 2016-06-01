@@ -104,7 +104,6 @@ public class Data {
     public static int MAX_GAME_LOOP = 10;
     public static int Number_Generated_IA = 20;
     public static int Number_Combine_IA = 20;
-    public static int Mode_Generate_Combine_Or_Load = 0;
     public static int All_Players_Number = 8;
     public static Array <String> selectedIAFiles;
 
@@ -766,7 +765,7 @@ public class Data {
     /*
     Take all serialized tree in selectedIAFiles from ToTestPool and move them throw TestedPool
      */
-    public static void moveTo(String originPath, String destPath) {
+    public static void moveSelectedTreeTo(String originPath, String destPath) {
         File origFile, destFile;
         for(String s : Data.selectedIAFiles)
         {
@@ -850,6 +849,9 @@ public class Data {
         Gdx.app.log(LABEL,"**readParamFile ends");
     }
 
+    /*
+    Read File AI Parameter
+     */
     public static void readParamAI()
     {
         Array<String> allLoadedFiles = new Array<String>();
@@ -866,35 +868,29 @@ public class Data {
                     if(line.contains("nbLaunchGame") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
                         MAX_GAME_LOOP = Integer.parseInt(line.split(":")[1]);
-                        System.out.println("MAX_GAME_LOOP : "+MAX_GAME_LOOP);
                     }
                     if(line.contains("Generation") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
                         Number_Generated_IA = Integer.parseInt(line.split(":")[1]);
-                        Mode_Generate_Combine_Or_Load = 1;
-                        System.out.println("Number_Generated_IA : "+Number_Generated_IA);
                         // Ajout appel de la fonction de génération
+                        generateXIA(Number_Generated_IA);
                         break;
                     }
                     if(line.contains("Combine") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
                         Number_Combine_IA = Integer.parseInt(line.split(":")[1]);
-                        Mode_Generate_Combine_Or_Load = 2;
-                        System.out.println("Number_Combine_IA : "+Number_Combine_IA);
                         //Ajout appel de la fonction de combinaison
                         // combiner tous les arbres qui sont dans PoolTestee, mettre enfants dans PoolATester
                         break;
                     }
                     if(line.contains("LoadMob"))
                     {
-                        Mode_Generate_Combine_Or_Load = 3;
                         //Ajout appel de la fonction load
                         // Charger tous les arbres qui sont dans PoolATester
                         // Attention à ce qu'il y ait suffisamment de mobs (si non générer x fois)
                         break;
                     }
                 }
-                System.out.println("End While");
             }
             else // file does not exist
             {
@@ -904,6 +900,7 @@ public class Data {
         catch (FileNotFoundException e)
         {e.printStackTrace();}
     }
+
     public static void setForServer(){
         autoIA = false;
         generateIA = false;
