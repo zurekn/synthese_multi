@@ -67,7 +67,7 @@ public class Data {
     public static final boolean debugQR = false;
     public static final int DEBUG_PLAYER = 4;
     public static final int DEBUG_NB_GENETIC_PLAYER = 4;
-    public static boolean ANDROID = true;
+    public static boolean ANDROID = false;
     //public static String IMAGE_DIR ="C:/Users/boby/Google Drive/Master1/Synth�se/ImageDeTest/";
     public static String IMAGE_DIR = "C:/Users/fr�d�ric/Google Drive/Master Cergy/Projet_PlateauJeu/Synth�se/ImageDeTest/";
 
@@ -846,5 +846,15 @@ public class Data {
             System.out.println("Read Param exception... " + e.toString());
         }
         Gdx.app.log(LABEL,"**readParamFile ends");
+    }
+
+    public static void setForServer(){
+        autoIA = false;
+        generateIA = false;
+        jvm = true;
+        RUN_APIX = false;
+        SCREEN_HEIGHT = 240;
+        SCREEN_WIDTH = 360;
+        debug = true;
     }
 }

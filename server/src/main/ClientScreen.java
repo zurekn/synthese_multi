@@ -6,10 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.input.GestureDetector;
 import com.mygdx.game.data.Data;
-import com.mygdx.game.game.InputHandler;
 
 import game.ClientGame;
-import game.ServerGame;
+import game.ClientInputHandler;
 
 /**
  * Created by gregory on 30/03/16.
@@ -29,18 +28,23 @@ public class ClientScreen implements Screen {
         public void show() {
             InputMultiplexer inputMultiplexer = new InputMultiplexer();
             inputMultiplexer.addProcessor(stage);
-            GestureDetector detector = new GestureDetector(new InputHandler());
+            GestureDetector detector = new GestureDetector(new ClientInputHandler());
             if(Data.ANDROID)
                 inputMultiplexer.addProcessor(detector);
             else
-                inputMultiplexer.addProcessor(new InputHandler());
+                inputMultiplexer.addProcessor(new ClientInputHandler());
             Gdx.input.setInputProcessor(inputMultiplexer);
-
         }
 
         @Override
         public void render(float delta) {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+            //try{
+            //    stage.client.sendToServer("coucou");
+            //}catch(Exception e){
+            //    System.err.println(e.getMessage());
+            //}
 
             stage.act(delta);
             stage.draw(delta);

@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.ServerSocket;
 import com.badlogic.gdx.net.ServerSocketHints;
-import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.SocketHints;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +19,6 @@ import java.io.InputStreamReader;
  */
 public class TCPClient {
     private SocketHints hints;
-    private int port;
     private Socket clientSocket;
     private String hostname;
 
@@ -31,7 +33,6 @@ public class TCPClient {
     }
 
     public TCPClient(String hostname, int port, int timeout) {
-        this.port = port;
         this.hints = new SocketHints();
         this.hints.connectTimeout = timeout;
         this.hints.socketTimeout = 0;
@@ -39,7 +40,45 @@ public class TCPClient {
         this.hints.performancePrefConnectionTime = 0;
         this.hints.performancePrefLatency = 0;
         this.hostname = hostname;
-        clientSocket = Gdx.net.newClientSocket(Net.Protocol.TCP, hostname, port, this.hints);
+        //clientSocket = Gdx.net.newClientSocket(Net.Protocol.TCP, hostname, port, this.hints);
+
+        try {
+            //this.hints.acceptTimeout = timeout;
+           // this.hints.reuseAddress = reuseAddr;
+            //this.hints.performancePrefBandwidth = 0;
+            //this.hints.performancePrefConnectionTime = 0;
+            //this.hints.performancePrefLatency = 0;
+
+
+            // initialize
+            InetSocketAddress address = new InetSocketAddress(hostname, port);
+            clientSocket = new java.net.Socket();
+            clientSocket.bind(address);
+            clientSocket.setSoTimeout(60000);
+
+            /*if (hints != null) {
+                serverSocket.setPerformancePreferences(hints.performancePrefConnectionTime,
+                        hints.performancePrefLatency,
+                        hints.performancePrefBandwidth);
+                serverSocket.setReuseAddress(hints.reuseAddress);
+
+                serverSocket.setReceiveBufferSize(hints.receiveBufferSize);
+            }*/
+            //serverSocket.setSoTimeout(hints.acceptTimeout);
+            // and bind the server...
+            //InetSocketAddress address = new InetSocketAddress(hostname, port);
+
+            //  serverSocket.bind(address);
+
+        }
+        catch (Exception e) {
+            throw new GdxRuntimeException("Cannot create a server socket at port " + port + ".", e);
+        }
+    }
+
+    public TCPClient(Socket socket){
+        clientSocket = socket;
+
     }
 
     public void sendToServer(String data) {

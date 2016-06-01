@@ -8,18 +8,19 @@ public class ClientLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-        Data.setScreenSize();
+		Data.setScreenSize();
 
 		config.title = Data.TITLE;
 		config.height = Data.SCREEN_HEIGHT;
 		config.width = Data.SCREEN_WIDTH;
+		config.fullscreen = false;
+		config.resizable = false;
+		Data.checkValuesIni("paramTI.ini");
 
-        Data.checkValuesIni("paramTI.ini");
+		Data.RUN_APIX = false;
+		Data.debug = true;
 
-
-        Data.debug = true;
-
-        Data.setForAndroid(false);
+		Data.setForAndroid(false);
 
         new LwjglApplication(new WindowClient(), config);
 	}

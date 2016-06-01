@@ -68,10 +68,11 @@ public class Player extends Character {
             this.setName(id);
             this.setNpc(false);
             Hero h = HeroData.getHeroByClass(caracterClass);
-            icon = h.getIcon();
             if (h == null) {
                 throw (new IllegalCaracterClassException(caracterClass + "Doesn't exist in hero.xml"));
             }
+            icon = h.getIcon();
+
             this.setStats(h.getStat().clone());
             this.setSpells(h.getSpells());
             this.setFitness(new IAFitness(false));
