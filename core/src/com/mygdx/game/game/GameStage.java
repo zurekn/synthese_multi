@@ -1252,26 +1252,28 @@ public class GameStage extends Stage {
                 mo.getFitness().toStringFitness(), true);
         mo.getFitness().writeHistory(mo, false, loopNumber);
             System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = " + mo.getFitness().getFinalScore());
-           try {
+           /*try {
                Hadoop.saveGeneticDataOnHive(mo.getName(), ""+mo.getGeneration(), Data.getDate(), mo.getFitness().getFinalScore(), mo.getFitness().getpAction(), mo.getFitness().getpHeal(),mo.getFitness().getpPass());
            } catch (SQLException e) {
                Gdx.app.error(LABEL, "Save score on Hive : " + e.getMessage());
-           }
+           }*/
        }
         for(Player po : originPlayers){
             po.getFitness().debugFile("Player id=" + po.getTrueID() + " name=" + po.getName() +
                     " score final = " + po.getFitness().calculFinalScore(gameWin, global_turn) + "" +
                     po.getFitness().toStringFitness(), true);
             po.getFitness().writeHistory(po, false, loopNumber);
-            try {
+            /*try {
                 Hadoop.saveGeneticDataOnHive(po.getName(), ""+po.getGeneration(), Data.getDate(), po.getFitness().getFinalScore(), po.getFitness().getpAction(), po.getFitness().getpHeal(), po.getFitness().getpPass());
             } catch (SQLException e) {
                 Gdx.app.error(LABEL, "Save score on Hive : "+e.getMessage());
-            }
+            }*/
 
         }
         originMobs.get(0).getFitness().renameScoreFile();
         //Data.switchAllTestPool();
+
+        Gdx.app.log(LABEL,"On move les scripts sélectionnés");
         Data.moveSelectedTreeTo(CompileString.destPathClass + Data.poolToTestDir, CompileString.destPathClass + Data.poolTestedDir);
         stopAllThread();
     }

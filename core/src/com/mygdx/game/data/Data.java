@@ -830,11 +830,13 @@ public class Data {
     Take all serialized tree in selectedIAFiles from ToTestPool and move them throw TestedPool
      */
     public static void moveSelectedTreeTo(String originPath, String destPath) {
+        Gdx.app.log(LABEL,"-- MoveSelectedTrees -- from "+originPath+" to "+destPath);
         File origFile, destFile;
         for(String s : selectedIAFiles)
         {
             origFile = new File(originPath + s);
             origFile.renameTo(new File(destPath + s));
+            Gdx.app.log(LABEL, "Moving "+s);
         }
     }
 
@@ -970,10 +972,8 @@ public class Data {
                     {
                         Number_Generated_IA = Integer.parseInt(line.split(":")[1]);
                         Gdx.app.log(LABEL,"Reading Param : a line contains Generation. Number = "+Number_Generated_IA);
-
                         // Ajout appel de la fonction de génération
                         generateXIA(Number_Generated_IA);
-                        Data.setPoolsArrays(); // Met à jour les listes de mobs générés
                         break;
                     }
                     if(line.contains("Combine") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
