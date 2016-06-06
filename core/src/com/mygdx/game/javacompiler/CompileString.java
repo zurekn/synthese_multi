@@ -189,8 +189,8 @@ public class CompileString {
             /*name1 = serializePrefix+name1+".txt";
             name2 = serializePrefix+name2+".txt";*/
             // Get monster 1 & 2 trees
-            root1 = deserializeObject(name1, destPathClass+Data.poolToTestDir+File.separator);
-            root2 = deserializeObject(name2, destPathClass+Data.poolToTestDir+File.separator);
+            root1 = deserializeObject(name1, destPathClass+Data.poolTestedDir+File.separator);
+            root2 = deserializeObject(name2, destPathClass+Data.poolTestedDir+File.separator);
             boolean done = false;
             // While we didn't combined...
             while(!done){

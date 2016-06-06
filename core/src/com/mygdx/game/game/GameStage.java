@@ -1233,7 +1233,8 @@ public class GameStage extends Stage {
               endGameLogs();
               if(loopNumber >= Data.MAX_GAME_LOOP) {
                   Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adios amigos !");
-                  resetGame();
+                  Data.suppressPoolDir(0);
+                  quitGame();
               }
           }
         }
@@ -1288,11 +1289,6 @@ public class GameStage extends Stage {
         Gdx.app.exit();
     }
 
-    public void resetGame()
-    {
-        Gdx.app.log("resetGame", "");
-        quitGame();
-    }
 
     /**
      * TODO correct this function

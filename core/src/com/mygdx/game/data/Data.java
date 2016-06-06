@@ -102,9 +102,9 @@ public class Data {
     /** Taux de combinaison des mobs pour le prochain jeu  (en %) */
     public static int crossMobRate = 0;
 
-    public static int MAX_GAME_LOOP = 10;
-    public static int Number_Generated_IA = 20;
-    public static int Number_Combine_IA = 20;
+    public static int MAX_GAME_LOOP = 1;
+    public static int Number_Generated_IA = 0;
+    public static int Number_Combine_IA = 0;
     public static int All_Players_Number = 8;
     public static Array <String> selectedIAFiles;
 
@@ -364,20 +364,28 @@ public class Data {
      */
     public static void setPoolsArrays(){
         File directory= new File(CompileString.destPathClass+Data.poolToTestDir);
+        if(!directory.exists()){
+            Gdx.app.log(LABEL,"SetPoolsArrays PoolATester n'existe pas");
+            return;
+        }
         allFilesToTest = new Array<String>();
         for (File file : directory.listFiles()) {
             if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt")) {
-                Gdx.app.log(LABEL,"SetPoolsArray added file "+file.getName());
+             //   Gdx.app.log(LABEL,"SetPoolsArray added file "+file.getName());
                 allFilesToTest.add(file.getName());
             }
         }
         directory= new File(CompileString.destPathClass+Data.poolTestedDir);
+        if(!directory.exists()){
+            Gdx.app.log(LABEL,"SetPoolsArrays PoolTestee n'existe pas");
+            return;
+        }
         allFilesTested = new Array<String>();
         for (File file : directory.listFiles()) {
             if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt"))
                 allFilesTested.add(file.getName());
         }
-        Gdx.app.log(LABEL,"First pool to test file name "+allFilesToTest.get(0));
+        Gdx.app.log(LABEL,"SetPoolsArrays : Arrays for files Set");
     }
 
     /*
@@ -398,6 +406,7 @@ public class Data {
                 randIdx = r.nextInt(allFilesToTest.size);
             selectedIAFiles.add(allFilesToTest.get(randIdx));
         }
+        System.out.println(LABEL + ", GetRandomIAGeneticList - selected IA Files :");
         for(String s : selectedIAFiles)
             System.out.println(s);
     }
@@ -733,6 +742,10 @@ public class Data {
      *  Combine les mobs choisi aleatoirement et incrémente la génération
      */
     public static void combineRandomMobs(int numberOfCombine){//String name1, String name2, String resultName){
+        if(allFilesTested.size <= 0){
+            Gdx.app.log(LABEL,"combineRandomMobs : Aucun fichier dans PoolTestee");
+            return;
+        }
         Gdx.app.log(LABEL,"On combine en mode Random");
         String name1="", name2="", resultName="";
         Random r = new Random();
@@ -754,7 +767,7 @@ public class Data {
             generation2 = getGenerationFromFileName(name2);
             generationMax = java.lang.Math.max(generation1, generation2);
             resultName = "x" + randomNumber1 + "_" + (generationMax+1);
-
+            Gdx.app.log(LABEL,"Combinaison : result = "+resultName);
             File resFile = new File(CompileString.destPathClass + Data.poolTestedDir + resultName);
             while (resFile.exists()) {
                 resultName = "x" + randomNumber2 + "_" + (generationMax+1);
@@ -763,14 +776,6 @@ public class Data {
             }
             Gdx.app.log(LABEL,"On combine les fichiers "+name1+" et "+name2+ "pour donner le fichier "+resultName);
             CompileString.combineTrees(name1, name2, resultName);
-            File file1 = new File(CompileString.destPathClass+Data.poolTestedDir+ name1);
-            if(!file1.delete()){
-                Gdx.app.log(LABEL,"Supression impossible du fichier "+name1);
-            }
-            File file2 = new File(name2);
-            if(!file2.delete()){
-                Gdx.app.log(LABEL,"\"Supression impossible du fichier "+name2);
-            }
         }
         Gdx.app.log(LABEL,"Combinaison random terminée");
     }
@@ -911,11 +916,39 @@ public class Data {
         Gdx.app.log(LABEL,"**readParamFile ends");
     }
 
+    /** Supprime un des répertoires Pool en entier.
+     *
+     *
+     * @param type : Si type = 0 on supprime PoolATester
+     */
+    public static void suppressPoolDir(int type){
+
+        File poolToTest;
+        if(type == 0) {
+            Gdx.app.log(LABEL,"On supprime le répertoire PoolToTest");
+            poolToTest = new File(CompileString.destPathClass + Data.poolToTestDir);
+        }else{
+            Gdx.app.log(LABEL,"On supprime le répertoire PoolTested");
+            poolToTest = new File(CompileString.destPathClass+Data.poolTestedDir);
+        }
+        File[] poolToTestFiles;
+        if(poolToTest.isDirectory()){
+            poolToTestFiles = poolToTest.listFiles();
+            for(int i=0;i<poolToTestFiles.length;i++){
+                poolToTestFiles[i].delete();
+            }
+            //poolToTest.delete();
+        }else{
+            Gdx.app.log(LABEL, "Impossible de supprimer le dossier pool à tester. Le répertoire n'existe pas ou n'est pas un dossier");
+        }
+    }
+
     /*
     Read File AI Parameter
      */
     public static void readParamAI()
     {
+        Gdx.app.log(LABEL, "**readParamAI begins");
         Array<String> allLoadedFiles = new Array<String>();
         Scanner scanner;
         try {
@@ -930,23 +963,29 @@ public class Data {
                     if(line.contains("nbLaunchGame") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
                         MAX_GAME_LOOP = Integer.parseInt(line.split(":")[1]);
+                        Gdx.app.log(LABEL,"Reading Param : a line contains nbLaunchGame. Number = "+MAX_GAME_LOOP);
+
                     }
                     if(line.contains("Generation") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
                         Number_Generated_IA = Integer.parseInt(line.split(":")[1]);
+                        Gdx.app.log(LABEL,"Reading Param : a line contains Generation. Number = "+Number_Generated_IA);
+
                         // Ajout appel de la fonction de génération
                         generateXIA(Number_Generated_IA);
-                        Data.setPoolsArrays();
+                        Data.setPoolsArrays(); // Met à jour les listes de mobs générés
                         break;
                     }
                     if(line.contains("Combine") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
+
                         Number_Combine_IA = Integer.parseInt(line.split(":")[1]);
+                        Gdx.app.log(LABEL,"Reading Param : a line contains Combine. Number = "+Number_Combine_IA);
                         Data.setPoolsArrays();
                         Data.combineRandomMobs(Number_Combine_IA);
                         //Ajout appel de la fonction de combinaison
                         // combiner tous les arbres qui sont dans PoolTestee, mettre enfants dans PoolATester
-
+                        suppressPoolDir(1);
                         break;
                     }
                     if(line.contains("LoadMob"))
