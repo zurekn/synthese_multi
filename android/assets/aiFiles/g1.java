@@ -24,14 +24,11 @@ public class g1 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(2,-2);
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.NORTH;
-		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxLife()/3)!= ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).getStats().getMaxMana()/2) )
+		    deplacementString = ch.getDeplacement(0,3);
+		if((ch.getStats().getMaxMana()/5)!= ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxMana()) )
 		{
-		    deplacementString = ch.getDeplacement(-2,0);
-		}
-		else
-		{
+		    deplacementString = ch.getDeplacement(-1,-2);
+		    deplacementString = ch.getDeplacement(-2,-2);
 		}
 		return actionString+"!!"+deplacementString;
 	}

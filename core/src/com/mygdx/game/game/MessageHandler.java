@@ -93,14 +93,14 @@ public class MessageHandler {
 	}
 
 	public void addGlobalMessage(Message message) {
-        Gdx.app.log("Message Handler", "Add message "+message);
+        //Gdx.app.log("Message Handler", "Add message "+message);
 		ArrayList<Message> splitMessage = split(message);
 		for (Message m : splitMessage)
 			waitingMessage.add(m);
 	}
 
 	public void addPlayerMessage(Message message, int player) {
-        Gdx.app.log("MessageHandler", "Create message "+message.toString()+" for player "+player);
+        //Gdx.app.log("MessageHandler", "Create message "+message.toString()+" for player "+player);
         if (Data.singlePlayer) {
             addGlobalMessage(message);
             return;

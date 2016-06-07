@@ -28,6 +28,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -696,8 +697,11 @@ public class Data {
                 if(line.contains(":")){
                     int index = line.indexOf(":");
                     String param = line.substring(0, index);
-                    String value = line.substring(index+1);
-                    switch(param){
+                    String value = line.substring(index+1).trim();
+                    switch(param.trim()){
+                        case "HADOOP_CONFIG_DIRECTORY":
+                            Hadoop.HADOOP_CONFIG_DIRECTORY=value;
+                            break;
                         case "HIVE" :
                             Hadoop.HIVE = value;
                             break;
@@ -707,8 +711,17 @@ public class Data {
                         case "HADOOP_USER":
                             Hadoop.HADOOP_USER_NAME = value;
                             break;
+                        case "HDFS":
+                            Hadoop.HDFS_PATH = value;
                         case "JDK":
                             CompileString.JDK_PATH = value;
+                            System.out.println("set -> JDK_PATH = "+value);
+                            break;
+                        case "GENETIC_DIRECTORY":
+                                Hadoop.GENETIC_DIRECTORY = value;
+                                break;
+                        case "GENETIC_TESTED_DIRECTORY":
+                                Hadoop.GENETIC_TESTED = value;
                             break;
                         default :
                             System.err.println("Can't find : "+param);
@@ -835,8 +848,17 @@ public class Data {
         for(String s : selectedIAFiles)
         {
             origFile = new File(originPath + s);
-            origFile.renameTo(new File(destPath + s));
-            Gdx.app.log(LABEL, "Moving "+s);
+            File f = new File(destPath + s);
+            origFile.renameTo(f);
+            Gdx.app.log(LABEL, "Moving " + s);
+            origFile.renameTo(f);
+            try {
+                Hadoop.copyFile(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED + f.getName());
+            } catch (Exception e) {
+                Gdx.app.error(Hadoop.TAG, "Error while trying to copy file : "+e.getMessage());
+                Hadoop.copyWhithCommandLine(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY+Hadoop.GENETIC_TESTED+f.getName());
+            }
+
         }
     }
 

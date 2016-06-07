@@ -35,6 +35,7 @@ import com.mygdx.game.javacompiler.CompileString;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
 import static com.mygdx.game.data.Data.BLOCK_NUMBER_Y;
@@ -1245,31 +1246,36 @@ public class GameStage extends Stage {
      */
     public void endGameLogs(){
         originMobs.get(0).getFitness().debugFile("-- FIN DE JEU --", true);
+        List<String> hiveList = new ArrayList<String>();
         for(Mob mo : originMobs){
-
             mo.getFitness().debugFile(	"Mob id="+mo.getTrueID()+" name="+mo.getName()+
                 " score final = "+mo.getFitness().calculFinalScore(gameLose, global_turn)+""+
                 mo.getFitness().toStringFitness(), true);
-        mo.getFitness().writeHistory(mo, false, loopNumber);
+            hiveList.add(mo.toStringForHive());
             System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = " + mo.getFitness().getFinalScore());
-           /*try {
-               Hadoop.saveGeneticDataOnHive(mo.getName(), ""+mo.getGeneration(), Data.getDate(), mo.getFitness().getFinalScore(), mo.getFitness().getpAction(), mo.getFitness().getpHeal(),mo.getFitness().getpPass());
-           } catch (SQLException e) {
-               Gdx.app.error(LABEL, "Save score on Hive : " + e.getMessage());
-           }*/
        }
         for(Player po : originPlayers){
             po.getFitness().debugFile("Player id=" + po.getTrueID() + " name=" + po.getName() +
                     " score final = " + po.getFitness().calculFinalScore(gameWin, global_turn) + "" +
                     po.getFitness().toStringFitness(), true);
+            hiveList.add(po.toStringForHive());
             po.getFitness().writeHistory(po, false, loopNumber);
-            /*try {
+            try {
                 Hadoop.saveGeneticDataOnHive(po.getName(), ""+po.getGeneration(), Data.getDate(), po.getFitness().getFinalScore(), po.getFitness().getpAction(), po.getFitness().getpHeal(), po.getFitness().getpPass());
             } catch (SQLException e) {
                 Gdx.app.error(LABEL, "Save score on Hive : "+e.getMessage());
-            }*/
+            }
 
         }
+        try {
+            Hadoop.saveGeneticDataOnHive(hiveList);
+            //Hadoop.saveGeneticDataOnHive(mo.getName(), ""+mo.getGeneration(), Data.getDate(), mo.getFitness().getFinalScore(), mo.getFitness().getpAction(), mo.getFitness().getpHeal(),mo.getFitness().getpPass());
+            Gdx.app.exit();
+        } catch (SQLException e) {
+            Gdx.app.error(LABEL, "Can't save score on Hive : " + e.getMessage());
+            Gdx.app.exit();
+        }
+
         originMobs.get(0).getFitness().renameScoreFile();
         //Data.switchAllTestPool();
 

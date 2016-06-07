@@ -286,7 +286,7 @@ public abstract class Character {
 		if (damage < 0)
 			damage = 0;
 		stats.setLife(stats.getLife() - damage);
-		System.out.println(id + " take : [" + damage + "] damage, remaining ["+stats.getLife()+"] HP");
+		System.out.println(id + " take : [" + damage + "] damage, remaining [" + stats.getLife() + "] HP");
 		return damage;
 	}
 
@@ -712,4 +712,12 @@ public abstract class Character {
 	public int getGeneration(){
 		return generation;
 	}
+
+    public String toStringForHive() {
+        if(fitness==null)
+            return "";
+//        out.write(name+generation+"\t"+name+"\t"+generation+"\t"+date+"\t"+scoreG+"\t"+scoreA+"\t"+scoreH+"\t"+scoreP+"\n");
+
+        return getTargetTree()+"\t"+name+"\t"+generation+"\t"+Data.getDate()+"\t"+fitness.getFinalScore()+"\t"+fitness.getpAction()+"\t"+fitness.getpHeal()+"\t"+fitness.getpPass()+"\n";
+    }
 }

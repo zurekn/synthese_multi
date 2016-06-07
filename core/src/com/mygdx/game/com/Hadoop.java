@@ -7,11 +7,14 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hdfs.DFSClient;
+import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.util.Progressable;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +27,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 
 /**
@@ -31,9 +35,12 @@ import java.sql.Statement;
  */
 public class Hadoop {
 
+    public static String HADOOP_CONFIG_DIRECTORY = "/hadoop/hadoop-2.7.1/etc/hadoop/";
     public static String TAG = "HADOOP";
-    public static String GENETIC_DIRECTORY = "/genetique/";
-    public static String HDFS_PATH = "hdfs://pc11.bigdata:9000";
+    public static String GENETIC_DIRECTORY = "genetique/";
+    public static String GENETIC_TESTED = "pool_tester/";
+    public static String HDFS_PATH = "hdfs://pc11.bigdata:9000/";
+    public static String NAME_NODE = "pc11.bigdata";
 
     public static  String HIVE = "jdbc:hive://pc11.bigdata:9000/hive";
     public static String driverName = "org.apache.hive.jdbc.HiveDriver";
@@ -79,21 +86,54 @@ public class Hadoop {
         br.close();
         hdfs.close();
     }
-
-    public static void saveFile(Path src, String fileName) throws IOException, URISyntaxException {
+    public static void copyFile(String src, String fileName) throws IOException, URISyntaxException {
         if(Data.HADOOP) {
-            Gdx.app.log(TAG, "Save file : [" + src.getName() + "] on Hadoop [" + fileName + "]");
+            Gdx.app.log(TAG, "Save file : [" + src+ "] on Hadoop [" + fileName + "]");
+
             Configuration conf = new Configuration();
-            conf.set("fs.defaultFS", HDFS_PATH);
+            conf.addResource(HADOOP_CONFIG_DIRECTORY+"core-site.xml");
+            conf.addResource(HADOOP_CONFIG_DIRECTORY + "hdfs-site.xml");
+            conf.addResource(HADOOP_CONFIG_DIRECTORY+"mapred-site.xml");
+            Gdx.app.log(TAG, "Connectif to ---"+conf.get("fs.default.name"));
+
+            InputStream in = new BufferedInputStream(new FileInputStream(src));
+
+            FileSystem fs = FileSystem.get(URI.create(fileName), conf);
+            OutputStream out = fs.create(new Path(fileName));
+
+            IOUtils.copyBytes(in, out, 4096, true);
+
+            Gdx.app.log(TAG, fileName+" copied to HDFS");
+        }else{
+            Gdx.app.log(TAG, "Can't save file on Hadoop -> Data.hadoop = false");
+        }
+    }
+    public static void copyFile2(String srcPath, String fileName) throws IOException, URISyntaxException {
+        if(Data.HADOOP) {
+            Path src = new Path(srcPath);
+            Gdx.app.log(TAG, "Save file : [" + src+ "] on Hadoop [" + fileName + "]");
+            Configuration conf = new Configuration();
+            //conf.set("fs.defaultFS", HDFS_PATH);
+            conf.addResource(HADOOP_CONFIG_DIRECTORY+"core-site.xml");
+            conf.addResource(HADOOP_CONFIG_DIRECTORY+"hdfs-site.xml");
+            conf.addResource(HADOOP_CONFIG_DIRECTORY + "mapred-site.xml");
+            //conf.set("fs.default.name", HDFS_PATH);
             FileSystem fs = FileSystem.get(conf);
-            Path dst = new Path(HDFS_PATH + GENETIC_DIRECTORY + fileName);
-            fs.copyFromLocalFile(src, dst);
+            Path dst = new Path(fileName);
+            if(!(fs.exists(dst.getParent())))
+            {
+                Gdx.app.error(TAG, "No Such destination exists :"+dst.getParent());
+            }
+            //fs.copyFromLocalFile(src, dst);
+            fs.copyFromLocalFile(false, src, dst);
         }else{
             Gdx.app.log(TAG, "Can't save file on Hadoop -> Data.hadoop = false");
         }
     }
 
     public static void createGeneticTable() throws ClassNotFoundException, SQLException {
+        if(!Data.HADOOP)
+            return;
         Class.forName(driverName);
         System.out.println(TAG+": Connect to HIVE database : "+HIVE+" with user "+HADOOP_USER_NAME+", password "+HADOOP_USER_PASSWORD);
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
@@ -116,10 +156,13 @@ public class Hadoop {
     }
 
     public static void saveGeneticDataOnHive(String name, String generation, String date, int scoreG, int scoreA, int scoreH, int scoreP) throws SQLException {
+        if(!Data.HADOOP)
+            return;
         //create the file with data for hive
+        String filePath = "/tmp/genetic_tmp.txt";
         try {
-            BufferedWriter out = new BufferedWriter(new FileWriter("genetic_tmp.txt", false));
-            out.write(name+generation+"\\t"+name+"\\t"+generation+"\\t"+date+"\\"+scoreG+"\\t"+scoreA+"\\t"+scoreH+"\\t"+scoreP+"\\n");
+            BufferedWriter out = new BufferedWriter(new FileWriter(filePath, false));
+            out.write(name+generation+"\t"+name+"\t"+generation+"\t"+date+"\t"+scoreG+"\t"+scoreA+"\t"+scoreH+"\t"+scoreP+"\n");
             Gdx.app.log(TAG, "Write the tmp file");
             out.close();
         } catch (IOException e) {
@@ -134,9 +177,100 @@ public class Hadoop {
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
         Statement stmt = con.createStatement();
 
-        String query = "LOAD DATA LOCAL INPATH 'genetic_tmp.txt' OVERWRITE INTO TABLE "+GENETIC_TABLE_NAME+";";
-        stmt.executeQuery(query);
-        Gdx.app.log(TAG, "Load data from tmp file into "+GENETIC_TABLE_NAME+" successful");
+        String query = "LOAD DATA LOCAL INPATH '"+filePath+"' OVERWRITE INTO TABLE "+GENETIC_TABLE_NAME+"";
+        stmt.execute(query);
+        Gdx.app.log(TAG, "Load data from tmp file " + filePath + " into " + GENETIC_TABLE_NAME + " successful");
         con.close();
+    }
+
+    /**
+     * Copy a file from hdfs
+     * @param source
+     * @param dest
+     * @throws IOException
+     */
+    public void copyFromHdfs (String source, String dest) throws IOException {
+
+        Configuration conf = new Configuration();
+        conf.set("fs.defaultFS", HDFS_PATH);
+
+
+        FileSystem fileSystem = FileSystem.get(conf);
+        Path srcPath = new Path(source);
+
+        Path dstPath = new Path(dest);
+// Check if the file already exists
+        if (!(fileSystem.exists(dstPath))) {
+            System.out.println("No such destination " + dstPath);
+            return;
+        }
+
+// Get the filename out of the file path
+        String filename = source.substring(source.lastIndexOf('/') + 1, source.length());
+
+        try{
+            fileSystem.copyToLocalFile(srcPath, dstPath);
+            System.out.println("File " + filename + "copied to " + dest);
+        }catch(Exception e){
+            System.err.println("Exception caught! :" + e);
+        }finally{
+            fileSystem.close();
+        }
+    }
+
+    public static void saveGeneticDataOnHive(List<String> hiveList) throws SQLException {
+        if(!Data.HADOOP)
+            return;
+        //create the file with data for hive
+        String filePath = "/tmp/genetic_tmp.txt";
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(filePath, false));
+            for(String s : hiveList)
+                    if(!s.isEmpty() || s != null)
+                        out.write(s);
+            //out.write(name+generation+"\t"+name+"\t"+generation+"\t"+date+"\t"+scoreG+"\t"+scoreA+"\t"+scoreH+"\t"+scoreP+"\n");
+            Gdx.app.log(TAG, "Write the tmp file");
+            out.close();
+
+            Long time = System.currentTimeMillis();
+            Process p = Runtime.getRuntime().exec("scp "+filePath+" "+HADOOP_USER_NAME+"@"+NAME_NODE+":"+filePath);
+            p.waitFor();
+            Gdx.app.log(TAG, "Copy file " + filePath + " on hiveserver in " + (System.currentTimeMillis()-time) + "ms");
+            //scp file on pc11.bigdata
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
+        Statement stmt = con.createStatement();
+
+        String query = "LOAD DATA LOCAL INPATH '"+filePath+"' INTO TABLE "+GENETIC_TABLE_NAME+"";
+        stmt.execute(query);
+        Gdx.app.log(TAG, "Load data from tmp file " + filePath + " into " + GENETIC_TABLE_NAME + " successful");
+        con.close();
+    }
+
+    public static void copyWhithCommandLine(String src, String dest) {
+        if(!Data.HADOOP)
+            return;
+        Gdx.app.log(TAG, "Save file : [" + src+ "] on Hadoop [" + dest + "] with the comande line");
+        try {
+            Process exe = Runtime.getRuntime().exec("hadoop fs -copyFromLocal "+src+" "+dest);
+            exe.waitFor();
+            Gdx.app.log(TAG, "File copied successfuly");
+        } catch (IOException e) {
+            Gdx.app.error(TAG, "hadoop fs failed");
+        } catch (InterruptedException e) {
+            Gdx.app.error(TAG, "hadoop fs failed");
+        }
+
     }
 }
