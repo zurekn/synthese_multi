@@ -1233,7 +1233,7 @@ public class GameStage extends Stage {
           if(Data.autoIA) {
               endGameLogs();
               if(loopNumber >= Data.MAX_GAME_LOOP) {
-                  Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adios amigos !");
+                  Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adiooooooos amigos !");
                   Data.suppressPoolDir(0);
                   quitGame();
               }

@@ -398,10 +398,13 @@ public class Data {
             for(int i = allFilesToTest.size;i<All_Players_Number;i++){
                 CompileString.generateTree("x" + i + "_1");
             }
+        setPoolsArrays();
         selectedIAFiles = new Array<String>();
         Random r = new Random();
         int randIdx;
+
         for(int i=0; i<All_Players_Number;i++) {
+
             randIdx = r.nextInt(allFilesToTest.size);
             while(isInArray(allFilesToTest.get(randIdx), selectedIAFiles))
                 randIdx = r.nextInt(allFilesToTest.size);
@@ -754,9 +757,10 @@ public class Data {
     /**
      *  Combine les mobs choisi aleatoirement et incrémente la génération
      */
-    public static void combineRandomMobs(int numberOfCombine){//String name1, String name2, String resultName){
-        if(allFilesTested.size <= 0){
+    public static void combineRandomMobs(int numberOfCombine){
+        if(allFilesTested.size <= 1){
             Gdx.app.log(LABEL,"combineRandomMobs : Aucun fichier dans PoolTestee");
+            generateXIA(numberOfCombine);
             return;
         }
         Gdx.app.log(LABEL,"On combine en mode Random");
