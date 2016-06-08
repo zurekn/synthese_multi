@@ -1,4 +1,4 @@
-nbLaunchGame:10
-Generation:30
-#Combine:20
+nbLaunchGame:3
+Generation:
+Combine:20
 #LoadMob

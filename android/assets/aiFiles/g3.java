@@ -24,15 +24,25 @@ public class g3 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(-1,2);
-		    deplacementString = ch.getDeplacement(-2,-1);
-		if(true== (ch.isCharacterInLine(left)) )
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.NORTH;
+		    deplacementString = ch.getDeplacement(2,-1);
+		if(((ch.researchCharacter(up)==null)?defaultBoolean:ch.researchCharacter(up).isCharacterInLine(right))== ((ch.researchCharacter(down)==null)?defaultBoolean:ch.researchCharacter(down).isCharacterInLine(up)) )
 		{
-		    actionString = ch.getMaxHealingSpellId()+":"+ Data.EAST;
-		if(true== ((ch.researchCharacter(down)==null)?defaultBoolean:ch.researchCharacter(down).isCharacterInLine(up)) )
+		    deplacementString = ch.getDeplacement(-2,-2);
+		    actionString = ch.getMaxHealingSpellId()+":"+ Data.NORTH;
+		if(false== (ch.isCharacterInLine(up)) )
 		{
-		    deplacementString = ch.getDeplacement(-1,0);
-		    actionString = ch.passerTour();
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.EAST;
+		}
+		else
+		{
+		}
+		}
+		else
+		{
+		if((ch.getStats().getMaxMana()/3)< ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).Portee(((ch.researchCharacter(up)==null)?defaultString:ch.researchCharacter(up).getMaxHealingSpellId()))) )
+		{
+		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SOUTH;
 		}
 		}
 		return actionString+"!!"+deplacementString;

@@ -783,14 +783,14 @@ public class Data {
             generation1 = getGenerationFromFileName(name1);
             generation2 = getGenerationFromFileName(name2);
             generationMax = java.lang.Math.max(generation1, generation2);
-            resultName = "x" + randomNumber1 + "_" + (generationMax+1);
+            resultName = "x" + (index+1) + "_" + (generationMax+1);
             Gdx.app.log(LABEL,"Combinaison : result = "+resultName);
-            File resFile = new File(CompileString.destPathClass + Data.poolTestedDir + resultName);
+            /*File resFile = new File(CompileString.destPathClass + Data.poolToTestDir + resultName+".txt");
             while (resFile.exists()) {
-                resultName = "x" + randomNumber2 + "_" + (generationMax+1);
-                generationMax++;
+                resultName = "x" + (randomNumber2) + "_" + (generationMax+1);
+                randomNumber2++;
                 resFile = new File(CompileString.destPathClass + Data.poolTestedDir + resultName);
-            }
+            }*/
             Gdx.app.log(LABEL,"On combine les fichiers "+name1+" et "+name2+ "pour donner le fichier "+resultName);
             CompileString.combineTrees(name1, name2, resultName);
         }
@@ -996,7 +996,7 @@ public class Data {
                     }
                     if(line.contains("Generation") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
-                        Number_Generated_IA = Integer.parseInt(line.split(":")[1]);
+                        Number_Generated_IA = 8*MAX_GAME_LOOP;//Integer.parseInt(line.split(":")[1]);
                         Gdx.app.log(LABEL,"Reading Param : a line contains Generation. Number = "+Number_Generated_IA);
                         // Ajout appel de la fonction de génération
                         generateXIA(Number_Generated_IA);
@@ -1005,7 +1005,7 @@ public class Data {
                     if(line.contains("Combine") && !line.substring(line.lastIndexOf(":") + 1).equals(""))
                     {
 
-                        Number_Combine_IA = Integer.parseInt(line.split(":")[1]);
+                        Number_Combine_IA = 8*MAX_GAME_LOOP;//Integer.parseInt(line.split(":")[1]);
                         Gdx.app.log(LABEL,"Reading Param : a line contains Combine. Number = "+Number_Combine_IA);
                         Data.setPoolsArrays();
                         Data.combineRandomMobs(Number_Combine_IA);

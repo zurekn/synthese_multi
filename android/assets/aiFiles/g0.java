@@ -24,12 +24,23 @@ public class g0 {
 	
 	public String run(Character ch)
 	{
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.EAST;
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SELF;
-		if((ch.getStats().getMaxLife()/2)!= (ch.Portee((ch.getMaxDamagingSpellId()))) )
+		    deplacementString = ch.getDeplacement(-1,-1);
+		if(((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).Portee(((ch.researchCharacter(up)==null)?defaultString:ch.researchCharacter(up).getMaxHealingSpellId())))>= ((ch.researchCharacter(down)==null)?defaultInt:ch.researchCharacter(down).Portee(((ch.researchCharacter(down)==null)?defaultString:ch.researchCharacter(down).getSpells().get(0).getId()))) )
 		{
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SOUTH;
-		    actionString = ch.getMaxHealingSpellId()+":"+ Data.NORTH;
+		    deplacementString = ch.getDeplacement(1,2);
+		if(1<= ((ch.researchCharacter(down)==null)?defaultFloat:ch.researchCharacter(down).getStats().getManaPercentage()) )
+		{
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.NORTH;
+		}
+		}
+		else
+		{
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.WEST;
+		if(1> ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getLifePercentage()) )
+		{
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.WEST;
+		    deplacementString = ch.getDeplacement(3,-1);
+		}
 		}
 		return actionString+"!!"+deplacementString;
 	}

@@ -24,21 +24,29 @@ public class m4 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(2,-1);
-		if(0.3< ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getManaPercentage()) )
+		    deplacementString = ch.getDeplacement(-1,-2);
+		if(0.5>= ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getLifePercentage()) )
+		{
+		    deplacementString = ch.getDeplacement(-2,-2);
+		if(((ch.researchCharacter(down)==null)?defaultInt:ch.researchCharacter(down).getStats().getMagicResist())== ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).Portee(((ch.researchCharacter(up)==null)?defaultString:ch.researchCharacter(up).getSpells().get(0).getId()))) )
+		{
+		    deplacementString = ch.getDeplacement(1,3);
+		}
+		else
+		{
+		}
+		}
+		else
 		{
 		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SELF;
+		if(0.2== (ch.getStats().getLifePercentage()) )
+		{
+		    deplacementString = ch.getDeplacement(-2,2);
+		    deplacementString = ch.getDeplacement(-1,3);
 		}
 		else
 		{
-		    deplacementString = ch.getDeplacement(1,-2);
-		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxMana()/5)> ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getStrength()) )
-		{
-		    actionString = ch.getMaxHealingSpellId()+":"+ Data.SELF;
-		    deplacementString = ch.getDeplacement(1,0);
-		}
-		else
-		{
+		    deplacementString = ch.getDeplacement(3,0);
 		}
 		}
 		return actionString+"!!"+deplacementString;

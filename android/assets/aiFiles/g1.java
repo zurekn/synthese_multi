@@ -24,11 +24,21 @@ public class g1 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(0,3);
-		if((ch.getStats().getMaxMana()/5)!= ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxMana()) )
+		if(0.5>= ((ch.researchCharacter(up)==null)?defaultFloat:ch.researchCharacter(up).getStats().getLifePercentage()) )
 		{
-		    deplacementString = ch.getDeplacement(-1,-2);
 		    deplacementString = ch.getDeplacement(-2,-2);
+		if(((ch.researchCharacter(down)==null)?defaultInt:ch.researchCharacter(down).getStats().getMagicResist())== ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).Portee(((ch.researchCharacter(up)==null)?defaultString:ch.researchCharacter(up).getSpells().get(0).getId()))) )
+		{
+		    deplacementString = ch.getDeplacement(1,3);
+		}
+		else
+		{
+		}
+		}
+		if(((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).getStats().getArmor())<= ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxMana()) )
+		{
+		    deplacementString = ch.getDeplacement(-1,-1);
+		    deplacementString = ch.getDeplacement(-1,0);
 		}
 		return actionString+"!!"+deplacementString;
 	}

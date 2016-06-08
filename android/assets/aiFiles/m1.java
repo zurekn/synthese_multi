@@ -24,12 +24,19 @@ public class m1 {
 	
 	public String run(Character ch)
 	{
-		    deplacementString = ch.getDeplacement(3,-2);
-		    deplacementString = ch.getDeplacement(2,-2);
-		if(false== ((ch.researchCharacter(left)==null)?defaultBoolean:ch.researchCharacter(left).isCharacterInLine(up)) )
+		    deplacementString = ch.getDeplacement(-2,-2);
+		    deplacementString = ch.getDeplacement(2,1);
+		if(((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxLife()/3)> ((ch.researchCharacter(up)==null)?defaultInt:ch.researchCharacter(up).getStats().getMana()) )
 		{
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.SOUTH;
-		    deplacementString = ch.getDeplacement(-1,3);
+		    deplacementString = ch.getDeplacement(-1,1);
+		if((ch.getStats().getMaxMana()/2)> ((ch.researchCharacter(left)==null)?defaultInt:ch.researchCharacter(left).getStats().getMaxLife()) )
+		{
+		    deplacementString = ch.getDeplacement(2,-2);
+		}
+		else
+		{
+		    actionString = ch.getSpells().get(0).getId()+":"+ Data.WEST;
+		}
 		}
 		return actionString+"!!"+deplacementString;
 	}

@@ -198,22 +198,30 @@ public class CompileString {
                 debugSys("#Random root1. found"+tmpRoot1.getValue());
                 //if we get a 'if' node, we search another 'if' node
                 if(tmpRoot1.getValue().equals("if")){
-
                     tmpRoot2 = root2.searchSubTreeByValue("if"); // search 'if' if 'if' found
                     if(tmpRoot2.getValue().equals("if"))
                         done = true;
                 }else if(tmpRoot1.getValue().equals("else")){
-
                     tmpRoot2 = root2.searchSubTreeByValue("else"); // search 'else' if 'else' found
                     if(tmpRoot2.getValue().equals("else"))
                         done = true;
                 }else{
                     tmpRoot2 = root2.getSubTree(-1);
-
                     if(!tmpRoot2.getValue().equals("else") ){
+                        // Si tmpRoot1 n'est pas une condition, tmpRoot2 ne doit pas l'être
                         if( !(tmpRoot1.getParent().getValue().equals("if") &&
                                 tmpRoot1.getParent().getChildren().get(0).getValue().equals(tmpRoot1.getValue())) ){
-                            done = true;
+                            // Si tmpRoot2 n'est pas une condition, ok
+                            if( !(tmpRoot2.getParent().getValue().equals("if") &&
+                                    tmpRoot2.getParent().getChildren().get(0).getValue().equals(tmpRoot2.getValue())) ) {
+                                done = true;
+                            }
+                        }else{
+                            // Si tmpRoot1 est une condition, tmpRoot2  doit l'être
+                            if( tmpRoot2.getParent().getValue().equals("if") &&
+                                    tmpRoot2.getParent().getChildren().get(0).getValue().equals(tmpRoot2.getValue()) ) {
+                                done = true;
+                            }
                         }
                     }
                 }
