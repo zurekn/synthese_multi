@@ -76,7 +76,16 @@ public abstract class Character {
 	}
 
 	public void loadScriptFromTree() {// génération d'un script génétique
-		CompileString.loadGenetic(this.targetTree,this.trueID);//,this.generation);
+        int gege ;
+        try{
+            gege = Integer.parseInt(this.targetTree.substring(this.targetTree.lastIndexOf("_") + 1, this.targetTree.lastIndexOf(".")));
+        }
+        catch (Exception e)
+        {
+            gege=-1;
+        }
+        this.setGeneration(gege);
+		CompileString.loadGenetic(this.targetTree, this.trueID);//,this.generation);
 	}
 
 	/**

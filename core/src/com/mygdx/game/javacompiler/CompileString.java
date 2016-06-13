@@ -178,7 +178,7 @@ public class CompileString {
      * @param name : String, file name of resulting IA
      */
     public static void combineTrees(String name1, String name2, String name){
-        System.setProperty("java.home", JDK_PATH);
+        SetGenerateCompiler();
         debugSys("Combining Trees "+name1+" and "+name2+" into "+name);
         Node root1;
         Node root2;

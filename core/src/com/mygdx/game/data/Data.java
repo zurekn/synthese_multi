@@ -49,6 +49,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * @author bob
  */
 public class Data {
+    public static boolean FORCE_HADOOP = false;
     private static String LABEL = "DATA";
 
     public static final boolean FULLSCREEN = false;
@@ -709,6 +710,14 @@ public class Data {
                     String param = line.substring(0, index);
                     String value = line.substring(index+1).trim();
                     switch(param.trim()){
+                        case "FORCE_HADOOP":
+                            try {
+                                Data.FORCE_HADOOP = Boolean.parseBoolean(value);
+                            }catch(Exception e){
+                                System.err.println(" Error "+ value+" is not a boolean");
+                                FORCE_HADOOP = false;
+                            }
+                            break;
                         case "HADOOP_CONFIG_DIRECTORY":
                             Hadoop.HADOOP_CONFIG_DIRECTORY=value;
                             break;
@@ -765,11 +774,11 @@ public class Data {
      *  Combine les mobs choisi aleatoirement et incrémente la génération
      */
     public static void combineRandomMobs(int numberOfCombine){
-        if(allFilesTested.size <= 1){
+        /*if(allFilesTested.size <= 1){
             Gdx.app.log(LABEL,"combineRandomMobs : Aucun fichier dans PoolTestee");
             generateXIA(numberOfCombine);
             return;
-        }
+        }*/
         Gdx.app.log(LABEL,"On combine en mode Random");
         String name1="", name2="", resultName="";
         Random r = new Random();
@@ -801,7 +810,7 @@ public class Data {
             Gdx.app.log(LABEL,"On combine les fichiers "+name1+" et "+name2+ "pour donner le fichier "+resultName);
             CompileString.combineTrees(name1, name2, resultName);
         }
-        Gdx.app.log(LABEL,"Combinaison random terminée");
+        Gdx.app.log(LABEL, "Combinaison random terminée");
     }
 
     public static int getGenerationFromFileName(String fileName){

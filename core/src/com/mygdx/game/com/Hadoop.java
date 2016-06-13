@@ -222,6 +222,7 @@ public class Hadoop {
     public static void saveGeneticDataOnHive(List<String> hiveList) throws SQLException {
         if(!Data.HADOOP)
             return;
+        long begin = System.currentTimeMillis();
         //create the file with data for hive
         String filePath = "/tmp/genetic_tmp.txt";
         try {
@@ -255,18 +256,19 @@ public class Hadoop {
 
         String query = "LOAD DATA LOCAL INPATH '"+filePath+"' INTO TABLE "+GENETIC_TABLE_NAME+"";
         stmt.execute(query);
-        Gdx.app.log(TAG, "Load data from tmp file " + filePath + " into " + GENETIC_TABLE_NAME + " successful");
+        Gdx.app.log(TAG, "Load data from tmp file " + filePath + " into " + GENETIC_TABLE_NAME + " successful in "+(System.currentTimeMillis()-begin)+" ms");
         con.close();
     }
 
     public static void copyWhithCommandLine(String src, String dest) {
         if(!Data.HADOOP)
             return;
+        long begin = System.currentTimeMillis();
         Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the comande line");
         try {
             Process exe = Runtime.getRuntime().exec("hadoop fs -copyFromLocal "+src+" "+dest);
             exe.waitFor();
-            Gdx.app.log(TAG, "File copied successfuly");
+            Gdx.app.log(TAG, "File copied successfuly in "+(System.currentTimeMillis()-begin)+" ms");
         } catch (IOException e) {
             Gdx.app.error(TAG, "hadoop fs failed");
         } catch (InterruptedException e) {
@@ -288,6 +290,9 @@ public class Hadoop {
         con.close();
     }
     public static void saveWebDataOnHive()throws SQLException{
+        if(!Data.HADOOP)
+            return;
+        long begin = System.currentTimeMillis();
         try {
             Class.forName(driverName);
         } catch (ClassNotFoundException e) {
@@ -298,7 +303,7 @@ public class Hadoop {
 
         String query = "INSERT OVERWRITE TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+GENETIC_TABLE_NAME+" group by generation order by generation asc";
         stmt.execute(query);
-        System.out.println(TAG + "Load data from "+GENETIC_TABLE_NAME+" into " + WEB_TABLE_NAME + " successful");
+        System.out.println(TAG + "Load data from "+GENETIC_TABLE_NAME+" into " + WEB_TABLE_NAME + " successful in "+(System.currentTimeMillis()-begin)+"ms");
         con.close();
     }
 }
