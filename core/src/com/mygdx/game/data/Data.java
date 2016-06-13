@@ -490,7 +490,7 @@ public class Data {
 
     public static String getDate() {
         Date date = new Date();
-        DateFormat formater = new SimpleDateFormat("dd-MM-yy-hh-mm-ss");
+        DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         return formater.format(date);
     }
 
@@ -673,6 +673,13 @@ public class Data {
         if(!isInitHadoop){
             try {
                 Hadoop.createGeneticTable();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                Hadoop.createWebTable();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {

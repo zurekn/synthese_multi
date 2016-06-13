@@ -35,6 +35,7 @@ import java.util.List;
  */
 public class Hadoop {
 
+    private static final String WEB_TABLE_NAME = "WEB";
     public static String HADOOP_CONFIG_DIRECTORY = "/hadoop/hadoop-2.7.1/etc/hadoop/";
     public static String TAG = "HADOOP";
     public static String GENETIC_DIRECTORY = "genetique/";
@@ -115,7 +116,7 @@ public class Hadoop {
             Configuration conf = new Configuration();
             //conf.set("fs.defaultFS", HDFS_PATH);
             conf.addResource(HADOOP_CONFIG_DIRECTORY+"core-site.xml");
-            conf.addResource(HADOOP_CONFIG_DIRECTORY+"hdfs-site.xml");
+            conf.addResource(HADOOP_CONFIG_DIRECTORY + "hdfs-site.xml");
             conf.addResource(HADOOP_CONFIG_DIRECTORY + "mapred-site.xml");
             //conf.set("fs.default.name", HDFS_PATH);
             FileSystem fs = FileSystem.get(conf);
@@ -141,7 +142,7 @@ public class Hadoop {
         System.out.println(TAG+": Connection successful-------------------------------");
         String query = "CREATE TABLE IF NOT EXISTS "+GENETIC_TABLE_NAME
                 +" (filename String, name String," +
-                "generation String, dateG String," +
+                "generation String, dateG DATE," +
                 "scoreG int, scoreA int," +
                 "scoreH int, scoreP int) " +
                 "COMMENT 'Genetic AI details' " +
@@ -177,7 +178,7 @@ public class Hadoop {
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
         Statement stmt = con.createStatement();
 
-        String query = "LOAD DATA LOCAL INPATH '"+filePath+"' OVERWRITE INTO TABLE "+GENETIC_TABLE_NAME+"";
+        String query = "LOAD DATA LOCAL INPATH '"+filePath+"'  INTO TABLE "+GENETIC_TABLE_NAME + "";
         stmt.execute(query);
         Gdx.app.log(TAG, "Load data from tmp file " + filePath + " into " + GENETIC_TABLE_NAME + " successful");
         con.close();
@@ -261,7 +262,7 @@ public class Hadoop {
     public static void copyWhithCommandLine(String src, String dest) {
         if(!Data.HADOOP)
             return;
-        Gdx.app.log(TAG, "Save file : [" + src+ "] on Hadoop [" + dest + "] with the comande line");
+        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the comande line");
         try {
             Process exe = Runtime.getRuntime().exec("hadoop fs -copyFromLocal "+src+" "+dest);
             exe.waitFor();
@@ -272,5 +273,32 @@ public class Hadoop {
             Gdx.app.error(TAG, "hadoop fs failed");
         }
 
+    }
+    public static void createWebTable()throws ClassNotFoundException, SQLException {
+        Class.forName(driverName);
+        System.out.println(TAG + ": Connect to HIVE database : " + HIVE + " with user " + HADOOP_USER_NAME + ", password " + HADOOP_USER_PASSWORD);
+        Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
+        Statement stmt = con.createStatement();
+        System.out.println(TAG + ": Connection successful-------------------------------");
+        String query = "CREATE TABLE IF NOT EXISTS " + WEB_TABLE_NAME + " (generation String, avgScore int, maxScore int, minScore int) " + "COMMENT 'Web info' " + "ROW FORMAT DELIMITED " + "FIELDS TERMINATED BY '\\t' " + "LINES TERMINATED BY '\\n' "
+                + "STORED AS TEXTFILE";
+        System.out.println(TAG + ": Execute query [" + query + "]");
+        stmt.executeQuery(query);
+        System.out.println(TAG + ": Table " + WEB_TABLE_NAME + " created");
+        con.close();
+    }
+    public static void saveWebDataOnHive()throws SQLException{
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
+        Statement stmt = con.createStatement();
+
+        String query = "INSERT OVERWRITE TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+GENETIC_TABLE_NAME+" group by generation order by generation asc";
+        stmt.execute(query);
+        System.out.println(TAG + "Load data from "+GENETIC_TABLE_NAME+" into " + WEB_TABLE_NAME + " successful");
+        con.close();
     }
 }

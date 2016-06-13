@@ -27,7 +27,7 @@ public class DesktopLauncher {
         Data.debug = true;
 
         //Data.setForAndroid(false);
-        //Data.initHadoop();
+        Data.initHadoop();
         new LwjglApplication(new WindowGame(), config);
 	}
 }

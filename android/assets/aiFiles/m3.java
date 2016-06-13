@@ -24,12 +24,12 @@ public class m3 {
 	
 	public String run(Character ch)
 	{
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.WEST;
-		    deplacementString = ch.getDeplacement(-1,-1);
-		if(0.5== (ch.getStats().getLifePercentage()) )
+		    deplacementString = ch.getDeplacement(3,1);
+		    actionString = ch.getMaxHealingSpellId()+":"+ Data.WEST;
+		if(((ch.researchCharacter(down)==null)?defaultBoolean:ch.researchCharacter(down).isCharacterInLine(left))== false )
 		{
-		    actionString = ch.getSpells().get(0).getId()+":"+ Data.SOUTH;
-		    actionString = ch.getMaxDamagingSpellId()+":"+ Data.WEST;
+		    deplacementString = ch.getDeplacement(3,0);
+		    deplacementString = ch.getDeplacement(2,0);
 		}
 		return actionString+"!!"+deplacementString;
 	}

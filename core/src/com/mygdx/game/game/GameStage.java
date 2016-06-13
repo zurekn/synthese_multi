@@ -1233,7 +1233,12 @@ public class GameStage extends Stage {
           if(Data.autoIA) {
               endGameLogs();
               if(loopNumber >= Data.MAX_GAME_LOOP) {
-                  Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adiooooooos amigos !");
+                  Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adios amigos !");
+                  try {
+                      Hadoop.saveWebDataOnHive();
+                  } catch (SQLException e) {
+                      Gdx.app.error(LABEL, "Error while saving web datas "+e.getMessage());
+                  }
                   Data.suppressPoolDir(0);
                   quitGame();
               }
@@ -1260,20 +1265,12 @@ public class GameStage extends Stage {
                     po.getFitness().toStringFitness(), true);
             hiveList.add(po.toStringForHive());
             po.getFitness().writeHistory(po, false, loopNumber);
-            try {
-                Hadoop.saveGeneticDataOnHive(po.getName(), ""+po.getGeneration(), Data.getDate(), po.getFitness().getFinalScore(), po.getFitness().getpAction(), po.getFitness().getpHeal(), po.getFitness().getpPass());
-            } catch (SQLException e) {
-                Gdx.app.error(LABEL, "Save score on Hive : "+e.getMessage());
-            }
-
         }
         try {
             Hadoop.saveGeneticDataOnHive(hiveList);
             //Hadoop.saveGeneticDataOnHive(mo.getName(), ""+mo.getGeneration(), Data.getDate(), mo.getFitness().getFinalScore(), mo.getFitness().getpAction(), mo.getFitness().getpHeal(),mo.getFitness().getpPass());
-            Gdx.app.exit();
         } catch (SQLException e) {
             Gdx.app.error(LABEL, "Can't save score on Hive : " + e.getMessage());
-            Gdx.app.exit();
         }
 
         originMobs.get(0).getFitness().renameScoreFile();
