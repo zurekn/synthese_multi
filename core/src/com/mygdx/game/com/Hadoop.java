@@ -28,6 +28,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -36,6 +37,7 @@ import java.util.List;
 public class Hadoop {
 
     private static final String WEB_TABLE_NAME = "WEB";
+    public static final String HADOOP_LOCAL_DIR = "/tmp/hadoop_tmp_local";
     public static String HADOOP_CONFIG_DIRECTORY = "/hadoop/hadoop-2.7.1/etc/hadoop/";
     public static String TAG = "HADOOP";
     public static String GENETIC_DIRECTORY = "genetique/";
@@ -260,19 +262,40 @@ public class Hadoop {
         con.close();
     }
 
-    public static void copyWhithCommandLine(String src, String dest) {
+    public static void hadoopCopyFromLocal(String src, String dest) {
         if(!Data.HADOOP)
             return;
         long begin = System.currentTimeMillis();
-        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the comande line");
+        String com = "hadoop fs -copyFromLocal "+src+" "+dest;
+        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the comande line ["+com+"]");
         try {
             Process exe = Runtime.getRuntime().exec("hadoop fs -copyFromLocal "+src+" "+dest);
             exe.waitFor();
-            Gdx.app.log(TAG, "File copied successfuly in "+(System.currentTimeMillis()-begin)+" ms");
+            Scanner sc = new Scanner(exe.getInputStream());
+            while(sc.hasNext())
+                Gdx.app.log(TAG, sc.nextLine());
+
+            Gdx.app.log(TAG, "File copied in "+(System.currentTimeMillis()-begin)+" ms");
         } catch (IOException e) {
             Gdx.app.error(TAG, "hadoop fs failed");
         } catch (InterruptedException e) {
             Gdx.app.error(TAG, "hadoop fs failed");
+        }
+
+    }
+
+    public static void hadoopPut(String src, String dest) {
+        if(!Data.HADOOP)
+            return;
+        long begin = System.currentTimeMillis();
+        String com = "hadoop fs -put "+src+" "+dest;
+        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the command line put["+com+"]" );
+        try {
+            Process exe = Runtime.getRuntime().exec(com);
+            exe.waitFor();
+            Gdx.app.log(TAG, "File(s) copied successfully in "+(System.currentTimeMillis()-begin)+" ms");
+        } catch (Exception e) {
+            Gdx.app.error(TAG, "hadoop fs -put failed ["+e.getMessage()+"]");
         }
 
     }
@@ -303,7 +326,11 @@ public class Hadoop {
 
         String query = "INSERT OVERWRITE TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+GENETIC_TABLE_NAME+" group by generation order by generation asc";
         stmt.execute(query);
-        System.out.println(TAG + "Load data from "+GENETIC_TABLE_NAME+" into " + WEB_TABLE_NAME + " successful in "+(System.currentTimeMillis()-begin)+"ms");
+        System.out.println(TAG + "Load data from " + GENETIC_TABLE_NAME + " into " + WEB_TABLE_NAME + " successful in " + (System.currentTimeMillis() - begin) + "ms");
         con.close();
+    }
+
+    public static void copyFromLocal(String s, String s1) {
+
     }
 }

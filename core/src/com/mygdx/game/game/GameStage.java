@@ -1010,7 +1010,9 @@ public class GameStage extends Stage {
                             Gdx.app.log(LABEL, "-----------------------------------------");
                             messageHandler.addPlayerMessage(new Message(focus.character.getName() + "Died "), turn);
                             int index = Math.max(players.indexOf(focus.character), mobs.indexOf(focus.character));
-                            int indexCurrent = Math.max(players.indexOf(currentCharacter), mobs.indexOf(currentCharacter));
+                            int indexCurrent = turn;
+                            if(focus.character.isMonster())
+                                index+=players.size();
                             currentCharacter.getFitness().debugFile("*** " + (focus.character.isMonster() ? "mob " : "genPlayer ") +
                                     focus.character.getName() + " " + focus.character.getTrueID() + " a �t� tu� par " + (currentCharacter.isMonster() ? "mob " : "genPlayer ") + currentCharacter.getName() + " " + currentCharacter.getTrueID() + ".", true);
 
@@ -1018,9 +1020,8 @@ public class GameStage extends Stage {
 
                             mobs.remove(focus.character);
                             playerNumber--;
-                            if (index <= indexCurrent)
-                                turn = (turn - 1) % playerNumber;
-                            if( turn < 0) turn = 0;
+                            if (index < indexCurrent)
+                               turn--;
                             checkEndGame();
                         }
                     } else {

@@ -18,6 +18,8 @@ import com.mygdx.game.com.Hadoop;
 import com.mygdx.game.game.WindowGame;
 import com.mygdx.game.javacompiler.CompileString;
 
+import org.apache.hadoop.hive.common.FileUtils;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -687,6 +689,26 @@ public class Data {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+            //create Hadoop local dir
+            File theDir = new File(Hadoop.HADOOP_LOCAL_DIR);
+
+            // if the directory does not exist, create it
+            if (!theDir.exists()) {
+                System.out.println("creating directory: " + Hadoop.HADOOP_LOCAL_DIR);
+                boolean result = false;
+
+                try{
+                    theDir.mkdir();
+                    result = true;
+                }
+                catch(SecurityException se){
+                    //handle it
+                }
+                if(result) {
+                    System.out.println("DIR created");
+                }
+            }
         }
     }
 
@@ -866,24 +888,71 @@ public class Data {
     /*
     Take all serialized tree in selectedIAFiles from ToTestPool and move them throw TestedPool
      */
-    public static void moveSelectedTreeTo(String originPath, String destPath) {
+    public static void moveSelectedTreeTo(String originPath, final String destPath) {
         Gdx.app.log(LABEL,"-- MoveSelectedTrees -- from "+originPath+" to "+destPath);
         File origFile, destFile;
+
+        //purge the hadoop dir
+        //purgeDirectory(new File(Hadoop.HADOOP_LOCAL_DIR));
+
         for(String s : selectedIAFiles)
         {
             origFile = new File(originPath + s);
             File f = new File(destPath + s);
             origFile.renameTo(f);
             Gdx.app.log(LABEL, "Moving " + s);
-            origFile.renameTo(f);
+            /*
+            try {
+                copyFileUsingJava7Files(f, new File(Hadoop.HADOOP_LOCAL_DIR +"/"+ f.getName()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+
             try {
                 Hadoop.copyFile(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED + f.getName());
             } catch (Exception e) {
                 Gdx.app.error(Hadoop.TAG, "Error while trying to copy file : "+e.getMessage());
-                Hadoop.copyWhithCommandLine(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY+Hadoop.GENETIC_TESTED+f.getName());
+                Hadoop.hadoopCopyFromLocal(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED + f.getName());
             }
 
         }
+
+        //thread not used
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(String s : selectedIAFiles) {
+                    File f = new File(destPath + s);
+                    try {
+                        Hadoop.copyFile(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED + f.getName());
+                    } catch (Exception e) {
+                        Gdx.app.error(Hadoop.TAG, "Error while trying to copy file : "+e.getMessage());
+                        Hadoop.hadoopCopyFromLocal(f.getAbsolutePath(), Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED + f.getName());
+                    }
+                }
+            }
+        });
+        //t.start();
+        //Hadoop.hadoopCopyFromLocal(Hadoop.HADOOP_LOCAL_DIR + "/*", Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED);
+        //Hadoop.hadoopPut(Hadoop.HADOOP_LOCAL_DIR + "/*", Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED);
+    }
+
+    public static void copyFileUsingJava7Files(File source, File dest) throws IOException {
+        Gdx.app.log(LABEL, " copy file ["+source.getPath()+"] to ["+dest.getPath()+"]");
+        Files.copy(source.toPath(), dest.toPath());
+    }
+
+    public static void purgeDirectory(File dir){
+        if(!dir.exists()) {
+            Gdx.app.error(LABEL, "Can't purge dir "+dir.getPath()+", dir doesn't exist");
+            return;
+        }
+        Gdx.app.log(LABEL, "Purge directory ["+dir.getPath()+"]");
+            for (File file: dir.listFiles()) {
+                if (file.isDirectory())
+                    purgeDirectory(file);
+                file.delete();
+            }
     }
 
     /** Read the file for parameters and update variables.
