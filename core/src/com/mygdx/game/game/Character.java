@@ -57,14 +57,12 @@ public abstract class Character {
 	private Character focusedOn;
 	private boolean npc = true;
 	protected boolean monster = true;
-
 	protected boolean hasPlayed = false;
 
 	private Class<?> cl = null;
 	private Object obj = null;
-
+	protected ArrayList<Long> executionTimeByTurn = new ArrayList<Long>();
 	public abstract void render(SpriteBatch batch, ShapeRenderer shapeRenderer);
-
 	public abstract void init();
 
 	/**
@@ -101,6 +99,7 @@ public abstract class Character {
 
 	public void findScriptAction(){// Ici mettre l'instanciation de la nouvelle classe propre à CE charactère
 		Gdx.app.log("Find Script action for Character", this.trueID);
+		long startTime = System.currentTimeMillis();
 		String result = "";
 			try
 			{
@@ -123,12 +122,12 @@ public abstract class Character {
 				}
 				else
 				{
-					//if(compteur == 0) getFitness().debugFile("error : mob = "+getTrueID()+" print= emptyAction", true);
-					//findScriptAction(++compteur);
-
 					GameStage.gameStage.decodeAction("p");
 					return;
 				}
+				long endTime = System.currentTimeMillis();
+				executionTimeByTurn.add((endTime-startTime));
+				System.out.println("Total elapsed time in execution of IA script() is :"+ (endTime-startTime));
 			} catch (IllegalAccessException e) {
 				//findScriptAction(++compteur);
 				try {
@@ -643,7 +642,7 @@ public abstract class Character {
 	public Character researchCharacter(int direction)
 	{
 		GameStage gameStage = GameStage.gameStage;
-		Gdx.app.log("Character researchCharacter", gameStage.getCurrentPlayer().toString());
+		//Gdx.app.log("Character researchCharacter", gameStage.getCurrentPlayer().toString());
 		return (gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).isEmpty()? null : gameStage.getCharacterPositionOnLine(gameStage.getCurrentPlayer().getX(), gameStage.getCurrentPlayer().getY(), direction).get(0));
 
 	}

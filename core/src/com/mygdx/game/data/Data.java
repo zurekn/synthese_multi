@@ -284,6 +284,7 @@ public class Data {
     public static Skin SKIN;
     public static TextureAtlas ATLAS;
     private static boolean isInitHadoop = false;
+    public static boolean iaUniTest = false;
 
     /**
      * Load all game variables
@@ -742,6 +743,9 @@ public class Data {
                         case "GENETIC_TESTED_DIRECTORY":
                                 Hadoop.GENETIC_TESTED = value;
                             break;
+                        case "IA_UNIT_TEST":
+                                iaUniTest = true;
+                            break;
                         default :
                             System.err.println("Can't find : "+param);
                             break;
@@ -1025,8 +1029,6 @@ public class Data {
                         Gdx.app.log(LABEL,"Reading Param : a line contains Combine. Number = "+Number_Combine_IA);
                         Data.setPoolsArrays();
                         Data.combineRandomMobs(Number_Combine_IA);
-                        //Ajout appel de la fonction de combinaison
-                        // combiner tous les arbres qui sont dans PoolTestee, mettre enfants dans PoolATester
                         suppressPoolDir(1);
                         break;
                     }

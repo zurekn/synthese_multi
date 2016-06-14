@@ -15,6 +15,8 @@ import com.mygdx.game.data.SpellData;
 import com.mygdx.game.data.Stats;
 import com.mygdx.game.exception.IllegalCaracterClassException;
 
+import java.util.ArrayList;
+
 import static com.mygdx.game.data.Data.scale;
 
 public class Player extends Character {
@@ -114,6 +116,7 @@ public class Player extends Character {
     }
 
     public void init() {
+        executionTimeByTurn = new ArrayList<Long>();
         monster=false;
         Monster m = MonsterData.getMonsterById(this.getId());
         Gdx.app.log("GameStage", "monster id : "+this.getId()+"m.getid() : "+m.getId()+"-"+m.toString());

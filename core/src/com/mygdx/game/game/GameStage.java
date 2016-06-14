@@ -215,7 +215,7 @@ public class GameStage extends Stage {
         // TrapData.loadTrap();
 
         initAPIX();
-        // Cmbine 2 mobs together
+        // Combine 2 mobs together
 
         Data.getRandomIAGeneticList();
         // Create the monsters and players lists
@@ -836,8 +836,15 @@ public class GameStage extends Stage {
         messageHandler.addGlobalMessage(new Message("Turn of " + currentCharacter.getName()));
         actionLeft = ACTION_PER_TURN;
 
-        if ( (currentCharacter.isNpc() || (Data.autoIA && Data.jvm) )  && !getCurrentCharacter().getHasPlayed() )// mettre le run du bot IAG�n�tique
-            currentCharacter.findScriptAction();
+        if ( (currentCharacter.isNpc() || (Data.autoIA && Data.jvm) )  && !getCurrentCharacter().getHasPlayed() ) {
+            if (!Data.iaUniTest) {
+                currentCharacter.findScriptAction();//Pour lancer l'action du premier joueur
+            } else {
+                TestAIScript tas = new TestAIScript(currentCharacter);
+                tas.testAllScripts();
+                quitGame();
+            }
+        }
 
 
         // print the current turn in the console
@@ -1258,13 +1265,31 @@ public class GameStage extends Stage {
                 mo.getFitness().toStringFitness(), true);
             hiveList.add(mo.toStringForHive());
             System.out.println("Mob id=" + mo.getId() + " name=" + mo.getName() + " " + mo.getFitness().toStringFitness() + " score final = " + mo.getFitness().getFinalScore());
-       }
+            int i = 0;
+            for(long time : mo.executionTimeByTurn){
+                i++;
+                System.out.println("Tour "+i+" - execution: "+time+" milli" );
+            }
+        }
         for(Player po : originPlayers){
             po.getFitness().debugFile("Player id=" + po.getTrueID() + " name=" + po.getName() +
                     " score final = " + po.getFitness().calculFinalScore(gameWin, global_turn) + "" +
                     po.getFitness().toStringFitness(), true);
             hiveList.add(po.toStringForHive());
             po.getFitness().writeHistory(po, false, loopNumber);
+            try {
+                Hadoop.saveGeneticDataOnHive(po.getName(), ""+po.getGeneration(), Data.getDate(), po.getFitness().getFinalScore(), po.getFitness().getpAction(), po.getFitness().getpHeal(), po.getFitness().getpPass());
+            } catch (SQLException e) {
+                Gdx.app.error(LABEL, "Save score on Hive : "+e.getMessage());
+            }
+            System.out.println("Player id=" + po.getId() + " name=" + po.getName() + " " + po.getFitness().toStringFitness() + " score final = " + po.getFitness().getFinalScore());
+
+            int i = 0;
+            for(long time : po.executionTimeByTurn){
+                i++;
+                System.out.println("Tour "+i+" - execution: "+time+" milli" );
+            }
+
         }
         try {
             Hadoop.saveGeneticDataOnHive(hiveList);
