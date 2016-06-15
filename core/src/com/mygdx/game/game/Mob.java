@@ -67,7 +67,7 @@ public class Mob extends Character {
 	@Override
 	public String toString() {
 		return "Mob [name=" + getName() + ", x=" + getX() + ", y=" + getY()
-				+ ", id=" + getId() + "]";
+				+ ", id=" + getId() + ", trueID "+getTrueID()+"]";
 	}
 
 	public String toStringAll() {

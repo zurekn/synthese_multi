@@ -122,7 +122,7 @@ public class GameStage extends Stage {
     private int loopNumber = 1;
 
 
-
+int lastPlayer = -1;
 
     protected int turnTimer;
     private long timeStamp = -1;
@@ -792,38 +792,38 @@ public class GameStage extends Stage {
 
         if(turn == 0)
         {
+
             currentCharacter.getFitness().debugFile("\n\t\t\t\t=== TOUR " + global_turn + " ===", true);
             checkEndGame();
 
             global_turn++;
-            messageHandler.addPlayerMessage(new Message("Tour de jeu num�ro  "+global_turn, Data.MESSAGE_TYPE_INFO), turn);
+            messageHandler.addPlayerMessage(new Message("Tour de jeu numero  "+global_turn, Data.MESSAGE_TYPE_INFO), turn);
             for(Mob mo:mobs){
                 mo.getFitness().addTurn();
             }
             if(Data.autoIA){
-                if(!Data.jvm)
-                {
                     for(Player po:players){
                         po.getFitness().addTurn();
                     }
-                }else{
-                    for(Player po:players){
-                        po.getFitness().addTurn();
-                    }
-                }
             }
         }
 
         previousCharacter = currentCharacter;
         previousCharacter.regenMana();
+
+        if(lastPlayer == turn){
+            Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");   // debug si jamais on a turn = last player                                                                                                      Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");Gdx.app.log(LABEL,"======= ERROR TURN = LAST PLAYER ========");
+        }
         // Switch the turn
-        // Set the new character turn
+        // Set the new char
         if (turn < players.size()) {
             players.get(turn).setMyTurn(true);
             currentCharacter = players.get(turn);
+            lastPlayer = turn;
         } else {
             mobs.get(turn - players.size()).setMyTurn(true);
             currentCharacter = mobs.get(turn - players.size());
+            lastPlayer = turn- players.size();
         }
 
         // set to false the previous character turn
