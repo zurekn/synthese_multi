@@ -784,11 +784,26 @@ int lastPlayer = -1;
         if (gameEnded)
             return;
 
-        // Reset the timer
-        Gdx.app.log(LABEL, "turn = " + turn + ", playerNumber = " + playerNumber + ", turnTimer = " + turnTimer);
         messageHandler.addGlobalMessage(new Message("Next turn"));
-        turnTimer = TURN_MAX_TIME;
         turn = (turn + 1) % playerNumber;
+        Gdx.app.log(LABEL, "turn = " + turn + ", playerNumber = " + playerNumber + ", turnTimer = " + turnTimer+"+ players.size = "+players.size()+", mobs.size = "+mobs.size());
+
+        // print the current turn in the console
+        if (debug) {
+            Gdx.app.log(LABEL, "========================");
+            if (turn < players.size()) {
+                Gdx.app.log(LABEL, "Tour du Joueur " + turn);
+                if(players.size() > 0)
+                    Gdx.app.log(LABEL, "Player : " + players.get(turn).toString());
+            } else {
+                Gdx.app.log(LABEL, "Tour du Monster" + (turn - players.size()));
+                if(mobs.size() > 0)
+                    Gdx.app.log(LABEL, "Monster " + mobs.get(turn - players.size()).toString());
+            }
+            Gdx.app.log(LABEL, "========================");
+        }
+        //reset the timer
+        turnTimer = TURN_MAX_TIME;
 
         if(turn == 0)
         {
@@ -845,18 +860,19 @@ int lastPlayer = -1;
                 quitGame();
             }
         }
-
-
         // print the current turn in the console
         if (debug) {
             Gdx.app.log(LABEL, "========================");
             if (turn < players.size()) {
-                Gdx.app.log(LABEL, "Tour du Joueur " + turn);
+                Gdx.app.log(LABEL, "Tour du Joueur " + turn+" TERMINE");
                 if(players.size() > 0)
                     Gdx.app.log(LABEL, "Player : " + players.get(turn).toString());
             } else {
-                Gdx.app.log(LABEL, "Tour du Monster" + (turn - players.size()));
+                Gdx.app.log(LABEL, "Tour du Monster" + (turn - players.size())+" TERMINE");
                 if(mobs.size() > 0)
+                    if(turn - players.size() >= mobs.size())
+                        Gdx.app.log(LABEL, "Can't print mob "+ (turn - players.size())+ ", he is dead !!");
+                    else
                     Gdx.app.log(LABEL, "Monster " + mobs.get(turn - players.size()).toString());
             }
             Gdx.app.log(LABEL, "========================");
