@@ -8,6 +8,8 @@ import game.ServerGame;
 
 public class ServerLauncher {
 	public static void main (String[] arg) {
+		Data.loadProperties();
+
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = Data.TITLE;
 		Data.PLAYER_MESSAGE_X_POS = 10;

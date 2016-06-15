@@ -6,6 +6,8 @@ import com.mygdx.game.data.Data;
 
 public class ClientLauncher {
 	public static void main (String[] arg) {
+		Data.loadProperties();
+
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
 		Data.setScreenSize();

@@ -42,6 +42,10 @@ public class TCPServer {
         this("localhost", port, DEFAULT_TIME_OUT, reuseAddr);
     }
 
+    public TCPServer(String hostname, int port){
+        this(hostname, port, DEFAULT_TIME_OUT, false);
+    }
+
     public TCPServer(String hostname, int port, int timeout) {
         this(hostname, port, timeout, false);
     }
@@ -79,7 +83,7 @@ public class TCPServer {
 
             // initialize
             serverSocket = new java.net.ServerSocket(port);
-            serverSocket.setSoTimeout(60000);
+            serverSocket.setSoTimeout(timeout);
 //            serverSocket.setReuseAddress(true);
 
 
@@ -108,9 +112,9 @@ public class TCPServer {
         try {
             String message = data + "\n";
             clientSocket.getOutputStream().write(message.getBytes());
-            Gdx.app.log("Server", "Sent : "+message);
+            System.out.println("Server: Sent : "+message);
         } catch (IOException e) {
-            Gdx.app.log("ServerError", "Error sending message to client : " + e.getMessage());
+            System.err.println("ServerError: Error sending message to client : " + e.getMessage());
         }
     }
 
@@ -121,10 +125,10 @@ public class TCPServer {
                 clients.add(lastClient);
 
             String message = new BufferedReader(new InputStreamReader(lastClient.getInputStream())).readLine();
-            Gdx.app.log("Server",  "Received : "+message);
+            System.out.println("Server: Received : "+message);
             return message;
         } catch (IOException e) {
-            Gdx.app.log("ServerError", "Error receiving message : " + e.getMessage());
+            System.err.println("ServerError: Error receiving message : " + e.getMessage());
         }
         return null;
     }
@@ -136,10 +140,10 @@ public class TCPServer {
                 clients.add(lastClient);
 
             String message = new BufferedReader(new InputStreamReader(lastClient.getInputStream())).readLine();
-            Gdx.app.log("Server",  "Received : "+message);
+            System.out.println("Server: Received : "+message);
             return message;
         } catch (IOException e) {
-            Gdx.app.log("ServerError", "Error receiving message : " + e.getMessage());
+            System.err.println("ServerError: Error receiving message : " + e.getMessage());
         }
         return null;
     }

@@ -39,7 +39,7 @@ public class ClientGame extends GameStage {
         gameStage = this;
         try {
             client = new TCPClient(new Socket((String)null, 42666));
-
+            //new ClientThread(gameStage, client.getSocket());
             client.sendToServer("12:12:p1:mage");
         } catch (IOException e) {
             e.printStackTrace();
