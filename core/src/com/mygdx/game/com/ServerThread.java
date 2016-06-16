@@ -1,7 +1,7 @@
-package game;
+package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.com.TCPClient;
+import com.mygdx.game.com.ServerGame;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.game.Player;
 

@@ -2,6 +2,7 @@ package main;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.mygdx.game.com.WindowClient;
 import com.mygdx.game.data.Data;
 
 public class ClientLauncher {

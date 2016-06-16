@@ -1,15 +1,12 @@
-package game;
+package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.com.TCPClient;
 import com.mygdx.game.exception.IllegalActionException;
-import com.mygdx.game.game.Player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by gregory on 30/05/16.

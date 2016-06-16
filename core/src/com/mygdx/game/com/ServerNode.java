@@ -5,23 +5,36 @@ import com.mygdx.game.data.Data;
 import java.net.Socket;
 import java.util.HashMap;
 
-import game.ServerGame;
-
 public class ServerNode implements Runnable {
     private int weight;
     private boolean keepRunning;
     private TCPServer server;
     private TCPClient parentServer;
     private HashMap<String, ServerGame> mapGames;
+    private static ServerNode instance;
 
-    public ServerNode(String serverAddress, int serverPort){
+    private ServerNode(String serverAddress, int serverPort){
         server = new TCPServer(serverAddress, serverPort);
         parentServer = new TCPClient(Data.SERVER_IP, Data.SERVER_PORT, Data.SERVER_TIMEOUT);
         new ServerNodeThread(parentServer);
         weight = 0;
         keepRunning = true;
+        mapGames = new HashMap<>();
 
         run();
+    }
+
+    public static ServerNode getInstance(String serverAddress, int serverPort){
+        if(instance != null)
+            instance = new ServerNode(serverAddress, serverPort);
+        return instance;
+    }
+
+    public static ServerNode getInstance(){
+        if(instance != null)
+            return instance;
+        else
+            throw new NullPointerException();
     }
 
     public int getWeight(){
@@ -30,6 +43,10 @@ public class ServerNode implements Runnable {
 
     public void setWeight(int value){
         weight = value;
+    }
+
+    public HashMap<String, ServerGame> getMapGames(){
+        return mapGames;
     }
 
     @Override
@@ -111,6 +128,14 @@ public class ServerNode implements Runnable {
                     try {
                         if(split[0].equals("askGame")){
                             //TODO create game
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    new Server();
+                                }
+                            };
+
+
                         } else if (split[0].equals("getGameAddress")) {
                             //TODO try to log client to game
                         }
