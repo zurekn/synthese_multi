@@ -292,6 +292,11 @@ public class Data {
     private static boolean isInitHadoop = false;
     public static boolean iaUniTest = false;
 
+    public static String SERVER_IP = "localhost";
+    public static int SERVER_PORT = 42666;
+    public static int SERVER_TIMEOUT = 500;
+    public static boolean SERVER_REUSE_ADDR = false;
+
     /**
      * Load all game variables
      */
@@ -778,6 +783,25 @@ public class Data {
                         case "IA_UNIT_TEST":
                                 iaUniTest = true;
                             break;
+                        case "SERVER_IP":
+                            SERVER_IP = value;
+                            break;
+                        case "SERVER_PORT":
+                            try{
+                                SERVER_PORT = Integer.parseInt(value);
+                            }catch(NumberFormatException e){
+
+                            }
+                            break;
+                        case "SERVER_TIMEOUT":
+                            try{
+                                SERVER_TIMEOUT = Integer.parseInt(value);
+                            }catch(NumberFormatException e){
+
+                            }
+                            break;
+                        case "SERVER_REUSE_ADDR":
+                            SERVER_REUSE_ADDR = value.equals("true");
                         default :
                             System.err.println("Can't find : "+param);
                             break;

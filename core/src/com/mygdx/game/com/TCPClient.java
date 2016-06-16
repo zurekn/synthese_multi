@@ -1,9 +1,6 @@
 package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
-import com.badlogic.gdx.net.ServerSocket;
-import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
@@ -14,9 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by gregory on 15/03/16.
- */
+
 public class TCPClient {
     private SocketHints hints;
     private Socket clientSocket;
@@ -78,7 +73,6 @@ public class TCPClient {
 
     public TCPClient(Socket socket){
         clientSocket = socket;
-
     }
 
     public void sendToServer(String data) {
@@ -95,6 +89,24 @@ public class TCPClient {
         return clientSocket;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || clientSocket.getClass() != o.getClass()) return false;
+
+        TCPClient client = (TCPClient) o;
+        Socket socket = client.getSocket();
+
+        if(!socket.getInetAddress().getHostAddress().equals(clientSocket.getInetAddress().getHostAddress())) return false;
+        if(!socket.getInetAddress().getHostName().equals(clientSocket.getInetAddress().getHostName())) return false;
+        if(socket.getPort() != clientSocket.getPort()) return false;
+        if(socket.getLocalPort() != clientSocket.getLocalPort()) return false;
+        if(socket.getLocalAddress().getHostAddress().equals(clientSocket.getLocalAddress().getHostAddress())) return false;
+        if(socket.getLocalAddress().getHostName().equals(clientSocket.getLocalAddress().getHostName())) return false;
+
+        return true;
+    }
+
     public String receive() {
         try {
             String message = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())).readLine();
@@ -105,4 +117,5 @@ public class TCPClient {
         }
         return null;
     }
+
 }

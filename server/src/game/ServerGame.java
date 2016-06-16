@@ -1,17 +1,17 @@
 package game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.mygdx.game.ai.*;
+import com.mygdx.game.ai.AStar;
+import com.mygdx.game.ai.CharacterData;
+import com.mygdx.game.ai.WindowGameData;
 import com.mygdx.game.com.TCPServer;
 import com.mygdx.game.data.Data;
+import com.mygdx.game.data.Event;
 import com.mygdx.game.data.SpellData;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalMovementException;
 import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Message;
-import com.mygdx.game.data.Event;
 import com.mygdx.game.game.Player;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import static com.mygdx.game.data.Data.debug;
 
 @SuppressWarnings({"ConstantConditions", "SuspiciousMethodCalls"})
 public class ServerGame extends GameStage {
-    private final int INIT_TIME = 60*1000;
+    private final int INIT_TIME = 60 * 1000;
     private long startTime;
 
     public TCPServer server;
@@ -41,47 +41,51 @@ public class ServerGame extends GameStage {
     private LogHandler logHandler;
 
 
-
-    public ServerGame(){
+    public ServerGame() {
         //create();
     }
 
+    public TCPServer getServer() {
+        return server;
+    }
+
     @Override
-    public void create(){
-        Data.MUSIC_VOLUM=0;
+    public void create() {
+        Data.MUSIC_VOLUM = 0;
         super.create();
         Data.BACKGROUND_MUSIC.stop();
         gameStage = this;
     }
 
     @Override
-    public void initCommandHandler(){
+    public void initCommandHandler() {
 
     }
 
     @Override
-    public void initPlayers(){
+    public void initPlayers() {
         initServer();
     }
 
-    private void initServer(){
-        server = new TCPServer(42666);
+    private void initServer() {
+        server = new TCPServer(Data.SERVER_PORT);
         logHandler = new LogHandler(this);
-        startTime =  System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
         String mess;
         String sArray[];
         Gdx.app.log(LABEL, "Waiting for clients");
-        do{
-            mess = server.acceptNewClient();
+        do {
             try {
+                mess = server.acceptNewClient();
                 sArray = mess.split(":");
                 Player player = new Player(Integer.parseInt(sArray[0]), Integer.parseInt(sArray[1]), sArray[2], sArray[3]);
                 players.add(player);
-                new ClientThread(gameStage, server.getLastClient(), player);
-            } catch(Exception e){
+                new ServerThread(gameStage, server.getLastClient(), player);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }while(players.size() <= 4 && (System.currentTimeMillis() - startTime) <= INIT_TIME);
+        } while (players.size() <= 4 && (System.currentTimeMillis() - startTime) <= INIT_TIME);
+        players.get(0).setMyTurn(true);
     }
 
 
@@ -228,12 +232,12 @@ public class ServerGame extends GameStage {
 
         try {
             server.sendToAllClients(action);
-        } catch(NullPointerException e){
+        } catch (NullPointerException e) {
             Gdx.app.error(LABEL, "Can't connect to server");
         }
-        if(currentCharacter.checkDeath())
+        if (currentCharacter.checkDeath())
             switchTurn();
-        if(action.startsWith("m"))
+        if (action.startsWith("m"))
             switchTurn();
     }
 
@@ -270,13 +274,13 @@ public class ServerGame extends GameStage {
 
         if (currentCharacter.isNpc() && !previousCharacter.isNpc()) {
             commands.startCommandsCalculation(currentCharacter, players, mobs, turn);
-        }else{
+        } else {
             try {
-                String mes =server.receive();
+                String mes = server.receive();
                 decodeAction(mes);
             } catch (IllegalActionException e) {
-                Gdx.app.error(LABEL,"",e);
-            } catch (NullPointerException e){
+                Gdx.app.error(LABEL, "", e);
+            } catch (NullPointerException e) {
                 Gdx.app.error(LABEL, e.getMessage());
             }
         }
@@ -295,7 +299,7 @@ public class ServerGame extends GameStage {
         }
     }
 
-    public LogHandler getLogHandler(){
+    public LogHandler getLogHandler() {
         return logHandler;
     }
 }
