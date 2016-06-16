@@ -1,10 +1,9 @@
-package game;
+package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.ai.AStar;
 import com.mygdx.game.ai.CharacterData;
 import com.mygdx.game.ai.WindowGameData;
-import com.mygdx.game.com.TCPServer;
 import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Event;
 import com.mygdx.game.data.SpellData;
@@ -13,10 +12,9 @@ import com.mygdx.game.exception.IllegalMovementException;
 import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Message;
 import com.mygdx.game.game.Player;
+import com.mygdx.game.hud.LogHandler;
 
 import java.util.ArrayList;
-
-import gui.LogHandler;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
 import static com.mygdx.game.data.Data.BLOCK_SIZE_X;
@@ -40,14 +38,19 @@ public class ServerGame extends GameStage {
     private final String LABEL = "ServerGame";
     private LogHandler logHandler;
 
+    private String id ;
 
-    public ServerGame() {
+
+    public ServerGame(String id) {
+        this.id = id;
         //create();
     }
 
     public TCPServer getServer() {
         return server;
     }
+
+    public String getId(){ return id; }
 
     @Override
     public void create() {

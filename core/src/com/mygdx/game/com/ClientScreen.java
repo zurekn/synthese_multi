@@ -1,4 +1,4 @@
-package main;
+package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -6,9 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.input.GestureDetector;
 import com.mygdx.game.data.Data;
-
-import game.ClientGame;
-import game.ClientInputHandler;
 
 /**
  * Created by gregory on 30/03/16.

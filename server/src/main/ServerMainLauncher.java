@@ -7,6 +7,10 @@ public class ServerMainLauncher {
     public static void main (String[] arg) {
         Data.loadProperties();
 
+        Data.setForServer();
+
+        Data.checkValuesIni("paramTI.ini");
+
         ServerMain server = new ServerMain();
     }
 }

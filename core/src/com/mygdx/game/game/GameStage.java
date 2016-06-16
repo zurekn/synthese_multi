@@ -122,7 +122,7 @@ public class GameStage extends Stage {
     private int loopNumber = 1;
 
 
-int lastPlayer = -1;
+    int lastPlayer = -1;
 
     protected int turnTimer;
     private long timeStamp = -1;
@@ -134,7 +134,7 @@ int lastPlayer = -1;
     private ArrayList decodeArray;
 
     public GameStage() {
-        create();
+        //create();
         gameStage = this;
         start();
     }
