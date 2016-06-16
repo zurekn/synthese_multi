@@ -134,7 +134,7 @@ public class GameStage extends Stage {
     private ArrayList decodeArray;
 
     public GameStage() {
-        //create();
+        create();
         gameStage = this;
         start();
     }
