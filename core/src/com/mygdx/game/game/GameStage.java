@@ -1259,6 +1259,11 @@ int lastPlayer = -1;
               if(loopNumber >= Data.MAX_GAME_LOOP) {
                   Gdx.app.log(LABEL,"On a atteint le max de lancements du jeu. Adios amigos !");
                   try {
+                      Hadoop.saveLastDataOnHive();
+                  } catch (SQLException e) {
+                      Gdx.app.error(LABEL, "Error while saving last datas "+e.getMessage());
+                  }
+                  try {
                       Hadoop.saveWebDataOnHive();
                   } catch (SQLException e) {
                       Gdx.app.error(LABEL, "Error while saving web datas "+e.getMessage());
@@ -1294,11 +1299,6 @@ int lastPlayer = -1;
                     po.getFitness().toStringFitness(), true);
             hiveList.add(po.toStringForHive());
             po.getFitness().writeHistory(po, false, loopNumber);
-            try {
-                Hadoop.saveGeneticDataOnHive(po.getName(), ""+po.getGeneration(), Data.getDate(), po.getFitness().getFinalScore(), po.getFitness().getpAction(), po.getFitness().getpHeal(), po.getFitness().getpPass());
-            } catch (SQLException e) {
-                Gdx.app.error(LABEL, "Save score on Hive : "+e.getMessage());
-            }
             System.out.println("Player id=" + po.getId() + " name=" + po.getName() + " " + po.getFitness().toStringFitness() + " score final = " + po.getFitness().getFinalScore());
 
             int i = 0;

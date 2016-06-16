@@ -107,6 +107,16 @@ public class CompileString {
         }
     }
 
+    public static void addMutationTree(String geneticName) {
+        SetGenerateCompiler();
+        debugSys("\n===========   MUTATION MOB " + geneticName + "  ===========");
+        Node root = advanced?DecodeScript(pathClass+"AdvancedAIScriptDatas.txt"):DecodeScript(pathClass+"AIScriptDatas.txt");
+        try {
+            serializeObject(serializePrefix + geneticName, root, destPathClass+Data.poolTestedDir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /*
      * S�rialization d'un objet
      */

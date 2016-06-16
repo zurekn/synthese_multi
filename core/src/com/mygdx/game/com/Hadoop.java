@@ -25,8 +25,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,6 +40,7 @@ public class Hadoop {
 
     private static final String WEB_TABLE_NAME = "WEB";
     public static final String HADOOP_LOCAL_DIR = "/tmp/hadoop_tmp_local";
+    private static final String LAST_TABLE_NAME = "last";
     public static String HADOOP_CONFIG_DIRECTORY = "/hadoop/hadoop-2.7.1/etc/hadoop/";
     public static String TAG = "HADOOP";
     public static String GENETIC_DIRECTORY = "genetique/";
@@ -241,7 +244,6 @@ public class Hadoop {
             p.waitFor();
             Gdx.app.log(TAG, "Copy file " + filePath + " on hiveserver in " + (System.currentTimeMillis()-time) + "ms");
             //scp file on pc11.bigdata
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -267,7 +269,7 @@ public class Hadoop {
             return;
         long begin = System.currentTimeMillis();
         String com = "hadoop fs -copyFromLocal "+src+" "+dest;
-        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the comande line ["+com+"]");
+        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the comande line [" + com + "]");
         try {
             Process exe = Runtime.getRuntime().exec("hadoop fs -copyFromLocal "+src+" "+dest);
             exe.waitFor();
@@ -324,7 +326,8 @@ public class Hadoop {
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
         Statement stmt = con.createStatement();
 
-        String query = "INSERT OVERWRITE TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+GENETIC_TABLE_NAME+" group by generation order by generation asc";
+        String query = "INSERT INTO TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+GENETIC_TABLE_NAME+" group by generation order by generation asc";
+        Gdx.app.log(TAG, "Execute query ["+query+"]");
         stmt.execute(query);
         System.out.println(TAG + "Load data from " + GENETIC_TABLE_NAME + " into " + WEB_TABLE_NAME + " successful in " + (System.currentTimeMillis() - begin) + "ms");
         con.close();
@@ -333,4 +336,67 @@ public class Hadoop {
     public static void copyFromLocal(String s, String s1) {
 
     }
+
+    public static void createLastTable() throws ClassNotFoundException, SQLException {
+        if(!Data.HADOOP)
+            return;
+        Class.forName(driverName);
+        System.out.println(TAG+": Connect to HIVE database : "+HIVE+" with user "+HADOOP_USER_NAME+", password "+HADOOP_USER_PASSWORD);
+        Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
+        Statement stmt = con.createStatement();
+        System.out.println(TAG+": Connection successful-------------------------------");
+        String query = "CREATE TABLE IF NOT EXISTS "+LAST_TABLE_NAME
+                +" (filename String, name String," +
+                "generation String, dateG DATE," +
+                "scoreG int, scoreA int," +
+                "scoreH int, scoreP int) " +
+                "COMMENT 'Genetic AI details' " +
+                "ROW FORMAT DELIMITED " +
+                "FIELDS TERMINATED BY '\\t' " +
+                "LINES TERMINATED BY '\\n' " +
+                "STORED AS TEXTFILE";
+        System.out.println(TAG+": Execute query ["+query+"]");
+        stmt.executeQuery(query);
+        System.out.println(TAG + ": Table " + LAST_TABLE_NAME + " created");
+        con.close();
+    }
+
+    public static void saveLastDataOnHive()throws SQLException{
+        if(!Data.HADOOP)
+            return;
+        long begin = System.currentTimeMillis();
+        try {
+            Class.forName(driverName);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
+        Statement stmt = con.createStatement();
+
+        String query = "INSERT OVERWRITE TABLE "+LAST_TABLE_NAME+" Select distinct filename, name, generation, dateg, scoreg, scorea, scoreh, scorep from (select max(generation) as maxg from genetic) maxt join "+GENETIC_TABLE_NAME+" g on (g.generation = maxt.maxg)";
+        Gdx.app.log(TAG, "Execute query ["+query+"]");
+        stmt.execute(query);
+        System.out.println(TAG + "Load data from " + GENETIC_TABLE_NAME + " into " + LAST_TABLE_NAME + " successful in " + (System.currentTimeMillis() - begin) + "ms");
+        con.close();
+    }
+
+    public static ArrayList<String> getLastGenerationFilename() throws ClassNotFoundException, SQLException {
+        Class.forName(driverName);
+        System.out.println(TAG + ": Connect to HIVE database : " + HIVE + " with user " + HADOOP_USER_NAME + ", password " + HADOOP_USER_PASSWORD);
+        Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
+        Statement stmt = con.createStatement();
+        System.out.println(TAG + ": Connection successful-------------------------------");
+        String query = "select filename from " + LAST_TABLE_NAME +" order by scoreg desc";
+        System.out.println(TAG + ": Execute query [" + query + "]");
+        stmt.executeQuery(query);
+        ResultSet set = stmt.getResultSet();
+        ArrayList<String> array = new ArrayList<>();
+        while(set.next())
+        {
+            array.add(set.getString(0));
+        }
+        con.close();
+        return array;
+    }
+
 }

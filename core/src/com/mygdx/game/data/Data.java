@@ -17,8 +17,7 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import com.mygdx.game.com.Hadoop;
 import com.mygdx.game.game.WindowGame;
 import com.mygdx.game.javacompiler.CompileString;
-
-import org.apache.hadoop.hive.common.FileUtils;
+import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -30,16 +29,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -85,10 +85,14 @@ public class Data {
     public static Array<String> allFilesToTest;
     public static Array<String> allFilesTested;
     // IA Param File Vars
+    public static float percentUP = 0.30f;
+    public static float percentDOWN = 0.30f;
+    public static final String paramPercentUP = "percentUP";
+    public static final String paramPercentDOWN = "percentDOWN";
     // Directories
     public static String paramDir = "ai"+File.separator;
     public static String poolsDir = "aiFiles"+File.separator;
-    public static String paramFileNAme = "ParamAI.txt";
+    public static String paramFileName = "ParamAI.txt";
 
     public static String poolToTestDir = "PoolATester"+File.separator;
     public static String poolTestedDir = "PoolTestee"+File.separator;
@@ -689,7 +693,13 @@ public class Data {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            try {
+                Hadoop.createLastTable();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             //create Hadoop local dir
             File theDir = new File(Hadoop.HADOOP_LOCAL_DIR);
 
@@ -918,6 +928,7 @@ public class Data {
         }
 
         //thread not used
+        /*
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -932,7 +943,8 @@ public class Data {
                 }
             }
         });
-        //t.start();
+        t.start();
+        */
         //Hadoop.hadoopCopyFromLocal(Hadoop.HADOOP_LOCAL_DIR + "/*", Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED);
         //Hadoop.hadoopPut(Hadoop.HADOOP_LOCAL_DIR + "/*", Hadoop.GENETIC_DIRECTORY + Hadoop.GENETIC_TESTED);
     }
@@ -942,12 +954,12 @@ public class Data {
         Files.copy(source.toPath(), dest.toPath());
     }
 
-    public static void purgeDirectory(File dir){
-        if(!dir.exists()) {
+    public static void purgeDirectory(File dir) {
+        if (!dir.exists()) {
             Gdx.app.error(LABEL, "Can't purge dir "+dir.getPath()+", dir doesn't exist");
             return;
         }
-        Gdx.app.log(LABEL, "Purge directory ["+dir.getPath()+"]");
+        Gdx.app.log(LABEL, "Purge directory [" + dir.getPath() + "]");
             for (File file: dir.listFiles()) {
                 if (file.isDirectory())
                     purgeDirectory(file);
@@ -960,7 +972,7 @@ public class Data {
     public static void readParamFile() {
         Gdx.app.log(LABEL, "**readParamFile begins");
         // File fichier = new File(Data.rootDir+"/core/src/com/mygdx/game/IAPool/" + filename + ".txt");
-        File fichier = Gdx.files.internal(Data.paramDir + Data.paramFileNAme).file();
+        File fichier = Gdx.files.internal(Data.paramDir + Data.paramFileName).file();
         if (!fichier.exists() || fichier.isDirectory()){
             Gdx.app.log(LABEL, "**readParamFile file : "+fichier.getAbsolutePath()+" don't exist.  rootDir = "+rootDir);
             return;
@@ -1069,7 +1081,7 @@ public class Data {
         Array<String> allLoadedFiles = new Array<String>();
         Scanner scanner;
         try {
-            File file = Gdx.files.internal(Data.paramDir + Data.paramFileNAme).file();
+            File file = Gdx.files.internal(Data.paramDir + Data.paramFileName).file();
             if(file.exists() && file.length() > 0)
             {
                 scanner = new Scanner(file);
@@ -1096,6 +1108,13 @@ public class Data {
 
                         Number_Combine_IA = 8*MAX_GAME_LOOP;//Integer.parseInt(line.split(":")[1]);
                         Gdx.app.log(LABEL,"Reading Param : a line contains Combine. Number = "+Number_Combine_IA);
+                        //operation for last table (hive)
+                        ArrayList<String> array = new ArrayList<>();
+                        array = getFilterList();
+                        setFilter();
+                        removeUnlessPoolsTrees(array);
+
+
                         Data.setPoolsArrays();
                         Data.combineRandomMobs(Number_Combine_IA);
                         suppressPoolDir(1);
@@ -1127,5 +1146,79 @@ public class Data {
         SCREEN_HEIGHT = 240;
         SCREEN_WIDTH = 360;
         debug = true;
+    }
+
+    public static void setFilter()
+    {
+        File file = new File(paramDir+paramFileName);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if(line.contains(":"))
+                {
+                    int index = line.indexOf(":");
+                    String param = line.substring(0, index);
+                    String value = line.substring(index+1).trim();
+                    switch(param.trim()){
+                        case paramPercentUP:
+                            if((float)Integer.parseInt(value)<=1)
+                                percentUP = (float)Integer.parseInt(value);
+                            else
+                                percentUP = ((float)Integer.parseInt(value)/100);
+                            break;
+                        case paramPercentDOWN:
+                            if((float)Integer.parseInt(value)<=1)
+                                percentDOWN = (float)Integer.parseInt(value);
+                            else
+                                percentDOWN = ((float)Integer.parseInt(value)/100);
+                            break;
+                        default :
+                            System.err.println("Can't find : "+param);
+                            break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> getFilterList(){
+        ArrayList<String> filter = null;
+        try {
+            filter = Hadoop.getLastGenerationFilename();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int max = (int)(filter.size()* percentUP);
+        int min = (int)(filter.size()* percentDOWN);
+        ArrayList<String> resFilter = new ArrayList<>();
+        for(int i=0; i<max;i++)
+            resFilter.add(filter.get(i));
+        for(int i = filter.size(); i> (filter.size()-min) ; i--)
+            resFilter.add(filter.get(i));
+        return resFilter;
+    }
+
+    public static void removeUnlessPoolsTrees(ArrayList<String> filted){
+        File directory= new File(poolsDir+poolTestedDir);
+        if(!directory.exists()){
+            System.err.println("SetPoolsArrays "+directory.getPath()+"+ n'existe pas");
+            return;
+        }
+        int fileDeleted = 0;
+        for (File file : directory.listFiles()) {
+            if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt") && filted.contains(file.getName())) {
+                //do nothing
+            }
+            else {
+                file.delete();
+                fileDeleted++;
+            }
+        }
+        System.out.println("SetPoolsArrays : Delete "+fileDeleted+" files from directory ["+directory.getPath()+"]");
     }
 }
