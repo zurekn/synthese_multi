@@ -22,6 +22,7 @@ import com.sun.org.apache.xalan.internal.xsltc.cmdline.Compile;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,6 +53,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * @author bob
  */
 public class Data {
+    private static String LOG_FILE = "GOD_LOG.txt";
     public static boolean FORCE_HADOOP = false;
     private static String LABEL = "DATA";
 
@@ -759,6 +762,9 @@ public class Data {
                         case "HADOOP_CONFIG_DIRECTORY":
                             Hadoop.HADOOP_CONFIG_DIRECTORY=value;
                             break;
+                        case "LOG_FILE":
+                            LOG_FILE=value;
+                            break;
                         case "HIVE" :
                             Hadoop.HIVE = value;
                             break;
@@ -1133,9 +1139,8 @@ public class Data {
                         Number_Combine_IA = 8*MAX_GAME_LOOP;//Integer.parseInt(line.split(":")[1]);
                         Gdx.app.log(LABEL,"Reading Param : a line contains Combine. Number = "+Number_Combine_IA);
                         //operation for last table (hive)
-                        ArrayList<String> array = new ArrayList<>();
-                        array = getFilterList();
                         setFilter();
+                        ArrayList<String> array = getFilterList();
                         removeUnlessPoolsTrees(array);
 
 
@@ -1222,8 +1227,9 @@ public class Data {
         ArrayList<String> resFilter = new ArrayList<>();
         for(int i=0; i<max;i++)
             resFilter.add(filter.get(i));
-        for(int i = filter.size(); i> (filter.size()-min) ; i--)
+        for(int i = filter.size()-1; i> (filter.size()-min) && i >= 0 ; i--)
             resFilter.add(filter.get(i));
+        Gdx.app.log(LABEL, "Filter list contain "+resFilter.size()+" results");
         return resFilter;
     }
 
@@ -1234,15 +1240,45 @@ public class Data {
             return;
         }
         int fileDeleted = 0;
+        ArrayList<File> files = new ArrayList<>();
         for (File file : directory.listFiles()) {
             if (file.getName().contains(CompileString.serializePrefix+"x") && file.getName().contains(".txt") && filted.contains(file.getName())) {
                 //do nothing
             }
             else {
-                file.delete();
+                files.add(file);//file.delete();
                 fileDeleted++;
             }
         }
-        System.out.println("SetPoolsArrays : Delete "+fileDeleted+" files from directory ["+directory.getPath()+"]");
+        System.out.println("SetPoolsArrays : Delete " + fileDeleted + " files from directory [" + directory.getPath() + "]");
+        if(MAX_GAME_LOOP - filted.size() != fileDeleted){
+            Gdx.app.error(LABEL, "Error while deleting serialise Files. File to delete = " + fileDeleted + ", correct number = " + (MAX_GAME_LOOP - filted.size()));
+            writeToLog("Error while deleting serialise Files. File to delete = "+fileDeleted+", correct number = "+(MAX_GAME_LOOP - filted.size()));
+            for(String s : filted){
+                writeToLog("File to save : [" + s + "]");
+                Gdx.app.log(LABEL, "File to save : ["+s+"]");
+            }
+        }else {
+            for (File f : files)
+                f.delete();
+        }
+    }
+
+    public static void writeToLog(String s){
+        File log = new File(LOG_FILE);
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(log));
+            bw.write("["+getDateTimeStamp()+"] "+s);
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String getDateTimeStamp() {
+        Date date = new Date();
+        DateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return formater.format(date);
     }
 }

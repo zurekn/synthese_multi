@@ -326,10 +326,10 @@ public class Hadoop {
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
         Statement stmt = con.createStatement();
 
-        String query = "INSERT INTO TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+GENETIC_TABLE_NAME+" group by generation order by generation asc";
+        String query = "INSERT INTO TABLE "+WEB_TABLE_NAME+" Select generation, avg(scoreg), max(scoreg), min(scoreg) from "+LAST_TABLE_NAME+" group by generation order by generation asc";
         Gdx.app.log(TAG, "Execute query ["+query+"]");
         stmt.execute(query);
-        System.out.println(TAG + "Load data from " + GENETIC_TABLE_NAME + " into " + WEB_TABLE_NAME + " successful in " + (System.currentTimeMillis() - begin) + "ms");
+        System.out.println(TAG + "Load data from " + LAST_TABLE_NAME + " into " + WEB_TABLE_NAME + " successful in " + (System.currentTimeMillis() - begin) + "ms");
         con.close();
     }
 
@@ -347,7 +347,7 @@ public class Hadoop {
         System.out.println(TAG+": Connection successful-------------------------------");
         String query = "CREATE TABLE IF NOT EXISTS "+LAST_TABLE_NAME
                 +" (filename String, name String," +
-                "generation String, dateG DATE," +
+                "generation int, dateG DATE," +
                 "scoreG int, scoreA int," +
                 "scoreH int, scoreP int) " +
                 "COMMENT 'Genetic AI details' " +
@@ -386,15 +386,15 @@ public class Hadoop {
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);
         Statement stmt = con.createStatement();
         System.out.println(TAG + ": Connection successful-------------------------------");
-        String query = "select filename from " + LAST_TABLE_NAME +" order by scoreg desc";
+        String query = "select filename, scoreg from " + LAST_TABLE_NAME +" order by scoreg desc";
         System.out.println(TAG + ": Execute query [" + query + "]");
-        stmt.executeQuery(query);
-        ResultSet set = stmt.getResultSet();
+        ResultSet set = stmt.executeQuery(query);
         ArrayList<String> array = new ArrayList<>();
         while(set.next())
         {
-            array.add(set.getString(0));
+            array.add(set.getString(1));
         }
+        Gdx.app.log(TAG, "Get "+array.size()+" results");
         con.close();
         return array;
     }
