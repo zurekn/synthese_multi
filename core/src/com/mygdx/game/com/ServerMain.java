@@ -15,6 +15,7 @@ public class ServerMain implements Runnable {
     private HashMap<String,ServerNodeThread> gameIDMap;
     private ReentrantLock socketLock ;
     private ReentrantLock mapLock;
+    private Thread thread;
 
 
     private boolean keepRunning;
@@ -29,7 +30,8 @@ public class ServerMain implements Runnable {
         socketLock = new ReentrantLock(true);
         mapLock = new ReentrantLock(true);
 
-        run();
+        thread = new Thread(this);
+        thread.start();
     }
 
     public void startNode(){

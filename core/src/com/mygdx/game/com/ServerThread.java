@@ -18,6 +18,7 @@ public class ServerThread implements Runnable {
     private boolean keepRunning;
     private Player player;
     private ServerGame game;
+    private Thread thread;
 
     public ServerThread(ServerGame game, Socket socket, Player player){
         this.socket = socket;
@@ -25,7 +26,9 @@ public class ServerThread implements Runnable {
         this.game = game;
         this.keepRunning = true;
 
-        run();
+        thread = new Thread(this);
+
+        thread.start();
     }
 
     //TODO handle connexion lost

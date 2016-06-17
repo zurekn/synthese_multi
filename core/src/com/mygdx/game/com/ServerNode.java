@@ -3,6 +3,7 @@ package com.mygdx.game.com;
 import com.mygdx.game.data.Data;
 
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ServerNode implements Runnable {
@@ -10,7 +11,8 @@ public class ServerNode implements Runnable {
     private boolean keepRunning;
     private TCPServer server;
     private TCPClient parentServer;
-    private HashMap<String, ServerGame> mapGames;
+    private ArrayList<ServerGame> gameList;
+    private Thread thread;
     private static ServerNode instance;
 
     private ServerNode(String serverAddress, int serverPort){
@@ -19,9 +21,10 @@ public class ServerNode implements Runnable {
         new ServerNodeThread(parentServer);
         weight = 0;
         keepRunning = true;
-        mapGames = new HashMap<>();
+        gameList = new ArrayList<>();
 
-        run();
+        thread = new Thread(this);
+        thread.start();
     }
 
     public static ServerNode getInstance(String serverAddress, int serverPort){
@@ -45,8 +48,8 @@ public class ServerNode implements Runnable {
         weight = value;
     }
 
-    public HashMap<String, ServerGame> getMapGames(){
-        return mapGames;
+    public ArrayList<ServerGame> getGameList(){
+        return gameList;
     }
 
     @Override
@@ -72,12 +75,14 @@ public class ServerNode implements Runnable {
     private class ClientNodeThread implements  Runnable{
         private TCPClient client;
         private boolean keepRunning;
+        private Thread thread;
 
         public ClientNodeThread(Socket socket){
             client = new TCPClient(socket);
             keepRunning = true;
+            thread = new Thread(this);
 
-            run();
+            thread.start();
         }
 
         @Override
@@ -104,12 +109,14 @@ public class ServerNode implements Runnable {
     private class ServerNodeThread implements Runnable{
         private TCPClient client;
         private boolean keepRunning;
+        private Thread thread;
 
         public ServerNodeThread(TCPClient client){
             this.client = client;
             keepRunning = true;
+            thread = new Thread(this);
 
-            run();
+            thread.start();
         }
 
         @Override
@@ -127,13 +134,14 @@ public class ServerNode implements Runnable {
                     String[] split = mess.split(":");
                     try {
                         if(split[0].equals("askGame")){
-                            //TODO create game
-                            new Runnable() {
+                            //create game
+                            Thread t = new Thread( new Runnable() {
                                 @Override
                                 public void run() {
                                     new Server();
                                 }
-                            };
+                            });
+                            t.start();
 
 
                         } else if (split[0].equals("getGameAddress")) {

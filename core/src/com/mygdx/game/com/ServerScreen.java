@@ -18,7 +18,7 @@ public class ServerScreen implements Screen {
     public ServerScreen() {
         String id = UUID.randomUUID().toString();
         game = new ServerGame(id);
-        ServerNode.getInstance().getMapGames().put(id,game);
+        ServerNode.getInstance().getGameList().add(game);
     }
 
     @Override
