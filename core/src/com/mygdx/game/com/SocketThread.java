@@ -8,13 +8,15 @@ public class SocketThread implements Runnable {
     private TCPClient clientSocket;
     private boolean keepRunning;
     private ServerMain server;
+    private Thread thread;
 
     public SocketThread(ServerMain server,Socket socket){
         this.clientSocket = new TCPClient(socket);
         this.keepRunning = true;
         this.server = server;
+        thread = new Thread(this);
 
-        run();
+        thread.start();
     }
 
     private void askGame(Socket socket){

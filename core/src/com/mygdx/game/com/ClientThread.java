@@ -8,20 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-/**
- * Created by gregory on 30/05/16.
- */
 public class ClientThread implements Runnable {
     private Socket socket;
     private boolean keepRunning;
     private ClientGame game;
+    private Thread thread;
 
     public ClientThread(ClientGame game, Socket socket){
         this.socket = socket;
         this.game = game;
         this.keepRunning = true;
+        thread = new Thread(this);
 
-        run();
+        thread.start();
     }
 
     //TODO handle connexion lost

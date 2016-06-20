@@ -9,12 +9,16 @@ public class ServerNodeThread implements Runnable{
     private int weight;
     private boolean keepRunning;
     private ArrayList<Object[]> messagesToSend;
+    private Thread thread;
 
     public ServerNodeThread(ServerMain parent, Socket sock){
         this.parent = parent;
         messagesToSend = new ArrayList<>();
         client = new TCPClient(sock);
         keepRunning = true;
+        thread = new Thread(this);
+
+        thread.start();
     }
 
     public int getWeight(){

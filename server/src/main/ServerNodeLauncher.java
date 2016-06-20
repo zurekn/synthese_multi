@@ -1,7 +1,5 @@
 package main;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.com.ServerNode;
 import com.mygdx.game.data.Data;
 

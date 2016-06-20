@@ -15,6 +15,7 @@ import com.mygdx.game.game.Player;
 import com.mygdx.game.hud.LogHandler;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
 import static com.mygdx.game.data.Data.BLOCK_SIZE_X;
@@ -300,6 +301,19 @@ public class ServerGame extends GameStage {
             }
             Gdx.app.log(LABEL, "========================");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ServerGame that = (ServerGame) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 
     public LogHandler getLogHandler() {
