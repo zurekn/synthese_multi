@@ -26,7 +26,8 @@ public class DesktopLauncher {
         Data.RUN_APIX = false;
         Data.debug = true;
 
-        //Data.setForAndroid(false);
+        Data.setForAndroid(false);
+
         if(Data.FORCE_HADOOP) {
             Data.initHadoop();
         }

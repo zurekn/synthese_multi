@@ -100,7 +100,7 @@ public class Hadoop {
             conf.addResource(HADOOP_CONFIG_DIRECTORY+"core-site.xml");
             conf.addResource(HADOOP_CONFIG_DIRECTORY + "hdfs-site.xml");
             conf.addResource(HADOOP_CONFIG_DIRECTORY+"mapred-site.xml");
-            Gdx.app.log(TAG, "Connectif to ---"+conf.get("fs.default.name"));
+            Gdx.app.log(TAG, "Connectif to ---" + conf.get("fs.default.name"));
 
             InputStream in = new BufferedInputStream(new FileInputStream(src));
 
@@ -109,7 +109,7 @@ public class Hadoop {
 
             IOUtils.copyBytes(in, out, 4096, true);
 
-            Gdx.app.log(TAG, fileName+" copied to HDFS");
+            Gdx.app.log(TAG, fileName + " copied to HDFS");
         }else{
             Gdx.app.log(TAG, "Can't save file on Hadoop -> Data.hadoop = false");
         }
@@ -291,7 +291,7 @@ public class Hadoop {
             return;
         long begin = System.currentTimeMillis();
         String com = "hadoop fs -put "+src+" "+dest;
-        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the command line put["+com+"]" );
+        Gdx.app.log(TAG, "Save file : [" + src + "] on Hadoop [" + dest + "] with the command line put[" + com + "]");
         try {
             Process exe = Runtime.getRuntime().exec(com);
             exe.waitFor();
@@ -355,7 +355,7 @@ public class Hadoop {
                 "FIELDS TERMINATED BY '\\t' " +
                 "LINES TERMINATED BY '\\n' " +
                 "STORED AS TEXTFILE";
-        System.out.println(TAG+": Execute query ["+query+"]");
+        System.out.println(TAG + ": Execute query [" + query + "]");
         stmt.executeQuery(query);
         System.out.println(TAG + ": Table " + LAST_TABLE_NAME + " created");
         con.close();
@@ -381,6 +381,8 @@ public class Hadoop {
     }
 
     public static ArrayList<String> getLastGenerationFilename() throws ClassNotFoundException, SQLException {
+        if(!Data.HADOOP)
+            return new ArrayList<String>();
         Class.forName(driverName);
         System.out.println(TAG + ": Connect to HIVE database : " + HIVE + " with user " + HADOOP_USER_NAME + ", password " + HADOOP_USER_PASSWORD);
         Connection con = HADOOP_USER_NAME.isEmpty() ? DriverManager.getConnection(HIVE) : DriverManager.getConnection(HIVE, HADOOP_USER_NAME, HADOOP_USER_PASSWORD);

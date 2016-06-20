@@ -144,6 +144,10 @@ public class GameStage extends Stage {
 
     /*************************************/
 
+    public HUD getUI(){
+        return ui;
+    }
+
     public Mob getMobById(String id) {
         for (int i = 0; i < mobs.size(); i++) {
             if (mobs.get(i).getId().equals(id)) {

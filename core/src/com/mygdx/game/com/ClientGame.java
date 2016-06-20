@@ -2,6 +2,7 @@ package com.mygdx.game.com;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.exception.IllegalActionException;
 import com.mygdx.game.exception.IllegalMovementException;
 
@@ -41,6 +42,13 @@ public class ClientGame extends GameStage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void customAct(float delta){
+        getUI().act(delta);
+        this.act(delta);
+        getCamera().update();
     }
 
     public void checkAction(String action) throws IllegalActionException {
@@ -100,4 +108,5 @@ public class ClientGame extends GameStage {
     public void decodeServerAction(String action) throws IllegalActionException {
         super.decodeAction(action);
     }
+
 }

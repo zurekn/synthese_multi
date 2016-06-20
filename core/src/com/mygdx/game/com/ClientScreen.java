@@ -16,7 +16,7 @@ public class ClientScreen implements Screen {
 
         private WindowClient game;
 
-        public ClientScreen(final WindowClient game){
+        public ClientScreen(WindowClient game){
             this.game = game;
             stage = new ClientGame();
         }
@@ -43,7 +43,7 @@ public class ClientScreen implements Screen {
             //    System.err.println(e.getMessage());
             //}
 
-            stage.act(delta);
+            stage.customAct(delta);
             stage.draw(delta);
         }
 
