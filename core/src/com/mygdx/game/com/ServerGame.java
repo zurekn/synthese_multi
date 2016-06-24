@@ -8,14 +8,19 @@ import com.mygdx.game.data.Data;
 import com.mygdx.game.data.Event;
 import com.mygdx.game.data.SpellData;
 import com.mygdx.game.exception.IllegalActionException;
+import com.mygdx.game.exception.IllegalCaracterClassException;
 import com.mygdx.game.exception.IllegalMovementException;
 import com.mygdx.game.game.GameStage;
 import com.mygdx.game.game.Message;
+import com.mygdx.game.game.Mob;
 import com.mygdx.game.game.Player;
 import com.mygdx.game.hud.LogHandler;
 
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.mygdx.game.data.Data.ACTION_PER_TURN;
 import static com.mygdx.game.data.Data.BLOCK_SIZE_X;
@@ -38,11 +43,14 @@ public class ServerGame extends GameStage {
     public static ServerGame gameStage;
     private final String LABEL = "ServerGame";
     private LogHandler logHandler;
+    private ArrayList<ServerThread> threadList;
+    private ArrayList<TCPClient> clientList;
 
     private String id ;
 
 
     public ServerGame(String id) {
+        ServerNode.getInstance().getGameList().add(this);
         this.id = id;
         //create();
     }
@@ -72,14 +80,27 @@ public class ServerGame extends GameStage {
     }
 
     private void initServer() {
-        server = new TCPServer(Data.SERVER_PORT);
+        boolean serverCreated = false;
+        int port = Data.GAME_PORT;
+        do {
+            try {
+                server = new TCPServer(port);
+                serverCreated = true;
+            }catch(Exception e){
+                port++;
+            }
+        }while(!serverCreated);
+        threadList = new ArrayList<>();
+        clientList = new ArrayList<>();
         logHandler = new LogHandler(this);
         startTime = System.currentTimeMillis();
         String mess;
         String sArray[];
         Gdx.app.log(LABEL, "Waiting for clients");
+        int size;
+
         do {
-            try {
+            /*try {
                 mess = server.acceptNewClient();
                 sArray = mess.split(":");
                 Player player = new Player(Integer.parseInt(sArray[0]), Integer.parseInt(sArray[1]), sArray[2], sArray[3]);
@@ -87,11 +108,88 @@ public class ServerGame extends GameStage {
                 new ServerThread(gameStage, server.getLastClient(), player);
             } catch (Exception e) {
                 e.printStackTrace();
+            }*/
+
+
+            synchronized (players){
+                size = players.size();
             }
-        } while (players.size() <= 4 && (System.currentTimeMillis() - startTime) <= INIT_TIME);
-        players.get(0).setMyTurn(true);
+        } while (size <= 4 && (System.currentTimeMillis() - startTime) <= INIT_TIME);
+        try{
+            synchronized (players){
+                players.get(0).setMyTurn(true);
+            }
+        }catch(IndexOutOfBoundsException e){
+            //TODO create log no players in game
+        }
     }
 
+
+
+    public void loadGame(ServerThread thread){
+        TCPClient client = thread.getClient();
+        synchronized (mobs){
+            for(Mob m : mobs){
+                String message ="mob";
+                message+=":"+m.getX();
+                message+=":"+m.getY();
+                message+=":"+m.getId();
+                message+=":"+m.getTrueID();
+                message+=":"+m.getTargetTree();
+                client.sendToServer(message,true);
+            }
+        }
+
+        synchronized (players){
+            for(Player p : players){
+                if(!p.equals(thread.getPlayer())){
+                    String message ="player";
+                    message+=":"+p.getX();
+                    message+=":"+p.getY();
+                    message+=":"+p.getId();
+                    message+=":"+p.getClass();
+                    client.sendToServer(message,true);
+                }
+            }
+        }
+
+        client.sendToServer("endLoading", true);
+    }
+
+    public void logToGame(Socket socket, String playerClass) {
+        try{
+            String pos = null;
+            Set set =Data.departureBlocks.keySet();
+            Iterator it = set.iterator();
+            while(it.hasNext() && pos == null){
+                String str = (String)it.next();
+                if(!Data.departureBlocks.get(str)){
+                    pos = str;
+                }
+            }
+
+            String[] split = pos.split(":");
+            int x = Integer.parseInt(split[0]), y = Integer.parseInt(split[1]);
+            Player p = new Player(x,y,"p"+socket.getPort(),playerClass);
+            players.add(p);
+            Data.departureBlocks.put(pos, true);
+            threadList.add(new ServerThread(this, socket, p));
+            clientList.add(new TCPClient(socket));
+        }catch(IllegalCaracterClassException e){
+            e.printStackTrace();
+        }catch(NumberFormatException e){
+            e.printStackTrace();
+        }
+    }
+
+    public boolean connect(TCPClient client){
+        try {
+            ServerThread sT = new ServerThread(gameStage, client);
+            return true;
+        }catch(Exception e){
+        }
+        return false;
+    }
 
     /**
      * decode a action and create associated event
@@ -306,17 +404,16 @@ public class ServerGame extends GameStage {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if(id.equals(o)) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
         ServerGame that = (ServerGame) o;
         return Objects.equals(id, that.id);
     }
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
     public LogHandler getLogHandler() {
         return logHandler;
     }
+
+
 }

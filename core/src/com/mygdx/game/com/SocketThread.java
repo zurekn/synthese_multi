@@ -2,34 +2,38 @@ package com.mygdx.game.com;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 
 public class SocketThread implements Runnable {
     private TCPClient clientSocket;
     private boolean keepRunning;
-    private ServerMain server;
+    private ServerMain parent;
     private Thread thread;
+    private ArrayList<String> messagesToSend;
 
-    public SocketThread(ServerMain server,Socket socket){
+
+    public SocketThread(ServerMain parent,Socket socket){
         this.clientSocket = new TCPClient(socket);
+        messagesToSend = new ArrayList<>();
         this.keepRunning = true;
-        this.server = server;
+        this.parent = parent;
         thread = new Thread(this);
 
         thread.start();
     }
 
     private void askGame(Socket socket){
-        if(server.askGame(socket)){
-            this.end();
+        if(parent.askGame(socket)){
+            //this.end();
         }
     }
 
     private void askGame(Socket socket, String gameId){
         try {
-            if(server.askGame(socket, gameId)){
-                this.end();
-            }
+            parent.askGame(socket, gameId);
+                //this.end();
+
         } catch (GameNotFoundException e) {
             e.printStackTrace();
         } catch (GameFullException e) {
@@ -41,11 +45,17 @@ public class SocketThread implements Runnable {
 
     @Override
     public void run() {
-        int disconnectCount = 0;
         while(keepRunning){
+            synchronized (messagesToSend){
+                if(!messagesToSend.isEmpty()){
+                    clientSocket.sendToServer(messagesToSend.get(0), true);
+                    if(messagesToSend.get(0).startsWith("gameNode"))
+                        parent.remove(clientSocket.getSocket());
+                    messagesToSend.remove(0);
+                }
+            }
             String message = receive();
             if(message!=null){
-                disconnectCount = 0;
                 String[] split = message.split(":");
                 try {
                     if (split[0].equals("game")) {
@@ -58,13 +68,8 @@ public class SocketThread implements Runnable {
                 }catch (ArrayIndexOutOfBoundsException e){
                     e.printStackTrace();
                 }
-            } else {
-                System.err.println("ServerMain: Disconnected");
-                disconnectCount++;
-                if(disconnectCount>5){
-                    keepRunning = false;
-                }
             }
+
         }
     }
 
@@ -83,7 +88,11 @@ public class SocketThread implements Runnable {
 
     }
 
-
+    public void addMessage(String mess){
+        synchronized (messagesToSend){
+            messagesToSend.add(mess);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -104,6 +113,12 @@ public class SocketThread implements Runnable {
     }
 
     public void kill(){
+        clientSocket.close();
         keepRunning = false;
+    }
+
+    @Override
+    public String toString() {
+        return clientSocket.toString();
     }
 }

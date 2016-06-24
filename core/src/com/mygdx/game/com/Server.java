@@ -5,11 +5,15 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.data.Data;
 
 public class Server {
-    public Server() {
+    public Server(String id){
+        this(id, Data.TITLE);
+    }
+
+    public Server(String id, String title) {
         Data.loadProperties();
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.title = Data.TITLE;
+        config.title = title;
         Data.PLAYER_MESSAGE_X_POS = 10;
         Data.PLAYER_MESSAGE_Y_POS = 10;
 
@@ -21,7 +25,7 @@ public class Server {
         Data.checkValuesIni("paramTI.ini");
 
         //try {
-            new LwjglApplication(new WindowServer(), config);
+            new LwjglApplication(new WindowServer(id), config);
         //}
     }
 }

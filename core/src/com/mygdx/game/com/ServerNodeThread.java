@@ -1,5 +1,7 @@
 package com.mygdx.game.com;
 
+import com.mygdx.game.data.Data;
+
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -10,12 +12,15 @@ public class ServerNodeThread implements Runnable{
     private boolean keepRunning;
     private ArrayList<Object[]> messagesToSend;
     private Thread thread;
+    private long timeSinceLastPing;
 
     public ServerNodeThread(ServerMain parent, Socket sock){
         this.parent = parent;
         messagesToSend = new ArrayList<>();
         client = new TCPClient(sock);
         keepRunning = true;
+        timeSinceLastPing = System.currentTimeMillis();
+
         thread = new Thread(this);
 
         thread.start();
@@ -37,18 +42,30 @@ public class ServerNodeThread implements Runnable{
         client.sendToServer(mess);
     }
 
+    public void send(String mess, boolean print){
+        client.sendToServer(mess, print);
+    }
+
     public String receive(){
-        return client.receive();
+        String mes = client.receive();
+        if(mes != null)
+            timeSinceLastPing = System.currentTimeMillis();
+        return mes;
     }
 
     public void askGame(Socket client){
-        send("createGame");
+        send("createGame", true);
 
-        String res = receive();
+        String res;
+        do{
+            res = receive();
+        } while(res.equals("ping"));
+
+        System.out.println("Received:"+res);
         if(res != null){
             String[] split = res.split(":");
             if(split.length == 4 && split[0].equals("gameId")){
-                res = split[1]+split[2]+split[3];
+                res = split[1]+":"+split[2]+":"+split[3];
             }
         }
 
@@ -57,8 +74,7 @@ public class ServerNodeThread implements Runnable{
         }else if(res.split(":").length == 3){
             String[] split = res.split(":");
 
-            parent.addGame(this, split[2], res, client);
-
+            parent.addGame(this, split[2], "gameNode:"+res, client);
         }
     }
 
@@ -77,7 +93,7 @@ public class ServerNodeThread implements Runnable{
             throw new GameNotFoundException("Game with id : "+id+" does not exist");
         }else if(res.split(":").length == 3){
             String[] split = res.split(":");
-
+            //TODO
             parent.addClient(this, split[2], res, client);
         }
     }
@@ -103,10 +119,10 @@ public class ServerNodeThread implements Runnable{
                         }else if(str.startsWith("getGameAddress")) {
                             try {
                                 getGameAddress((Socket) messagesToSend.get(0)[1], str);
-                            }catch (GameNotFoundException e){
+                            } catch (GameNotFoundException e) {
                                 parent.getServer().send("Error:Game not found", (Socket) messagesToSend.get(0)[1]);
                             }
-                        }else {
+                        } else {
                             mes = str;
                         }
                         messagesToSend.remove(0);
@@ -119,6 +135,25 @@ public class ServerNodeThread implements Runnable{
             }
             if(mes != null)
                 send(mes);
+            try {
+                String str = receive();
+                if(str!=null && !str.equals("ping"))
+                    System.out.println("run: "+str);
+                if (str.equals("ping")) {
+                    //System.out.println("Received ping from" + client.getSocket().getInetAddress()+":"+client.getSocket().getPort());
+                }
+            } catch(NullPointerException e){
+
+            }
+
+            long time = System.currentTimeMillis();
+            if(!client.getSocket().isConnected() || (time - timeSinceLastPing) > Data.PING_TIMEOUT) {
+                keepRunning = false;
+                try{
+                    send("kill");
+                }catch(Exception e){ }
+                System.err.println("Connection lost with "+client.getSocket().getInetAddress().getHostAddress()+":"+client.getSocket().getPort());
+            }
         }
     }
 

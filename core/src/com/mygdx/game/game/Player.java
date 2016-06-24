@@ -16,6 +16,7 @@ import com.mygdx.game.data.Stats;
 import com.mygdx.game.exception.IllegalCaracterClassException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mygdx.game.data.Data.scale;
 
@@ -197,6 +198,17 @@ public class Player extends Character {
     public String toString() {
         return "Mob [name=" + getName() + ", x=" + getX() + ", y=" + getY()
                 + ", id=" + getId() + "]"+ ", true id=" + getTrueID() + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if(getTrueID().equals(o))
+            return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return getId().equals(player.getId());
     }
 
     public String toStringAll() {

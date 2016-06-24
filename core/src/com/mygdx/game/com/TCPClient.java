@@ -3,6 +3,7 @@ package com.mygdx.game.com;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.net.SocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.mygdx.game.data.Data;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -10,6 +11,7 @@ import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 
 public class TCPClient {
@@ -46,10 +48,10 @@ public class TCPClient {
 
 
             // initialize
-            InetSocketAddress address = new InetSocketAddress(hostname, port);
-            clientSocket = new java.net.Socket();
-            clientSocket.bind(address);
-            clientSocket.setSoTimeout(60000);
+            //InetSocketAddress address = new InetSocketAddress(hostname, port);
+            clientSocket = new java.net.Socket(hostname, port);
+            //clientSocket.bind(address);
+            clientSocket.setSoTimeout(timeout);
 
             /*if (hints != null) {
                 serverSocket.setPerformancePreferences(hints.performancePrefConnectionTime,
@@ -76,12 +78,17 @@ public class TCPClient {
     }
 
     public void sendToServer(String data) {
+        sendToServer(data,false);
+    }
+
+    public void sendToServer(String data, boolean print){
         try {
             String message = data + "\n";
             clientSocket.getOutputStream().write(message.getBytes());
-            Gdx.app.log("Client", "Sent : "+message);
+            if(print)
+                System.out.println("Client : Sent : "+message);
         } catch (IOException e) {
-            Gdx.app.log("ClientError", "Error sending message to server: " + e.getMessage());
+            System.err.println("ClientError : Error sending message to server: " + e.getMessage());
         }
     }
 
@@ -92,30 +99,43 @@ public class TCPClient {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || clientSocket.getClass() != o.getClass()) return false;
 
-        TCPClient client = (TCPClient) o;
-        Socket socket = client.getSocket();
+        Socket socket = new Socket();
+        if (o == null || (clientSocket.getClass() != o.getClass() && socket.getClass() != o.getClass())) return false;
+
+        try {
+            TCPClient client = (TCPClient) o;
+            socket = client.getSocket();
+        }catch(ClassCastException e){
+            socket = (Socket) o;
+        }
 
         if(!socket.getInetAddress().getHostAddress().equals(clientSocket.getInetAddress().getHostAddress())) return false;
         if(!socket.getInetAddress().getHostName().equals(clientSocket.getInetAddress().getHostName())) return false;
         if(socket.getPort() != clientSocket.getPort()) return false;
         if(socket.getLocalPort() != clientSocket.getLocalPort()) return false;
-        if(socket.getLocalAddress().getHostAddress().equals(clientSocket.getLocalAddress().getHostAddress())) return false;
-        if(socket.getLocalAddress().getHostName().equals(clientSocket.getLocalAddress().getHostName())) return false;
+        if(!socket.getLocalAddress().getHostAddress().equals(clientSocket.getLocalAddress().getHostAddress())) return false;
+        if(!socket.getLocalAddress().getHostName().equals(clientSocket.getLocalAddress().getHostName())) return false;
 
         return true;
     }
 
     public String receive() {
         try {
+            clientSocket.setSoTimeout(Data.SERVER_TIMEOUT);
             String message = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())).readLine();
-            Gdx.app.log("Client", "Received :"+message);
+            //System.out.println("Client: Received :"+message);
             return message;
         } catch (IOException e) {
-            Gdx.app.log("ClientError", "Error receiving message from server : " + e.getMessage());
+            //System.err.println("ClientError: Error receiving message from server : " + e.getMessage());
         }
         return null;
     }
 
+    public void close() {
+        try {
+            clientSocket.close();
+        } catch (IOException e) {}
+
+    }
 }

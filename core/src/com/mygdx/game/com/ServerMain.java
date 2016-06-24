@@ -34,34 +34,28 @@ public class ServerMain implements Runnable {
         thread.start();
     }
 
-    public void startNode(){
-        //try {
-        //    Process p = Runtime.getRuntime().exec("ssh....");
-        //
-        //} catch (IOException e) {
-        //    e.printStackTrace();
-        //}
-    }
-
     public void addNode(Socket socket){
-        nodeList.add(new ServerNodeThread(this, server.getLastClient()));
+        nodeList.add(new ServerNodeThread(this, socket));
     }
 
     public void addClient(Socket socket){
-        socketClients.add(new SocketThread(this, socket));
+        synchronized (socketClients) {
+            socketClients.add(new SocketThread(this, socket));
+        }
     }
 
     public synchronized void addGame(ServerNodeThread node, String gameId, String mess, Socket client){
         gameIDMap.put(gameId, node);
-        server.send("gameNode:"+mess, client);
 
-        socketClients.remove(new TCPClient(client));
+        getSocketClient(client).addMessage(mess);
     }
 
     public synchronized void addClient(ServerNodeThread node, String gameId, String mess, Socket client){
         server.send("gameNode:"+mess, client);
 
-        socketClients.remove(new TCPClient(client));
+        synchronized (socketClients) {
+            socketClients.remove(new TCPClient(client));
+        }
     }
 
     public boolean askGame(Socket client){
@@ -82,18 +76,15 @@ public class ServerMain implements Runnable {
 
         //TODO
         selectedNode.addMessage("createGame", client);
-        /*String res = selectedNode.askGame();
-        if(res == null){
-            //TODO game not created
-        }else if(res.split(":").length == 3){
-            String[] split = res.split(":");
+        TCPClient tcp = new TCPClient(client);
 
-            gameIDMap.put(split[2], selectedNode);
-            server.send("gameNode:"+res, client);
+        /*String mess;
+        do {
+            mess = tcp.receive();
+        }while(mess == null);*/
 
-            socketClients.remove(new TCPClient(client));
 
-        }*/
+
         return false;
     }
 
@@ -124,10 +115,12 @@ public class ServerMain implements Runnable {
                 if(mess != null) {
                     if(mess.startsWith("client")) {
                         socketLock.lock();
+                        System.out.println("Added client : " + server.getLastClient().getLocalAddress().getHostAddress() + ":" + server.getLastClient().getPort());
                         addClient(server.getLastClient());
                         socketLock.unlock();
                     }else if(mess.startsWith("node")){
                         socketLock.lock();
+                        System.out.println("Added node : "+ server.getLastClient().getLocalAddress().getHostAddress()+":"+server.getLastClient().getPort());
                         addNode(server.getLastClient());
                         socketLock.unlock();
                     }
@@ -135,6 +128,40 @@ public class ServerMain implements Runnable {
             }catch(Exception e){
             }
         }while(keepRunning);
+    }
+
+    public void remove(ServerNodeThread thread){
+        socketLock.lock();
+        nodeList.remove(thread);
+        socketLock.unlock();
+    }
+
+    public void remove(Socket sock){
+        synchronized (socketClients){
+            try {
+                SocketThread sT = socketClients.get(socketClients.indexOf(sock));
+                sT.kill();
+                socketClients.remove(sT);
+                System.out.println("Removed "+sT);
+            }catch(ArrayIndexOutOfBoundsException e){
+
+            }
+        }
+    }
+
+    public SocketThread getSocketClient(Socket sock){
+        try{
+            for(int i = 0 ; i < socketClients.size(); i++){
+                SocketThread el = socketClients.get(i);
+                if(el.equals(sock))
+                    return el;
+            }
+
+            //return socketClients.get(socketClients.indexOf(sock));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public TCPServer getServer() {

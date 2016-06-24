@@ -6,6 +6,7 @@ import com.badlogic.gdx.Net;
 //import com.badlogic.gdx.net.Socket;
 import com.badlogic.gdx.net.ServerSocketHints;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.mygdx.game.data.Data;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,7 +57,10 @@ public class TCPServer {
 
     public int getPort(){
         return port;
+    }
 
+    public ServerSocket getSocket(){
+        return serverSocket;
     }
 
     public TCPServer(String hostname, int port, int timeout, Boolean reuseAddr) {
@@ -140,10 +144,11 @@ public class TCPServer {
                 clients.add(lastClient);
 
             String message = new BufferedReader(new InputStreamReader(lastClient.getInputStream())).readLine();
-            System.out.println("Server: Received : "+message);
+            //if(Data.debug)
+                //System.out.println("Server: Received : "+message);
             return message;
         } catch (IOException e) {
-            System.err.println("ServerError: Error receiving message : " + e.getMessage());
+            //System.err.println("ServerError: Error receiving message : " + e.getMessage());
         }
         return null;
     }
@@ -189,4 +194,7 @@ public class TCPServer {
         }
     }
 
+    public ArrayList<Socket> getClients() {
+        return clients;
+    }
 }

@@ -94,9 +94,9 @@ public class GameStage extends Stage {
     private ShapeRenderer shapeRenderer;
     private final String LABEL = "GameStage";
     //
-    private MobHandler mobHandler;
+    protected MobHandler mobHandler;
     protected ArrayList<Mob> mobs;
-    private ArrayList<Mob> originMobs;
+    protected ArrayList<Mob> originMobs;
     private PlayerHandler playerHandler;
     protected ArrayList<Player> players;
     private ArrayList<Player> originPlayers;
@@ -236,11 +236,14 @@ public class GameStage extends Stage {
         timerInitPlayer = INIT_MAX_TIME;
     }
 
-    public void loadChallengers(){
-
+    public void initMobs(){
         mobs = MonsterData.initMobs();
         mobHandler = new MobHandler(mobs);
         originMobs = new ArrayList<Mob>(mobs);
+    }
+
+    public void loadChallengers(){
+        initMobs();
         players = new ArrayList<Player>();
         playerHandler = new PlayerHandler(players);
         // Fill the player list

@@ -299,6 +299,10 @@ public class Data {
     public static int SERVER_PORT = 42666;
     public static int SERVER_TIMEOUT = 500;
     public static boolean SERVER_REUSE_ADDR = false;
+    public static int PING_TIMEOUT = 1500;
+    public static int GAME_PORT = 46000;
+
+    public static boolean USE_AI_GENETIC = true;
 
     /**
      * Load all game variables
@@ -808,6 +812,21 @@ public class Data {
                             break;
                         case "SERVER_REUSE_ADDR":
                             SERVER_REUSE_ADDR = value.equals("true");
+                            break;
+                        case "PING_TIMEOUT":
+                            try{
+                                PING_TIMEOUT = Integer.parseInt(value);
+                            }catch(NumberFormatException e){
+
+                            }
+                            break;
+                        case "GAME_PORT":
+                            try {
+                                GAME_PORT = Integer.parseInt(value);
+                            }catch(NumberFormatException e){
+
+                            }
+                            break;
                         default :
                             System.err.println("Can't find : "+param);
                             break;
@@ -1174,6 +1193,14 @@ public class Data {
         RUN_APIX = false;
         SCREEN_HEIGHT = 240;
         SCREEN_WIDTH = 360;
+        debug = true;
+    }
+
+    public static void setForClient(){
+        autoIA = false;
+        generateIA = false;
+        jvm = true;
+        RUN_APIX = false;
         debug = true;
     }
 

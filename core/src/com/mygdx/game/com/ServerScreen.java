@@ -15,8 +15,7 @@ public class ServerScreen implements Screen {
     private ServerGame game;
     int  i=0;
 
-    public ServerScreen() {
-        String id = UUID.randomUUID().toString();
+    public ServerScreen(String id) {
         game = new ServerGame(id);
         ServerNode.getInstance().getGameList().add(game);
     }

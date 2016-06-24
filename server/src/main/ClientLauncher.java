@@ -24,6 +24,7 @@ public class ClientLauncher {
 		Data.debug = true;
 
 		Data.setForAndroid(false);
+		Data.setForClient();
 
         new LwjglApplication(new WindowClient(), config);
 	}

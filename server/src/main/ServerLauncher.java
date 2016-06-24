@@ -7,9 +7,6 @@ import java.io.File;
 public class ServerLauncher {
 
 	public static void main (String[] arg) {
-		File toto = new File("arborescenceQuiFaitChier.txt");
-		System.out.println(toto.getAbsolutePath());
-
-		new Server();
+		new Server("id1");
 	}
 }
